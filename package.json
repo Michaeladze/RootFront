@@ -16,8 +16,7 @@
     "stylelint": "npx stylelint **/*.scss --fix",
     "g": "node node_modules/react-generator-cmd/dist",
     "release": "release-it --no-git.requireCleanWorkingDir",
-    "copy-files": "copyfiles -u 1 package.json dist/",
-    "postbuild": "yarn run copy-files",
+    "postbuild": "cp package.json dist/",
     "semantic-release": "semantic-release"
   },
   "license": "MIT",
