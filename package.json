@@ -147,9 +147,6 @@
   "release-it": {
     "github": {
       "release": false
-    },
-    "npm": {
-      "publishPath": "dist"
     }
   }
 }
