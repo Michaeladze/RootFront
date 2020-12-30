@@ -1,6 +1,6 @@
 {
   "name": "root-front",
-  "version": "1.0.7",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -15,7 +15,10 @@
     "rfunlink": "yarn unlink  && cd node_modules/react && yarn unlink && cd ../react-dom && yarn unlink && cd ../react-router-dom &&yarn unlink",
     "stylelint": "npx stylelint **/*.scss --fix",
     "g": "node node_modules/react-generator-cmd/dist",
-    "release": "release-it --no-git.requireCleanWorkingDir"
+    "release": "release-it --no-git.requireCleanWorkingDir",
+    "copy-files": "copyfiles -u 1 package.json dist/",
+    "postbuild": "yarn run copy-files",
+    "semantic-release": "semantic-release"
   },
   "license": "MIT",
   "author": {
@@ -31,7 +34,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Michaeladze/RootFront.git"
+    "url": "https://github.com/Michaeladze/RootFront.git"
   },
   "keywords": [
     "UI Components"
@@ -85,6 +88,7 @@
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "babel-loader": "^8.1.0",
+    "copyfiles": "^2.4.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^7.16.0",
@@ -104,6 +108,7 @@
     "release-it": "^14.2.2",
     "rimraf": "^3.0.2",
     "semantic-release": "^17.3.1",
+    "semantic-release-cli": "^5.4.0",
     "storybook-addon-designs": "^5.4.2",
     "stylelint-config-sass-guidelines": "^7.1.0",
     "swiper": "6.1.2",
@@ -149,14 +154,5 @@
     "github": {
       "release": false
     }
-  },
-  "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/changelog",
-    "@semantic-release/github",
-    "@semantic-release/npm",
-    "@semantic-release/git"
-  ],
-  "release": { "branches": [ "main" ] }
+  }
 }
