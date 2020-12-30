@@ -107,7 +107,6 @@
     "release-it": "^14.2.2",
     "rimraf": "^3.0.2",
     "semantic-release": "^17.3.1",
-    "semantic-release-cli": "^5.4.0",
     "storybook-addon-designs": "^5.4.2",
     "stylelint-config-sass-guidelines": "^7.1.0",
     "swiper": "6.1.2",
@@ -153,5 +152,13 @@
     "github": {
       "release": false
     }
-  }
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
 }
