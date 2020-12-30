@@ -36,16 +36,6 @@ export const fileInput = () => {
           />
         </StoryRow>
         <StoryRow>
-          <FileInput
-            name='file'
-            placeholder='Сжать изображения'
-            accept='*'
-            setFile={setFile}
-            multiple
-            compressImages
-          />
-        </StoryRow>
-        <StoryRow>
           <FileInput name='file' placeholder='Выберите текстовый файл' accept='text/*' setFile={setFile} />
         </StoryRow>
       </StoryItem>

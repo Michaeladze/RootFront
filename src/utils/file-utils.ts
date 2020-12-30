@@ -1,5 +1,4 @@
 import { IFileData } from '../types';
-import imageCompression from 'browser-image-compression';
 
 const executablesList: string[] = [
   'action',
@@ -247,27 +246,4 @@ export const validateFile = (file: File, options?: IOptions): IValidationResult 
     valid,
     error
   };
-};
-
-export const compress = async (files: IFileData[], maxSizeMB = 0.1): Promise<IFileData[]> => {
-  const result: IFileData[] = [];
-
-  for (let i = 0; i < files.length; i++) {
-    let newBase64 = undefined;
-    try {
-      newBase64 = await imageCompression.getDataUrlFromFile(await imageCompression(files[i].file, {
-        maxSizeMB,
-        useWebWorker: true
-      }));
-    } catch (e) {
-      console.log(`%c Не изображение (${files[i].file.name})`, 'color: #FF5722');
-    }
-
-    result.push({
-      ...files[i],
-      base64Compressed: newBase64 || files[i].base64
-    });
-  }
-
-  return result;
 };

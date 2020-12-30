@@ -1,9 +1,7 @@
 import React, {
   useCallback, useRef, useState
 } from 'react';
-import {
-  compress, getBase64, validateFile
-} from '../../../utils/file-utils';
+import { getBase64, validateFile } from '../../../utils/file-utils';
 import Chips from '../../molecules/Chips/Chips';
 import { IChips, IFileData } from '../../../types';
 import Button from '../Button';
@@ -45,7 +43,6 @@ const FileInput: React.FC<IFileInputProps> = ({
   setFile,
   onError,
   maxSize,
-  compressImages = false,
   ...props
 }: IFileInputProps) => {
   /** Файл */
@@ -59,7 +56,7 @@ const FileInput: React.FC<IFileInputProps> = ({
     if (ref.current && ref.current.files) {
       const promises: Promise<IFileData>[] = [];
 
-      Array.from(ref.current.files).forEach((fl: File) => {
+      Array.from(ref.current.files as FileList).forEach((fl: File) => {
         const validationResult = validateFile(fl, {
           maxSize,
           accept
@@ -94,22 +91,8 @@ const FileInput: React.FC<IFileInputProps> = ({
               newFiles.push(...data);
             }
 
-            if (compressImages) {
-              compress(newFiles)
-                .then((compressedFiles: IFileData[]) => {
-                  setFile(compressedFiles);
-                  uploadFile(compressedFiles);
-                })
-                .catch(() => {
-                  sendNotification({
-                    message: 'Не удалось сжать изображение',
-                    variant: 'danger'
-                  });
-                });
-            } else {
-              setFile(newFiles);
-              uploadFile(newFiles);
-            }
+            setFile(newFiles);
+            uploadFile(newFiles);
           }
         })
         .catch((error: Error) => {
