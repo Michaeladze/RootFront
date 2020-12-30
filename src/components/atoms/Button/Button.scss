@@ -1,0 +1,701 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variables";
+
+.rf-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: auto;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.15s ease-in all;
+  white-space: nowrap;
+}
+
+.rf-button__giant {
+  @include buttonGiant;
+  padding: 16px 40px;
+
+  &.rf-button__rounded {
+    border-radius: 28px;
+  }
+}
+
+.rf-button__large {
+  @include buttonGiant;
+  padding: 14px 32px;
+
+  &.rf-button__rounded {
+    border-radius: 24px;
+  }
+}
+
+.rf-button__medium {
+  @include buttonMedium;
+  padding: 12px 24px;
+
+  &.rf-button__rounded {
+    border-radius: 20px;
+  }
+}
+
+.rf-button__small {
+  @include buttonSmall;
+  padding: 8px 16px;
+  border-radius: 4px;
+
+  &.rf-button__rounded {
+    border-radius: 16px;
+  }
+}
+
+.rf-button__tiny {
+  @include buttonSmall;
+  padding: 4px 12px;
+  border-radius: 4px;
+
+  &.rf-button__rounded {
+    border-radius: 12px;
+  }
+}
+
+.rf-button:disabled {
+  //@include disabled(0.7);
+  cursor: default;
+  pointer-events: none;
+}
+
+// ------ Primary ------
+
+.rf-button--primary {
+
+  &.rf--base {
+    background-color: var(--base-500);
+    color: var(--base-000);
+
+    &:hover {
+      background-color: var(--base-400);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--base-500);
+    }
+
+    &:disabled {
+      background-color: var(--base-200);
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--accent {
+    background-color: var(--accent-500);
+    color: var(--base-000);
+
+    &:hover {
+      background-color: var(--accent-400);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--accent-500);
+    }
+
+    &:disabled {
+      background-color: var(--base-200);
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--info {
+    background-color: var(--info-500);
+    color: var(--base-000);
+
+    &:hover {
+      background-color: var(--info-400);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--info-500);
+    }
+
+    &:disabled {
+      background-color: var(--base-200);
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--complement {
+    background-color: var(--complement-500);
+    color: var(--base-000);
+
+    &:hover {
+      background-color: var(--complement-400);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--complement-500);
+    }
+
+    &:disabled {
+      background-color: var(--base-200);
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--danger {
+    background-color: var(--danger-500);
+    color: var(--base-000);
+
+    &:hover {
+      background-color: var(--danger-400);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--danger-500);
+    }
+
+    &:disabled {
+      background-color: var(--base-200);
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--warning {
+    background-color: var(--warning-500);
+    color: var(--base-000);
+
+    &:hover {
+      background-color: var(--warning-400);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--warning-500);
+    }
+
+    &:disabled {
+      background-color: var(--base-200);
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--success {
+    background-color: var(--success-500);
+    color: var(--base-000);
+
+    &:hover {
+      background-color: var(--success-400);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--success-500);
+    }
+
+    &:disabled {
+      background-color: var(--base-200);
+      color: var(--base-400);
+    }
+  }
+}
+
+// ------ Secondary ------
+
+.rf-button--secondary {
+
+  &.rf--base {
+    background-color: var(--base-100);
+    color: var(--base-500);
+
+    &:hover {
+      background-color: var(--base-100);
+    }
+
+    &:active,
+    &:focus {
+      border-color: var(--base-300);
+    }
+
+    &:disabled {
+      color: var(--base-300);
+    }
+  }
+
+  &.rf--accent {
+    background-color: var(--accent-100);
+    color: var(--accent-500);
+
+    &:hover {
+      background-color: var(--accent-100);
+    }
+
+    &:active,
+    &:focus {
+      border-color: var(--accent-300);
+    }
+
+    &:disabled {
+      color: var(--accent-300);
+    }
+  }
+
+  &.rf--info {
+    background-color: var(--info-100);
+    color: var(--info-500);
+
+    &:hover {
+      background-color: var(--info-100);
+    }
+
+    &:active,
+    &:focus {
+      border-color: var(--info-300);
+    }
+
+    &:disabled {
+      color: var(--info-300);
+    }
+  }
+
+  &.rf--complement {
+    background-color: var(--complement-100);
+    color: var(--complement-500);
+
+    &:hover {
+      background-color: var(--complement-100);
+    }
+
+    &:active,
+    &:focus {
+      border-color: var(--complement-300);
+    }
+
+    &:disabled {
+      color: var(--complement-300);
+    }
+  }
+
+  &.rf--danger {
+    background-color: var(--danger-100);
+    color: var(--danger-500);
+
+    &:hover {
+      background-color: var(--danger-100);
+    }
+
+    &:active,
+    &:focus {
+      border-color: var(--danger-300);
+    }
+
+    &:disabled {
+      color: var(--danger-300);
+    }
+  }
+
+  &.rf--warning {
+    background-color: var(--warning-100);
+    color: var(--warning-500);
+
+    &:hover {
+      background-color: var(--warning-100);
+    }
+
+    &:active,
+    &:focus {
+      border-color: var(--warning-300);
+    }
+
+    &:disabled {
+      color: var(--warning-300);
+    }
+  }
+
+  &.rf--success {
+    background-color: var(--success-100);
+    color: var(--success-500);
+
+    &:hover {
+      background-color: var(--success-100);
+    }
+
+    &:active,
+    &:focus {
+      border-color: var(--success-300);
+    }
+
+    &:disabled {
+      color: var(--success-300);
+    }
+  }
+}
+
+// ------ Link Primary ------
+
+.rf-button--link {
+  justify-content: flex-start;
+  background-color: transparent;
+
+  &.rf--base {
+    color: var(--base-500);
+
+    &:hover {
+      background-color: var(--base-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--base-100);
+      border-color: var(--base-300);
+    }
+
+    &:disabled {
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--accent {
+    color: var(--accent-500);
+
+    &:hover {
+      background-color: var(--accent-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--accent-100);
+      border-color: var(--accent-300);
+    }
+
+    &:disabled {
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--info {
+    color: var(--info-500);
+
+    &:hover {
+      background-color: var(--info-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--info-100);
+      border-color: var(--info-300);
+    }
+
+    &:disabled {
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--complement {
+    color: var(--complement-500);
+
+    &:hover {
+      background-color: var(--complement-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--complement-100);
+      border-color: var(--complement-300);
+    }
+
+    &:disabled {
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--danger {
+    color: var(--danger-500);
+
+    &:hover {
+      background-color: var(--danger-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--danger-100);
+      border-color: var(--danger-300);
+    }
+
+    &:disabled {
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--warning {
+    color: var(--warning-500);
+
+    &:hover {
+      background-color: var(--warning-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--warning-100);
+      border-color: var(--warning-300);
+    }
+
+    &:disabled {
+      color: var(--base-400);
+    }
+  }
+
+  &.rf--success {
+    color: var(--success-500);
+
+    &:hover {
+      background-color: var(--success-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--success-100);
+      border-color: var(--success-300);
+    }
+
+    &:disabled {
+      color: var(--base-400);
+    }
+  }
+}
+
+// ------ Outline Primary ------
+
+.rf-button--outline-primary {
+
+  &.rf--base {
+    color: var(--base-500);
+    border-color: var(--base-500);
+
+    &:hover {
+      background-color: var(--base-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--base-100);
+    }
+
+    &:disabled {
+      background-color: var(--base-100);
+      color: var(--base-300);
+      border-color: var(--base-300);
+    }
+  }
+
+  &.rf--accent {
+    color: var(--accent-500);
+    border-color: var(--accent-500);
+
+    &:hover {
+      background-color: var(--accent-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--accent-100);
+    }
+
+    &:disabled {
+      background-color: var(--accent-100);
+      color: var(--accent-300);
+      border-color: var(--accent-300);
+    }
+  }
+
+  &.rf--info {
+    color: var(--info-500);
+    border-color: var(--info-500);
+
+    &:hover {
+      background-color: var(--info-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--info-100);
+    }
+
+    &:disabled {
+      background-color: var(--info-100);
+      color: var(--info-300);
+      border-color: var(--info-300);
+    }
+  }
+
+  &.rf--complement {
+    color: var(--complement-500);
+    border-color: var(--complement-500);
+
+    &:hover {
+      background-color: var(--complement-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--complement-100);
+    }
+
+    &:disabled {
+      background-color: var(--complement-100);
+      color: var(--complement-300);
+      border-color: var(--complement-300);
+    }
+  }
+
+  &.rf--danger {
+    color: var(--danger-500);
+    border-color: var(--danger-500);
+
+    &:hover {
+      background-color: var(--danger-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--danger-100);
+    }
+
+    &:disabled {
+      background-color: var(--danger-100);
+      color: var(--danger-300);
+      border-color: var(--danger-300);
+    }
+  }
+
+  &.rf--warning {
+    color: var(--warning-500);
+    border-color: var(--warning-500);
+
+    &:hover {
+      background-color: var(--warning-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--warning-100);
+    }
+
+    &:disabled {
+      background-color: var(--warning-100);
+      color: var(--warning-300);
+      border-color: var(--warning-300);
+    }
+  }
+
+  &.rf--success {
+    color: var(--success-500);
+    border-color: var(--success-500);
+
+    &:hover {
+      background-color: var(--success-100);
+    }
+
+    &:active,
+    &:focus {
+      background-color: var(--success-100);
+    }
+
+    &:disabled {
+      background-color: var(--success-100);
+      color: var(--success-300);
+      border-color: var(--success-300);
+    }
+  }
+}
+
+// ------ Outline Secondary ------
+
+.rf-button--outline-secondary {
+  color: var(--base-500);
+  border-color: var(--base-300);
+}
+
+.rf-button--outline-secondary:hover {
+  background-color: var(--base-100);
+}
+
+.rf-button--outline-secondary:active,
+.rf-button--outline-secondary:focus {
+  //
+}
+
+.rf-button--outline-secondary:disabled {
+  color: var(--base-300);
+  border-color: var(--base-200);
+}
+
+// ------ Text ------
+
+.rf-button.rf-button--text {
+  padding: 0;
+}
+
+.rf-button.rf-button--text:disabled {
+  color: var(--base-300);
+}
+
+// ------ Round ------
+
+.rf-button--round {
+  @include round(40px);
+  @include text(16px, 500, var(--base-1000));
+  padding: 0;
+  background-color: var(--base-000);
+  box-shadow: 0 2px 4px rgba(25, 59, 104, 0.15);
+}
+
+.rf-button--round:hover {
+  background-color: var(--base-100);
+}
+
+.rf-button--round:active,
+.rf-button--round:focus {
+
+  &.rf--base {
+    color: var(--base-000);
+    background-color: var(--base-500);
+  }
+
+  &.rf--accent {
+    color: var(--base-000);
+    background-color: var(--accent-500);
+  }
+
+  &.rf--info {
+    color: var(--base-000);
+    background-color: var(--info-500);
+  }
+
+  &.rf--complement {
+    color: var(--base-000);
+    background-color: var(--complement-500);
+  }
+
+  &.rf--danger {
+    color: var(--base-000);
+    background-color: var(--danger-500);
+  }
+
+  &.rf--warning {
+    color: var(--base-000);
+    background-color: var(--warning-500);
+  }
+
+  &.rf--success {
+    color: var(--base-000);
+    background-color: var(--success-500);
+  }
+}

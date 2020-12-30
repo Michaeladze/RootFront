@@ -1,0 +1,175 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variables";
+
+.rf-input {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+
+.rf-input__field {
+  width: 100%;
+  padding: 8px 16px;
+  line-height: 20px;
+  transition: 0.3s ease-in all;
+  @include p1;
+  border: 0;
+  border-bottom: 1px solid var(--base-300);
+  background-color: var(--base-000);
+  color: var(--base-1000);
+
+  &.invalid {
+    border-color: var(--danger-500);
+  }
+
+  &.disabled {
+    @include disabled();
+
+    &::placeholder {
+      color: var(--base-300);
+    }
+  }
+
+  &.rf-input__field--file {
+    cursor: pointer;
+  }
+
+  &.rf-input__field--with-label {
+    padding: 18px 18px 10px 18px;
+    cursor: text;
+  }
+}
+
+.rf-input__field--outline {
+  border: 1px solid var(--base-300);
+  border-radius: 4px;
+}
+
+.rf-input__field:hover {
+  border-color: var(--accent-300);
+}
+
+.rf-input__field:focus {
+  border-color: var(--accent-500);
+}
+
+.rf-input__field:disabled {
+  @include disabled();
+  background-color: transparent;
+  border-color: var(--base-300);
+  color: var(--base-300);
+}
+
+.rf-input__field::placeholder {
+  @include p1;
+  color: var(--base-500);
+}
+
+.rf-input__field:disabled::placeholder {
+  color: var(--base-300);
+}
+
+.rf-input-action {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  height: 40px;
+  border-radius: 0 20px 20px 0;
+  border: 0;
+  line-height: 0;
+  background-color: transparent;
+  transform: translateY(-50%);
+  transition: 0.3s ease-in color;
+  cursor: pointer;
+  color: var(--base-300);
+
+  @media screen and (max-width: $mobileLarge) {
+    right: 12px;
+  }
+
+  &:focus + .rf-input__field {
+    border-color: var(--accent-500);
+  }
+}
+
+/** file-input */
+
+.rf-input__file-hidden {
+  @include hidden;
+}
+
+.rf-input__file-placeholder {
+  line-height: 20px;
+  @include p1;
+  color: var(--base-500);
+}
+
+.rf-input__file-value {
+  @include p1;
+}
+
+input[type='file']:disabled + .rf-input__field.rf-input__field--file {
+  @include disabled();
+}
+
+// лейбл вместо плейсхолдера
+
+.rf-input__label {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  transition: 0.1s ease-in all;
+  pointer-events: none;
+  cursor: text;
+  transform-origin: left center;
+  transform: translate(0, -50%) scale(1);
+  @include p1;
+  color: var(--base-500);
+}
+
+// лейбл при фокусе или заполненном инпуте
+
+.rf-input__field:focus + .rf-input__label,
+.rf-input__field.rf-active-float + .rf-input__label {
+  top: 0;
+  transform: scale(0.7);
+  transform-origin: left;
+}
+
+.rf-input__action {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: var(--base-500);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rf-input--search {
+  padding-left: 48px;
+  padding-right: 40px;
+  border-radius: 24px;
+  border: 1px solid var(--base-300);
+}
+
+.rf-input__action-search {
+  right: auto;
+  left: 18px;
+  color: var(--accent-500);
+  background: transparent;
+  pointer-events: none;
+  cursor: default;
+}
+
+.rf-input__action-clear {
+  color: var(--base-300);
+}
+
+.rf-input__action-clear:hover,
+.rf-input__action-clear:focus {
+  color: var(--base-500);
+}

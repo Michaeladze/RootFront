@@ -1,0 +1,20 @@
+@import "../../../styles/mixins";
+
+.retry-notification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.retry-now__button {
+  margin-left: 16px;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+}
+
+.retry-now__button {
+  margin: 0 16px;
+}

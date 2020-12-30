@@ -1,0 +1,194 @@
+@import "../../../../styles/mixins";
+
+.find-users__wrapper {
+  width: 464px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.find-users__title {
+  @include h4;
+}
+
+.find-users__notice {
+  @include p2;
+  padding-top: 8px;
+  color: var(--base-500);
+}
+
+.find-users__subtitle {
+  @include h6;
+  margin: 0 -48px;
+  padding: 0 0 8px 48px;
+  border-bottom: 1px solid var(--base-200);
+}
+
+.find-users__input-wrapper {
+  position: relative;
+  margin: 24px 0;
+}
+
+.find-users__input-wrapper > div {
+  height: 100%;
+}
+
+.find-users__input-icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: var(--accent-500);
+}
+
+.find-users__input {
+  height: 100%;
+  border-radius: 24px;
+  min-height: 40px;
+
+  border: 2px solid var(--base-200);
+  padding-left: 48px;
+}
+
+.find-users__input:active {
+  border: 2px solid var(--accent-400);
+}
+
+.find-users__list-wrapper {
+  min-height: 0;
+  overflow-y: auto;
+  flex: 1 auto;
+
+  margin-right: -24px;
+  padding-right: 24px;
+  margin-top: 8px;
+
+  position: relative;
+}
+
+.list-users__wrapper {
+  display: flex;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+.list-users__wrapper:last-of-type {
+  padding-bottom: 0;
+}
+
+.list-users__texts-wrapper {
+  padding: 0 16px;
+}
+
+.list-users__user-name {
+  @include s1;
+}
+
+.list-users__user-position {
+  @include p2;
+}
+
+.list-users__button-add,
+.list-users__button-add:focus,
+.list-users__button-add:hover {
+  margin-left: auto;
+  background-color: var(--accent-100);
+  color: var(--accent-500);
+}
+
+.list-users__button-check,
+.list-users__button-check:focus,
+.list-users__button-check:hover {
+  margin-left: auto;
+  background-color: var(--accent-500);
+  color: var(--base-000);
+}
+
+.selected__list-wrapper {
+  display: flex;
+  padding-bottom: 24px;
+  align-items: center;
+}
+
+.selected__text {
+  @include c2;
+}
+
+.selected__button {
+  position: absolute;
+  @include round(22px);
+  right: 10px;
+  top: 0;
+  background-color: var(--base-300);
+  border: 2px solid var(--base-000);
+  color: var(--base-000);
+  box-shadow: none;
+}
+
+.selected__button svg {
+  width: 8px;
+  height: 8px;
+}
+
+.selected__button:focus,
+.selected__button:hover {
+  background-color: var(--base-300);
+}
+
+.swiper-container {
+  width: 100%;
+}
+
+.selected_swiper-slide {
+  width: 80px;
+  padding-top: 4px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.swiper__container {
+  position: relative;
+  margin: 0 -24px;
+  padding-bottom: 24px;
+}
+
+.swiper__wrapper {
+  margin-right: 16px;
+  margin-left: 8px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 32px;
+  height: 32px;
+  top: auto;
+  bottom: 48px;
+  background-color: var(--base-400);
+  color: var(--base-000);
+  transition: 0ms;
+}
+
+.swiper-button-prev {
+  transform: rotate(-180deg);
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: '';
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.1;
+}
+
+.find-users__message {
+  @include p2;
+}

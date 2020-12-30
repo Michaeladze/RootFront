@@ -1,0 +1,15 @@
+@import "../../../../styles/mixins";
+
+.popup-footer__button {
+  margin-left: 24px;
+}
+
+.popup-footer__button:first-of-type {
+  margin-left: 0;
+}
+
+.popup-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+}

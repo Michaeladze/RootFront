@@ -1,0 +1,15 @@
+@import "../../../../styles/mixins";
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user__name {
+  @include s1;
+  margin-left: 16px;
+}
+
+.user .rf-dropdown__list {
+  min-width: 100%;
+}

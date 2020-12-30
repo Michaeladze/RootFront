@@ -1,0 +1,126 @@
+@import "./src/styles/mixins";
+
+.rf-chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rf-chips__item {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 16px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background-color: var(--base-200);
+  cursor: default;
+}
+
+.rf-chips__name {
+  @include p1;
+}
+
+.rf-chips__button {
+  @include round(22px);
+  margin-left: 8px;
+  background-color: var(--base-000);
+  color: var(--base-500);
+}
+
+.rf-chips__item.rf--base:hover .rf-chips__name {
+  color: var(--base-500);
+}
+
+.rf-chips__item.rf--accent {
+  background-color: var(--accent-500);
+
+  .rf-chips__name {
+    color: var(--base-000);
+  }
+
+  &:hover {
+    background-color: var(--accent-400);
+  }
+}
+
+.rf-chips__item.rf--success {
+  background-color: var(--success-500);
+
+  .rf-chips__name {
+    color: var(--base-000);
+  }
+
+  &:hover {
+    background-color: var(--success-400);
+  }
+}
+
+.rf-chips__item.rf--warning {
+  background-color: var(--warning-500);
+
+  .rf-chips__name {
+    color: var(--base-000);
+  }
+
+  &:hover {
+    background-color: var(--warning-400);
+  }
+}
+
+.rf-chips__item.rf--danger {
+  background-color: var(--danger-500);
+
+  .rf-chips__name {
+    color: var(--base-000);
+  }
+
+  &:hover {
+    background-color: var(--danger-400);
+  }
+}
+
+.rf-chips__item.rf--info {
+  background-color: var(--info-500);
+
+  .rf-chips__name {
+    color: var(--base-000);
+  }
+
+  &:hover {
+    background-color: var(--info-400);
+  }
+}
+
+.rf-chips__item.rf--complement {
+  background-color: var(--complement-500);
+
+  .rf-chips__name {
+    color: var(--base-000);
+  }
+
+  &:hover {
+    background-color: var(--complement-400);
+  }
+}
+
+.rf-chips__item.rf-chips__item--disabled {
+  background-color: var(--base-200);
+
+  .rf-chips__name {
+    color: var(--base-400);
+  }
+
+  .rf-chips__button {
+    background-color: var(--base-100);
+    color: var(--base-400);
+    cursor: default;
+  }
+
+  &:hover {
+    background-color: var(--base-200);
+  }
+}
+
+.rf-chips__item--pointer {
+  cursor: pointer;
+}

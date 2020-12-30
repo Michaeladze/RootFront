@@ -1,0 +1,31 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variables";
+
+$size: 32px;
+$margin: 2px;
+
+.rf-timepicker__wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rf-timepicker__disable {
+  pointer-events: none;
+}
+
+.rf-timepicker__wrapper .rf-input__field {
+  border-bottom: 0;
+  max-width: 40px;
+  margin-right: 8px;
+  padding: 0;
+  background-color: transparent;
+}
+
+.rf-timepicker__wrapper .rf-input__field[readonly] {
+  cursor: default;
+}
+
+.rf-timepicker__icon {
+  color: var(--base-500);
+}

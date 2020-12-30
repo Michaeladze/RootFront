@@ -1,0 +1,56 @@
+@import "../../../../styles/mixins";
+
+.page-template {
+  width: 100%;
+  position: relative;
+  flex: 1 0 auto;
+}
+
+.page-template__underlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  background-color: var(--base-200);
+  width: 100%;
+  height: 200px;
+}
+
+.page-template__header {
+  max-height: 200px;
+  padding-top: 20px;
+  padding-bottom: 24px;
+}
+
+.page-template__header-row {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 12px;
+}
+
+.page-template__header-back {
+  margin-right: 24px;
+}
+
+.page-template__header-icon {
+  transform: rotate(90deg);
+}
+
+.page-template__title {
+  @include h2;
+  width: 100%;
+}
+
+.page-template__content {
+  flex: 1 0 auto;
+}
+
+.page-template__content-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,33 @@
+@import "./src/styles/mixins";
+
+.rf-inline-group__inner {
+  display: flex;
+  align-items: center;
+}
+
+.rf-inline-group__label {
+  @include s2;
+  margin-right: 8px;
+  white-space: nowrap;
+  min-width: 60px;
+}
+
+.rf-inline-group__required {
+  color: var(--danger-500);
+}
+
+.rf-inline-group__message {
+  margin-top: 4px;
+  @include c1;
+  color: var(--danger-500);
+}
+
+.rf-inline-group__inner .rf-input__field {
+  @include p2;
+  padding: 0 8px;
+}
+
+.rf-inline-group__inner .rf-input__field::placeholder {
+  @include p2;
+  color: var(--base-500);
+}

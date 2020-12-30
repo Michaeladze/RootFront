@@ -1,0 +1,85 @@
+@import "../../../styles/mixins";
+
+.rf-message {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--base-700);
+  cursor: default;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rf-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 8px;
+}
+
+.rf-message.rf--base::before {
+  background-color: var(--base-500);
+}
+
+.rf-message.rf--accent::before {
+  background-color: var(--accent-500);
+}
+
+.rf-message.rf--info::before {
+  background-color: var(--info-500);
+}
+
+.rf-message.rf--complement::before {
+  background-color: var(--complement-500);
+}
+
+.rf-message.rf--danger::before {
+  background-color: var(--danger-500);
+}
+
+.rf-message.rf--success::before {
+  background-color: var(--success-500);
+}
+
+.rf-message.rf--warning::before {
+  background-color: var(--warning-500);
+}
+
+.rf-message.rf--base {
+  background-color: var(--base-100);
+}
+
+.rf-message.rf--accent {
+  background-color: var(--accent-100);
+}
+
+.rf-message.rf--info {
+  background-color: var(--info-100);
+}
+
+.rf-message.rf--complement {
+  background-color: var(--complement-100);
+}
+
+.rf-message.rf--danger {
+  background-color: var(--danger-100);
+}
+
+.rf-message.rf--success {
+  background-color: var(--success-100);
+}
+
+.rf-message.rf--warning {
+  background-color: var(--warning-100);
+}
+
+.rf-message__message {
+  @include p1;
+  white-space: normal;
+}

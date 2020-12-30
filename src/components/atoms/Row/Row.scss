@@ -1,0 +1,46 @@
+.rf-row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Align prop
+
+.rf-row--top {
+  align-items: flex-start;
+}
+
+.rf-row--middle {
+  align-items: center;
+}
+
+.rf-row--bottom {
+  align-items: flex-end;
+}
+
+// Justify prop
+
+.rf-row--left {
+  justify-content: flex-start;
+}
+
+.rf-row--center {
+  justify-content: center;
+}
+
+.rf-row--right {
+  justify-content: flex-end;
+}
+
+.rf-row--around {
+  justify-content: space-around;
+}
+
+.rf-row--between {
+  justify-content: space-between;
+}

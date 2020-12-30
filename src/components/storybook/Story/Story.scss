@@ -1,0 +1,21 @@
+@import "../../../styles/mixins";
+
+.story {
+  height: 100%;
+}
+
+.story__name {
+  @include h2;
+  margin-bottom: 8px;
+  color: var(--base-900);
+}
+
+.story__wrapper {
+  margin-top: 24px;
+}
+
+.story__description {
+  @include p1;
+  color: var(--base-700);
+  max-width: 600px;
+}

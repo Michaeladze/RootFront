@@ -1,0 +1,9 @@
+.rf-notifications__list {
+  display: flex;
+  flex-direction: column-reverse;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}

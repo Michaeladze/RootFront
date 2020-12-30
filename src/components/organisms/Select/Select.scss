@@ -1,0 +1,106 @@
+@import "../../../styles/mixins";
+
+.rf-select {
+  width: 100%;
+  position: relative;
+}
+
+.rf-select__list {
+  position: absolute;
+  width: 100%;
+  max-height: 250px;
+  z-index: 100;
+  background: var(--base-000);
+  box-shadow: 0 2px 6px rgba(25, 59, 104, 0.15);
+  border-radius: 4px;
+  padding: 16px 0;
+  display: none;
+  overflow-y: auto;
+}
+
+.rf-select__list-item {
+  list-style: none;
+  transition: background-color 0.15s;
+}
+
+.rf-select__list-item:hover {
+  background-color: var(--base-200);
+}
+
+.rf-select__list-item > label {
+  padding: 6px 32px;
+}
+
+.rf-select__list-item:hover .rf-radio__label {
+  color: var(--accent-500);
+}
+
+.rf-select__list-item .rf-radio__input:checked + .rf-radio__label {
+  color: var(--accent-500);
+}
+
+.rf-select__list-item .rf-radio__input:disabled ~ .rf-radio__label {
+  color: var(--base-500);
+}
+
+.rf-select__list-item .rf-checkbox__input:disabled ~ .rf-checkbox__label {
+  color: var(--base-500);
+}
+
+.rf-select__list-item--hidden {
+  display: none;
+}
+
+.rf-select__list--show {
+  display: block;
+}
+
+.rf-select__input-wrapper {
+  position: relative;
+}
+
+.rf-select__input-wrapper .rf-input__field {
+  padding-right: 50px;
+}
+
+.rf-select__input-wrapper .rf-input__field[readonly] {
+  cursor: pointer;
+}
+
+.rf-select__input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(0);
+  transition: 0.35s;
+  color: var(--base-500);
+}
+
+.rf-select__input-angle {
+  right: 8px;
+  cursor: pointer;
+}
+
+.rf-select__input-clear {
+  right: 48px;
+  cursor: pointer;
+  display: none;
+  pointer-events: none;
+  color: var(--base-300);
+}
+
+.rf-select__input-clear--show {
+  display: block;
+  pointer-events: auto;
+}
+
+.rf-select__input-clear:hover {
+  color: var(--base-500);
+}
+
+.rf-select__input-angle--rotate {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.rf-select__chips {
+  margin-top: 16px;
+}

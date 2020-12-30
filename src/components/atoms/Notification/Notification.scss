@@ -1,0 +1,71 @@
+@import "../../../styles/mixins";
+
+.rf-notification {
+  margin-top: 15px;
+  position: relative;
+  width: 640px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--base-700);
+  cursor: default;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rf-notification::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 8px;
+}
+
+.rf-notification.rf--success::before {
+  background-color: var(--success-500);
+}
+
+.rf-notification.rf--danger::before {
+  background-color: var(--danger-500);
+}
+
+.rf-notification.rf--info::before {
+  background-color: var(--info-500);
+}
+
+.rf-notification.rf--warning::before {
+  background-color: var(--warning-500);
+}
+
+.rf-notification.rf--accent::before {
+  background-color: var(--accent-500);
+}
+
+.rf-notification.rf--base::before {
+  background-color: var(--base-500);
+}
+
+.rf-notification.rf--complement::before {
+  background-color: var(--complement-500);
+}
+
+.rf-notification__message {
+  width: 100%;
+  @include p1;
+  color: var(--base-000);
+  white-space: normal;
+}
+
+.rf-notification__close {
+  flex-grow: 0;
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: var(--base-200);
+}

@@ -1,0 +1,66 @@
+@import "../../../styles/mixins";
+
+.rf-tooltip {
+  width: inherit;
+  height: inherit;
+  display: inline-flex;
+}
+
+$color: #fff;
+$radius: 8px;
+
+.rf-tooltip__content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2200;
+  padding-left: 8px;
+}
+
+.rf-tooltip__content {
+  border-radius: $radius;
+  box-shadow: var(--shadow-strong);
+}
+
+.rf-tooltip__inner {
+  position: relative;
+  padding: 16px;
+  color: var(--base-700);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  background: var(--base-000);
+  border-radius: $radius;
+}
+
+.rf-tooltip__inner::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: $color;
+  box-shadow: var(--shadow-strong);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.rf-tooltip__inner--right::after {
+  top: 50%;
+  left: 0;
+}
+
+.rf-tooltip__inner--left::after {
+  top: 50%;
+  left: 100%;
+}
+
+.rf-tooltip__inner--bottom::after {
+  top: 0;
+  left: 50%;
+}
+
+.rf-tooltip__inner--top::after {
+  top: 100%;
+  left: 50%;
+}

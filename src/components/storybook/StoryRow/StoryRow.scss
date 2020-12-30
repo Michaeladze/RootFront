@@ -1,0 +1,9 @@
+.story__row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.story__row:last-of-type {
+  margin-bottom: 0;
+}

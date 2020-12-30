@@ -1,0 +1,48 @@
+@import '../../../styles/variables';
+
+.rf-col {
+  position: relative;
+  max-width: 100%;
+  min-height: 1px;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.rf-col--top {
+  align-self: flex-start;
+}
+
+.rf-col--middle {
+  align-self: center;
+}
+
+.rf-col--bottom {
+  align-self: flex-end;
+}
+
+// карта с брейкопинтами
+$breakpointsMap: (
+  'sm': $mobileLarge,
+  'md': $tablet,
+  'lg': $desktop
+);
+
+// бежим по брейкпойнтам и ширинам
+@each $key, $breakpoint in $breakpointsMap {
+  @media screen and (min-width: $breakpoint) {
+    @for $i from 1 through 12 {
+      .rf-col-#{$key}-#{$i} {
+        flex: 0 0 calc(100% / 12 * #{$i});
+        max-width: calc(100% / 12 * #{$i});
+      }
+    }
+  }
+}
+
+.rf {
+  margin: 0;
+}
+
+.rpf {
+  padding: 0;
+}

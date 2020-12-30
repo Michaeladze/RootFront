@@ -1,0 +1,70 @@
+@import "../../../styles/mixins";
+
+.rf-badge__wrapper {
+  display: inline-flex;
+  position: relative;
+}
+
+.rf-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  border-radius: 10px;
+  transform: translate(50%, -50%);
+
+  @include p2;
+  cursor: default;
+}
+
+.rf-badge--text {
+  transform: translate(100%, -50%);
+}
+
+.rf-badge.rf--base {
+  background-color: var(--base-200);
+}
+
+.rf-badge.rf--accent {
+  background-color: var(--accent-500);
+  color: var(--base-000);
+}
+
+.rf-badge.rf--complement {
+  background-color: var(--complement-500);
+  color: var(--base-000);
+}
+
+.rf-badge.rf--info {
+  background-color: var(--info-500);
+  color: var(--base-000);
+}
+
+.rf-badge.rf--success {
+  background-color: var(--success-500);
+  color: var(--base-000);
+}
+
+.rf-badge.rf--warning {
+  background-color: var(--warning-500);
+  color: var(--base-000);
+}
+
+.rf-badge.rf--danger {
+  background-color: var(--danger-500);
+  color: var(--base-000);
+}
+
+.rf-badge--dot {
+  @include round(8px);
+  padding: 0;
+  border: 2px solid var(--base-000);
+  box-sizing: content-box;
+}

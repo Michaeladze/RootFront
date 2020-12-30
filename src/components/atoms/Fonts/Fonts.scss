@@ -1,0 +1,95 @@
+@import "./src/styles/mixins";
+
+.rf-fonts {
+  cursor: default;
+  display: flex;
+}
+
+.rf-fonts__col {
+  margin-right: 80px;
+}
+
+.rf-fonts__col-title {
+  @include h3;
+  color: #fff;
+  background-color: #333;
+  padding: 4px 8px;
+  margin-bottom: 14px;
+}
+
+.rf-fonts__item {
+  margin-bottom: 8px;
+  display: block;
+}
+
+.rf-h1 {
+  @include h1;
+}
+
+.rf-h2 {
+  @include h2;
+}
+
+.rf-h3 {
+  @include h3;
+}
+
+.rf-h4 {
+  @include h4;
+}
+
+.rf-h5 {
+  @include h5;
+}
+
+.rf-h6 {
+  @include h6;
+}
+
+.rf-s1 {
+  @include s1;
+}
+
+.rf-s2 {
+  @include s2;
+}
+
+.rf-p1 {
+  @include p1;
+}
+
+.rf-p2 {
+  @include p2;
+}
+
+.rf-c1 {
+  @include c1;
+}
+
+.rf-c2 {
+  @include c2;
+}
+
+.rf-l {
+  @include label;
+}
+
+.rf-button-giant {
+  @include buttonGiant;
+}
+
+.rf-button-large {
+  @include buttonLarge;
+}
+
+.rf-button-medium {
+  @include buttonMedium;
+}
+
+.rf-button-small {
+  @include buttonSmall;
+}
+
+.rf-button-tiny {
+  @include buttonTiny;
+}

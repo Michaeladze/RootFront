@@ -1,0 +1,15 @@
+@import "../../../styles/mixins";
+
+.rf-modal-child {
+  padding: 20px;
+}
+
+.rf-modal-child__title {
+  margin-bottom: 20px;
+  @include text(24px, 600, var(--base-700));
+}
+
+.rf-modal-child__text {
+  margin-bottom: 15px;
+  @include text(16px, 400, var(--base-700));
+}
