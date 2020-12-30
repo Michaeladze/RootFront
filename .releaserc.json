@@ -1,4 +1,4 @@
 {
-  "pkgRoot": "dist",
-  "branches": ["main"]
+  "branches": "main",
+  "repositoryUrl": "https://github.com/Michaeladze/RootFront"
 }
