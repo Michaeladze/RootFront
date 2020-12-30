@@ -114,12 +114,10 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint ./src --format=table --fix",
-      "git add"
+      "eslint ./src --format=table --fix"
     ],
     "*.{css,scss}": [
-      "npx stylelint ./src/**/*.scss --fix",
-      "git add"
+      "npx stylelint ./src/**/*.scss --fix"
     ]
   },
   "browserslist": {
