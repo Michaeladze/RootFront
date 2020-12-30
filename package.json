@@ -1,8 +1,22 @@
 {
   "name": "root-front",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "rimraf dist && tsc && yarn build_css",
+    "build_css": "node-sass src/ -o dist/ ",
+    "start": "npm run build -- -w",
+    "commit": "git add . && npx git-cz",
+    "storybook": "start-storybook -p 9010 -s public -c src/.storybook",
+    "build-storybook": "build-storybook -s public -c ",
+    "rflink": "yarn link  && cd node_modules/react && yarn link && cd ../react-dom && yarn link && cd ../react-router-dom && yarn link",
+    "rfunlink": "yarn unlink  && cd node_modules/react && yarn unlink && cd ../react-dom && yarn unlink && cd ../react-router-dom &&yarn unlink",
+    "stylelint": "npx stylelint **/*.scss --fix",
+    "g": "node node_modules/react-generator-cmd/dist",
+    "release": "release-it --no-git.requireCleanWorkingDir"
+  },
   "license": "MIT",
   "author": {
     "email": "michael.kutateladze@gmail.com",
@@ -22,20 +36,9 @@
   "keywords": [
     "UI Components"
   ],
-  "scripts": {
-    "test": "jest",
-    "build": "rimraf dist && tsc && yarn build_css",
-    "build_css": "node-sass src/ -o dist/ ",
-    "start": "npm run build -- -w",
-    "commit": "git add . && npx git-cz",
-    "storybook": "start-storybook -p 9010 -s public -c src/.storybook",
-    "build-storybook": "build-storybook -s public -c ",
-    "rflink": "yarn link  && cd node_modules/react && yarn link && cd ../react-dom && yarn link && cd ../react-router-dom && yarn link",
-    "rfunlink": "yarn unlink  && cd node_modules/react && yarn unlink && cd ../react-dom && yarn unlink && cd ../react-router-dom &&yarn unlink",
-    "stylelint": "npx stylelint **/*.scss --fix",
-    "g": "node node_modules/react-generator-cmd/dist",
-    "release": "cd dist && release-it --no-git.requireCleanWorkingDir && cd ../"
-  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@types/react-router-dom": "^5.1.6",
     "axios": "^0.21.0",
@@ -108,8 +111,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
