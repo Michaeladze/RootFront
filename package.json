@@ -34,7 +34,7 @@
     "rfunlink": "yarn unlink  && cd node_modules/react && yarn unlink && cd ../react-dom && yarn unlink && cd ../react-router-dom &&yarn unlink",
     "stylelint": "npx stylelint **/*.scss --fix",
     "g": "node node_modules/react-generator-cmd/dist",
-    "release": "release-it --no-git.requireCleanWorkingDir"
+    "release": "cd dist && release-it --no-git.requireCleanWorkingDir && cd ../"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.1.6",
