@@ -3,11 +3,18 @@
   "version": "1.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "license": "MIT",
   "author": {
     "email": "michael.kutateladze@gmail.com",
     "name": "Michael Kutateladze",
     "url": "https://github.com/Michaeladze"
   },
+  "contributors": [
+    {
+      "name": "Anton Pugachev",
+      "url": "https://github.com/mun4kin"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Michaeladze/RootFront.git"
