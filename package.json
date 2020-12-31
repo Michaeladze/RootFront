@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "rimraf dist && tsc && yarn build_css",
+    "build": "rimraf dist && tsc && yarn build_css && cp src/styles/mixins.scss dist/styles",
     "build_css": "node-sass src/ -o dist/ ",
     "start": "npm run build -- -w",
     "commit": "git add . && npx git-cz",

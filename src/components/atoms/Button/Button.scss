@@ -651,7 +651,7 @@
 
 .rf-button--round {
   @include round(40px);
-  @include text(16px, 500, var(--base-1000));
+  @include p1();
   padding: 0;
   background-color: var(--base-000);
   box-shadow: 0 2px 4px rgba(25, 59, 104, 0.15);
