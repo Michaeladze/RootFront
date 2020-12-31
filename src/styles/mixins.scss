@@ -1,11 +1,3 @@
-// Текст
-@mixin text($size: 18px, $weight: 400, $color: $black, $fontStyle: normal) {
-  font-size: $size;
-  font-weight: $weight;
-  font-style: $fontStyle;
-  color: $color;
-}
-
 // Неактивное состояние элемента
 @mixin disabled() {
   cursor: default;
