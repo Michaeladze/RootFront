@@ -42,31 +42,29 @@ $margin: 2px;
     border-color: var(--danger-500);
   }
 
-  .react-date-picker__inputGroup__day {
+  @mixin text {
     border: 0;
     outline: 0;
     cursor: pointer;
     line-height: inherit;
     @include p1;
     letter-spacing: normal;
+  }
+
+  .react-date-picker__inputGroup__day {
+    @include text;
   }
 
   .react-date-picker__inputGroup__month {
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-    line-height: inherit;
-    @include p1;
-    letter-spacing: normal;
+    @include text;
   }
 
   .react-date-picker__inputGroup__year {
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-    line-height: inherit;
-    @include p1;
-    letter-spacing: normal;
+    @include text;
+  }
+
+  .react-date-picker__inputGroup__leadingZero {
+    //@include text;
   }
 
   // цвет выделения
@@ -340,6 +338,12 @@ input[type=number]::-webkit-outer-spin-button {
   }
 
   .react-date-picker__inputGroup__input {
+    color: var(--base-300);
+    background-color: transparent;
+    cursor: default
+  }
+
+  .react-date-picker__inputGroup__leadingZero {
     color: var(--base-300);
     background-color: transparent;
     cursor: default
