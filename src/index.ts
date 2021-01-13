@@ -22,6 +22,7 @@ import Message from './components/atoms/Message';
 import Switch from './components/atoms/Switch';
 import Tile from './components/atoms/Tile';
 import ShareButton from './components/atoms/ShareButton';
+import BackdropLoader from './components/atoms/BackdropLoader';
 
 // ------------------------ Компоненты Molecules -----------------------------------------------------------------------
 import Notifications, { sendNotification } from './components/molecules/Notifications';
@@ -89,7 +90,8 @@ export {
   AppHeader,
   UsersStack,
   FeedbackPopup,
-  Menu
+  Menu,
+  BackdropLoader
 };
 
 export {
