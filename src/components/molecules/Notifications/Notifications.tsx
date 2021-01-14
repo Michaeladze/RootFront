@@ -1,6 +1,4 @@
-import React, {
-  useEffect, useState, FC
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { BehaviorSubject } from 'rxjs';
 import Notification from '../../atoms/Notification';
 import { Variant } from '../../../types';
@@ -9,14 +7,10 @@ import { RETRY_ID } from '../../../utils/requestWithRetry';
 // ---------------------------------------------------------------------------------------------------------------------
 
 /** Стэк уведомлений */
-export let notifications$$: BehaviorSubject<INotification[]> | null = new BehaviorSubject<INotification[]>([]);
+let notifications$$: BehaviorSubject<INotification[]> = new BehaviorSubject<INotification[]>([]);
 
 /** Удалить уведомление */
 export const removeNotification = (id?: number) => {
-  if (!notifications$$) {
-    return;
-  }
-
   if (notifications$$.closed || notifications$$.isStopped) {
     return;
   }
@@ -36,10 +30,6 @@ export const removeNotification = (id?: number) => {
 
 /** Добавить уведомление */
 export const sendNotification = (message: INotification, delay = 4000) => {
-  if (!notifications$$) {
-    return;
-  }
-
   if (notifications$$.closed || notifications$$.isStopped) {
     return;
   }
@@ -81,14 +71,8 @@ export interface INotification {
   cancelRetry?: () => void;
 }
 
-const Notifications: FC<any> = () => {
-  const [sub, setSub] = useState<BehaviorSubject<INotification[]> | null>(() => {
-    debugger;
-
-    if (!notifications$$) {
-      notifications$$ = new BehaviorSubject<INotification[]>([]);
-    }
-
+const Notifications = () => {
+  const [sub] = useState<BehaviorSubject<INotification[]>>(() => {
     if (notifications$$.closed || notifications$$.isStopped) {
       notifications$$ = new BehaviorSubject<INotification[]>([]);
     }
@@ -100,23 +84,17 @@ const Notifications: FC<any> = () => {
   const [notifications, setNotifications] = useState<INotification[]>([]);
 
   // -------------------------------------------------------------------------------------------------------------------
+
   /** Подписываемся на список уведомлений */
   useEffect(() => {
-    debugger;
-
-    if (!sub) {
-      return;
-    }
-
     sub.subscribe((data: INotification[]) => {
       setNotifications(data);
     });
 
     return () => {
       sub.unsubscribe();
-      setSub(null);
     };
-  }, [sub]);
+  }, []);
 
   // -------------------------------------------------------------------------------------------------------------------
   /** Список уведомлений TSX */
