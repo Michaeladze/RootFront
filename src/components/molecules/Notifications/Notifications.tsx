@@ -83,6 +83,8 @@ export interface INotification {
 
 const Notifications: FC<any> = () => {
   const [sub, setSub] = useState<BehaviorSubject<INotification[]> | null>(() => {
+    debugger;
+
     if (!notifications$$) {
       notifications$$ = new BehaviorSubject<INotification[]>([]);
     }
@@ -100,6 +102,8 @@ const Notifications: FC<any> = () => {
   // -------------------------------------------------------------------------------------------------------------------
   /** Подписываемся на список уведомлений */
   useEffect(() => {
+    debugger;
+
     if (!sub) {
       return;
     }
