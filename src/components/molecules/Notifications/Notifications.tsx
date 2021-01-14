@@ -9,10 +9,14 @@ import { RETRY_ID } from '../../../utils/requestWithRetry';
 // ---------------------------------------------------------------------------------------------------------------------
 
 /** Стэк уведомлений */
-export const notifications$$ = new BehaviorSubject<INotification[]>([]);
+export let notifications$$ = new BehaviorSubject<INotification[]>([]);
 
 /** Удалить уведомление */
 export const removeNotification = (id?: number) => {
+  if (notifications$$.closed || notifications$$.isStopped) {
+    return;
+  }
+
   let tmp = [...notifications$$.getValue()];
 
   if (tmp.length > 0) {
@@ -28,6 +32,10 @@ export const removeNotification = (id?: number) => {
 
 /** Добавить уведомление */
 export const sendNotification = (message: INotification, delay = 4000) => {
+  if (notifications$$.closed || notifications$$.isStopped) {
+    return;
+  }
+
   const tmp = [...notifications$$.getValue()];
   const notification = tmp.find((n: INotification) => n.id === message.id);
 
@@ -66,7 +74,13 @@ export interface INotification {
 }
 
 const Notifications: FC<any> = () => {
-  const [sub] = useState(notifications$$);
+  const [sub] = useState(() => {
+    if (notifications$$.closed || notifications$$.isStopped) {
+      notifications$$ = new BehaviorSubject<INotification[]>([]);
+    }
+
+    return notifications$$;
+  });
 
   /** Список уведомлений */
   const [notifications, setNotifications] = useState<INotification[]>([]);
@@ -78,7 +92,9 @@ const Notifications: FC<any> = () => {
       setNotifications(data);
     });
 
-    return () => sub.unsubscribe();
+    return () => {
+      sub.unsubscribe();
+    };
   }, [sub]);
 
   // -------------------------------------------------------------------------------------------------------------------
