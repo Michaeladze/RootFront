@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { BehaviorSubject } from 'rxjs';
-import Notification from '../../atoms/Notification';
+import React, {
+  useEffect, useRef, useState
+} from 'react';
+import './Notifications.scss';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Variant } from '../../../types';
-import { RETRY_ID } from '../../../utils/requestWithRetry';
+import Notification from '../../atoms/Notification';
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -35,23 +38,15 @@ export const sendNotification = (message: INotification, delay = 4000) => {
   }
 
   const tmp = [...notifications$$.getValue()];
-  const notification = tmp.find((n: INotification) => n.id === message.id);
-
-  if (notification && notification.id === RETRY_ID) {
-    return;
-  }
 
   tmp.push({
     ...message,
     id: message.id || Date.now()
   });
   notifications$$.next(tmp);
-  setTimeout(
-    () => {
-      removeNotification(message.id);
-    },
-    message.id === RETRY_ID ? 600000 : delay
-  );
+  setTimeout(() => {
+    removeNotification(message.id);
+  }, delay);
 };
 
 // ----Компонент--------------------------------------------------------------------------------------------------------
@@ -72,13 +67,18 @@ export interface INotification {
 }
 
 const Notifications = () => {
-  const [sub] = useState<BehaviorSubject<INotification[]>>(() => {
-    if (notifications$$.closed || notifications$$.isStopped) {
+  /** Флаг по которому оставновить подписку */
+  const obstacle = useRef<Subject<boolean>>(new Subject());
+
+  const [sub, setSub] = useState<BehaviorSubject<INotification[]> | null>(null);
+
+  useEffect(() => {
+    if (notifications$$.closed) {
       notifications$$ = new BehaviorSubject<INotification[]>([]);
     }
 
-    return notifications$$;
-  });
+    setSub(notifications$$);
+  }, []);
 
   /** Список уведомлений */
   const [notifications, setNotifications] = useState<INotification[]>([]);
@@ -87,14 +87,20 @@ const Notifications = () => {
 
   /** Подписываемся на список уведомлений */
   useEffect(() => {
-    sub.subscribe((data: INotification[]) => {
+    if (!sub || sub.closed) {
+      return;
+    }
+
+    const until = obstacle.current;
+
+    sub.pipe(takeUntil(until)).subscribe((data: INotification[]) => {
       setNotifications(data);
     });
 
     return () => {
-      sub.unsubscribe();
+      until.next(true);
     };
-  }, []);
+  }, [sub]);
 
   // -------------------------------------------------------------------------------------------------------------------
   /** Список уведомлений TSX */

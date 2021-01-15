@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import Modal from '../../molecules/Modal';
 
 /** Стак попапов */
-export const popups$$ = new BehaviorSubject<ReactNode[]>([]);
+export let popups$$ = new BehaviorSubject<ReactNode[]>([]);
 
 /** Закрываем последний открытый попап */
 const onClose = (): void => {
@@ -27,6 +27,10 @@ const PopupMaker: React.FC = () => {
 
   /** Подписываемся на стек попапов*/
   useEffect(() => {
+    if (popups$$.closed) {
+      popups$$ = new BehaviorSubject<ReactNode[]>([]);
+    }
+
     popups$$.subscribe((data: ReactNode[]) => {
       setModalComponent(data);
     });
