@@ -18,7 +18,12 @@ export interface IUser {
   department: string;
   /** Почта */
   email?: string;
+  /** Оклад */
+  salary?: number;
+  /** Валюта */
+  currency?: string;
 }
+
 export interface IFeedback {
   /** ID ОС */
   id?: string;
