@@ -36,7 +36,8 @@ import Chips from './components/molecules/Chips';
 import Menu from './components/molecules/Menu';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
-import Select from './components/organisms/Select/Select';
+import Select from './components/organisms/Select';
+import TextEditor from './components/organisms/TextEditor';
 import { openPopup, PopupMaker } from './components/organisms/PopupMaker';
 
 // ------------------------ Компоненты Projects ------------------------------------------------------------------------
@@ -91,7 +92,8 @@ export {
   UsersStack,
   FeedbackPopup,
   Menu,
-  BackdropLoader
+  BackdropLoader,
+  TextEditor
 };
 
 export {
