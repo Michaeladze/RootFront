@@ -1,9 +1,8 @@
 import React, { SVGProps } from 'react';
 
 export default (props: SVGProps<SVGSVGElement>) => (
-  <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg' { ...props }>
-    <path fillRule='evenodd' clipRule='evenodd'
-      d='M11.71 11H12.5L17.49 16L16 17.49L11 12.5V11.71L10.73 11.43C9.59 12.41 8.11 13 6.5 13C2.91 13 0 10.09 0 6.5C0 2.91 2.91 0 6.5 0C10.09 0 13 2.91 13 6.5C13 8.11 12.41 9.59 11.43 10.73L11.71 11ZM2 6.5C2 8.99 4.01 11 6.5 11C8.99 11 11 8.99 11 6.5C11 4.01 8.99 2 6.5 2C4.01 2 2 4.01 2 6.5Z'
-      fill='currentColor'/>
+  <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+    <path fillRule='evenodd' clipRule='evenodd' d='M4 11C4 7.13 7.13 4 11 4C14.87 4 18 7.13 18 11C18 12.7621 17.3511 14.3708 16.2789 15.6005L19.7802 19.111C20.0337 19.3652 20.0332 19.7767 19.779 20.0302C19.5248 20.2837 19.1133 20.2832 18.8598 20.029L15.3373 16.4973C14.1453 17.4386 12.639 18 11 18C7.13 18 4 14.87 4 11ZM16.7 11C16.7 7.86 14.14 5.3 11 5.3C7.86 5.3 5.3 7.86 5.3 11C5.3 14.14 7.86 16.7 11 16.7C14.14 16.7 16.7 14.14 16.7 11Z' fill='currentColor'/>
   </svg>
+
 );

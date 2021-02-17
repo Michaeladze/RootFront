@@ -1,6 +1,6 @@
 import React, { SVGProps } from 'react';
 
 export default (props: SVGProps<SVGSVGElement>) =>
-  <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
-    <path d='M16.293 9.29297L12 13.586L7.70697 9.29297L6.29297 10.707L12 16.414L17.707 10.707L16.293 9.29297Z' fill='currentColor'/>
+  <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+    <path d='M4.2666 7.13348C4.2666 6.98348 4.32493 6.84182 4.4416 6.73348C4.6666 6.53348 5.00827 6.55015 5.20827 6.76682L9.99185 12.0744L14.6169 6.73346C14.8169 6.50846 15.1585 6.50013 15.3835 6.70013C15.6002 6.90013 15.6169 7.24179 15.4169 7.46679L10.4252 13.2161C10.1918 13.4744 9.79185 13.4744 9.55852 13.2161L4.40827 7.50015C4.30827 7.39182 4.2666 7.26682 4.2666 7.13348Z' fill='currentColor'/>
   </svg>;
