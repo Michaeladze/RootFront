@@ -1,0 +1,53 @@
+@import "src/styles/mixins";
+
+.rf-segment {
+  position: relative;
+  cursor: pointer;
+  height: 32px;
+}
+
+.rf-segment__list {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border: 1px solid var(--base-300);
+  border-radius: 8px;
+}
+
+.rf-segment__item {
+  position: relative;
+  height: 100%;
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.rf-segment__item:after {
+  content: '';
+  width: 1px;
+  height: 18px;
+  top: 10px;
+  background-color: var(--base-300);
+}
+
+.rf-segment__item:last-of-type:after {
+  display: none;
+}
+
+.rf-segment__slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 32px;
+  width: 141px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-500);
+  transition: left 0.3s;
+  z-index: 10;
+}
+
+.rf-segment .rf-radio__label {
+  @include buttonMedium;
+}
