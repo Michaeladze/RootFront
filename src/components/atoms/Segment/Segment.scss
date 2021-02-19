@@ -48,6 +48,12 @@
   z-index: 10;
 }
 
-.rf-segment .rf-radio__label {
-  @include buttonMedium;
+.rf-segment {
+  .rf-radio {
+    height: 100%;
+  }
+
+  .rf-radio__label {
+    @include buttonMedium;
+  }
 }
