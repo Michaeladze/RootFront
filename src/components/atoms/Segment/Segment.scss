@@ -10,8 +10,6 @@
   display: flex;
   align-items: center;
   height: 100%;
-  border: 1px solid var(--base-300);
-  border-radius: 8px;
 }
 
 .rf-segment__item {
@@ -21,17 +19,28 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  border: 1px solid var(--base-300);
+}
+
+.rf-segment__item:first-of-type {
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
+}
+
+.rf-segment__item:last-of-type {
+  border-left: 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .rf-segment__slider {
   position: absolute;
   top: 0;
   left: 0;
-  height: 32px;
-  width: 141px;
+  height: 100%;
+  width: 50%;
   border-radius: 8px;
   border: 1px solid var(--accent-500);
-  transition: left 0.3s;
+  transition: transform 0.3s;
   z-index: 10;
 }
 

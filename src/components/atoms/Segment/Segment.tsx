@@ -21,14 +21,10 @@ const Segment: React.FC<ISegmentProps> = ({
   const slider = useRef<HTMLDivElement>(null);
   // -------------------------------------------------------------------------------------------------------------------
 
-  const WIDTH = 141;
-
   /** Изменение позиции слайдера */
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
     if (slider.current) {
-
-      slider.current.style.left = `${(WIDTH * i)}px`;
-      slider.current.style.width = `${WIDTH}px`;
+      slider.current.style.transform = `translateX(${100 * i}%)`;
     }
 
     props.onChange && props.onChange(e);

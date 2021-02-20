@@ -12,7 +12,7 @@ export default {
 
 export const segment = () => {
 
-  const list: IOption[] = [
+  const list: [IOption, IOption] = [
     {
       value: '1',
       label: 'Заявки'
