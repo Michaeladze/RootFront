@@ -20,10 +20,6 @@ export const segment = () => {
     {
       value: '2',
       label: 'Задачи'
-    },
-    {
-      value: '3',
-      label: 'История'
     }
   ];
 

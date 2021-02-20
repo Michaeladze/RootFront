@@ -6,7 +6,7 @@ import { Radio } from '../../../index';
 
 export interface ISegmentProps extends Omit<HTMLProps<HTMLInputElement>, 'list'> {
   /** Список элементов */
-  list: IOption[];
+  list: [IOption, IOption];
   /** Вариант */
   variant?: Variant;
 }
@@ -27,19 +27,8 @@ const Segment: React.FC<ISegmentProps> = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
     if (slider.current) {
 
-      let x;
-
-      if (i === 0) {
-        x = 0;
-      } else if (i === list.length - 1) {
-        x = -2;
-      } else {
-        x = -1;
-      }
-
-      const width = i !== list.length - 1 ? WIDTH : WIDTH + 1;
-      slider.current.style.left = `${(WIDTH * i) + x}px`;
-      slider.current.style.width = `${width}px`;
+      slider.current.style.left = `${(WIDTH * i)}px`;
+      slider.current.style.width = `${WIDTH}px`;
     }
 
     props.onChange && props.onChange(e);
