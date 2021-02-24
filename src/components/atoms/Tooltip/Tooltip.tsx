@@ -30,8 +30,8 @@ const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, cl
     };
   }, [div]);
 
-  rect.y = rect.y || rect.top;
-  rect.x = rect.x || rect.left;
+  rect.y = (rect.y || rect.top) + window.scrollY;
+  rect.x = (rect.x || rect.left) + window.scrollX;
 
   const styles = {
     top: {
