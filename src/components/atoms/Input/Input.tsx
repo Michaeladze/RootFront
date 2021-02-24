@@ -9,8 +9,10 @@ import SearchIcon from '../../_icons/search';
 import CloseIcon from '../../_icons/close';
 import HideIcon from '../../_icons/hide';
 import ShowIcon from '../../_icons/show';
+import { Size } from '../../../types';
+import { sizeClass } from '../../../utils/helpers';
 
-export interface IInputProps extends HTMLProps<HTMLInputElement> {
+export interface IInputProps extends Omit<HTMLProps<HTMLInputElement>, 'size'> {
   /** Возможность очистки поля по клику */
   onClear?: () => void;
   /** Возможность поиска */
@@ -21,8 +23,8 @@ export interface IInputProps extends HTMLProps<HTMLInputElement> {
   debounce?: number;
   /** Вернуть value */
   getValue?: (value: string) => void;
-  /** Тип */
-  inputType?: 'inline' | 'outline';
+  /** Размер */
+  size?: Size;
 }
 
 const Input: FC<IInputProps> = ({
@@ -31,7 +33,7 @@ const Input: FC<IInputProps> = ({
   search = false,
   floatLabel,
   getValue,
-  inputType = 'inline',
+  size = 'medium',
   ...props
 }: IInputProps) => {
   /** Ref */
@@ -129,18 +131,17 @@ const Input: FC<IInputProps> = ({
 
   // ------------------------------------------------------------------------------------------------------------------
 
-  const searchClass = search ? 'rf-input--search' : '';
   const floatLabelClass = floatLabel ? 'rf-input__field--with-label' : '';
-  const typeClass = inputType === 'outline' ? 'rf-input__field--outline' : '';
+  const iconClass = search || onClear ? 'rf-input__with-icon' : '';
 
   return (
     <div className='rf-input'>
       <input
         {...props}
         ref={ref}
-        className={`rf-input__field ${
+        className={`rf-input__field ${floatLabelClass} ${floatClass} ${sizeClass[size]} ${iconClass} ${
           props.className || ''
-        } ${floatLabelClass} ${floatClass} ${searchClass} ${typeClass}`}
+        }`}
         autoComplete='off'
         type={props.type || 'text'}
         onKeyUp={handleFloatLabel}

@@ -8,23 +8,37 @@
 .rf-chips__item {
   display: flex;
   align-items: center;
-  padding: 6px 12px;
+  padding: 0 12px;
   border-radius: 16px;
   margin-right: 8px;
   margin-bottom: 8px;
   background-color: var(--base-200);
   cursor: default;
+
+  height: 34px;
+
+  &.rf--small {
+    height: 26px;
+  }
 }
 
 .rf-chips__name {
   @include p1;
 }
 
-.rf-chips__button {
+.rf-chips__item.rf--small .rf-chips__name {
+  @include p2;
+}
+
+.rf-chips__item .rf-chips__button {
   @include round(22px);
   margin-left: 8px;
   background-color: var(--base-000);
   color: var(--base-500);
+}
+
+.rf-chips__item.rf--small .rf-chips__button {
+  @include round(16px);
 }
 
 .rf-chips__item.rf--base:hover .rf-chips__name {

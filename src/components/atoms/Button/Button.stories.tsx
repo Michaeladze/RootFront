@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 import { variants } from '../../../utils/helpers';
-import { Variant } from '../../../types';
+import { Size, Variant } from '../../../types';
 import Story from '../../storybook/Story';
 import StoryRow from '../../storybook/StoryRow';
 import StoryItem from '../../storybook/StoryItem';
@@ -12,7 +12,7 @@ export default {
   component: Button
 };
 
-const scales: string[] = ['giant', 'large', 'medium', 'small', 'tiny'];
+const scales: Size[] = ['big', 'medium', 'small'];
 
 const buttonTypes: any = ['primary', 'secondary', 'link', 'outlinePrimary'];
 

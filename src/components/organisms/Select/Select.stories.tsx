@@ -39,7 +39,7 @@ for (let i = 1; i < 15; i++) {
             <div style={{ width: '240px' }}>
               <div>Вам недоступна эта опция. Свяжитесь с администратором для получения доступа.</div>
               <div style={{ marginTop: '8px' }}>
-                <Button size='tiny' buttonType='outlinePrimary'>
+                <Button size='small' buttonType='outlinePrimary'>
                   Связаться
                 </Button>
               </div>
@@ -68,7 +68,7 @@ export const select = () => {
     <Story name='Select' width={600}>
       <StoryItem description='Выбор радио кнопок или чекбоксов из выпадающего списка'>
         <StoryRow>
-          <Select options={list} placeholder='Запрещен ввод' readOnly inputType='outline' />
+          <Select options={list} placeholder='Запрещен ввод' readOnly />
         </StoryRow>
         <StoryRow>
           <Select name='s1' options={list} placeholder='Выберите значение' value={s1} />

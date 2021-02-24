@@ -1,4 +1,6 @@
-import { IFormattedDate, Variant } from '../types';
+import {
+  IFormattedDate, Size, Variant
+} from '../types';
 
 const months = [
   'январь',
@@ -134,3 +136,9 @@ export const variants: Variant[] = [
   'warning',
   'success'
 ];
+
+export const sizeClass: Record<Size, string> = {
+  'small': 'rf--small',
+  'medium': 'rf--medium',
+  'big': 'rf--big'
+};

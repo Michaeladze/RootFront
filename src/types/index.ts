@@ -78,3 +78,6 @@ export interface IBreadcrumb {
 
 /** Тип цветового оформления */
 export type Variant = 'base' | 'accent' | 'info' | 'complement' | 'danger' | 'warning' | 'success';
+
+/** Размер */
+export type Size = 'small' | 'medium' | 'big';

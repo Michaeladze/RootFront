@@ -24,7 +24,7 @@
 }
 
 .rf-select__list-item:hover {
-  background-color: var(--base-200);
+  background-color: var(--base-150);
 }
 
 .rf-select__list-item > label {
@@ -60,15 +60,17 @@
 }
 
 .rf-select__input-wrapper .rf-input__field {
-  padding-right: 50px;
+  padding-right: 64px;
 }
 
 .rf-select__input-wrapper .rf-input__field[readonly] {
   cursor: pointer;
+  padding-right: 32px;
 }
 
 .rf-select__input-icon {
   position: absolute;
+  width: 24px;
   top: 50%;
   transform: translateY(-50%) rotate(0);
   transition: 0.35s;
@@ -81,7 +83,8 @@
 }
 
 .rf-select__input-clear {
-  right: 48px;
+  right: 40px;
+  width: 24px;
   cursor: pointer;
   display: none;
   pointer-events: none;

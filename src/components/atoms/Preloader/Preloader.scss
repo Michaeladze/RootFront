@@ -8,16 +8,16 @@
   transform: translate(-50%, -50%);
 }
 
-.preloader--small {
-  @include round(15px);
+.preloader.rf--small {
+  @include round(32px);
 }
 
-.preloader--medium {
-  @include round(30px);
+.preloader.rf--medium {
+  @include round(40px);
 }
 
-.preloader--large {
-  @include round(45px);
+.preloader.rf--big {
+  @include round(48px);
 }
 
 .preloader__circle {

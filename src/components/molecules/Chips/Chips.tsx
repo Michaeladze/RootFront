@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import Button from '../../atoms/Button';
 import Close from '../../_icons/close-sm';
-import { IChips, Variant } from '../../../types';
-import { variantClass } from '../../../utils/helpers';
+import {
+  IChips, Size, Variant
+} from '../../../types';
+import { sizeClass, variantClass } from '../../../utils/helpers';
 
 export interface IChipsProps {
   items: IChips[];
@@ -11,10 +13,12 @@ export interface IChipsProps {
   onClick?: (c: IChips) => void;
   onRemove?: (id: string) => void;
   disabled?: boolean;
+  /** Размер */
+  size?: Size;
 }
 
 const Chips: FC<IChipsProps> = ({
-  items, variant = 'base', onRemove, onClick, className, disabled
+  items, variant = 'base', size = 'medium', onRemove, onClick, className, disabled
 }: IChipsProps) => {
   const handleRemove = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
@@ -29,7 +33,7 @@ const Chips: FC<IChipsProps> = ({
 
   const chips = items.map((e: IChips) => (
     <div
-      className={`rf-chips__item ${variantClass[variant]} ${
+      className={`rf-chips__item ${variantClass[variant]} ${sizeClass[size]} ${
         disabled || e.disabled ? 'rf-chips__item--disabled' : ''
       } ${className} ${onClick ? 'rf-chips__item--pointer' : ''}`}
       key={e.id}

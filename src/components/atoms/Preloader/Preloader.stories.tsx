@@ -27,14 +27,14 @@ export const preloader = () => {
         height: '60px',
         position: 'relative'
       }}>
-        <Preloader variant={variant} />
+        <Preloader size='medium' variant={variant} />
       </div>
       <div style={{
         width: '60px',
         height: '60px',
         position: 'relative'
       }}>
-        <Preloader size='large' variant={variant} />
+        <Preloader size='big' variant={variant} />
       </div>
     </StoryCol>
   ));

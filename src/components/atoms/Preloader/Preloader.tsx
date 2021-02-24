@@ -1,15 +1,16 @@
 import React from 'react';
-import { Variant } from '../../../types';
-import { variantClass } from '../../../utils/helpers';
+import { Size, Variant } from '../../../types';
+import { sizeClass, variantClass } from '../../../utils/helpers';
 
 export interface IPreloaderProps {
-  size?: 'small' | 'medium' | 'large';
+  className?: string;
+  size?: Size;
   variant?: Variant;
 }
 
-const Preloader: React.FC<IPreloaderProps> = ({ size = 'medium', variant = 'accent' }: IPreloaderProps) => {
+const Preloader: React.FC<IPreloaderProps> = ({ className = '', size = 'medium', variant = 'accent' }: IPreloaderProps) => {
   return (
-    <div className={`preloader preloader--${size} ${variantClass[variant]}`}>
+    <div className={`preloader ${sizeClass[size]} ${variantClass[variant]} ${className}`}>
       <div className='preloader__circle' />
     </div>
   );

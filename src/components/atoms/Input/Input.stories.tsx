@@ -47,6 +47,7 @@ export const input = () => {
         disabled={r.disabled}
         autoFocus={r.autofocus}
         onClear={r.clear}
+        size='medium'
       />
     </StoryRow>
   ));
@@ -73,9 +74,6 @@ export const input = () => {
             placeholder='Поле с возможностью очистки содержимого. Начните печатать...'
             onClear={() => console.log('clear')}
           />
-        </StoryRow>
-        <StoryRow>
-          <Input name='border' placeholder='С контуром' inputType='outline' />
         </StoryRow>
         <StoryRow>
           <Input name='floatLabel' floatLabel='Введите текст' />

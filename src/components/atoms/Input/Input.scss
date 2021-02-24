@@ -10,12 +10,12 @@
 
 .rf-input__field {
   width: 100%;
-  padding: 8px 16px;
+  padding: 0 16px;
   line-height: 20px;
   transition: 0.3s ease-in all;
   @include p1;
-  border: 0;
-  border-bottom: 1px solid var(--base-300);
+  border: 1px solid var(--base-300);
+  border-radius: 4px;
   background-color: var(--base-000);
   color: var(--base-1000);
 
@@ -35,15 +35,26 @@
     cursor: pointer;
   }
 
+  &.rf--small {
+    height: 32px;
+  }
+
+  &.rf--medium {
+    height: 40px;
+  }
+
+  &.rf--big {
+    height: 48px;
+  }
+
   &.rf-input__field--with-label {
     padding: 18px 18px 10px 18px;
     cursor: text;
   }
 }
 
-.rf-input__field--outline {
-  border: 1px solid var(--base-300);
-  border-radius: 4px;
+.rf-input__with-icon {
+  padding-right: 40px;
 }
 
 .rf-input__field:hover {
@@ -149,20 +160,9 @@ input[type='file']:disabled + .rf-input__field.rf-input__field--file {
   justify-content: center;
 }
 
-.rf-input--search {
-  padding-left: 48px;
-  padding-right: 40px;
-  border-radius: 24px;
-  border: 1px solid var(--base-300);
-}
-
 .rf-input__action-search {
-  right: auto;
-  left: 18px;
-  color: var(--accent-500);
-  background: transparent;
   pointer-events: none;
-  cursor: default;
+  color: var(--base-400);
 }
 
 .rf-input__action-clear {

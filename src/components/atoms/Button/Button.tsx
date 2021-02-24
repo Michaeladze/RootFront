@@ -1,18 +1,18 @@
 import React, { FC, HTMLProps } from 'react';
-import { Variant } from '../../../types';
-import { variantClass } from '../../../utils/helpers';
+import { Size, Variant } from '../../../types';
+import { sizeClass, variantClass } from '../../../utils/helpers';
 
 export interface IButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
   /** Внешний вид */
   buttonType?: 'primary' | 'secondary' | 'link' | 'outlinePrimary' | 'outlineSecondary' | 'round' | 'text';
-  /** Размер */
-  size?: 'giant' | 'large' | 'medium' | 'small' | 'tiny';
   /** Тип */
   type?: 'button' | 'submit' | 'reset';
   /** Скругленная */
   rounded?: boolean;
   /** Варианты */
   variant?: Variant;
+  /** Размер */
+  size?: Size;
 }
 
 const Button: FC<IButtonProps> = ({
@@ -30,13 +30,7 @@ const Button: FC<IButtonProps> = ({
     outlinePrimary: 'rf-button--outline-primary',
     outlineSecondary: 'rf-button--outline-secondary',
     text: 'rf-button--text',
-    round: 'rf-button--round',
-
-    giant: 'rf-button__giant',
-    large: 'rf-button__large',
-    medium: 'rf-button__medium',
-    small: 'rf-button__small',
-    tiny: 'rf-button__tiny'
+    round: 'rf-button--round'
   };
 
   const roundedClass = rounded ? 'rf-button__rounded' : '';
@@ -45,7 +39,7 @@ const Button: FC<IButtonProps> = ({
     <button
       {...props}
       type={type}
-      className={`rf-button ${classesMap[buttonType]} ${classesMap[size]} ${variantClass[variant]} ${roundedClass} ${
+      className={`rf-button ${classesMap[buttonType]} ${classesMap[size]} ${sizeClass[size]} ${variantClass[variant]} ${roundedClass} ${
         props.className || ''
       }`}>
       {props.children}

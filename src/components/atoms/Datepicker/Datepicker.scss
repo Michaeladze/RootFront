@@ -5,40 +5,61 @@ $size: 32px;
 $margin: 2px;
 
 .react-date-picker__calendar {
+  //top: calc(100% + 8px) !important; // omg
   z-index: 100;
   background-color: white;
 }
 
 .rf-datepicker__wrapper {
-  cursor: pointer;
+  cursor: default;
 
   // Inputs
 
   .react-date-picker__wrapper {
     overflow: hidden;
     position: relative;
-    border: 0;
-    border-bottom: 1px solid var(--base-300);
+    transition: 0.15s ease-in all;
   }
 
   .react-date-picker__inputGroup {
     min-width: 190px;
-    @include s1;
+    @include p1;
     flex-grow: 1;
     line-height: 20px;
-    padding: 8px 16px;
+    padding: 0 16px;
     background-color: var(--base-000);
+    border: 1px solid var(--base-300);
+    border-radius: 4px;
+    display: flex;
+    align-items: baseline;
   }
 
-  .react-date-picker__wrapper:hover {
-    border-color: var(--accent-300);
+  &.rf--big .react-date-picker__inputGroup {
+    height: 48px;
+    padding: 14px 16px;
   }
 
-  .react-date-picker__wrapper:focus {
+  &.rf--medium .react-date-picker__inputGroup {
+    height: 40px;
+    padding: 10px 16px;
+  }
+
+  &.rf--small .react-date-picker__inputGroup {
+    height: 32px;
+    padding: 6px 16px;
+  }
+
+  .react-date-picker:not(.react-date-picker--disabled):not(.react-date-picker--open) {
+    .react-date-picker__wrapper:hover .react-date-picker__inputGroup {
+      border-color: var(--accent-500);
+    }
+  }
+
+  .react-date-picker--open:not(.react-date-picker--disabled) .react-date-picker__inputGroup {
     border-color: var(--accent-500);
   }
 
-  .react-date-picker__wrapper.invalid {
+  .react-date-picker__inputGroup.invalid {
     border-color: var(--danger-500);
   }
 
@@ -46,9 +67,7 @@ $margin: 2px;
     border: 0;
     outline: 0;
     cursor: pointer;
-    line-height: inherit;
     @include p1;
-    letter-spacing: normal;
   }
 
   .react-date-picker__inputGroup__day {
@@ -61,10 +80,12 @@ $margin: 2px;
 
   .react-date-picker__inputGroup__year {
     @include text;
+    width: 100% !important;
+    flex-shrink: 1;
   }
 
   .react-date-picker__inputGroup__leadingZero {
-    //@include text;
+    @include text;
   }
 
   // цвет выделения
@@ -92,8 +113,9 @@ $margin: 2px;
     cursor: pointer;
     background-color: transparent;
     z-index: 50;
-    @include s1;
+    @include p1;
     color: var(--base-500);
+    transition: 0.15s ease-in color;
   }
 
   .react-date-picker__clear-button {
@@ -102,7 +124,7 @@ $margin: 2px;
     transform: translateY(-50%);
     z-index: 51;
 
-    @include s1;
+    @include p1;
     color: var(--base-500);
 
     svg {
@@ -114,6 +136,7 @@ $margin: 2px;
   .react-date-picker__button:hover,
   .react-date-picker__button:focus {
     background-color: transparent;
+    //color: var(--accent-500);
   }
 
   // Calendar
@@ -121,9 +144,9 @@ $margin: 2px;
   .react-calendar {
     box-sizing: content-box;
     width: ($size + $margin * 2)  * 7;
-    padding: 25px;
+    padding: 30px 20px;
     border-radius: 4px;
-    color: var(--base-1000);
+    color: var(--base-500);
     box-shadow: 0 2px 6px rgba(25, 59, 104, 0.15);
   }
 
@@ -138,6 +161,10 @@ $margin: 2px;
     box-sizing: border-box;
     border-radius: 2px;
     @include s1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .react-calendar__tile--active {
@@ -146,7 +173,8 @@ $margin: 2px;
   }
 
   .react-calendar__tile:disabled {
-    color: var(--base-400);
+    color: var(--base-300);
+    cursor: default;
   }
 
   .react-calendar__tile[disabled] {
@@ -156,32 +184,28 @@ $margin: 2px;
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
     cursor: pointer;
-    background-color: var(--accent-200);
-    border-color: var(--accent-500);
+    border-color: var(--accent-100);
+    background-color: var(--accent-100);
   }
 
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
-    background-color: var(--accent-200);
     border-color: var(--accent-500);
+    background-color: var(--accent-200);
   }
 
   .react-calendar__month-view__days__day--neighboringMonth {
     @include p2;
-    color: var(--base-500);
+    color: var(--base-300);
   }
 
   .react-calendar__tile.react-calendar__month-view__days__day--neighboringMonth:hover {
-    background-color: var(--accent-100);
-    border-color: var(--accent-100);
+    background-color: var(--accent-200);
   }
 
   .react-calendar__month-view__weekdays {
     @include c1;
-    color: var(--base-500);
     padding: 4px 0;
-    border-top: 1px solid var(--base-200);
-    border-bottom: 1px solid var(--base-200);
   }
 
   .react-calendar__month-view__weekdays__weekday {
@@ -196,7 +220,7 @@ $margin: 2px;
 
     abbr {
       text-decoration: none;
-      text-transform: uppercase;
+      text-transform: capitalize;
     }
   }
 
@@ -213,8 +237,8 @@ $margin: 2px;
 
   .react-calendar__year-view__months__month:enabled:hover,
   .react-calendar__year-view__months__month:enabled:focus {
+    border-color: var(--accent-200);
     background-color: var(--accent-200);
-    border-color: var(--accent-500);
   }
 
   .react-calendar__decade-view__years__year {
@@ -224,8 +248,8 @@ $margin: 2px;
 
   .react-calendar__decade-view__years__year:enabled:hover,
   .react-calendar__decade-view__years__year:enabled:focus {
+    border-color: var(--accent-200);
     background-color: var(--accent-200);
-    border-color: var(--accent-500);
   }
 
   // Navigation
@@ -310,14 +334,6 @@ $margin: 2px;
   }
 }
 
-.rf-datepicker__wrapper--outline {
-
-  .react-date-picker__wrapper {
-    border: 1px solid var(--base-300);
-    border-radius: 4px;
-  }
-}
-
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none !important;
@@ -330,17 +346,18 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: default;
 
   .rf-datepicker__wrapper .react-date-picker__wrapper {
-    border-bottom-color: var(--base-300);
-  }
-
-  .react-date-picker__wrapper:hover {
-    border-bottom-color: var(--base-300);
+    border-color: var(--base-100);
   }
 
   .react-date-picker__inputGroup__input {
     color: var(--base-300);
     background-color: transparent;
     cursor: default
+  }
+
+  .react-date-picker__inputGroup {
+    background-color: var(--base-100);
+    border-color: var(--base-100);
   }
 
   .react-date-picker__inputGroup__leadingZero {
@@ -357,6 +374,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: var(--base-300);
   }
 
+  .react-date-picker__button:hover,
   .react-date-picker__button {
     color: var(--base-300);
     cursor: default

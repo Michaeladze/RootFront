@@ -1,7 +1,9 @@
 import React, {
   FC, InputHTMLAttributes, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
-import { IChips, IOption } from '../../../types';
+import {
+  IChips, IOption, Size
+} from '../../../types';
 import useClickOutside from '../../../hooks/useClickOutside';
 import {
   Button, Checkbox, Input, Radio
@@ -10,7 +12,7 @@ import Angle from '../../_icons/caret-down';
 import Close from '../../_icons/close';
 import Chips from '../../molecules/Chips/Chips';
 
-export interface ISelectProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /** Список вариантов */
   options: IOption[];
   /** Множественный выбор */
@@ -21,8 +23,8 @@ export interface ISelectProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>, option?: IOption) => void;
   /** Вернуть IOption */
   getValue?: (option: IOption) => void;
-  /** Тип */
-  inputType?: 'inline' | 'outline';
+  /** Размер */
+  size?: Size;
 }
 
 const Select: FC<ISelectProps> = ({
@@ -31,7 +33,7 @@ const Select: FC<ISelectProps> = ({
   value,
   onChange,
   getValue,
-  inputType = 'inline',
+  size = 'medium',
   ...props
 }: ISelectProps) => {
   /** Ссылка на текущий компонент */
@@ -242,7 +244,7 @@ const Select: FC<ISelectProps> = ({
 
   const chipsJSX = multiSelect && (
     <div className='rf-select__chips'>
-      <Chips variant='accent' items={chips} onRemove={onChipsRemove} disabled={props.disabled} />
+      <Chips variant='accent' items={chips} size={size} onRemove={onChipsRemove} disabled={props.disabled} />
     </div>
   );
 
@@ -287,7 +289,7 @@ const Select: FC<ISelectProps> = ({
           readOnly={props.readOnly}
           onChange={onInputChange}
           onKeyUp={onSearch}
-          inputType={inputType}
+          size={size}
           onClick={onInputClick}
           disabled={props.disabled}
         />
