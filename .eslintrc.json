@@ -29,7 +29,7 @@
     "block-spacing": "error",
     "brace-style": "error",
     "camelcase": "error",
-    "capitalized-comments": "error",
+    "capitalized-comments": 0,
     "comma-spacing": ["error", { "before": false, "after": true }],
     "comma-style": ["error", "last"],
     "eol-last": "error",
@@ -42,7 +42,7 @@
     "max-len": ["warn", { "code": 140, "tabWidth": 2, "ignoreStrings": true,
       "ignoreTemplateLiterals": true
     }],
-    "multiline-comment-style": ["error", "starred-block"],
+    "multiline-comment-style": [0, "starred-block"],
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
     "no-multi-assign": "error",
     "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],

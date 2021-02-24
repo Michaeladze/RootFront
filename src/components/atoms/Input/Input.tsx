@@ -91,14 +91,14 @@ const Input: FC<IInputProps> = ({
   /** Кнопка поиска и сброса */
   const closeButton = onClear && value.length > 0 && (
     <button className='rf-input__action rf-input__action-clear' onClick={clearInput}>
-      <CloseIcon />
+      <CloseIcon/>
     </button>
   );
 
   /** Кнопка поиска и сброса */
   const searchButton = search && (
     <button className='rf-input__action rf-input__action-search'>
-      <SearchIcon />
+      <SearchIcon/>
     </button>
   );
 
@@ -114,7 +114,7 @@ const Input: FC<IInputProps> = ({
   /** Кнопка отображения пароля */
   const showButton = props.type === 'password' && (
     <button className='rf-input-action rf-password-action' type='button' onClick={togglePassword}>
-      {showPassword ? <ShowIcon /> : <HideIcon />}
+      {showPassword ? <ShowIcon/> : <HideIcon/>}
     </button>
   );
 
@@ -135,13 +135,11 @@ const Input: FC<IInputProps> = ({
   const iconClass = search || onClear ? 'rf-input__with-icon' : '';
 
   return (
-    <div className='rf-input'>
+    <div className={`rf-input ${props.className || ''}`}>
       <input
         {...props}
         ref={ref}
-        className={`rf-input__field ${floatLabelClass} ${floatClass} ${sizeClass[size]} ${iconClass} ${
-          props.className || ''
-        }`}
+        className={`rf-input__field ${floatLabelClass} ${floatClass} ${sizeClass[size]} ${iconClass}`}
         autoComplete='off'
         type={props.type || 'text'}
         onKeyUp={handleFloatLabel}

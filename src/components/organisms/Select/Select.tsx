@@ -11,6 +11,7 @@ import {
 import Angle from '../../_icons/caret-down';
 import Close from '../../_icons/close';
 import Chips from '../../molecules/Chips/Chips';
+import { sizeClass } from '../../../utils/helpers';
 
 export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /** Список вариантов */
@@ -281,7 +282,7 @@ const Select: FC<ISelectProps> = ({
   const clearIconClass = !props.readOnly && inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
 
   return (
-    <div className={`rf-select ${props.className || ''}`} ref={componentNode}>
+    <div className={`rf-select ${sizeClass[size]} ${props.className || ''}`} ref={componentNode}>
       <div className='rf-select__input-wrapper'>
         <Input
           placeholder={props.placeholder}

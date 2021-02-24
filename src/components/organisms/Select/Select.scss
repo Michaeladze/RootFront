@@ -31,6 +31,10 @@
   padding: 6px 32px;
 }
 
+.rf--small .rf-select__list-item > label {
+  padding: 6px 16px;
+}
+
 .rf-select__list-item:hover .rf-radio__label {
   color: var(--accent-500);
 }
