@@ -15,7 +15,7 @@ const BackdropLoader: React.FC<IBackdropLoaderProps> = ({ className = '', varian
 
   return (
     <div className={`rf__backdrop-loader ${className}`}>
-      <Preloader size='large' variant={variant}/>
+      <Preloader size='big' variant={variant}/>
     </div>
   );
 };
