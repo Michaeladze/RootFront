@@ -50,6 +50,9 @@ import UserItem from './components/projects/molecules/User';
 import UsersStack from './components/projects/molecules/UsersStack';
 import PopupFooter from './components/projects/molecules/PopupFooter';
 
+// ------------------------ Компоненты Templates ------------------------------------------------------------------------
+import Page from './components/projects/templates/Page';
+
 // --------------------------Иконки-------------------------------------------------------------------------------------
 
 import Copy from './components/_icons/copy';
@@ -108,7 +111,8 @@ export {
   FeedbackPopup,
   Menu,
   BackdropLoader,
-  TextEditor
+  TextEditor,
+  Page
 };
 
 export {

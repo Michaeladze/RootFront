@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 
 export interface IUserPhotoProps {
+  className?: string;
   /** Ссылка на фото */
   url?: string;
   /** Фамилия и Имя */
@@ -11,7 +12,7 @@ export interface IUserPhotoProps {
   radius?: string;
 }
 
-const UserPhoto: FC<IUserPhotoProps> = ({ url = '', radius = '40px', fullName = '' }: IUserPhotoProps) => {
+const UserPhoto: FC<IUserPhotoProps> = ({ className = '', url = '', radius = '40px', fullName = '' }: IUserPhotoProps) => {
   const styles = radius ? {
     width: radius,
     height: radius,
@@ -31,7 +32,7 @@ const UserPhoto: FC<IUserPhotoProps> = ({ url = '', radius = '40px', fullName = 
   }, [fullName]);
 
   return (
-    <div className='rf__user-photo' style={{
+    <div className={`rf__user-photo ${className}`} style={{
       backgroundImage: `url(${url})`,
       ...styles
     }}>

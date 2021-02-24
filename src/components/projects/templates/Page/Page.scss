@@ -1,0 +1,28 @@
+@import "src/styles/mixins";
+
+.rf-page {
+  padding: 40px;
+  background-color: var(--base-150);
+}
+
+.rf-page__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.rf-page__header-back {
+  margin-right: 8px;
+}
+
+.rf-page__title {
+  @include h4;
+}
+
+.rf-page__user {
+  margin-left: auto;
+}
+
+.rf-page__header-back {
+  color: var(--accent-500);
+}
