@@ -243,7 +243,7 @@ const Select: FC<ISelectProps> = ({
     setCurrentValue(onOptionRemove(id));
   };
 
-  const chipsJSX = multiSelect && (
+  const chipsJSX = multiSelect && chips.length && (
     <div className='rf-select__chips'>
       <Chips variant='accent' items={chips} size={size} onRemove={onChipsRemove} disabled={props.disabled} />
     </div>

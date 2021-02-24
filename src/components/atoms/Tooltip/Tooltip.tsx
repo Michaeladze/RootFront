@@ -1,11 +1,7 @@
 import React, {
   FC, ReactNode, useCallback, useEffect, useMemo, useState
 } from 'react';
-import { createPortal } from 'react-dom';
 
-// ---------------------------------------------------------------------------------------------------------------------
-/** Вложенный компонент. Нужен только локально, поэтому никуда его не экспортирую. */
-// ---------------------------------------------------------------------------------------------------------------------
 
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 
@@ -17,7 +13,7 @@ interface ITooltipContentProps {
   className?: string;
 }
 
-const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, className }: ITooltipContentProps) => {
+const TooltipContent: FC<ITooltipContentProps> = ({ children, position, className }: ITooltipContentProps) => {
   const div = useMemo<HTMLDivElement>(() => document.createElement('div'), []);
 
   /** При маунте добавляем модалку. При дестрое - удаляем. */
@@ -30,28 +26,28 @@ const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, cl
     };
   }, [div]);
 
-  rect.y = (rect.y || rect.top) + window.scrollY;
-  rect.x = (rect.x || rect.left) + window.scrollX;
+  // rect.y = (rect.y || rect.top) + window.scrollY;
+  // rect.x = (rect.x || rect.left) + window.scrollX;
 
   const styles = {
     top: {
-      top: `${rect.y}px`,
-      left: `${rect.x + rect.width / 2}px`,
+      top: '0',
+      left: '50%',
       transform: 'translate(-50%, -100%)'
     },
     right: {
-      top: `${rect.y + rect.height / 2}px`,
-      left: `${rect.x + rect.width}px`,
+      top: '50%',
+      left: '100%',
       transform: 'translate(0, -50%)'
     },
     bottom: {
-      top: `${rect.y + rect.height}px`,
-      left: `${rect.x + rect.width / 2}px`,
+      top: '100%',
+      left: '50%',
       transform: 'translate(-50%, 0)'
     },
     left: {
-      top: `${rect.y + rect.height / 2}px`,
-      left: `${rect.x}px`,
+      top: '50%',
+      left: '0',
       transform: 'translate(-100%, -50%)'
     }
   };
@@ -81,7 +77,7 @@ const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, cl
     </div>
   );
 
-  return createPortal(tooltip, div);
+  return tooltip;
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
