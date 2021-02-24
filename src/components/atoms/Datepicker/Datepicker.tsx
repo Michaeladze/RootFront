@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 // @ts-ignore
 import DatePicker, { DatePickerProps } from 'react-date-picker/dist/entry.nostyle';
-import Calendar from '../../_icons/calendar';
+import Calendar from '../../_icons/calendar-outline';
 import Close from '../../_icons/close';
 import { Size } from '../../../types';
 import { sizeClass } from '../../../utils/helpers';
