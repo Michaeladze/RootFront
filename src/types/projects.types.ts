@@ -16,6 +16,10 @@ export interface IUser {
   position: string;
   /** Подразделение */
   department: string;
+  /** Департамент ID */
+  departmentId?: string;
+  /** Департамент - орг структура */
+  departmentPath?: string;
   /** Почта */
   email?: string;
   /** Оклад */
