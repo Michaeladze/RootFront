@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { IListElement } from '../../../types';
 import { MenuContext } from '../../molecules/Menu/Menu';
+import './List.scss';
 
 interface IProps {
   /** Элементы меню */

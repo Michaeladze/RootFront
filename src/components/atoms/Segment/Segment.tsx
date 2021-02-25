@@ -1,4 +1,5 @@
 import React, { HTMLProps, useRef } from 'react';
+import './Segment.scss';
 import { IOption, Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
 import { Radio } from '../../../index';

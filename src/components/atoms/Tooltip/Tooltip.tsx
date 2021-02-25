@@ -1,6 +1,7 @@
 import React, {
   FC, ReactNode, useCallback, useEffect, useMemo, useState
 } from 'react';
+import './Tooltip.scss';
 
 
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';

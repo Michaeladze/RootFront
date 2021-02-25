@@ -2,7 +2,7 @@ import React, {
   ChangeEvent, FC, HTMLProps, useEffect, useState
 } from 'react';
 import InputMask from 'react-input-mask';
-
+import './Timepicker.scss';
 import Time from '../../_icons/time';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';

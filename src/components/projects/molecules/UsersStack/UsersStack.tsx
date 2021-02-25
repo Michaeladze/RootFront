@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './UsersStack.scss';
 import { IUser } from '../../../../types/projects.types';
 import { UserPhoto } from '../../../../index';
 

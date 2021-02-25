@@ -1,6 +1,7 @@
 import React, {
   FC, InputHTMLAttributes, ReactNode
 } from 'react';
+import './Radio.scss';
 import CheckIcon from '../../_icons/check-icon';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';

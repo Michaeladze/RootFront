@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './Page.scss';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-left-outline';
 import { UserPhoto } from '../../../../index';

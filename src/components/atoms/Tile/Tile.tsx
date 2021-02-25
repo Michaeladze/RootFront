@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './Tile.scss';
 
 export interface ITileProps {
   children: ReactNode | ReactNode[];

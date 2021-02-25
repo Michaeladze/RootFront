@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './Container.scss';
 
 interface IProps {
   children: ReactNode | ReactNode[];

@@ -5,8 +5,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "rimraf dist && tsc && yarn build_css && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/",
-    "build_css": "node-sass src/styles/index.scss -o dist/ ",
+    "build": "rimraf dist && tsc && yarn build_css",
+    "build_css": "node-sass src -o dist/ ",
     "start": "npm run build -- -w",
     "commit": "git add . && npx git-cz",
     "storybook": "start-storybook -p 9010 -s public -c src/.storybook",

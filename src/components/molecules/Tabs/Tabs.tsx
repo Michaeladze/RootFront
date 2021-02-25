@@ -10,6 +10,7 @@ import React, {
   useLayoutEffect,
   useEffect
 } from 'react';
+import './Tabs.scss';
 import Button from '../../atoms/Button';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ITab } from '../../../types';

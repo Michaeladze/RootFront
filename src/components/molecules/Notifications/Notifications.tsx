@@ -1,6 +1,7 @@
 import React, {
   useEffect, useRef, useState
 } from 'react';
+import './Notifications.scss';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Variant } from '../../../types';

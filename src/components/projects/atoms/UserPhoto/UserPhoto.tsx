@@ -1,6 +1,7 @@
 import React, {
   FC, useEffect, useState
 } from 'react';
+import './UserPhoto.scss';
 
 export interface IUserPhotoProps {
   className?: string;

@@ -1,6 +1,7 @@
 import React, {
   FC, ReactNode, useState, useEffect
 } from 'react';
+import './Switch.scss';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
 

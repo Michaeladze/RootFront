@@ -1,4 +1,5 @@
 import React, { HTMLProps } from 'react';
+import './ShareButton.scss';
 import Share from '../../_icons/share';
 import Button from '../Button';
 import { sendNotification } from '../../../index';

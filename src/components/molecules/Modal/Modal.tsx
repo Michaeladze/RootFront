@@ -1,6 +1,7 @@
 import React, {
   FC, useEffect, useState
 } from 'react';
+import './Modal.scss';
 import { createPortal } from 'react-dom';
 import Close from '../../_icons/close';
 

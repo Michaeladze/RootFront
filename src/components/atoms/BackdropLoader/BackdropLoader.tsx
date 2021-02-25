@@ -1,4 +1,5 @@
 import React from 'react';
+import './BackdropLoader.scss';
 import Preloader from '../Preloader';
 import { Variant } from '../../../types';
 

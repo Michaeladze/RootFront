@@ -1,4 +1,5 @@
 import React, { FC, HTMLProps } from 'react';
+import './PopupFooter.scss';
 
 import Button from '../../../atoms/Button';
 

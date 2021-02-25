@@ -1,6 +1,7 @@
 import React, {
   useCallback, useRef, useState
 } from 'react';
+import './FileInput.scss';
 import { getBase64, validateFile } from '../../../utils/file-utils';
 import Chips from '../../molecules/Chips/Chips';
 import { IChips, IFileData } from '../../../types';
