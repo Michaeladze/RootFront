@@ -7,8 +7,6 @@ export interface IButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'>
   buttonType?: 'primary' | 'secondary' | 'link' | 'outlinePrimary' | 'outlineSecondary' | 'round' | 'text';
   /** Тип */
   type?: 'button' | 'submit' | 'reset';
-  /** Скругленная */
-  rounded?: boolean;
   /** Варианты */
   variant?: Variant;
   /** Размер */
@@ -20,7 +18,6 @@ const Button: FC<IButtonProps> = ({
   size = 'medium',
   buttonType = 'primary',
   variant = 'accent',
-  rounded = false,
   ...props
 }: IButtonProps) => {
   const classesMap: { [key: string]: string } = {
@@ -33,13 +30,11 @@ const Button: FC<IButtonProps> = ({
     round: 'rf-button--round'
   };
 
-  const roundedClass = rounded ? 'rf-button__rounded' : '';
-
   return (
     <button
       {...props}
       type={type}
-      className={`rf-button ${classesMap[buttonType]} ${classesMap[size]} ${sizeClass[size]} ${variantClass[variant]} ${roundedClass} ${
+      className={`rf-button ${classesMap[buttonType]} ${sizeClass[size]} ${variantClass[variant]} ${
         props.className || ''
       }`}>
       {props.children}
