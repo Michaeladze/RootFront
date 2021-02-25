@@ -14,11 +14,6 @@ describe('Test <Button /> component', () => {
     expect(wrapper.hasClass('rf-button--outline-secondary')).toBeTruthy();
   });
 
-  it('Should have "rf-button__rounded" class', () => {
-    const wrapper = shallow(<Button rounded>Button</Button>);
-    expect(wrapper.hasClass('rf-button__rounded')).toBeTruthy();
-  });
-
   it('Should change "state" to "false" on click', () => {
     let state = true;
     const onClick = () => {

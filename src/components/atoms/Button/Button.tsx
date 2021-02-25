@@ -1,4 +1,6 @@
 import React, { FC, HTMLProps } from 'react';
+// @ts-ignore
+import classes from './Button.module.scss';
 import { Size, Variant } from '../../../types';
 import { sizeClass, variantClass } from '../../../utils/helpers';
 
@@ -7,8 +9,6 @@ export interface IButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'>
   buttonType?: 'primary' | 'secondary' | 'link' | 'outlinePrimary' | 'outlineSecondary' | 'round' | 'text';
   /** Тип */
   type?: 'button' | 'submit' | 'reset';
-  /** Скругленная */
-  rounded?: boolean;
   /** Варианты */
   variant?: Variant;
   /** Размер */
@@ -20,7 +20,6 @@ const Button: FC<IButtonProps> = ({
   size = 'medium',
   buttonType = 'primary',
   variant = 'accent',
-  rounded = false,
   ...props
 }: IButtonProps) => {
   const classesMap: { [key: string]: string } = {
@@ -33,15 +32,13 @@ const Button: FC<IButtonProps> = ({
     round: 'rf-button--round'
   };
 
-  const roundedClass = rounded ? 'rf-button__rounded' : '';
+  const className = props.className || '';
 
   return (
     <button
       {...props}
       type={type}
-      className={`rf-button ${classesMap[buttonType]} ${classesMap[size]} ${sizeClass[size]} ${variantClass[variant]} ${roundedClass} ${
-        props.className || ''
-      }`}>
+      className={`${classes['rf-button']} ${classes[classesMap[buttonType]]} ${classes[sizeClass[size]]} ${classes[variantClass[variant]]} ${className}`}>
       {props.children}
     </button>
   );
