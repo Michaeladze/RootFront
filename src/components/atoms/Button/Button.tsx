@@ -1,5 +1,4 @@
 import React, { FC, HTMLProps } from 'react';
-// @ts-ignore
 import classes from './Button.module.scss';
 import { Size, Variant } from '../../../types';
 import { sizeClass, variantClass } from '../../../utils/helpers';

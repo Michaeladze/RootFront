@@ -5,6 +5,7 @@
 @import "common";
 
 // Стили компонентов
+@import '../components/atoms/Button/Button.module';
 @import '../components/atoms/Checkbox/Checkbox';
 @import '../components/atoms/Column/Column';
 @import '../components/atoms/Datepicker/Datepicker';
