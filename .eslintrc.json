@@ -5,7 +5,7 @@
     "unused-imports",
     "@typescript-eslint"
   ],
-  "ignorePatterns": ["nodejs", "**/*.spec.tsx", "./**/*.stories.tsx", "dist"],
+  "ignorePatterns": ["nodejs", "**/*.spec.tsx", "./**/*.stories.tsx", "dist", "src/webpack.config.js"],
   "rules": {
     "no-extra-parens": "off",
     "curly": "error",
