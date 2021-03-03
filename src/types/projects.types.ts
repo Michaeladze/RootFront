@@ -1,4 +1,5 @@
 import { IListElement, IOption } from './index';
+import { ReactNode } from 'react';
 
 /** Пользователь */
 export interface IUser {
@@ -63,7 +64,7 @@ export interface IFeedback {
   browser: string;
 }
 
-/** интерфейс шаблона страницы - Список действий */
+/** Интерфейс шаблона страницы - Список действий */
 export interface IActionMenuListConfig {
   sortList: IOption[];
   actionList: IListElement[];
@@ -72,4 +73,11 @@ export interface IActionMenuListConfig {
   onClear: () => void;
   /** Подпись на кнопке при множественном выбор */
   actionLabel?: string;
+}
+
+/** Секции для шаблона */
+export interface IPageSection {
+  id: string;
+  title: ReactNode;
+  component: ReactNode;
 }

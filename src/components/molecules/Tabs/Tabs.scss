@@ -24,21 +24,25 @@ $lineWidth: 2px;
 }
 
 .rf-tabs__link {
-  margin-right: 32px;
+  //margin-right: 32px;
 }
 
 .rf-tabs__link:last-of-type {
   margin-right: 0;
 }
 
-.rf-button.rf-tabs__button {
+.rf-tabs__button {
   font-size: 16px;
   line-height: 20px;
   height: auto;
-  color: var(--base-400);
+  color: var(--base-1000);
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  padding: 0 16px;
 }
 
-.rf-button.rf-tabs__button--active {
+.rf-tabs__button--active {
   color: var(--base-1000);
 }
 

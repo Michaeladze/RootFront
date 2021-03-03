@@ -2,7 +2,9 @@ import React from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { Page } from '../../../../index';
-import { IPageSection } from './Page';
+import PageWithSections from '../PageWithSections';
+import ActionMenu from '../ActionMenu';
+import { IPageSection } from '../../../../types/projects.types';
 import { ITab } from '../../../../types';
 
 export default {
@@ -36,27 +38,9 @@ export const page = () => {
     {
       id: 'test2',
       title: 'Раздел 2',
-      component: <div style={{ height: '300px' }}> Раздел 1 </div>
+      component: <div style={{ height: '300px' }}>222</div>
     }
   ];
-
-  // const listConfig: IActionMenuListConfig = {
-  //   sortList: [
-  //     {
-  //       value: 'asc',
-  //       label: 'По алфавиту А-Я'
-  //     },
-  //     {
-  //       value: 'desc',
-  //       label: 'По алфавиту Я-А'
-  //     }
-  //   ],
-  //   actionLabel: 'Создать',
-  //   actionList: [{ label: 'Действие 1' }, { label: 'Действие 2' }],
-  //   onSort: (sortParam: string) => console.log(sortParam),
-  //   onSearch: (searchStr: string) => console.log(searchStr),
-  //   onClear: () => console.log('clear')
-  // };
 
   const navigation: ITab[] = [
     {
@@ -69,9 +53,13 @@ export const page = () => {
     }
   ];
 
+  const actionMenu = <ActionMenu type='default'/>;
+
   return (
     <BrowserRouter>
-      <Page backUrl='/' title='Изменение графика рабочего времени' sections={sections} navigation={navigation} actionMenuType='default'/>
+      <Page backUrl='/' title='Изменение графика рабочего времени' navigation={navigation} actionMenu={actionMenu} >
+        <PageWithSections sections={sections}/>
+      </Page>
     </BrowserRouter>
   );
 };

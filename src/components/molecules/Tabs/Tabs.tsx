@@ -1,16 +1,6 @@
 import React, {
-  ReactNode,
-  FC,
-  useState,
-  MouseEvent,
-  useMemo,
-  useRef,
-  createRef,
-  RefObject,
-  useLayoutEffect,
-  useEffect
+  createRef, FC, MouseEvent, ReactNode, RefObject, useEffect, useLayoutEffect, useMemo, useRef, useState
 } from 'react';
-import Button from '../../atoms/Button';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ITab } from '../../../types';
 
@@ -82,9 +72,9 @@ const Tabs: FC<ITabsProps> = ({ list, type = 'underline', children }: ITabsProps
 
     return (
       <div key={i} className='rf-tabs__link' ref={refs.current[i]}>
-        <Button className={`rf-tabs__button ${className}`} buttonType='text' disabled={t.disabled} onClick={handler}>
+        <button className={`rf-tabs__button ${className}`} disabled={t.disabled} onClick={handler}>
           {t.label}
-        </Button>
+        </button>
       </div>
     );
   });

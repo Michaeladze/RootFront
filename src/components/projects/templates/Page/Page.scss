@@ -3,7 +3,6 @@
 .rf-page {
   max-width: 1368px;
   padding: 0 40px 40px;
-  margin: 0 auto;
   background-color: var(--base-150);
 }
 
@@ -22,7 +21,6 @@
   width: 100%;
   max-width: 1368px;
   padding: 0 40px;
-  margin: 0 auto;
 }
 
 .rf-page__header-wrapper {
@@ -132,4 +130,5 @@ $asideLinkHeight: 42px;
 
 .sb-show-main.sb-main-padded {
   padding: 0 !important;
+  background-color: var(--base-150) !important;
 }
