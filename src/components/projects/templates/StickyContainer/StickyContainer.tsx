@@ -33,8 +33,8 @@ const StickyContainer: React.FC<IProps> = ({
           console.log('Going down');
           console.log(rect.top, rect.height - window.innerHeight);
 
+          // Fix at the bottom
           if (position.current !== 'fixBottom' && rect.top < 0 && rect.top + (rect.height - window.innerHeight) >= 0) {
-            console.log('Fix at bottom of the page');
             block.style.position = 'fixed';
             block.style.top = 'auto';
             block.style.bottom = '0';
@@ -44,8 +44,10 @@ const StickyContainer: React.FC<IProps> = ({
         } else {
           console.log('Going up');
 
+          // Remove fix at the bottom
           if (position.current === 'fixBottom') {
-
+            block.style.position = 'absolute';
+            block.style.bottom = `${pageYOffset + window.innerHeight}px`;
           }
 
           if (rect.top < 0 && rect.top + (rect.height - window.innerHeight) >= 0) {
