@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import './PageWithSections.scss';
 import { Tile } from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
 

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import './ActionMenu.scss';
 import { IOption } from '../../../../types';
 import {
   Button, Input, Menu, Select
