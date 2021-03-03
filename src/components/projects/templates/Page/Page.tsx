@@ -6,7 +6,6 @@ import Chevron from '../../../_icons/chevron-left-outline';
 import { Tabs, UserPhoto } from '../../../../index';
 import { IUser } from '../../../../types/projects.types';
 import { ITab } from '../../../../types';
-import StickyContainer from '../StickyContainer';
 
 
 export interface IPageProps {
@@ -74,7 +73,6 @@ const Page: React.FC<IPageProps> = ({
         </div>
       </header>
       <div className='rf-page__content' ref={contentRef}>
-        <StickyContainer top={242}/>
         {children}
       </div>
     </div>

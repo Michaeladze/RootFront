@@ -6,6 +6,7 @@ import PageWithSections from '../PageWithSections';
 import ActionMenu from '../ActionMenu';
 import { IPageSection } from '../../../../types/projects.types';
 import { ITab } from '../../../../types';
+import StickyContainer from '../StickyContainer';
 
 export default {
   title: 'Projects/Page',
@@ -58,6 +59,7 @@ export const page = () => {
   return (
     <BrowserRouter>
       <Page backUrl='/' title='Изменение графика рабочего времени' navigation={navigation} actionMenu={actionMenu} >
+        <StickyContainer top={242}/>
         <PageWithSections sections={sections}/>
       </Page>
     </BrowserRouter>
