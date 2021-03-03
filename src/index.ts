@@ -23,6 +23,7 @@ import Switch from './components/atoms/Switch';
 import Tile from './components/atoms/Tile';
 import ShareButton from './components/atoms/ShareButton';
 import BackdropLoader from './components/atoms/BackdropLoader';
+import Badge from './components/atoms/Badge/Badge';
 
 // ------------------------ Компоненты Molecules -----------------------------------------------------------------------
 import Notifications, { sendNotification } from './components/molecules/Notifications';
@@ -112,7 +113,8 @@ export {
   Menu,
   BackdropLoader,
   TextEditor,
-  Page
+  Page,
+  Badge
 };
 
 export {

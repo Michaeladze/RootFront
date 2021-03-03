@@ -1,3 +1,5 @@
+import { IListElement, IOption } from './index';
+
 /** Пользователь */
 export interface IUser {
   /** Уникальный ID пользователя */
@@ -59,4 +61,15 @@ export interface IFeedback {
   screen: string;
   /** Информация о браузере */
   browser: string;
+}
+
+/** интерфейс шаблона страницы - Список действий */
+export interface IActionMenuListConfig {
+  sortList: IOption[];
+  actionList: IListElement[];
+  onSort: (sortParam: string) => void;
+  onSearch: (searchStr: string) => void;
+  onClear: () => void;
+  /** Подпись на кнопке при множественном выбор */
+  actionLabel?: string;
 }

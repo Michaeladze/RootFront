@@ -3,8 +3,12 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-left-outline';
-import { Tile, UserPhoto } from '../../../../index';
-import { IUser } from '../../../../types/projects.types';
+import {
+  Tabs, Tile, UserPhoto
+} from '../../../../index';
+import { IActionMenuListConfig, IUser } from '../../../../types/projects.types';
+import ActionMenu from '../ActionMenu';
+import { ITab } from '../../../../types';
 
 
 export interface IPageProps {
@@ -14,6 +18,12 @@ export interface IPageProps {
   children?: ReactNode | ReactNode[];
   user?: IUser;
   sections?: IPageSection[];
+  /** Navigation */
+  navigation?: ITab[];
+  /** Fixed action menu */
+  actionMenuType?: 'default' | 'list' | 'action';
+  actionMenuListConfig?: IActionMenuListConfig;
+  actionMenuContent?: ReactNode | ReactNode[];
 }
 
 export interface IPageSection {
@@ -28,7 +38,11 @@ const Page: React.FC<IPageProps> = ({
   backUrl = '',
   user,
   children,
-  sections
+  sections,
+  navigation,
+  actionMenuType,
+  actionMenuListConfig,
+  actionMenuContent
 }: IPageProps) => {
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -83,21 +97,28 @@ const Page: React.FC<IPageProps> = ({
 
   /** Изменение координаты слайдера при скролле */
   useEffect(() => {
-    if (lineRef.current && sliderRef.current && pageRef.current && headerRef.current) {
-      const pageHeight = pageRef.current.offsetHeight + headerRef.current.offsetHeight;
-      const clientHeight = document.documentElement.clientHeight;
+    const page = document.querySelector('.rf-page');
 
-      const sliderHeight = sliderRef.current.offsetHeight;
-      const lineHeight = lineRef.current.offsetHeight - sliderHeight;
+    if (page) {
+      const pageHeader = page.querySelector('.rf-page__header');
 
-      const k1 = (pageHeight - clientHeight) / (pageHeight / lineHeight);
-      const k2 = lineHeight * lineHeight / k1;
+      if (lineRef.current && sliderRef.current && pageHeader) {
+        // @ts-ignore
+        const pageHeight = page.offsetHeight + pageHeader.offsetHeight;
+        const clientHeight = document.documentElement.clientHeight;
 
-      window.addEventListener('scroll', () => {
-        if (sliderRef.current) {
-          sliderRef.current.style.top = document.documentElement.scrollTop * k2 / pageHeight + 'px';
-        }
-      });
+        const sliderHeight = sliderRef.current.offsetHeight;
+        const lineHeight = lineRef.current.offsetHeight - sliderHeight;
+
+        const k1 = (pageHeight - clientHeight) / (pageHeight / lineHeight);
+        const k2 = lineHeight * lineHeight / k1;
+
+        window.addEventListener('scroll', () => {
+          if (sliderRef.current) {
+            sliderRef.current.style.top = document.documentElement.scrollTop * k2 / pageHeight + 'px';
+          }
+        });
+      }
     }
   }, []);
 
@@ -147,18 +168,33 @@ const Page: React.FC<IPageProps> = ({
     );
   });
 
+
   // -------------------------------------------------------------------------------------------------------------------
 
   return (
     <div className={`rf-page ${className}`} ref={pageRef}>
       <header className='rf-page__header' ref={headerRef}>
         <div className='rf-page__header-inner'>
-          {backUrl && <Link to={backUrl} className='rf-page__header-back'>
-            <Chevron/>
-          </Link>}
-          <h2 className='rf-page__title'>{title}</h2>
+          <div className='rf-page__header-wrapper'>
+            {backUrl && <Link to={backUrl} className='rf-page__header-back'>
+              <Chevron/>
+            </Link>}
+            <h2 className='rf-page__title'>{title}</h2>
 
-          <UserPhoto className='rf-page__user' fullName={user?.fullName} radius={'48px'}/>
+            <UserPhoto className='rf-page__user' fullName={user?.fullName} radius={'48px'}/>
+          </div>
+          {navigation && (
+            <div className='rf-page__tabs'>
+              <Tabs list={navigation}/>
+            </div>
+          )}
+          {actionMenuType && (
+            <div className='rf-page__action-menu'>
+              <ActionMenu type={actionMenuType} listConfig={actionMenuListConfig}>
+                {actionMenuContent}
+              </ActionMenu>
+            </div>
+          )}
         </div>
       </header>
       <div className='rf-page__content' ref={contentRef}>

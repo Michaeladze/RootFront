@@ -23,6 +23,9 @@
   max-width: 1368px;
   padding: 0 40px;
   margin: 0 auto;
+}
+
+.rf-page__header-wrapper {
   display: flex;
   align-items: center;
 }
@@ -67,6 +70,7 @@
 
 .rf-page__content-aside {
   position: fixed;
+  z-index: 1;
   width: 192px;
   right: 40px;
 }
@@ -116,6 +120,14 @@ $asideLinkHeight: 42px;
   left: 0;
   top: 0;
   border-radius: 2px;
+}
+
+.rf-page__action-menu {
+  margin-top: 16px;
+}
+
+.rf-page__tabs {
+  margin-top: 32px;
 }
 
 .sb-show-main.sb-main-padded {

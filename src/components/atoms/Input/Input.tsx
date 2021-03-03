@@ -95,8 +95,8 @@ const Input: FC<IInputProps> = ({
     </button>
   );
 
-  /** Кнопка поиска и сброса */
-  const searchButton = search && (
+  /** Кнопка поиска */
+  const searchButton = search && value.length === 0 && (
     <button className='rf-input__action rf-input__action-search'>
       <SearchIcon/>
     </button>

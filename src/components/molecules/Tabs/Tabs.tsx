@@ -107,7 +107,11 @@ const Tabs: FC<ITabsProps> = ({ list, type = 'underline', children }: ITabsProps
         <div className='rf-tabs__navigation-list'>{nav}</div>
         <div className='rf-tabs__navigation-line' ref={lineRef} />
       </nav>
-      <div className='rf-tabs__content'>{isRouting && children ? children : list[active].tab}</div>
+      {
+        ((isRouting && children) || (!isRouting && list.length > 0)) && (
+          <div className='rf-tabs__content'>{isRouting && children ? children : list[active].tab}</div>
+        )
+      }
     </div>
   );
 };

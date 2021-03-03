@@ -613,6 +613,36 @@
 
 .rf-button.rf-button--text {
   padding: 0;
+  width: auto;
+  height: auto;
+
+  &.rf--base {
+    color: var(--base-500);
+  }
+
+  &.rf--accent {
+    color: var(--accent-500);
+  }
+
+  &.rf--info {
+    color: var(--info-500);
+  }
+
+  &.rf--complement {
+    color: var(--complement-500);
+  }
+
+  &.rf--danger {
+    color: var(--danger-500);
+  }
+
+  &.rf--warning {
+    color: var(--warning-500);
+  }
+
+  &.rf--success {
+    color: var(--success-500);
+  }
 }
 
 .rf-button.rf-button--text:disabled {
