@@ -141,9 +141,9 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
         const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
         const block = document.getElementById(section.id);
 
-        if (block && pageHeader) {
+        if (block && pageHeader && actionMenuRef.current) {
 
-          const top = block.getBoundingClientRect().top + pageYOffset - pageHeader.offsetHeight;
+          const top = block.getBoundingClientRect().top + pageYOffset - pageHeader.offsetHeight - actionMenuRef.current.offsetHeight;
           const msie = window.navigator.userAgent.indexOf('MSIE ');
 
           if (msie > 0) {
