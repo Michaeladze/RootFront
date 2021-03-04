@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Plus from '../../../_icons/plus';
 import Check from '../../../_icons/check';
-import Close from '../../../_icons/close';
+import Close from '../../../_icons/close-sm';
 import Arrow from '../../../_icons/arrow';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -135,7 +135,7 @@ const FindUsers: FC<IProps> = ({
       <h4 className='find-users__title'>Поиск сотрудников</h4>
       <p className='find-users__notice'>Поиск осуществляется по выбранной компании и в рамках одного подразделения.</p>
       <div className='find-users__input-wrapper'>
-        <Input className='find-users__input' placeholder='Поиск' search={true} onKeyUp={inputHandle} />
+        <Input placeholder='Поиск' search={true} onKeyUp={inputHandle} />
       </div>
 
       {!!selectedPeople.length && (

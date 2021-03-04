@@ -114,7 +114,7 @@
   @include c2;
 }
 
-.selected__button {
+.selected__button.rf-button {
   position: absolute;
   @include round(22px);
   right: 10px;
@@ -123,11 +123,6 @@
   border: 2px solid var(--base-000);
   color: var(--base-000);
   box-shadow: none;
-}
-
-.selected__button svg {
-  width: 8px;
-  height: 8px;
 }
 
 .selected__button:focus,

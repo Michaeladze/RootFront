@@ -17,7 +17,7 @@ const Button: FC<IButtonProps> = ({
   type = 'button',
   size = 'medium',
   buttonType = 'primary',
-  variant = 'accent',
+  variant = buttonType === 'text' ? 'base' : 'accent',
   ...props
 }: IButtonProps) => {
   const classesMap: { [key: string]: string } = {
