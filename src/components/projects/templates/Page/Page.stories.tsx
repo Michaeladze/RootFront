@@ -1,6 +1,4 @@
-import React, {
-  ReactNode, useEffect, useState
-} from 'react';
+import React from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { ContentExpander, Page } from '../../../../index';
@@ -60,22 +58,10 @@ export const page = () => {
     }
   ];
 
-  const [s, setS] = useState<ReactNode>(null);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setS(<ActionMenu/>);
-    }, 2000);
-
-    setTimeout(() => {
-      setS(null);
-    }, 3000);
-  }, []);
-
   return (
     <BrowserRouter>
       <Page backUrl='/' title='Изменение графика рабочего времени' navigation={navigation} >
-        <PageWithSections sections={sections} actionMenu={s}/>
+        <PageWithSections sections={sections} actionMenu={<ActionMenu/>}/>
       </Page>
     </BrowserRouter>
   );
