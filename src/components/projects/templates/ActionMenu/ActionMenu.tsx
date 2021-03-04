@@ -7,7 +7,7 @@ import { IActionMenuListConfig } from '../../../../types/projects.types';
 import AngleDown from '../../../_icons/angle-down';
 
 interface IActionMenuProps {
-  type: 'default' | 'list' | 'action';
+  type?: 'default' | 'list' | 'action';
   listConfig?: IActionMenuListConfig;
   children?: ReactNode | ReactNode[];
 }

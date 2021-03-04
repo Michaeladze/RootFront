@@ -1,0 +1,91 @@
+.rf-page__content--sections {
+  display: flex;
+}
+
+.rf-page__action-menu {
+  box-sizing: content-box;
+  padding-bottom: 24px;
+  height: 48px;
+  max-width: 1368px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  background-color: var(--base-150);
+}
+
+.rf-page__action-menu-inner {
+  width: 100%;
+  padding: 0 40px;
+}
+
+.rf-page__section {
+  margin-bottom: 48px;
+}
+
+.rf-page__section:last-of-type {
+  margin-bottom: 0;
+}
+
+.rf-page__content-sections {
+  max-width: 904px;
+  width: 100%;
+}
+
+.rf-page__section-title {
+  @include h6;
+  margin-bottom: 16px;
+}
+
+.rf-page__content-aside {
+  position: fixed;
+  z-index: 1;
+  width: 192px;
+  right: 40px;
+}
+
+@media (max-width: 1200px) {
+  .rf-page__content-aside {
+    display: none;
+  }
+}
+
+.rf-page__aside-inner {
+  display: flex;
+  width: 100%;
+}
+
+.rf-page__aside-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+$asideLinkHeight: 42px;
+
+.rf-page__aside-link {
+  width: 100%;
+  height: $asideLinkHeight;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include p2;
+  cursor: pointer;
+}
+
+.rf-page__aside-bar {
+  position: relative;
+  width: 2px;
+  flex-shrink: 0;
+  background-color: var(--base-200);
+  margin-right: 38px;
+  border-radius: 2px;
+}
+
+.rf-page__aside-slider {
+  width: 100%;
+  height: $asideLinkHeight;
+  background-color: var(--accent-500);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+}

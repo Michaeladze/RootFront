@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {
+  ReactNode, useEffect, useState
+} from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
-import { Page } from '../../../../index';
+import { ContentExpander, Page } from '../../../../index';
 import PageWithSections from '../PageWithSections';
 import ActionMenu from '../ActionMenu';
 import { IPageSection } from '../../../../types/projects.types';
 import { ITab } from '../../../../types';
-import StickyContainer from '../StickyContainer';
 
 export default {
   title: 'Projects/Page',
@@ -39,7 +40,12 @@ export const page = () => {
     {
       id: 'test2',
       title: 'Раздел 2',
-      component: <div style={{ height: '300px' }}>222</div>
+      component: <ContentExpander title='Expand'>
+        <div style={{ height: '300px' }}>222</div>
+        <div style={{ height: '300px' }}>222</div>
+        <div style={{ height: '300px' }}>222</div>
+        <div style={{ height: '300px' }}>222</div>
+      </ContentExpander>
     }
   ];
 
@@ -54,13 +60,22 @@ export const page = () => {
     }
   ];
 
-  const actionMenu = <ActionMenu type='default'/>;
+  const [s, setS] = useState<ReactNode>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setS(<ActionMenu/>);
+    }, 2000);
+
+    setTimeout(() => {
+      setS(null);
+    }, 3000);
+  }, []);
 
   return (
     <BrowserRouter>
-      <Page backUrl='/' title='Изменение графика рабочего времени' navigation={navigation} actionMenu={actionMenu} >
-        <StickyContainer top={242}/>
-        <PageWithSections sections={sections}/>
+      <Page backUrl='/' title='Изменение графика рабочего времени' navigation={navigation} >
+        <PageWithSections sections={sections} actionMenu={s}/>
       </Page>
     </BrowserRouter>
   );

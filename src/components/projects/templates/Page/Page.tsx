@@ -16,8 +16,6 @@ export interface IPageProps {
   user?: IUser;
   /** Navigation */
   navigation?: ITab[];
-  /** Fixed action menu */
-  actionMenu?: ReactNode;
 }
 
 const Page: React.FC<IPageProps> = ({
@@ -26,8 +24,7 @@ const Page: React.FC<IPageProps> = ({
   backUrl = '',
   user,
   children,
-  navigation,
-  actionMenu
+  navigation
 }: IPageProps) => {
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -63,11 +60,6 @@ const Page: React.FC<IPageProps> = ({
           {navigation && (
             <div className='rf-page__tabs'>
               <Tabs list={navigation}/>
-            </div>
-          )}
-          {actionMenu && (
-            <div className='rf-page__action-menu'>
-              {actionMenu}
             </div>
           )}
         </div>
