@@ -67,8 +67,8 @@ const Timepicker: FC<ITimepickerProps> = ({
       </InputMask>
       <div>
         <Menu position='right' content={content}>
-          <Button buttonType='text' className='rf-timepicker__icon'>
-            <Time/>
+          <Button buttonType='text'>
+            <Time className='rf-timepicker__icon'/>
           </Button>
         </Menu>
       </div>

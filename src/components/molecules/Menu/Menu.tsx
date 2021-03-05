@@ -21,7 +21,7 @@ export interface IListProps {
 }
 
 /** Контекст для передачи функций работы с меню. */
-export const MenuContext = React.createContext<IMenuContext>({ onClose() {} });
+export const MenuContext = React.createContext<IMenuContext>({ onClose: () => {} });
 
 const Menu: React.FC<IListProps> = ({
   list,
