@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { Tile } from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
+import { detect } from 'detect-browser';
 
 
 interface IPageWithSectionsProps {
@@ -144,15 +145,19 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
         if (block && pageHeader && actionMenuRef.current) {
 
           const top = block.getBoundingClientRect().top + pageYOffset - pageHeader.offsetHeight - actionMenuRef.current.offsetHeight;
-          const msie = window.navigator.userAgent.indexOf('MSIE ');
 
-          if (msie > 0) {
-            window.scrollTo(0, top);
-          } else {
+          const browser = detect();
+          switch (browser && browser.name) {
+          case 'chrome':
+          case 'firefox':
             window.scrollTo({
               top,
               behavior: 'smooth'
             });
+            break;
+
+          default:
+            window.scrollTo(0, top);
           }
         }
       };
