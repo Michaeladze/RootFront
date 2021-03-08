@@ -28,6 +28,16 @@
   transform: translate(100%, -50%);
 }
 
+.rf-badge--near {
+  align-items: center;
+
+  .rf-badge {
+    transform: translate(0, 0);
+    position: static;
+    margin-left: 4px;
+  }
+}
+
 .rf-badge.rf--base {
   background-color: var(--base-200);
 }

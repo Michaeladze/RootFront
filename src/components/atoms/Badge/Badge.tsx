@@ -12,6 +12,7 @@ export interface IBadgeProps {
   max?: number;
   position?: 'topRight' | 'topLeft' | 'bottomLeft' | 'bottomRight' | 'text';
   display?: boolean;
+  placeNear?: boolean;
 }
 
 type Coordinates = { top: number; right: number };
@@ -23,7 +24,8 @@ const Badge: React.FC<IBadgeProps> = ({
   variant = 'base',
   max = 99,
   position = 'topRight',
-  display = true
+  display = true,
+  placeNear = false
 }: IBadgeProps) => {
   const wrapper = useRef<HTMLDivElement>(null);
 
@@ -34,7 +36,7 @@ const Badge: React.FC<IBadgeProps> = ({
   });
 
   useLayoutEffect(() => {
-    if (badgeContent) {
+    if (badgeContent || placeNear) {
       return;
     }
 
@@ -72,9 +74,10 @@ const Badge: React.FC<IBadgeProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const textClass = typeof children === 'string' || position === 'text' ? 'rf-badge--text' : '';
+  const placeNearClass = placeNear ? 'rf-badge--near' : '';
 
   return (
-    <div className={`rf-badge__wrapper ${className}`} ref={wrapper}>
+    <div className={`rf-badge__wrapper ${className} ${placeNearClass}`} ref={wrapper}>
       {children}
       {display &&
         <div className={`rf-badge ${variantClass[variant]} ${isDot} ${textClass}`} style={coordinates}>
