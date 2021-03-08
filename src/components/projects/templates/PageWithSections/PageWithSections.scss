@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .rf-page__content--sections {
   display: flex;
 }
@@ -62,7 +64,7 @@
   flex-shrink: 1;
 }
 
-$asideLinkHeight: 42px;
+$asideLinkHeight: 46px;
 
 .rf-page__aside-link {
   width: 100%;
