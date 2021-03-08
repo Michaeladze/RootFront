@@ -19,16 +19,18 @@ export interface IUserProps {
   actionsList: IListElement[];
   /** Пользователь */
   user: IUser | null;
+  /** Показать имя */
+  showName?: boolean;
 }
 
-const User: FC<IUserProps> = ({ actionsList, user }: IUserProps) => {
+const User: FC<IUserProps> = ({ actionsList, user, showName = true }: IUserProps) => {
   return (
     <>
       {user && (
         <Menu list={actionsList}>
           <Button className='app-header__user-button' buttonType='text'>
             <UserPhoto url={user.photo} fullName={`${user.firstName} ${user.lastName}`} />
-            <h4 className='user__name'>{user.firstName}</h4>
+            { showName && <h4 className='user__name'>{user.firstName}</h4> }
           </Button>
         </Menu>
       )}

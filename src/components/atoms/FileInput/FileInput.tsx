@@ -53,6 +53,7 @@ const FileInput: React.FC<IFileInputProps> = ({
 
   /** Получаем картинку */
   const onChange = () => {
+
     if (ref.current && ref.current.files) {
       const promises: Promise<IFileData>[] = [];
 
@@ -93,11 +94,17 @@ const FileInput: React.FC<IFileInputProps> = ({
 
             setFile(newFiles);
             uploadFile(newFiles);
+            ref.current.value = '';
           }
         })
         .catch((error: Error) => {
           console.log('%c [Ошибка] Не удалось загрузить файл(ы)', 'color: #FF5722');
           console.log(error);
+
+          if (ref.current) {
+            ref.current.value = '';
+          }
+
           onError && onError(new Error(`Не удалось загрузить ${multiple ? 'файлы' : 'файл'}`));
         });
     }

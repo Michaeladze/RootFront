@@ -148,6 +148,9 @@ $margin: 2px;
     border-radius: 4px;
     color: var(--base-500);
     box-shadow: 0 2px 6px rgba(25, 59, 104, 0.15);
+    position: relative;
+    z-index: 100;
+    background-color: var(--base-000);
   }
 
   .react-calendar__tile {
