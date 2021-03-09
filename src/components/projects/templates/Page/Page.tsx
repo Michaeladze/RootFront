@@ -3,9 +3,10 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-left-outline';
-import { Tabs, UserPhoto } from '../../../../index';
+import { Tabs } from '../../../../index';
 import { IUser } from '../../../../types/projects.types';
-import { ITab } from '../../../../types';
+import { IListElement, ITab } from '../../../../types';
+import User from '../../molecules/User';
 
 
 export interface IPageProps {
@@ -14,6 +15,10 @@ export interface IPageProps {
   backUrl?: string;
   children?: ReactNode | ReactNode[];
   user?: IUser;
+  /** Список действий в дропдауне пользователя */
+  actionsList?: IListElement[];
+  /** Положение меню пользователя слева или справа */
+  menuPosition?: 'left' | 'right';
   /** Navigation */
   navigation?: ITab[];
 }
@@ -23,6 +28,8 @@ const Page: React.FC<IPageProps> = ({
   className = '',
   backUrl = '',
   user,
+  actionsList = [],
+  menuPosition = 'right',
   children,
   navigation
 }: IPageProps) => {
@@ -55,7 +62,9 @@ const Page: React.FC<IPageProps> = ({
             </Link>}
             <h2 className='rf-page__title'>{title}</h2>
 
-            <UserPhoto className='rf-page__user' fullName={user?.fullName} radius={'48px'}/>
+            <div className='rf-page__user'>
+              <User user={user} menuPosition={menuPosition} actionsList={actionsList} radius='48px'/>
+            </div>
           </div>
           {navigation && (
             <div className='rf-page__tabs'>

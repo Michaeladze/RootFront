@@ -6,30 +6,37 @@ import { Menu } from '../../../../index';
 
 /** Упрощенный интерфейс пользователя */
 interface IUser {
+  fullName?: string;
   /** Имя пользователя */
-  firstName: string;
+  firstName?: string;
   /** Фамилия пользователя */
-  lastName: string;
+  lastName?: string;
   /** Ссылка на фото */
-  photo: string;
+  photo?: string;
 }
 
 export interface IUserProps {
-  /** Список действий в дропдауне */
-  actionsList: IListElement[];
   /** Пользователь */
-  user: IUser | null;
+  user: IUser | undefined | null;
   /** Показать имя */
   showName?: boolean;
+  radius?: string;
+  /** Список действий в дропдауне */
+  actionsList?: IListElement[];
+  /** Положение слева или справа */
+  menuPosition?: 'left' | 'right';
 }
 
-const User: FC<IUserProps> = ({ actionsList, user, showName = true }: IUserProps) => {
+const User: FC<IUserProps> = ({ actionsList = [], menuPosition = 'right', user, showName = true, radius }: IUserProps) => {
+
+  const name: string = user?.fullName || `${user?.firstName} ${user?.lastName}`;
+
   return (
     <>
       {user && (
-        <Menu list={actionsList}>
+        <Menu list={actionsList} position={menuPosition}>
           <Button className='app-header__user-button' buttonType='text'>
-            <UserPhoto url={user.photo} fullName={`${user.firstName} ${user.lastName}`} />
+            <UserPhoto url={user.photo} fullName={name} radius={radius} />
             { showName && <h4 className='user__name'>{user.firstName}</h4> }
           </Button>
         </Menu>

@@ -21,7 +21,7 @@
 @mixin h {
   font-style: normal;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: normal;
   color: var(--base-1000);
 }
 
@@ -66,7 +66,7 @@
 @mixin s {
   font-style: normal;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: normal;
   color: var(--base-1000);
   line-height: 24px;
 }
@@ -86,7 +86,7 @@
 @mixin t {
   font-style: normal;
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: normal;
   color: var(--base-1000);
 }
 

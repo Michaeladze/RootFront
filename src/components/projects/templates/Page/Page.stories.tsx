@@ -58,9 +58,11 @@ export const page = () => {
     }
   ];
 
+  const user: any = { fullName: 'Ричард Брэндмауер' };
+
   return (
     <BrowserRouter>
-      <Page backUrl='/' title='Изменение графика рабочего времени' navigation={navigation} >
+      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation} >
         <PageWithSections sections={sections} actionMenu={<ActionMenu/>}/>
       </Page>
     </BrowserRouter>
