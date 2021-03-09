@@ -63,7 +63,7 @@ const Page: React.FC<IPageProps> = ({
             <h2 className='rf-page__title'>{title}</h2>
 
             <div className='rf-page__user'>
-              <User user={user} menuPosition={menuPosition} actionsList={actionsList} radius='48px'/>
+              <User user={user} menuPosition={menuPosition} actionsList={actionsList} showName={false} radius='48px'/>
             </div>
           </div>
           {navigation && (
