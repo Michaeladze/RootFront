@@ -72,10 +72,20 @@ $margin: 2px;
 
   .react-date-picker__inputGroup__day {
     @include text;
+    min-width: 17px;
+
+    &.react-date-picker__inputGroup__input--hasLeadingZero {
+      min-width: 9px;
+    }
   }
 
   .react-date-picker__inputGroup__month {
     @include text;
+    min-width: 17px;
+
+    &.react-date-picker__inputGroup__input--hasLeadingZero {
+      min-width: 9px;
+    }
   }
 
   .react-date-picker__inputGroup__year {
@@ -86,6 +96,7 @@ $margin: 2px;
 
   .react-date-picker__inputGroup__leadingZero {
     @include text;
+    min-width: 9px;
   }
 
   // цвет выделения
