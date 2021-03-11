@@ -46,6 +46,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
         if (actionMenuRef.current) {
           actionMenuHeight = actionMenuRef.current.offsetHeight;
+          actionMenuRef.current.style.top = `${pageHeader.offsetHeight}px`;
         }
 
         if (pageHeader) {
@@ -58,7 +59,9 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
       }
     };
 
-    calculateRightPosition();
+    setTimeout(() => {
+      calculateRightPosition();
+    });
     window.addEventListener('resize', calculateRightPosition);
 
     return () => {
