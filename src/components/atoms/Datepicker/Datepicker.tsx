@@ -28,7 +28,7 @@ const Datepicker: FC<IDatepickerProps> = ({ size = 'medium', ...props }: IDatepi
       <DatePicker
         {...props}
         value={value}
-        // format='dd.MM.y'
+        format='dd.MM.y'
         locale='ru-RU'
         calendarIcon={<Calendar />}
         clearIcon={props.clear && !props.disabled && value ? <Close /> : null}

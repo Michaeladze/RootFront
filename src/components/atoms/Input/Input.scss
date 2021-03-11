@@ -67,7 +67,7 @@
 
 .rf-input__field:disabled {
   @include disabled();
-  background-color: transparent;
+  background-color: var(--base-100);
   border-color: var(--base-300);
   color: var(--base-300);
 }

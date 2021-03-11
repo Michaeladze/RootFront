@@ -51,7 +51,7 @@ $margin: 2px;
 
   .react-date-picker:not(.react-date-picker--disabled):not(.react-date-picker--open) {
     .react-date-picker__wrapper:hover .react-date-picker__inputGroup {
-      border-color: var(--accent-500);
+      border-color: var(--accent-300);
     }
   }
 
@@ -360,18 +360,18 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: default;
 
   .rf-datepicker__wrapper .react-date-picker__wrapper {
-    border-color: var(--base-100);
+    border-color: var(--base-300);
   }
 
   .react-date-picker__inputGroup__input {
     color: var(--base-300);
-    background-color: transparent;
+    background-color: var(--base-100);
     cursor: default
   }
 
   .react-date-picker__inputGroup {
     background-color: var(--base-100);
-    border-color: var(--base-100);
+    border-color: var(--base-300);
   }
 
   .react-date-picker__inputGroup__leadingZero {

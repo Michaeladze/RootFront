@@ -26,6 +26,11 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   const actionMenuRef = useRef<HTMLDivElement>(null);
   /** Ссылка на секции */
   const sectionsRef = useRef<HTMLDivElement>(null);
+  /** Ссылка на разделитель скролла */
+  const dividerRef = useRef<HTMLDivElement>(null);
+
+  /** Прокрутка до отображения разделителя */
+  const SHOW_DIVIDER_SCROLL_TOP = 10;
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -68,6 +73,21 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
       window.removeEventListener('resize', calculateRightPosition);
     };
   }, [actionMenu]);
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /** Показать разделитель при скролле */
+  useEffect(() => {
+    const onScroll = () => {
+      if (dividerRef.current) {
+        dividerRef.current.style.opacity = pageYOffset >= SHOW_DIVIDER_SCROLL_TOP ? '1' : '0';
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -166,6 +186,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
       {actionMenu && (
         <div className='rf-page__action-menu' ref={actionMenuRef}>
           <div className='rf-page__action-menu-inner'>
+            <div className='rf-page__action-menu-divider' ref={dividerRef}/>
             {actionMenu}
           </div>
         </div>

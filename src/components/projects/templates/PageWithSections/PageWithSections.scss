@@ -17,8 +17,21 @@
 }
 
 .rf-page__action-menu-inner {
+  position: relative;
   width: 100%;
   padding: 0 40px;
+}
+
+.rf-page__action-menu-divider {
+  content: '';
+  display: block;
+  width: calc(100% - 80px);
+  height: 1px;
+  background-color: var(--base-300);
+  position: absolute;
+  bottom: -24px;
+  left: 40px;
+  opacity: 0;
 }
 
 .rf-page__section {
