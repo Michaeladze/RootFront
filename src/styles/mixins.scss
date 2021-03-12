@@ -71,6 +71,11 @@
   line-height: 24px;
 }
 
+@mixin s0 {
+  @include s;
+  font-size: 18px;
+}
+
 @mixin s1 {
   @include s;
   font-size: 15px;
