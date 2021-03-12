@@ -37,21 +37,23 @@ const ActionMenu: React.FC<IActionMenuProps> = ({
       <div className='rf-action-menu__search'>
         <Input onKeyUp={handleSearch} placeholder='Поиск' search onClear={listConfig.onClear}/>
       </div>
-      <div className='rf-action-menu__list-button'>
-        {listConfig.actionList.length > 0 && (
-          listConfig.actionList.length === 1 ? (
-            <Button onClick={listConfig.actionList[0].handler}>
-              {listConfig.actionList[0].label}
-            </Button>
-          ) : (
-            <Menu list={listConfig.actionList} position='right'>
-              <Button>
-                {listConfig.actionLabel || 'Создать'}<AngleDown className='rf-action-menu__list-button-icon'/>
+      {listConfig.actionList.length > 0 && (
+        <div className='rf-action-menu__list-button'>
+          {
+            listConfig.actionList.length === 1 ? (
+              <Button onClick={listConfig.actionList[0].handler}>
+                {listConfig.actionList[0].label}
               </Button>
-            </Menu>
-          )
-        )}
-      </div>
+            ) : (
+              <Menu list={listConfig.actionList} position='right'>
+                <Button>
+                  {listConfig.actionLabel || 'Создать'}<AngleDown className='rf-action-menu__list-button-icon'/>
+                </Button>
+              </Menu>
+            )
+          }
+        </div>
+      )}
     </div>
   );
 
