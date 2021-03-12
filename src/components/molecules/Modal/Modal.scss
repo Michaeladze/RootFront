@@ -35,7 +35,7 @@
 }
 
 .rf-modal__content {
-  padding: 40px 48px 32px 48px;
+  padding: 40px 48px;
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -49,13 +49,14 @@
 
 .rf-modal__close-button {
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 24px;
+  right: 24px;
   background-color: transparent;
   outline: none;
   border: 0;
   cursor: pointer;
   z-index: 2;
+  color: var(--base-400);
 }
 
 .rf-modal__footer {

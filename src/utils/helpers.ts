@@ -82,6 +82,7 @@ export const formatDate = (date: string | number | undefined): IFormattedDate =>
   const tempDate = new Date(date);
   const month = addLeadingZeros(tempDate.getMonth() + 1);
   const monthLong = getMonthName(months[tempDate.getMonth()]);
+  const monthName = months[tempDate.getMonth()];
   const monthShort = monthsShort[tempDate.getMonth()];
 
   const dayOfMonth = addLeadingZeros(tempDate.getDate());
@@ -96,6 +97,7 @@ export const formatDate = (date: string | number | undefined): IFormattedDate =>
     month,
     monthLong,
     monthShort,
+    monthName,
     dayOfMonth,
     dayOfWeek,
     hour,
@@ -114,6 +116,11 @@ export const formatDate = (date: string | number | undefined): IFormattedDate =>
  */
 export const getShortString = (text: string, n = 50, symbol = '...') => {
   return n > text.length ? text : `${text.slice(0, n)}${symbol}`;
+};
+
+/** Заменить подстроку по индексу */
+export const replaceAt = (str: string, index: number, replacement: string): string => {
+  return str.substr(0, index) + replacement + str.substr(index + replacement.length);
 };
 
 /** Общий класс для цветового оформления */

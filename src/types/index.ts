@@ -60,6 +60,7 @@ export interface IFormattedDate {
   month: string;
   monthLong: string;
   monthShort: string;
+  monthName: string;
   dayOfMonth: string;
   dayOfWeek: string;
   hour: string;

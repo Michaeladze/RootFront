@@ -1,0 +1,18 @@
+.rf-datepicker {
+  position: relative;
+}
+
+.rf-datepicker__input-wrapper {
+  position: relative;
+}
+
+.rf-datepicker__calendar-button {
+  position: absolute;
+  width: 24px;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%) rotate(0);
+  transition: 0.35s;
+  color: var(--base-500);
+  cursor: pointer;
+}

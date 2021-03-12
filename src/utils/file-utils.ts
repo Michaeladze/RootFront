@@ -212,7 +212,7 @@ export const validateFile = (file: File, options?: IOptions): IValidationResult 
 
     const ext = file.name.split('.');
     const isExecutable = executablesList.some((x: string) => {
-      return ext[1] && ext[1] === x;
+      return ext.length > 0 && ext[ext.length - 1] === x;
     });
 
     if (isExecutable) {

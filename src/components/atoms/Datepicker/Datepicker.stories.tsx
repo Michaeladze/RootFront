@@ -1,11 +1,10 @@
 import React from 'react';
-import Datepicker from './Datepicker';
 import { FormGroup } from '../../../index';
 import Story from '../../storybook/Story';
 import StoryItem from '../../storybook/StoryItem';
 
 export default {
-  title: 'Form Controls/Datepicker',
+  title: 'Form Controls/NewDatepicker',
   component: Datepicker
 };
 

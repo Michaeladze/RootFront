@@ -1,0 +1,61 @@
+@import "src/styles/mixins";
+
+.rf-datepicker__calendar {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 296px;
+  height: 296px;
+  padding: 16px 8px;
+  background-color: var(--base-000);
+  box-shadow: 0 2px 6px rgba(25, 59, 104, 0.15);
+  border-radius: 4px;
+}
+
+.rf-datepicker__calendar-header {
+  display: flex;
+  align-items: center;
+}
+
+.rf-calendar__control {
+  display: flex;
+  align-items: center;
+}
+
+.rf-calendar__button {
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rf-datepicker__calendar-right {
+  transform: rotate(180deg);
+}
+
+.rf-calendar__label-button {
+  width: auto;
+  height: auto;
+  padding: 0 8px;
+}
+
+.rf-datepicker__calendar-label {
+  @include s2;
+  text-transform: capitalize;
+}
+
+.rf-datepicker__calendar-today {
+  margin-left: auto;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  @include s2;
+  color: var(--accent-500);
+  cursor: pointer;
+}
