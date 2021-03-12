@@ -11,9 +11,10 @@ export interface IDatepickerProps extends Omit<DatePickerProps, 'onChange'> {
   clear?: boolean;
   /** Размер */
   size?: Size;
+  showLeadingZeros?: boolean;
 }
 
-const Datepicker: FC<IDatepickerProps> = ({ size = 'medium', ...props }: IDatepickerProps) => {
+const Datepicker: FC<IDatepickerProps> = ({ size = 'medium', showLeadingZeros = true, ...props }: IDatepickerProps) => {
   const [value, setValue] = useState<Date | Date[] | null>(props.value || null);
 
   /** Изменение значения календаря */
@@ -30,6 +31,7 @@ const Datepicker: FC<IDatepickerProps> = ({ size = 'medium', ...props }: IDatepi
         value={value}
         format='dd.MM.y'
         locale='ru-RU'
+        showLeadingZeros={showLeadingZeros}
         calendarIcon={<Calendar />}
         clearIcon={props.clear && !props.disabled && value ? <Close /> : null}
         onChange={handleChange}

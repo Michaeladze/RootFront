@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup } from '../../../index';
+import { Datepicker, FormGroup } from '../../../index';
 import Story from '../../storybook/Story';
 import StoryItem from '../../storybook/StoryItem';
 
