@@ -18,13 +18,20 @@ interface IDatepickerCalendarProps {
   setInputValue: Dispatch<SetStateAction<string>>;
   /** Изменить отображение календаря */
   toggleCalendar: Dispatch<SetStateAction<boolean>>;
+  /** Минимальная дата */
+  minDate?: Date;
+  /** максимальная */
+  maxDate?: Date;
 }
 
 const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   value,
   setInputValue,
-  toggleCalendar
+  toggleCalendar,
+  minDate,
+  maxDate
 }: IDatepickerCalendarProps) => {
+
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
   /** Устанавливаем текущий день */
@@ -55,6 +62,12 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   /** Отображаемый период */
   const [activePeriod, setActivePeriod] = useState<IDatepickerActivePeriod>(getDaysForMonth(new Date()));
 
+  useEffect(() => {
+    if (minDate && new Date().getTime() < minDate.getTime()) {
+      setActivePeriod(getDaysForMonth(minDate));
+    }
+  }, [minDate]);
+
   // -------------------------------------------------------------------------------------------------------------------
 
   /** Days */
@@ -70,8 +83,14 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const periodClass = `rf-datepicker__calendar-day--${period}`;
     const currentDayClass = isCurrentDay(date, currentDate) ? 'rf-datepicker__calendar-date--active' : '';
 
+    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const disabledMin = minDate && minDate.getTime() > d.getTime();
+    const disabledMax = maxDate && maxDate.getTime() < d.getTime();
+    const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
+
     return (
-      <div className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day ${periodClass} ${currentDayClass}`}
+      <div
+        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day ${periodClass} ${currentDayClass} ${disabledClass}`}
         key={date.getTime()}
         onClick={() => onDayClick(date)}
       >
@@ -90,10 +109,16 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   };
 
   const monthsJSX = months.map((m: string, i: number) => {
-    const currentMonthClass = isCurrentMonth(new Date(activePeriod.year, i), currentDate) ? 'rf-datepicker__calendar-date--active' : '';
+    const d = new Date(activePeriod.year, i);
+    const currentMonthClass = isCurrentMonth(d, currentDate) ? 'rf-datepicker__calendar-date--active' : '';
+
+    const monthMs = 1000 * 3600 * 24 * 31;
+    const disabledMin = minDate && ((minDate.getTime() - monthMs) > d.getTime());
+    const disabledMax = maxDate && ((maxDate.getTime()) < d.getTime());
+    const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
 
     return (
-      <div className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month ${currentMonthClass}`}
+      <div className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month ${currentMonthClass} ${disabledClass}`}
         key={m}
         onClick={(e: React.MouseEvent) => onMonthClick(e, i)}>
         {m}
@@ -124,8 +149,12 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const yearsJSX = years.map((y: number) => {
     const currentMonthClass = activePeriod.year === y ? 'rf-datepicker__calendar-date--active' : '';
 
+    const disabledMin = minDate && minDate.getFullYear() > y;
+    const disabledMax = maxDate && maxDate.getFullYear() < y;
+    const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
+
     return (
-      <div className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year ${currentMonthClass}`}
+      <div className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year ${currentMonthClass} ${disabledClass}`}
         key={y}
         onClick={(e: React.MouseEvent) => onYearClick(e, y)}>
         {y}
@@ -186,11 +215,36 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  /** Активность месяцев */
+  const prevMonthDisabled = periodType === 'day' && !!minDate && minDate.getMonth() > activePeriod.month - 1;
+  const nextMonthDisabled = periodType === 'day' && !!maxDate && maxDate.getMonth() < activePeriod.month + 1;
+
+  /** Активность годов */
+  const prevYearDisabled = periodType === 'month' && !!minDate && minDate.getFullYear() > activePeriod.year - 1;
+  const nextYearDisabled = periodType === 'month' && !!maxDate && maxDate.getFullYear() < activePeriod.year + 1;
+
+  /** Активность декад */
+  const prevDecadeDisabled = periodType === 'year' && !!minDate && minDate.getFullYear() > decadeStart;
+  const nextDecadeDisabled = periodType === 'year' && !!maxDate && maxDate.getFullYear() < decadeStart + 10;
+
+  /** Флаг активности стрелок */
+  const prevArrowDisabled: boolean = prevMonthDisabled || prevYearDisabled || prevDecadeDisabled;
+  const nextArrowDisabled: boolean = nextMonthDisabled || nextYearDisabled || nextDecadeDisabled;
+
+  /** Активность кнопки Сегодня */
+  const d = new Date();
+  const today = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const disabledMin = !!minDate && minDate.getTime() > today.getTime();
+  const disabledMax = !!maxDate && maxDate.getTime() < today.getTime();
+  const todayDisabled: boolean = disabledMin || disabledMax;
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   return (
     <div className='rf-datepicker__calendar'>
       <header className='rf-datepicker__calendar-header'>
         <div className='rf-calendar__control'>
-          <button className='rf-calendar__button rf-calendar__button-prev' onClick={() => onPeriodChange(-1)}>
+          <button className='rf-calendar__button rf-calendar__button-prev' disabled={prevArrowDisabled} onClick={() => onPeriodChange(-1)}>
             <Chevron className='rf-datepicker__calendar-prev'/>
           </button>
           <button className='rf-calendar__button rf-calendar__label-button' onClick={onPeriodTypeChange}>
@@ -198,11 +252,11 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
               {periodTypeLabel[periodType]}
             </span>
           </button>
-          <button className='rf-calendar__button rf-calendar__button-next' onClick={() => onPeriodChange(1)}>
+          <button className='rf-calendar__button rf-calendar__button-next' disabled={nextArrowDisabled} onClick={() => onPeriodChange(1)}>
             <Chevron className='rf-datepicker__calendar-right'/>
           </button>
         </div>
-        <button className='rf-datepicker__calendar-today' onClick={() => onDateChange(new Date())}>Сегодня</button>
+        <button className='rf-datepicker__calendar-today' disabled={todayDisabled} onClick={() => onDateChange(new Date())}>Сегодня</button>
       </header>
 
       {periodType === 'day' && (

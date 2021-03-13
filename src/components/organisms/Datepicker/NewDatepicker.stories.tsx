@@ -14,7 +14,7 @@ export const newDatepicker = () => {
     <Story name='Datepicker' width={600}>
       <StoryItem description='Выбор даты'>
         <div style={{ width: '200px' }}>
-          <NewDatepicker/>
+          <NewDatepicker />
         </div>
       </StoryItem>
     </Story>

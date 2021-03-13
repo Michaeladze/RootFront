@@ -37,6 +37,11 @@
   justify-content: center;
 }
 
+.rf-calendar__button[disabled] {
+  color: var(--base-300);
+  cursor: default;
+}
+
 .rf-datepicker__calendar-right {
   transform: rotate(180deg);
 }
@@ -61,6 +66,11 @@
   @include s2;
   color: var(--accent-500);
   cursor: pointer;
+}
+
+.rf-datepicker__calendar-today[disabled] {
+  cursor: default;
+  color: var(--base-300);
 }
 
 .rf-datepicker__calendar-week {
@@ -138,4 +148,9 @@
   min-width: 50px;
   margin-bottom: 8px;
   margin-right: 16px;
+}
+
+.rf-datepicker__calendar-date--disabled {
+  pointer-events: none;
+  color: var(--base-300);
 }

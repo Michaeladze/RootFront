@@ -27,8 +27,14 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   name = 'datepicker',
   placeholder = 'Выберите дату',
   size = 'medium',
-  defaultValue
+  defaultValue,
+  min,
+  max
 }: IDatepickerProps) => {
+  const minD: Date | undefined = min ? min instanceof Date ? min : new Date(min) : undefined;
+  const maxD: Date | undefined = max ? max instanceof Date ? max : new Date(max) : undefined;
+  const minDate: Date | undefined = minD ? new Date(minD.getFullYear(), minD.getMonth(), minD.getDate()) : undefined;
+  const maxDate: Date | undefined = maxD ? new Date(maxD.getFullYear(), maxD.getMonth(), maxD.getDate()) : undefined;
 
   const datepickerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -73,6 +79,16 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
     if (defaultValue instanceof Date) {
       inputValue = formatDate(defaultValue.getTime()).date;
+    }
+
+    const [dd, mm, yyyy] = inputValue.split('.');
+
+    if (minDate && new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
+      inputValue = formatDate(minDate.getTime()).date;
+    }
+
+    if (maxDate && new Date(+yyyy, +mm, +dd).getTime() > maxDate.getTime()) {
+      inputValue = formatDate(maxDate.getTime()).date;
     }
 
     setInputValue(inputValue);
@@ -143,7 +159,8 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           className={`${sizeClass[size]}`}/>
         <Calendar className='rf-datepicker__calendar-button'/>
       </div>
-      {showCalendar && <DatepickerCalendar value={inputValue} setInputValue={setInputValue} toggleCalendar={toggleCalendar}/>}
+      {showCalendar && <DatepickerCalendar value={inputValue} minDate={minDate} maxDate={maxDate} setInputValue={setInputValue}
+        toggleCalendar={toggleCalendar}/>}
     </div>
   );
 };
