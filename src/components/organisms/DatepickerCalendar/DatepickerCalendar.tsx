@@ -40,8 +40,6 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     }
   }, [value]);
 
-  // const formatCurrentDay = formatDate(currentDate.getTime());
-
   // -------------------------------------------------------------------------------------------------------------------
 
   /** Изменяя дату, изменяем значение в инпуте */

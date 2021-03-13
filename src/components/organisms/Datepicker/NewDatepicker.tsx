@@ -81,7 +81,6 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newStr = e.target.value;
     setInputValue((oldStr: string) => {
-      const len = newStr.length;
       const lastChar = newStr[newStr.length - 1];
 
       if (!lastChar) {
@@ -95,18 +94,24 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
         return oldStr;
       }
 
-      if (!isDelete && len !== 1 && len !== 3) {
-        if (key === 47) {
-          return oldStr;
-        }
-      }
-
-      if (!isDelete && len === 2) {
+      if (!isDelete && newStr.length === 2) {
         newStr += '.';
       }
 
-      if (!isDelete && len === 5) {
+      if (!isDelete && oldStr.length === 2 && newStr.length === 3) {
+        const tmp = newStr.split('');
+        tmp.splice(2, 0, '.');
+        newStr = tmp.join('');
+      }
+
+      if (!isDelete && newStr.length === 5) {
         newStr += '.';
+      }
+
+      if (!isDelete && oldStr.length === 5 && newStr.length === 6) {
+        const tmp = newStr.split('');
+        tmp.splice(5, 0, '.');
+        newStr = tmp.join('');
       }
 
       return newStr;
