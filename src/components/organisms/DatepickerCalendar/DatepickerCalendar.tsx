@@ -205,9 +205,11 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
         <button className='rf-datepicker__calendar-today' onClick={() => onDateChange(new Date())}>Сегодня</button>
       </header>
 
-      <div className='rf-datepicker__calendar-week'>
-        {weekDays.map((d: string) => <div className='rf-datepicker__calendar-tile rf-datepicker__calendar-week-day' key={d}>{d}</div>)}
-      </div>
+      {periodType === 'day' && (
+        <div className='rf-datepicker__calendar-week'>
+          {weekDays.map((d: string) => <div className='rf-datepicker__calendar-tile rf-datepicker__calendar-week-day' key={d}>{d}</div>)}
+        </div>
+      )}
 
       <div className='rf-datepicker__calendar-periods'>
         {periodType === 'day' && daysJSX}

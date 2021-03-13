@@ -16,6 +16,7 @@
 .rf-datepicker__calendar-header {
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .rf-calendar__control {
@@ -66,8 +67,6 @@
   display: flex;
   align-items: center;
   border-top: 1px solid var(--base-200);
-  border-bottom: 1px solid var(--base-200);
-  margin-top: 8px;
   padding: 4px;
 }
 
@@ -97,6 +96,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 4px;
+  border-top: 1px solid var(--base-200);
   cursor: pointer;
 }
 
@@ -131,8 +131,11 @@
 .rf-datepicker__calendar-month {
   width: auto;
   text-transform: capitalize;
+  margin-bottom: 8px;
 }
 
 .rf-datepicker__calendar-year {
-  width: auto;
+  min-width: 50px;
+  margin-bottom: 8px;
+  margin-right: 16px;
 }

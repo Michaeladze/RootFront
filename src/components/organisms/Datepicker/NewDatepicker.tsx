@@ -90,25 +90,35 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
       const key = lastChar.charCodeAt(0);
       const isDelete = oldStr.length > newStr.length;
 
+      /** Если удаляем в месте точки, то удаляем предыдущее число, а точку оставляем */
+      // if (isDelete) {
+      //   if (!newStr.slice(0, 3).includes('.')) {
+      //     const tmp = newStr.split('');
+      //     tmp[1] = '';
+      //     tmp.splice(2, 0, '.');
+      //     newStr = tmp.join('');
+      //   }
+      // }
+
       if (!isDelete && (key < 47 || key > 57)) {
         return oldStr;
       }
 
-      if (!isDelete && newStr.length === 2) {
+      if (!isDelete && newStr.length === 2 && newStr[1] !== '.') {
         newStr += '.';
       }
 
-      if (!isDelete && oldStr.length === 2 && newStr.length === 3) {
+      if (!isDelete && oldStr[1] !== '.' && oldStr.length === 2 && newStr.length === 3) {
         const tmp = newStr.split('');
         tmp.splice(2, 0, '.');
         newStr = tmp.join('');
       }
 
-      if (!isDelete && newStr.length === 5) {
+      if (!isDelete && newStr.length === 5 && newStr[4] !== '.') {
         newStr += '.';
       }
 
-      if (!isDelete && oldStr.length === 5 && newStr.length === 6) {
+      if (!isDelete && oldStr[5] !== '.' && oldStr.length === 5 && newStr.length === 6) {
         const tmp = newStr.split('');
         tmp.splice(5, 0, '.');
         newStr = tmp.join('');
