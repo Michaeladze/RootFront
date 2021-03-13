@@ -10,6 +10,7 @@
   background-color: var(--base-000);
   box-shadow: 0 2px 6px rgba(25, 59, 104, 0.15);
   border-radius: 4px;
+  cursor: default;
 }
 
 .rf-datepicker__calendar-header {
@@ -46,6 +47,7 @@
 }
 
 .rf-datepicker__calendar-label {
+  min-width: 100px;
   @include s2;
   text-transform: capitalize;
 }
@@ -58,4 +60,79 @@
   @include s2;
   color: var(--accent-500);
   cursor: pointer;
+}
+
+.rf-datepicker__calendar-week {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--base-200);
+  border-bottom: 1px solid var(--base-200);
+  margin-top: 8px;
+  padding: 4px;
+}
+
+.rf-datepicker__calendar-week-day {
+  @include c1;
+  color: var(--base-500);
+  margin-right: 8px;
+}
+
+.rf-datepicker__calendar-week-day:last-of-type {
+  margin-right: 0;
+}
+
+.rf-datepicker__calendar-tile {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  border: 1px solid transparent;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.rf-datepicker__calendar-periods {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.rf-datepicker__calendar-date {
+  margin-right: 8px;
+  @include s1;
+}
+
+.rf-datepicker__calendar-date--active {
+  background-color: var(--accent-200);
+  border: 1px solid var(--accent-500);
+}
+
+.rf-datepicker__calendar-date:not(.rf-datepicker__calendar-date--active):hover {
+  background-color: var(--accent-100);
+}
+
+.rf-datepicker__calendar-day:nth-child(7n) {
+  margin-right: 0;
+}
+
+.rf-datepicker__calendar-day--prev {
+  @include p2;
+  color: var(--base-500);
+}
+
+.rf-datepicker__calendar-day--next {
+  @include p2;
+  color: var(--base-500);
+}
+
+.rf-datepicker__calendar-month {
+  width: auto;
+  text-transform: capitalize;
+}
+
+.rf-datepicker__calendar-year {
+  width: auto;
 }

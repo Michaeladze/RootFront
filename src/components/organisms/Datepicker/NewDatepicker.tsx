@@ -17,10 +17,14 @@ export interface IDatepickerProps {
   defaultValue?: Date | string | number;
   /** Размер */
   size?: Size;
+  /** Минимальная дата */
+  min?: Date | string | number;
+  /** максимальная */
+  max?: Date | string | number;
 }
 
 const NewDatepicker: React.FC<IDatepickerProps> = ({
-  name,
+  name = 'datepicker',
   placeholder = 'Выберите дату',
   size = 'medium',
   defaultValue
@@ -30,7 +34,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   const inputRef = useRef<HTMLDivElement>(null);
 
   /** Отображение календаря */
-  const [showCalendar, toggleCalendar] = useState<boolean>(true);
+  const [showCalendar, toggleCalendar] = useState<boolean>(false);
   // -------------------------------------------------------------------------------------------------------------------
 
   /** Функция отслеживания клика вне элемента */
@@ -124,7 +128,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           className={`${sizeClass[size]}`}/>
         <Calendar className='rf-datepicker__calendar-button'/>
       </div>
-      {showCalendar && <DatepickerCalendar value={inputValue} setInputValue={setInputValue}/>}
+      {showCalendar && <DatepickerCalendar value={inputValue} setInputValue={setInputValue} toggleCalendar={toggleCalendar}/>}
     </div>
   );
 };
