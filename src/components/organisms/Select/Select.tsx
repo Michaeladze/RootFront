@@ -298,8 +298,9 @@ const Select: FC<ISelectProps> = ({
         <Button
           buttonType='text'
           disabled={props.disabled}
+          onClick={clearInput}
           className={`rf-select__input-icon rf-select__input-clear ${clearIconClass}`}>
-          <Close onClick={clearInput} />
+          <Close />
         </Button>
         <Button
           buttonType='text'
