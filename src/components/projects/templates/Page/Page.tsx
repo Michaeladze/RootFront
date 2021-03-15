@@ -45,9 +45,11 @@ const Page: React.FC<IPageProps> = ({
 
   /** Расчет отступа сверху для контента */
   useEffect(() => {
-    if (headerRef.current && contentRef.current) {
-      contentRef.current.style.marginTop = `${headerRef.current.offsetHeight}px`;
-    }
+    setTimeout(() => {
+      if (headerRef.current && contentRef.current) {
+        contentRef.current.style.marginTop = `${headerRef.current.offsetHeight}px`;
+      }
+    });
   }, []);
 
   // -------------------------------------------------------------------------------------------------------------------

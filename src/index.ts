@@ -54,6 +54,7 @@ import PopupFooter from './components/projects/molecules/PopupFooter';
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
 import Page from './components/projects/templates/Page';
 import PageWithSections from './components/projects/templates/PageWithSections';
+import PageWithList from './components/projects/templates/PageWithList';
 import ActionMenu from './components/projects/templates/ActionMenu';
 
 // --------------------------Иконки-------------------------------------------------------------------------------------
@@ -117,6 +118,7 @@ export {
   TextEditor,
   Page,
   PageWithSections,
+  PageWithList,
   Badge,
   ActionMenu
 };
