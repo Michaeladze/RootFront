@@ -252,7 +252,8 @@ const Select: FC<ISelectProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   /** Очистка оля ввода */
-  const clearInput = () => {
+  const clearInput = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setInputValue('');
 
     if (componentNode.current) {
