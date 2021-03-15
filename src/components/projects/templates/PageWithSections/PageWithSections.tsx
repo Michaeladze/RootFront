@@ -25,9 +25,15 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   const sectionsRef = useRef<HTMLDivElement>(null);
   /** Ссылка на разделитель скролла */
   const dividerRef = useRef<HTMLDivElement>(null);
+  /** Ссылка на ползунок */
+  const sliderRef = useRef<HTMLDivElement>(null);
+  /** Ссылка на линию */
+  const lineRef = useRef<HTMLDivElement>(null);
 
   /** Прокрутка до отображения разделителя */
   const SHOW_DIVIDER_SCROLL_TOP = 10;
+  /** Дополнительной отступ для активации секции в оглавлении */
+  const ADDITIONAL_SCROLL_OFFSET = 30;
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -114,12 +120,14 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  const activeTitle = useTableOfContents({
+  /** Активная секция при скролле */
+  const { activeTitleId, activeIndex } = useTableOfContents({
     container: sectionsRef,
-    selector: 'h2',
-    additionalOffset: actionMenuRef.current ? actionMenuRef.current.offsetHeight + 30 : 0
+    selector: '.rf-page__section-title',
+    additionalOffset: ADDITIONAL_SCROLL_OFFSET + (actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0)
   });
 
+  // -------------------------------------------------------------------------------------------------------------------
   /** Боковая навигация для секций */
   const asideJSX = sections?.filter((section: IPageSection) => !!section.title)
     .map((section: IPageSection) => {
@@ -127,20 +135,29 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
         const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
         const block = document.getElementById(section.id);
 
-        if (block && pageHeader && actionMenuRef.current) {
-
-          const top = block.getBoundingClientRect().top + pageYOffset - pageHeader.offsetHeight - actionMenuRef.current.offsetHeight;
+        if (block && pageHeader) {
+          const menuOffset = actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0;
+          const top = block.getBoundingClientRect().top + pageYOffset - pageHeader.offsetHeight - menuOffset;
           window.scrollTo(0, top);
         }
       };
 
-      const activeClass = section.id === activeTitle ? 'rf-page__aside-link--active' : '';
       return (
-        <div key={section.id} className={`rf-page__aside-link ${activeClass}`} onClick={onNavClick}>
+        <div key={section.id} className='rf-page__aside-link' onClick={onNavClick}>
           {section.title}
         </div>
       );
     });
+
+  useEffect(() => {
+    if (sliderRef.current) {
+      const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
+      const navLink = document.querySelectorAll('.rf-page__aside-link')[activeIndex];
+      const menuOffset = actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0;
+
+      sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - pageHeader.offsetHeight - menuOffset}px`;
+    }
+  }, [activeTitleId]);
 
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -164,6 +181,10 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
         <aside className='rf-page__content-aside' ref={asideRef}>
           <div className='rf-page__aside-inner'>
+            <div className='rf-page__aside-bar' ref={lineRef}>
+              <div className='rf-page__aside-slider' ref={sliderRef}/>
+            </div>
+
             <nav className='rf-page__aside-nav'>
               {asideJSX}
             </nav>
