@@ -80,30 +80,30 @@
 $asideLinkHeight: 46px;
 
 .rf-page__aside-link {
+  position: relative;
   width: 100%;
-  height: $asideLinkHeight;
+  min-height: $asideLinkHeight;
   display: flex;
   flex-direction: column;
   justify-content: center;
   @include p1;
   cursor: pointer;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: -38px;
+    top: 0;
+    height: $asideLinkHeight;
+    width: 2px;
+    flex-shrink: 0;
+    background-color: var(--base-200);
+    border-radius: 2px;
+  }
 }
 
-.rf-page__aside-bar {
-  position: relative;
-  width: 2px;
-  flex-shrink: 0;
-  background-color: var(--base-200);
-  margin-right: 38px;
-  border-radius: 2px;
-}
-
-.rf-page__aside-slider {
-  width: 100%;
-  height: $asideLinkHeight;
-  background-color: var(--accent-500);
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-radius: 2px;
+.rf-page__aside-link--active {
+  &:before {
+    background-color: var(--accent-500);
+  }
 }
