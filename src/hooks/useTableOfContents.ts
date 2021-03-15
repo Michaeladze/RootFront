@@ -5,7 +5,7 @@ export interface IHeadingData {
     htmlNode: HTMLElement;
 }
 
-export interface useActiveTableOfContentsProps {
+export interface IUseTableOfContentsProps {
     container: React.RefObject<HTMLElement>;
     /* Селектор для отслеживаемых заголовков/элементов */
     selector: string;
@@ -13,9 +13,16 @@ export interface useActiveTableOfContentsProps {
     additionalOffset?: number;
 }
 
+export interface IActiveTitle {
+  activeTitleId?: string;
+  activeIndex: number;
+}
 
-const useTableOfContents = ({ container, selector, additionalOffset = 0 }: useActiveTableOfContentsProps): string | undefined => {
-  const [activeTitle, setActiveTitle] = useState<string | undefined>(undefined);
+const useTableOfContents = ({ container, selector, additionalOffset = 0 }: IUseTableOfContentsProps): IActiveTitle => {
+  const [activeTitle, setActiveTitle] = useState<IActiveTitle>({
+    activeIndex: 0,
+    activeTitleId: undefined
+  });
   const [titlesNodes, setTitlesNodes] = useState<IHeadingData[]>([]);
 
   const parseTitles = () => {
@@ -23,7 +30,6 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0 }: useAc
       const htmlNodes: HTMLElement[] = Array.from(container.current.querySelectorAll(selector));
 
       return htmlNodes.map((node) => ({
-        value: node.innerText,
         id: node.id,
         htmlNode: node,
       }));
@@ -42,9 +48,15 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0 }: useAc
         return offset > wrapper.offsetTop + additionalOffset;
       });
 
-      /* Активируем последний заголовок если вся страница проскролена */
+      /** Активируем последний заголовок если вся страница проскролена */
       if (window.innerHeight + window.pageYOffset >= document.documentElement.offsetHeight) {
-        setActiveTitle(titlesNodes[titlesNodes.length - 1].id);
+        activeIndex = titlesNodes.length - 1;
+
+        setActiveTitle({
+          activeTitleId: titlesNodes[activeIndex].id,
+          activeIndex
+        });
+
         return;
       }
 
@@ -54,7 +66,10 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0 }: useAc
         activeIndex -= 1;
       }
 
-      setActiveTitle(titlesNodes[activeIndex].id);
+      setActiveTitle({
+        activeTitleId: titlesNodes[activeIndex].id,
+        activeIndex
+      });
     }
   };
 
@@ -65,6 +80,13 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0 }: useAc
   }, [selector]);
 
   useEffect(() => {
+    if (!activeTitle.activeTitleId && titlesNodes.length) {
+      setActiveTitle({
+        activeTitleId: titlesNodes[0].id,
+        activeIndex: 0
+      });
+    }
+
     window.addEventListener('scroll', findActiveNode);
 
     return () => {
