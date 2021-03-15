@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { Tile } from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
+import useTableOfContents from '../../../../hooks/useTableOfContents';
 
 
 interface IPageWithSectionsProps {
@@ -18,10 +19,6 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   /** Ссылка на навигацию */
   const asideRef = useRef<HTMLDivElement>(null);
-  /** Ссылка на ползунок */
-  // const sliderRef = useRef<HTMLDivElement>(null);
-  /** Ссылка на линию */
-  const lineRef = useRef<HTMLDivElement>(null);
   /** Ссылка на меню */
   const actionMenuRef = useRef<HTMLDivElement>(null);
   /** Ссылка на секции */
@@ -91,46 +88,6 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  // /** Изменение координаты слайдера при скролле */
-  // useEffect(() => {
-  //   let onScroll: null | (() => void) = null;
-  //   const page = document.querySelector('.rf-page') as HTMLElement;
-  //
-  //   if (page) {
-  //
-  //     setTimeout(() => {
-  //       const pageHeader = page.querySelector('.rf-page__header') as HTMLElement;
-  //
-  //       if (lineRef.current && sliderRef.current && pageHeader) {
-  //         const pageHeight = page.offsetHeight + pageHeader.offsetHeight;
-  //         const clientHeight = document.documentElement.clientHeight;
-  //
-  //         const sliderHeight = sliderRef.current.offsetHeight;
-  //         const lineHeight = lineRef.current.offsetHeight - sliderHeight;
-  //
-  //         const k1 = (pageHeight - clientHeight) / (pageHeight / lineHeight);
-  //         const k2 = lineHeight * lineHeight / k1;
-  //
-  //         onScroll = () => {
-  //           if (sliderRef.current) {
-  //             sliderRef.current.style.top = document.documentElement.scrollTop * k2 / pageHeight + 'px';
-  //           }
-  //         };
-  //
-  //         window.addEventListener('scroll', onScroll);
-  //       }
-  //     });
-  //   }
-  //
-  //   return () => {
-  //     if (onScroll) {
-  //       window.removeEventListener('scroll', onScroll);
-  //     }
-  //   };
-  // }, [actionMenu]);
-
-  // -------------------------------------------------------------------------------------------------------------------
-
   useEffect(() => {
     if (sectionsRef.current) {
       if (!actionMenu) {
@@ -146,8 +103,8 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   /** Отображение секций */
   const sectionsJSX = sections?.map((section: IPageSection) => {
     return (
-      <section key={section.id} id={section.id} className='rf-page__section'>
-        <h2 className='rf-page__section-title'>{section.title}</h2>
+      <section key={section.id} className='rf-page__section'>
+        <h2 className='rf-page__section-title' id={section.id}>{section.title}</h2>
         <Tile>
           {section.component}
         </Tile>
@@ -156,6 +113,12 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   });
 
   // -------------------------------------------------------------------------------------------------------------------
+
+  const activeTitle = useTableOfContents({
+    container: sectionsRef,
+    selector: 'h2',
+    additionalOffset: actionMenuRef.current ? actionMenuRef.current.offsetHeight + 30 : 0
+  });
 
   /** Боковая навигация для секций */
   const asideJSX = sections?.filter((section: IPageSection) => !!section.title)
@@ -171,8 +134,9 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
         }
       };
 
+      const activeClass = section.id === activeTitle ? 'rf-page__aside-link--active' : '';
       return (
-        <div key={section.id} className='rf-page__aside-link' onClick={onNavClick}>
+        <div key={section.id} className={`rf-page__aside-link ${activeClass}`} onClick={onNavClick}>
           {section.title}
         </div>
       );
@@ -200,10 +164,6 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
         <aside className='rf-page__content-aside' ref={asideRef}>
           <div className='rf-page__aside-inner'>
-            <div className='rf-page__aside-bar' ref={lineRef}>
-              {/* <div className='rf-page__aside-slider' ref={sliderRef}/>*/}
-            </div>
-
             <nav className='rf-page__aside-nav'>
               {asideJSX}
             </nav>
