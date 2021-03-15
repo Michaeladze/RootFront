@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { debounceTime, map } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 export interface IHeadingData {
     id: string;
@@ -87,10 +89,13 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0 }: IUseT
       });
     }
 
-    window.addEventListener('scroll', findActiveNode);
+    const subscription = fromEvent(window, 'scroll').pipe(
+      debounceTime(300),
+      map(() => findActiveNode())
+    ).subscribe();
 
     return () => {
-      window.removeEventListener('scroll', findActiveNode);
+      subscription.unsubscribe();
     };
   }, [titlesNodes]);
 
