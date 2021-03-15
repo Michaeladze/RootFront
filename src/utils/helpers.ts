@@ -1,3 +1,6 @@
+import { MonoTypeOperatorFunction } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import {
   IFormattedDate, Size, Variant
 } from '../types';
@@ -149,3 +152,29 @@ export const sizeClass: Record<Size, string> = {
   'medium': 'rf--medium',
   'big': 'rf--big'
 };
+
+function oDataServ(data:any) {
+  (data.results ) && (data = data.results);
+
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      (key === '__metadata') && delete data[key];
+
+      if (Array.isArray(data[key])) {
+        data[key].forEach((item: any) => {
+          oDataServ(item);
+        });
+      } else if (typeof data[key] === 'object') {
+        data[key] = oDataServ(data[key]);
+      }
+    }
+  }
+
+  return data;
+}
+
+export const oDataTransform = <T>():MonoTypeOperatorFunction<T> => map((data: any) => {
+  delete data['@odata.context'];
+  delete data['@odata.metadataEtag'];
+  return data.d ? oDataServ(data.d) as T : data as T;
+});
