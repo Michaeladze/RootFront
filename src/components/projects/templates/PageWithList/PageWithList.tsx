@@ -74,7 +74,7 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
       <main className='rf-page__main'>
         <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
           <div className='rf-page__main-action-menu-inner'>
-            <div className='rf-page__action-menu-divider' ref={dividerRef}/>
+            <div className='rf-page__action-menu-divider--list' ref={dividerRef}/>
             {actionMenu}
           </div>
         </div>
