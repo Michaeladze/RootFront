@@ -52,7 +52,9 @@ export const pageWithList = () => {
     }
   };
 
-  const filtersJSX = <>Фильтры</>;
+  const filtersJSX = <>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur consectetur enim facere id iste iusto optio perspiciatis, quos recusandae repudiandae sequi, unde. Assumenda cupiditate earum eos iure nam voluptate!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam atque cum deleniti et fugit ipsum maiores maxime modi nesciunt nobis obcaecati, optio pariatur porro ratione reprehenderit sequi sit tenetur.</>;
 
   return (
     <BrowserRouter>

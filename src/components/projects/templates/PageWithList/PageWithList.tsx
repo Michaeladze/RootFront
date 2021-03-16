@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
+import StickyContainer from '../StickyContainer';
 
 
 interface IProps {
@@ -66,9 +67,12 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
     <div className='rf-page__with-list'>
       {filters && (
         <aside className='rf-page__aside-filters'>
-          <div className='rf-page__aside-filters-inner'>
-            {filters}
-          </div>
+          <StickyContainer top={actionMenu && actionMenuRef.current ? actionMenuRef.current.getBoundingClientRect().top + 10 : 190}>
+
+            <div className='rf-page__aside-filters-inner'>
+              {filters}
+            </div>
+          </StickyContainer>
         </aside>
       )}
       <main className='rf-page__main'>
