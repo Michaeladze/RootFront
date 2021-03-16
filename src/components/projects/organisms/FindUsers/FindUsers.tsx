@@ -26,6 +26,8 @@ export interface IProps {
   users?: IUser[];
   /** Функция поиска пользователей */
   onSearch?: (search: string, department: string) => void;
+  /** Очистка */
+  onClear?: () => void;
   /** Вернуть выбранных пользователей в компонент */
   getUsers?: (data: IUser[]) => void;
   /** Дополнительная информация о депортаменте поиска */
@@ -40,6 +42,7 @@ const FindUsers: FC<IProps> = ({
   searchData = [],
   onSearch,
   getUsers,
+  onClear,
   department = 'Поиск по всем сотрудникам банка',
   loaded = false
 }: IProps) => {
@@ -57,7 +60,6 @@ const FindUsers: FC<IProps> = ({
   }, []);
 
   const onSubmit = () => {
-    // E.preventDefault();
     onClose && onClose();
     getUsers && getUsers(selectedPeople);
   };
@@ -81,7 +83,7 @@ const FindUsers: FC<IProps> = ({
   /** Кнопки добавить / удалить */
 
   const buttonAdd = (item: IUser) => (
-    <Button className='list-users__button-add' onClick={() => addHandle(item)} buttonType='round'>
+    <Button className='list-users__button-add' onClick={() => addHandle(item)} buttonType='round' variant='accent'>
       <Plus />
     </Button>
   );
@@ -135,7 +137,7 @@ const FindUsers: FC<IProps> = ({
       <h4 className='find-users__title'>Поиск сотрудников</h4>
       <p className='find-users__notice'>Поиск осуществляется по выбранной компании и в рамках одного подразделения.</p>
       <div className='find-users__input-wrapper'>
-        <Input placeholder='Поиск' search={true} onKeyUp={inputHandle} />
+        <Input placeholder='Поиск' search={true} onKeyUp={inputHandle} onClear={onClear} />
       </div>
 
       {!!selectedPeople.length && (

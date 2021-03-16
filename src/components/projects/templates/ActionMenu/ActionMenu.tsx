@@ -32,7 +32,8 @@ const ActionMenu: React.FC<IActionMenuProps> = ({
   const listJSX = listConfig && (
     <div className='rf-action-menu__header'>
       <div className='rf-action-menu__sorting'>
-        <Select readOnly options={listConfig.sortList} value={listConfig.sortList[0].value} getValue={getSortValue}/>
+        {listConfig.sortList.length > 0 && listConfig &&
+        <Select readOnly options={listConfig.sortList} value={listConfig.sortList[0].value} getValue={getSortValue}/>}
       </div>
       <div className='rf-action-menu__search'>
         <Input onKeyUp={handleSearch} placeholder='Поиск' search onClear={listConfig.onClear}/>

@@ -47,7 +47,7 @@ const Page: React.FC<IPageProps> = ({
   useEffect(() => {
     setTimeout(() => {
       if (headerRef.current && contentRef.current) {
-        contentRef.current.style.marginTop = `${headerRef.current.offsetHeight}px`;
+        contentRef.current.style.paddingTop = `${headerRef.current.offsetHeight}px`;
       }
     });
   }, []);

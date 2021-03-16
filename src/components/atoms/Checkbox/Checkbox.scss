@@ -48,7 +48,7 @@
 
 // Hover
 
-.rf-checkbox:hover > .rf-checkbox__check {
+.rf-checkbox:not(.disabled):hover > .rf-checkbox__input:not(:checked) ~ .rf-checkbox__check {
 
   &.rf--base {
     background-color: var(--base-200);

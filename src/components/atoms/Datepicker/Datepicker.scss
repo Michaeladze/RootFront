@@ -187,7 +187,7 @@ $margin: 2px;
   }
 
   .react-calendar__tile:disabled {
-    color: var(--base-300);
+    color: var(--base-400);
     cursor: default;
   }
 
@@ -364,7 +364,7 @@ input[type=number]::-webkit-outer-spin-button {
   }
 
   .react-date-picker__inputGroup__input {
-    color: var(--base-300);
+    color: var(--base-400);
     background-color: var(--base-100);
     cursor: default
   }
@@ -375,17 +375,17 @@ input[type=number]::-webkit-outer-spin-button {
   }
 
   .react-date-picker__inputGroup__leadingZero {
-    color: var(--base-300);
+    color: var(--base-400);
     background-color: transparent;
     cursor: default
   }
 
   .react-date-picker__inputGroup__input::placeholder {
-    color: var(--base-300);
+    color: var(--base-400);
   }
 
   .react-date-picker__inputGroup__divider {
-    color: var(--base-300);
+    color: var(--base-400);
   }
 
   .react-date-picker__button:hover,

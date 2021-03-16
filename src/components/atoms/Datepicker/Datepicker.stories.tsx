@@ -17,7 +17,7 @@ export const datepicker = () => {
     <Story name='Datepicker (Выбор даты))' width={500}>
       <StoryItem>
         <FormGroup label='Big'>
-          <Datepicker name='dateUntil' minDate={new Date()} value={new Date()} onChange={onChange} size='big' />
+          <Datepicker name='dateUntil' disabled minDate={new Date()} value={new Date()} onChange={onChange} size='big' />
         </FormGroup>
       </StoryItem>
       <StoryItem>
