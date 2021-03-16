@@ -80,8 +80,9 @@
 $asideLinkHeight: 46px;
 
 .rf-page__aside-link {
+  position: relative;
   width: 100%;
-  height: $asideLinkHeight;
+  min-height: $asideLinkHeight;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,4 +107,5 @@ $asideLinkHeight: 46px;
   left: 0;
   top: 0;
   border-radius: 2px;
+  transition: all ease-in-out 0.3s;
 }
