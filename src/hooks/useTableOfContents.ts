@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { debounceTime, map } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
+import { detect } from 'detect-browser';
 
 export interface IHeadingData {
     id: string;
@@ -89,8 +90,9 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0 }: IUseT
       });
     }
 
+    const browser = detect();
     const subscription = fromEvent(window, 'scroll').pipe(
-      debounceTime(300),
+      debounceTime(browser?.name === 'ie' ? 300 : 0),
       map(() => findActiveNode())
     ).subscribe();
 
