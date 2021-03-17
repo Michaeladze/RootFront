@@ -1,8 +1,9 @@
 name: Semantic release
 
 on:
-  branches:
-    - main
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
