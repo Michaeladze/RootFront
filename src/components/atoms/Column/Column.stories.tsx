@@ -43,7 +43,12 @@ export const grid = () => (
     </Row>
 
     <Row gap={10}>
-      {[1, 2, 3, 4].map((key) => (
+      {[
+        1,
+        2,
+        3,
+        4
+      ].map((key) => (
         <Column gap={10} sm={12} md={4} lg={3} key={key}>
           <div style={style}>sm: 12, md: 4, lg: 3</div>
         </Column>

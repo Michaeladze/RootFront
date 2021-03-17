@@ -1,37 +1,48 @@
 'use strict';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const childProcess = require('child_process');
-const branch = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim()
+const branch = childProcess.execSync('git rev-parse --abbrev-ref HEAD')
+  .toString()
+  .trim()
   .split('/')
   .slice(-1);
-
+console.clear();
 module.exports = {
-  disableEmoji: false,
-  list: ['feat', 'fix', 'merge', 'refactor'],
-  maxMessageLength: 100,
-  minMessageLength: 3,
-  questions: ['type', 'subject'],
-  types: {
-    feat: {
-      description: 'Добавление нового функционала',
-      emoji: '[' + branch + ']',
-      value: 'feat'
+  subjectSeparator: ' ',
+  skipQuestions: [
+    'body',
+    'scope',
+    'body',
+    'breaking',
+    'footer'
+  ],
+  messages: {
+    type: ' \n____________Коммит в ' + branch.toString()
+      .toLocaleUpperCase() + '____________\n',
+    subject: 'Введите описание:\n',
+    confirmCommit: 'Вы уверены?',
+
+
+  },
+  types: [
+    {
+      name: '✨  feat:        Добавление нового функционала',
+      value: 'feat: [' + branch + '] '
     },
-    fix: {
-      description: 'Исправление ошибок',
-      value: 'fix',
-      emoji: '[' + branch + ']',
+    {
+      name: '🐞 fix:         Исправление ошибок',
+      value: 'fix: [' + branch + '] ',
     },
-    merge: {
-      description: 'Слияние веток',
-      emoji: '[' + branch + ']',
-      value: 'merge'
+    {
+      name: '📚 merge:       Слияние веток',
+      value: 'merge: [' + branch + '] '
 
     },
-    refactor: {
-      description: 'Правки кода без исправления ошибок или добавления новых функций',
-      emoji: '[' + branch + ']',
-      value: 'refactor'
+    {
+      name: '💅 refactor:    Правки кода без исправления ошибок или добавления новых функций',
+      value: 'refactor: [' + branch + ']'
     }
-  }
+  ]
+
+
 };

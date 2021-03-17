@@ -6,13 +6,13 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const dotenv = require('dotenv');
-//получаем путь проекта
+// получаем путь проекта
 const __project = __dirname.split('\\')
   .slice(-1)[0].split('/')
   .slice(0, -3)
   .join('/');
 
-//=========================================================================
+// =========================================================================
 // открываем все свойства .env
 const env = process.argv[process.argv.indexOf('--env') + 1] || 'development';
 const fileEnv = dotenv.config({ path: `${__project}/.env.${env}` }).parsed;
@@ -22,11 +22,12 @@ const envKeys = Object.keys(fileEnv)
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {});
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 envKeys['process.env.REACT_APP_V'] = `"${require('../../../package.json').version}"`;
-//=========================================================================
+// =========================================================================
 
 
-//=========================================================================
+// =========================================================================
 console.clear();
 console.log('\x1b[32m', '#########################################');
 console.log('\x1b[36m', 'ENVIRONMENT:  ', env);
@@ -35,7 +36,7 @@ console.log(' ENV_PATH:    ', `${__project}/.env.${env}`);
 console.log(' VER:         ', `${envKeys['process.env.REACT_APP_V']}`);
 console.log('\x1b[32m', '#########################################');
 console.log(envKeys);
-//=========================================================================
+// =========================================================================
 module.exports = {
   entry: ['./src/singleSpaEntry.tsx'],
   output: {

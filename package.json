@@ -1,13 +1,13 @@
 {
   "name": "root-front",
-  "version": "1.10.7",
+  "version": "1.10.8",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "rimraf dist && tsc && yarn build_css && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/ && yarn cp",
     "build_css": "node-sass src/styles/index.scss -o dist/ ",
-    "cp": "cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp .babelrc dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
+    "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp .babelrc dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
     "start": "npm run build -- -w",
     "commit": "git add . && npx git-cz",
     "storybook": "start-storybook -p 9010 -s public -c src/.storybook",
@@ -119,16 +119,6 @@
       "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint ./src --format=table --fix",
-      "git add ."
-    ],
-    "*.{css,scss}": [
-      "npx stylelint ./src/**/*.scss --fix",
-      "git add ."
-    ]
   },
   "browserslist": {
     "production": [
