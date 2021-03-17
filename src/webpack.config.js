@@ -15,7 +15,7 @@ const __project = __dirname.split('\\')
 //=========================================================================
 // открываем все свойства .env
 const env = process.argv[process.argv.indexOf('--env') + 1] || 'development';
-fileEnv = dotenv.config({ path: `${__project}/.env.${env}` }).parsed;
+const fileEnv = dotenv.config({ path: `${__project}/.env.${env}` }).parsed;
 // меняем версию
 const envKeys = Object.keys(fileEnv)
   .reduce((prev, next) => {
