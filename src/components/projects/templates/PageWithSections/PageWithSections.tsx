@@ -150,13 +150,18 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
     });
 
   useEffect(() => {
-    if (sliderRef.current) {
-      const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
-      const navLink = document.querySelectorAll('.rf-page__aside-link')[activeIndex];
-      const menuOffset = actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0;
+    setTimeout(() => {
+      if (sliderRef.current) {
+        const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
+        const navLinks = document.querySelectorAll('.rf-page__aside-link');
+        const navLink = navLinks[activeIndex];
 
-      sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - pageHeader.offsetHeight - menuOffset}px`;
-    }
+        if (pageHeader && navLink) {
+          const menuOffset = actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0;
+          sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - pageHeader.offsetHeight - menuOffset}px`;
+        }
+      }
+    });
   }, [activeTitleId]);
 
 
