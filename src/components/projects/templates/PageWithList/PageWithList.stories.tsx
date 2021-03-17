@@ -52,12 +52,15 @@ export const pageWithList = () => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const filtersJSX = <>Фильтры</>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const actionMenu = <ActionMenu listConfig={config} type='list'/>;
 
   return (
     <BrowserRouter>
       <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation}>
-        <PageWithList filters={filtersJSX} actionMenu={<ActionMenu listConfig={config} type='list'/>}>
+        <PageWithList filters={filtersJSX}>
           {listJSX}
         </PageWithList>
       </Page>

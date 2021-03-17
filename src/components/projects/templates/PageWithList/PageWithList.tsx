@@ -18,6 +18,8 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
   const actionMenuRef = useRef<HTMLDivElement>(null);
   /** Ссылка на разделитель скролла */
   const dividerRef = useRef<HTMLDivElement>(null);
+  /** Ссылка на контент */
+  const mainRef = useRef<HTMLDivElement>(null);
 
   /** Прокрутка до отображения разделителя */
   const SHOW_DIVIDER_SCROLL_TOP = 10;
@@ -43,8 +45,14 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
     setTimeout(() => {
       const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
 
-      if (actionMenuRef.current && pageHeader) {
-        actionMenuRef.current.style.top = `${pageHeader.offsetHeight}px`;
+      if (actionMenuRef.current) {
+        if (pageHeader) {
+          actionMenuRef.current.style.top = `${pageHeader.offsetHeight}px`;
+        }
+
+        if (mainRef.current) {
+          mainRef.current.style.paddingTop = `${actionMenuRef.current.offsetHeight}px`;
+        }
       }
 
     });
@@ -71,13 +79,13 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
           </div>
         </aside>
       )}
-      <main className='rf-page__main'>
-        <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
+      <main className='rf-page__main' ref={mainRef}>
+        {actionMenu && <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
           <div className='rf-page__main-action-menu-inner'>
             <div className='rf-page__action-menu-divider--list' ref={dividerRef}/>
             {actionMenu}
           </div>
-        </div>
+        </div>}
         <div className='rf-page__main-content'>
           {children}
         </div>
