@@ -1,0 +1,10 @@
+{
+  "*.{js,jsx,ts,tsx}": [
+    "eslint ./src --format=table --fix",
+    "git add ."
+  ],
+  "*.{css,scss}": [
+    "npx stylelint ./src/**/*.scss --fix",
+    "git add ."
+  ]
+}

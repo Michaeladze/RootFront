@@ -1,13 +1,13 @@
 {
   "name": "root-front",
-  "version": "1.10.6",
+  "version": "1.10.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "rimraf dist && tsc && yarn build_css && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/ && yarn cp",
     "build_css": "node-sass src/styles/index.scss -o dist/ ",
-    "cp": "cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp .babelrc dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/",
+    "cp": "cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp .babelrc dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
     "start": "npm run build -- -w",
     "commit": "git add . && npx git-cz",
     "storybook": "start-storybook -p 9010 -s public -c src/.storybook",
