@@ -14,5 +14,5 @@
     "comment-whitespace-inside": "always",
     "max-empty-lines": 1
   },
-  "ignoreFiles": ["src/styles/Swiper.scss"]
+  "ignoreFiles": ["**/node_modules"]
 }
