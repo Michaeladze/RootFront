@@ -1,9 +1,7 @@
 'use strict';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const childProcess = require('child_process');
-const branch = childProcess.execSync('git rev-parse --abbrev-ref HEAD')
-  .toString()
-  .trim()
+const branch = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim()
   .split('/')
   .slice(-1);
 console.clear();
@@ -17,8 +15,7 @@ module.exports = {
     'footer'
   ],
   messages: {
-    type: ' \n____________Коммит в ' + branch.toString()
-      .toLocaleUpperCase() + '____________\n',
+    type: ' \n____________Коммит в ' + branch.toString().toLocaleUpperCase() + '____________\n',
     subject: 'Введите описание:\n',
     confirmCommit: 'Вы уверены?',
 
