@@ -64,7 +64,7 @@ export const pageWithList = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoaded(true);
-    }, 10000);
+    }, 1000);
   }, []);
 
   return (
