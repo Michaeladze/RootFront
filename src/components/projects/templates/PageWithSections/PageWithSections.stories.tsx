@@ -64,14 +64,14 @@ export const pageWithSections = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      // setLoaded(true);
-    }, 10000);
+      setLoaded(true);
+    }, 2000);
   }, []);
 
   return (
     <BrowserRouter>
-      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation} preloader={!loaded}>
-        <PageWithSections sections={sections} actionMenu={<ActionMenu/>}/>
+      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation}>
+        <PageWithSections sections={sections} actionMenu={<ActionMenu/>} preloader={!loaded}/>
       </Page>
     </BrowserRouter>
   );

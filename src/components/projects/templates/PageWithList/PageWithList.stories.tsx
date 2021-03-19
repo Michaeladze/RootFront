@@ -1,4 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, {
+  ReactNode, useEffect, useState
+} from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { Page, Tile } from '../../../../index';
@@ -57,10 +59,18 @@ export const pageWithList = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const actionMenu = <ActionMenu listConfig={config} type='list'/>;
 
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 10000);
+  }, []);
+
   return (
     <BrowserRouter>
       <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation}>
-        <PageWithList filters={filtersJSX}>
+        <PageWithList filters={filtersJSX} preloader={!loaded}>
           {listJSX}
         </PageWithList>
       </Page>

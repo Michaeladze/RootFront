@@ -1,7 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
-import { Tile } from '../../../../index';
+import { Preloader, Tile } from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
 import useTableOfContents from '../../../../hooks/useTableOfContents';
 
@@ -10,11 +10,13 @@ interface IPageWithSectionsProps {
   sections?: IPageSection[];
   /** Fixed action menu */
   actionMenu?: ReactNode;
+  preloader?: boolean;
 }
 
 const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   sections,
-  actionMenu
+  actionMenu,
+  preloader = false
 }: IPageWithSectionsProps) => {
 
   /** Ссылка на навигацию */
@@ -180,21 +182,27 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
       <div className='rf-page__content--sections'>
 
-        <div className='rf-page__content-sections' ref={sectionsRef}>
-          {sectionsJSX}
-        </div>
+        {
+          preloader ? <Preloader/> : (
+            <>
+              <div className='rf-page__content-sections' ref={sectionsRef}>
+                {sectionsJSX}
+              </div>
 
-        <aside className='rf-page__content-aside' ref={asideRef}>
-          <div className='rf-page__aside-inner'>
-            <div className='rf-page__aside-bar' ref={lineRef}>
-              <div className='rf-page__aside-slider' ref={sliderRef}/>
-            </div>
+              <aside className='rf-page__content-aside' ref={asideRef}>
+                <div className='rf-page__aside-inner'>
+                  <div className='rf-page__aside-bar' ref={lineRef}>
+                    <div className='rf-page__aside-slider' ref={sliderRef}/>
+                  </div>
 
-            <nav className='rf-page__aside-nav'>
-              {asideJSX}
-            </nav>
-          </div>
-        </aside>
+                  <nav className='rf-page__aside-nav'>
+                    {asideJSX}
+                  </nav>
+                </div>
+              </aside>
+            </>
+          )
+        }
       </div>
     </>
   );

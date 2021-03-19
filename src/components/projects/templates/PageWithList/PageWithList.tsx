@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
+import { Preloader } from '../../../../index';
 
 
 interface IProps {
@@ -10,9 +11,10 @@ interface IProps {
   filters?: ReactNode;
   /** Fixed action menu */
   actionMenu?: ReactNode;
+  preloader?: boolean;
 }
 
-const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProps) => {
+const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preloader = false }: IProps) => {
 
   /** Ссылка на меню */
   const actionMenuRef = useRef<HTMLDivElement>(null);
@@ -72,24 +74,30 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
 
   return (
     <div className='rf-page__with-list'>
-      {filters && (
-        <aside className='rf-page__aside-filters'>
-          <div className='rf-page__aside-filters-inner'>
-            {filters}
-          </div>
-        </aside>
-      )}
-      <main className='rf-page__main' ref={mainRef}>
-        {actionMenu && <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
-          <div className='rf-page__main-action-menu-inner'>
-            <div className='rf-page__action-menu-divider--list' ref={dividerRef}/>
-            {actionMenu}
-          </div>
-        </div>}
-        <div className='rf-page__main-content'>
-          {children}
-        </div>
-      </main>
+      {
+        preloader ? <Preloader/> : (
+          <>
+            {filters && (
+              <aside className='rf-page__aside-filters'>
+                <div className='rf-page__aside-filters-inner'>
+                  {filters}
+                </div>
+              </aside>
+            )}
+            <main className='rf-page__main' ref={mainRef}>
+              {actionMenu && <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
+                <div className='rf-page__main-action-menu-inner'>
+                  <div className='rf-page__action-menu-divider--list' ref={dividerRef}/>
+                  {actionMenu}
+                </div>
+              </div>}
+              <div className='rf-page__main-content'>
+                {children}
+              </div>
+            </main>
+          </>
+        )
+      }
     </div>
   );
 };
