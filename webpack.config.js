@@ -7,10 +7,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const dotenv = require('dotenv');
 // получаем путь проекта
-const __project = __dirname.split('\\')
-  .slice(-1)[0].split('/')
+const dividor = __dirname.split('/').length - 1 ? '/' : '\\';
+
+const __project = __dirname
+  .split(dividor)
   .slice(0, -3)
-  .join('/');
+  .join(dividor);
+
 
 // =========================================================================
 // открываем все свойства .env
@@ -28,7 +31,7 @@ envKeys['process.env.REACT_APP_V'] = `"${require('../../../package.json').versio
 
 
 // =========================================================================
-console.clear();
+// console.clear();
 console.log('\x1b[32m', '#########################################');
 console.log('\x1b[36m', 'ENVIRONMENT:  ', env);
 console.log(' PROJECT:     ', __project);
