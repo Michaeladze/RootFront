@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { ContentExpander, Page } from '../../../../index';
@@ -60,9 +60,17 @@ export const pageWithSections = () => {
 
   const user: any = { fullName: 'Ричард Брэндмауер' };
 
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      // setLoaded(true);
+    }, 10000);
+  }, []);
+
   return (
     <BrowserRouter>
-      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation} >
+      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation} preloader={!loaded}>
         <PageWithSections sections={sections} actionMenu={<ActionMenu/>}/>
       </Page>
     </BrowserRouter>

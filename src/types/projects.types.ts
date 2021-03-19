@@ -29,6 +29,16 @@ export interface IUser {
   salary?: number;
   /** Валюта */
   currency?: string;
+
+  /** Орг структура */
+  departmentsPath?: IUserStructure[];
+}
+
+export interface IUserStructure {
+  id: string;
+  name: string;
+  unitType: string;
+  unitTypeDesc: string;
 }
 
 export interface IFeedback {

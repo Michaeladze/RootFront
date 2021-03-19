@@ -50,6 +50,7 @@ import UserPhoto from './components/projects/atoms/UserPhoto';
 import UserItem from './components/projects/molecules/User';
 import UsersStack from './components/projects/molecules/UsersStack';
 import PopupFooter from './components/projects/molecules/PopupFooter';
+import UserStructure from './components/projects/atoms/UserStructure';
 
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
 import Page from './components/projects/templates/Page';
@@ -120,7 +121,8 @@ export {
   PageWithSections,
   PageWithList,
   Badge,
-  ActionMenu
+  ActionMenu,
+  UserStructure
 };
 
 export {
