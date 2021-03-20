@@ -72,6 +72,7 @@ import DotsHorizontal from './components/_icons/dots-h';
 import InfoCircle from './components/_icons/info-circle';
 import PersonAddOutline from './components/_icons/person-add-outline';
 import BoxGrid from './components/_icons/box-grid';
+import Close from './components/_icons/close';
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -142,5 +143,6 @@ export {
   DotsHorizontal,
   InfoCircle,
   PersonAddOutline,
-  BoxGrid
+  BoxGrid,
+  Close
 };
