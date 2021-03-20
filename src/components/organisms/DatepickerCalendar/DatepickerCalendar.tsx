@@ -220,6 +220,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
     return (
       <div
+        key={date.getTime()}
         className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day ${periodClass} ${currentDayClass} ${disabledClass} ${inRangeClass}`}
         onClick={() => onDayClick(date)}
       >
@@ -254,6 +255,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
     return (
       <div
+        key={m}
         className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month ${currentMonthClass} ${disabledClass} ${inRangeClass}`}
         onClick={(e: React.MouseEvent) => onMonthClick(e, i)}>
         {m}
