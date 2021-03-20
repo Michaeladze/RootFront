@@ -9,18 +9,23 @@ import { replaceAt, sizeClass } from '../../../utils/helpers';
 import Calendar from '../../_icons/calendar-outline';
 import DatepickerCalendar from '../DatepickerCalendar';
 import useClickOutside from '../../../hooks/useClickOutside';
+import InputMask from 'react-input-mask';
 
 
 export interface IDatepickerProps {
   name?: string;
   placeholder?: string;
   defaultValue?: Date | string | number;
+  disabled?: boolean;
+  readOnly?: boolean;
   /** Размер */
   size?: Size;
   /** Минимальная дата */
   min?: Date | string | number;
-  /** максимальная */
+  /** Максимальная дата */
   max?: Date | string | number;
+  /** Возвращает дату */
+  getValue?: (value: string) => void;
 }
 
 const NewDatepicker: React.FC<IDatepickerProps> = ({
@@ -29,7 +34,10 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   size = 'medium',
   defaultValue,
   min,
-  max
+  max,
+  disabled = false,
+  readOnly = false,
+  getValue
 }: IDatepickerProps) => {
   const minD: Date | undefined = min ? min instanceof Date ? min : new Date(min) : undefined;
   const maxD: Date | undefined = max ? max instanceof Date ? max : new Date(max) : undefined;
@@ -94,73 +102,77 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     setInputValue(inputValue);
   }, [defaultValue]);
 
+  // -------------------------------------------------------------------------------------------------------------------
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newStr = e.target.value;
-    setInputValue((oldStr: string) => {
-      const lastChar = newStr[newStr.length - 1];
+    setInputValue(e.target.value);
 
-      if (!lastChar) {
-        return '';
-      }
-
-      const key = lastChar.charCodeAt(0);
-      const isDelete = oldStr.length > newStr.length;
-
-      /** Если удаляем в месте точки, то удаляем предыдущее число, а точку оставляем */
-      // if (isDelete) {
-      //   if (!newStr.slice(0, 3).includes('.')) {
-      //     const tmp = newStr.split('');
-      //     tmp[1] = '';
-      //     tmp.splice(2, 0, '.');
-      //     newStr = tmp.join('');
-      //   }
-      // }
-
-      if (!isDelete && (key < 47 || key > 57)) {
-        return oldStr;
-      }
-
-      if (!isDelete && newStr.length === 2 && newStr[1] !== '.') {
-        newStr += '.';
-      }
-
-      if (!isDelete && oldStr[1] !== '.' && oldStr.length === 2 && newStr.length === 3) {
-        const tmp = newStr.split('');
-        tmp.splice(2, 0, '.');
-        newStr = tmp.join('');
-      }
-
-      if (!isDelete && newStr.length === 5 && newStr[4] !== '.') {
-        newStr += '.';
-      }
-
-      if (!isDelete && oldStr[5] !== '.' && oldStr.length === 5 && newStr.length === 6) {
-        const tmp = newStr.split('');
-        tmp.splice(5, 0, '.');
-        newStr = tmp.join('');
-      }
-
-      return newStr;
-    });
+    if (e.target.value.length === 10 && !e.target.value.includes('_')) {
+      getValue && getValue(e.target.value);
+    }
   };
+
+  const setValue = (value: string) => {
+    setInputValue(value);
+    getValue && getValue(value);
+
+    setTimeout(() => {
+      if (inputRef.current) {
+        const input = inputRef.current.querySelector('input');
+
+        if (input) {
+          input.dispatchEvent(new Event('change'));
+        }
+      }
+    }, 100);
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  const disabledClass = disabled ? 'rf-datepicker__input-wrapper--disabled' : '';
+  const readOnlyClass = readOnly ? 'rf-datepicker__input-wrapper--readonly' : '';
+
+  const mask = [
+    /[0-3]/,
+    inputValue[0] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
+    '.',
+    /[0,1]/,
+    inputValue[3] === '0' ? /[1-9]/ : /[0-2]/,
+    '.',
+    /[1,2]/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ];
 
   // -------------------------------------------------------------------------------------------------------------------
 
   return (
     <div className='rf-datepicker' ref={datepickerRef}>
-      <div className='rf-datepicker__input-wrapper' ref={inputRef} onClick={() => toggleCalendar(true)}>
-        <Input name={name}
-          debounce={0}
-          maxLength={10}
+      <div className={`rf-datepicker__input-wrapper ${disabledClass} ${readOnlyClass}`}
+        ref={inputRef} onClick={() => toggleCalendar(true)}>
+        <InputMask
+          mask={mask}
+          name={name}
           placeholder={placeholder}
           value={inputValue}
-          onChange={onChange}
-
-          className={`${sizeClass[size]}`}/>
+          disabled={disabled}
+          readOnly={readOnly}
+          onChange={onChange}>
+          <Input className={`${sizeClass[size]}`}/>
+        </InputMask>
         <Calendar className='rf-datepicker__calendar-button'/>
       </div>
-      {showCalendar && <DatepickerCalendar value={inputValue} minDate={minDate} maxDate={maxDate} setInputValue={setInputValue}
-        toggleCalendar={toggleCalendar}/>}
+      {showCalendar && (
+        <DatepickerCalendar
+          value={inputValue}
+          minDate={minDate}
+          maxDate={maxDate}
+          toggleRef={inputRef}
+          setInputValue={setValue}
+          showCalendar={showCalendar}
+          toggleCalendar={toggleCalendar}/>
+      )}
     </div>
   );
 };

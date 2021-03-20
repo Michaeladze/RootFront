@@ -9,7 +9,7 @@
     "build_css": "node-sass src/styles/index.scss -o dist/ ",
     "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp .babelrc dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
     "start": "npm run build -- -w",
-    "commit": "git add . && ./node_modules/cz-customizable/standalone.js && git push",
+    "commit": "git add . && ./node_modules/cz-customizable/standalone.js",
     "storybook": "start-storybook -p 9010 -s public -c src/.storybook",
     "build-storybook": "build-storybook -s public -c ",
     "rflink": "yarn link  && cd node_modules/react && yarn link && cd ../react-dom && yarn link && cd ../react-router-dom && yarn link",

@@ -63,7 +63,7 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)$/,
         use: 'babel-loader',
-        exclude: [path.resolve(__dirname, 'node_modules')]
+        exclude: [path.resolve(__dirname, 'node_modules'), /spec\.(js|jsx|ts|tsx)$/]
       },
       {
         test: /\.html$/i,

@@ -1,5 +1,5 @@
 import React, {
-  Dispatch, ReactNode, SetStateAction, useEffect, useState
+  Dispatch, ReactNode, RefObject, SetStateAction, useCallback, useEffect, useRef, useState
 } from 'react';
 import './DatepickerCalendar.scss';
 import Chevron from '../../_icons/chevron-left';
@@ -15,37 +15,96 @@ interface IDatepickerCalendarProps {
   /** Формат всегда dd.mm.yyyy */
   value: string;
   /** Изменение инпута в родителе */
-  setInputValue: Dispatch<SetStateAction<string>>;
+  setInputValue: (value: string) => void;
+  /** Видимость календаря */
+  showCalendar: boolean;
   /** Изменить отображение календаря */
   toggleCalendar: Dispatch<SetStateAction<boolean>>;
   /** Минимальная дата */
   minDate?: Date;
-  /** максимальная */
+  /** Максимальная дата */
   maxDate?: Date;
+  /** Ссылка на инпут */
+  toggleRef: RefObject<HTMLDivElement>
 }
 
 const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   value,
   setInputValue,
+  showCalendar,
   toggleCalendar,
   minDate,
-  maxDate
+  maxDate,
+  toggleRef
 }: IDatepickerCalendarProps) => {
 
-  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  /** Ссылка на контент */
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const setCurrent = useCallback(() => {
+    let d = new Date();
+    const formatToday = formatDate(d.getTime()).date.split('.');
+
+    if (value) {
+      let [dd, mm, yyyy] = value.split('.');
+      dd = dd.includes('_') ? formatToday[0] : dd;
+      mm = mm.includes('_') ? formatToday[1] : mm;
+      yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;
+      d = new Date(`${mm}.${dd}.${yyyy}`);
+    }
+
+    return d;
+  }, [value]);
+
+  const [currentDate, setCurrentDate] = useState<Date>(setCurrent());
 
   /** Устанавливаем текущий день */
   useEffect(() => {
-    if (value) {
-      const [dd, mm, yyyy] = value.split('.');
-      const d = new Date(`${mm}.${dd}.${yyyy}`);
-      setCurrentDate(d);
-
-      if (value.length === 10) {
-        setActivePeriod(getDaysForMonth(d));
-      }
-    }
+    setCurrentDate(setCurrent());
   }, [value]);
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  const [coordinates, setCoordinates] = useState({
+    top: '-9999px',
+    left: '0',
+    right: 'auto'
+  });
+
+  /** Пересчитываем координаты, если не помещается*/
+  const rearrangePosition = () => {
+    if (contentRef.current && toggleRef.current) {
+      const toggleRect: DOMRect = toggleRef.current.getBoundingClientRect();
+      const listRect: DOMRect = contentRef.current.getBoundingClientRect();
+
+      let left = 0;
+      let top: number = toggleRect.height;
+      const minGap = 10;
+
+      if (toggleRect.height + toggleRect.top + listRect.height > document.body.offsetHeight) {
+        top =
+          toggleRect.height -
+          (toggleRect.height + toggleRect.top + listRect.height - document.body.offsetHeight) -
+          minGap;
+      }
+
+      if (toggleRect.left + listRect.width > document.body.offsetWidth) {
+        left = document.body.offsetWidth - listRect.width - toggleRect.left - minGap;
+      }
+
+      setCoordinates({
+        left: `${left}px`,
+        top: `${top}px`,
+        right: 'auto'
+      });
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      rearrangePosition();
+    });
+  }, [showCalendar]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +119,11 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   /** Отображаемый период */
-  const [activePeriod, setActivePeriod] = useState<IDatepickerActivePeriod>(getDaysForMonth(new Date()));
+  const [activePeriod, setActivePeriod] = useState<IDatepickerActivePeriod>(getDaysForMonth(currentDate));
+
+  useEffect(() => {
+    setActivePeriod(getDaysForMonth(currentDate));
+  }, [currentDate]);
 
   useEffect(() => {
     if (minDate && new Date().getTime() < minDate.getTime()) {
@@ -241,7 +304,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   return (
-    <div className='rf-datepicker__calendar'>
+    <div className='rf-datepicker__calendar' ref={contentRef} style={coordinates}>
       <header className='rf-datepicker__calendar-header'>
         <div className='rf-calendar__control'>
           <button className='rf-calendar__button rf-calendar__button-prev' disabled={prevArrowDisabled} onClick={() => onPeriodChange(-1)}>
