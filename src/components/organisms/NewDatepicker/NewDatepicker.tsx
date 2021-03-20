@@ -10,7 +10,7 @@ import Calendar from '../../_icons/calendar-outline';
 import DatepickerCalendar from '../DatepickerCalendar';
 import useClickOutside from '../../../hooks/useClickOutside';
 import InputMask from 'react-input-mask';
-
+import { IDateVariants } from '../DatepickerCalendar/datepicker.types';
 
 export interface IDatepickerProps {
   name?: string;
@@ -25,7 +25,9 @@ export interface IDatepickerProps {
   /** Максимальная дата */
   max?: Date | string | number;
   /** Возвращает дату */
-  getValue?: (value: string) => void;
+  getValue?: (value: IDateVariants) => void;
+  /** Диапазон */
+  range?: boolean;
 }
 
 const NewDatepicker: React.FC<IDatepickerProps> = ({
@@ -37,7 +39,8 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   max,
   disabled = false,
   readOnly = false,
-  getValue
+  getValue,
+  range = false
 }: IDatepickerProps) => {
   const minD: Date | undefined = min ? min instanceof Date ? min : new Date(min) : undefined;
   const maxD: Date | undefined = max ? max instanceof Date ? max : new Date(max) : undefined;
@@ -61,6 +64,22 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const [inputValue, setInputValue] = useState<string>('');
+
+  /** Валидация мин и макс дат. Если не попадает в ограничения, привести к граничным значениям. */
+  const validate = (date: string): string => {
+    let result = date;
+    const [dd, mm, yyyy] = date.split('.');
+
+    if (minDate && new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
+      result = formatDate(minDate.getTime()).date;
+    }
+
+    if (maxDate && new Date(+yyyy, +mm, +dd).getTime() > maxDate.getTime()) {
+      result = formatDate(maxDate.getTime()).date;
+    }
+
+    return result;
+  };
 
   /** Проверяем и подставляем defaultValue */
   useEffect(() => {
@@ -89,32 +108,40 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
       inputValue = formatDate(defaultValue.getTime()).date;
     }
 
-    const [dd, mm, yyyy] = inputValue.split('.');
-
-    if (minDate && new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
-      inputValue = formatDate(minDate.getTime()).date;
-    }
-
-    if (maxDate && new Date(+yyyy, +mm, +dd).getTime() > maxDate.getTime()) {
-      inputValue = formatDate(maxDate.getTime()).date;
-    }
+    inputValue = validate(inputValue);
 
     setInputValue(inputValue);
   }, [defaultValue]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const getReturnValue = (value: string): IDateVariants => {
+    const [dd, mm, yyyy] = value.split('.');
+    const date = new Date(`${mm}.${dd}.${yyyy}`);
+    return {
+      date,
+      value,
+      timestamp: date.getTime()
+    };
+  };
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
 
     if (e.target.value.length === 10 && !e.target.value.includes('_')) {
-      getValue && getValue(e.target.value);
+      const result = validate(e.target.value);
+
+      if (e.target.value !== result) {
+        setInputValue(result);
+      }
+
+      getValue && getValue(getReturnValue(result));
     }
   };
 
   const setValue = (value: string) => {
     setInputValue(value);
-    getValue && getValue(value);
+    getValue && getValue(getReturnValue(value));
 
     setTimeout(() => {
       if (inputRef.current) {
@@ -132,7 +159,31 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   const disabledClass = disabled ? 'rf-datepicker__input-wrapper--disabled' : '';
   const readOnlyClass = readOnly ? 'rf-datepicker__input-wrapper--readonly' : '';
 
-  const mask = [
+  const mask = range ? [
+    /[0-3]/,
+    inputValue[0] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
+    '.',
+    /[0,1]/,
+    inputValue[3] === '0' ? /[1-9]/ : /[0-2]/,
+    '.',
+    /[1,2]/,
+    /\d/,
+    /\d/,
+    /\d/,
+    ' ',
+    '-',
+    ' ',
+    /[0-3]/,
+    inputValue[13] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
+    '.',
+    /[0,1]/,
+    inputValue[16] === '0' ? /[1-9]/ : /[0-2]/,
+    '.',
+    /[1,2]/,
+    /\d/,
+    /\d/,
+    /\d/
+  ] : [
     /[0-3]/,
     inputValue[0] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
     '.',
@@ -170,6 +221,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           maxDate={maxDate}
           toggleRef={inputRef}
           setInputValue={setValue}
+          range={range}
           showCalendar={showCalendar}
           toggleCalendar={toggleCalendar}/>
       )}

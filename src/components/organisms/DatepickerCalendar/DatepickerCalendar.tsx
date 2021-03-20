@@ -26,6 +26,8 @@ interface IDatepickerCalendarProps {
   maxDate?: Date;
   /** Ссылка на инпут */
   toggleRef: RefObject<HTMLDivElement>
+  /** Диапазон */
+  range: boolean;
 }
 
 const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
@@ -35,12 +37,16 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   toggleCalendar,
   minDate,
   maxDate,
-  toggleRef
+  toggleRef,
+  range
 }: IDatepickerCalendarProps) => {
 
   /** Ссылка на контент */
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /** Текущий выбранный день для range = false */
   const setCurrent = useCallback(() => {
     let d = new Date();
     const formatToday = formatDate(d.getTime()).date.split('.');
@@ -60,8 +66,10 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   /** Устанавливаем текущий день */
   useEffect(() => {
-    setCurrentDate(setCurrent());
-  }, [value]);
+    if (range) {
+      setCurrentDate(setCurrent());
+    }
+  }, [value, range]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -110,10 +118,13 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   /** Изменяя дату, изменяем значение в инпуте */
   const onDateChange = (date: Date) => {
-    setCurrentDate(date);
     setInputValue(formatDate(date.getTime()).date);
     setPeriodType('day');
-    toggleCalendar(false);
+
+    if (!range) {
+      setCurrentDate(date);
+      toggleCalendar(false);
+    }
   };
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -136,7 +147,6 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   /** Days */
   const onDayClick = (date: Date) => {
     onDateChange(date);
-    toggleCalendar(false);
   };
 
   const daysJSX = activePeriod.days.map(({

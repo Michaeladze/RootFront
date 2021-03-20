@@ -24,7 +24,7 @@ export const newDatepicker = () => {
   };
 
   return (
-    <Story name='Datepicker' width={600}
+    <Story name='Datepicker' width={600} height={1200}
       description='Календарь с выбором даты. В defaultValue можно передать строку, число Date.now() или объект new Date().'>
 
       <StoryItem description='Выбор даты с вводом. Чтобы запретить ввод, используйте пропс readOnly.'>
@@ -47,6 +47,12 @@ export const newDatepicker = () => {
               <Button type='submit'>Отправить</Button>
             </div>
           </form>
+        </div>
+      </StoryItem>
+
+      <StoryItem description='Выбор диапазона.'>
+        <div style={{ width: '400px' }}>
+          <NewDatepicker range/>
         </div>
       </StoryItem>
     </Story>

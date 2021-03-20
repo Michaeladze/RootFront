@@ -12,3 +12,9 @@ export interface IDatepickerDay {
   period: IDatepickerPeriod;
   date: Date;
 }
+
+export interface IDateVariants {
+  date: Date;
+  timestamp: number;
+  value: string;
+}
