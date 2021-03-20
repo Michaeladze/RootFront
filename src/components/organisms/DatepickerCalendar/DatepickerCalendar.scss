@@ -121,6 +121,12 @@
   border: 1px solid var(--accent-500);
 }
 
+.rf-datepicker__calendar-date--range {
+  position: relative;
+  background-color: var(--accent-200);
+  border-radius: 0;
+}
+
 .rf-datepicker__calendar-date:not(.rf-datepicker__calendar-date--active):hover {
   background-color: var(--accent-100);
 }

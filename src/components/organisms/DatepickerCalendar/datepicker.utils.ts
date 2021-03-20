@@ -1,4 +1,5 @@
 import { IDatepickerActivePeriod } from './datepicker.types';
+import { formatDate } from '../../../utils/helpers';
 
 export const weekDays = [
   'пн',
@@ -25,7 +26,9 @@ export const months = [
   'декабрь'
 ];
 
-export const getDaysForMonth = (date: Date): IDatepickerActivePeriod => {
+export const getDaysForMonth = (d?: Date): IDatepickerActivePeriod => {
+  const date = d || new Date();
+
   /** Результирующий массив с днями месяца */
   const result: IDatepickerActivePeriod = {
     month: date.getMonth(),
@@ -79,12 +82,26 @@ export const getDaysForMonth = (date: Date): IDatepickerActivePeriod => {
   return result;
 };
 
-export const isCurrentDay = (d1: Date, d2: Date): boolean => {
-  return d1.getDate() === d2.getDate() &&
-    d1.getMonth() === d2.getMonth() &&
-    d1.getFullYear() === d2.getFullYear();
+export const isCurrentDay = (d1: Date, d2?: Date): boolean => {
+  const d = d2 || new Date();
+
+  return d1.getDate() === d.getDate() &&
+    d1.getMonth() === d.getMonth() &&
+    d1.getFullYear() === d.getFullYear();
 };
 
-export const isCurrentMonth = (d1: Date, d2: Date): boolean => {
-  return d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear();
+export const isCurrentMonth = (d1: Date, d2?: Date): boolean => {
+  const d = d2 || new Date();
+  return d1.getMonth() === d.getMonth() && d1.getFullYear() === d.getFullYear();
+};
+
+export const stringToDate = (s: string): Date => {
+  const d = new Date();
+  const formatToday = formatDate(d.getTime()).date.split('.');
+
+  let [dd, mm, yyyy] = s.split('.');
+  dd = dd.includes('_') ? formatToday[0] : dd;
+  mm = mm.includes('_') ? formatToday[1] : mm;
+  yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;
+  return new Date(`${mm}.${dd}.${yyyy}`);
 };

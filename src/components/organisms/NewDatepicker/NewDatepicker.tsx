@@ -68,14 +68,33 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   /** Валидация мин и макс дат. Если не попадает в ограничения, привести к граничным значениям. */
   const validate = (date: string): string => {
     let result = date;
-    const [dd, mm, yyyy] = date.split('.');
 
-    if (minDate && new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
-      result = formatDate(minDate.getTime()).date;
-    }
+    if (range) {
+      const [from, to] = date.split(' - ');
 
-    if (maxDate && new Date(+yyyy, +mm, +dd).getTime() > maxDate.getTime()) {
-      result = formatDate(maxDate.getTime()).date;
+      if (from && to && !from.includes('_') && !to.includes('_')) {
+        const [dd1, mm1, yyyy1] = from.split('.');
+
+        const [dd2, mm2, yyyy2] = to.split('.');
+        const fromD = new Date(`${mm1}.${dd1}.${yyyy1}`).getTime();
+        const toD = new Date(`${mm2}.${dd2}.${yyyy2}`).getTime();
+
+
+        /** Если дата ПО меньше даты С, ставим дату ПО на 1 день больше даты С*/
+        if (toD < fromD) {
+          result = `${formatDate(fromD).date} - ${formatDate(fromD + 24 * 3600 * 1000).date}`;
+        }
+      }
+    } else {
+      const [dd, mm, yyyy] = date.split('.');
+
+      if (minDate && new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
+        result = formatDate(minDate.getTime()).date;
+      }
+
+      if (maxDate && new Date(+yyyy, +mm, +dd).getTime() > maxDate.getTime()) {
+        result = formatDate(maxDate.getTime()).date;
+      }
     }
 
     return result;
@@ -128,7 +147,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
 
-    if (e.target.value.length === 10 && !e.target.value.includes('_')) {
+    if (!e.target.value.includes('_')) {
       const result = validate(e.target.value);
 
       if (e.target.value !== result) {
@@ -174,7 +193,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     '-',
     ' ',
     /[0-3]/,
-    inputValue[13] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
+    inputValue[13] === '3' ? /[0,1]/ : inputValue[13] === '0' ? /[1-9]/ : /[0-9]/,
     '.',
     /[0,1]/,
     inputValue[16] === '0' ? /[1-9]/ : /[0-2]/,

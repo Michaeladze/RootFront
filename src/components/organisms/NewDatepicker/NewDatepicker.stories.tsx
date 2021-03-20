@@ -4,6 +4,7 @@ import StoryItem from '../../storybook/StoryItem';
 import NewDatepicker from './NewDatepicker';
 import { useReactiveForm } from 'use-reactive-form';
 import { Button } from '../../../index';
+import { IDateVariants } from '../DatepickerCalendar/datepicker.types';
 
 export default {
   title: 'Form Controls/NewDatepicker',
@@ -12,7 +13,7 @@ export default {
 
 export const newDatepicker = () => {
 
-  const getValue = (value: string) => {
+  const getValue = (value: IDateVariants) => {
     console.log('NewDatepicker: ', value);
   };
 
@@ -35,7 +36,7 @@ export const newDatepicker = () => {
 
       <StoryItem description='Выбор даты с ограничениями. Ограничения задаются пропсами min и max типа Date.'>
         <div style={{ width: '200px' }}>
-          <NewDatepicker min={new Date()} max={new Date(2021, 5, 10)} />
+          <NewDatepicker min={new Date(2022, 1, 1)} max={new Date(2023, 5, 10)} />
         </div>
       </StoryItem>
 
@@ -51,8 +52,8 @@ export const newDatepicker = () => {
       </StoryItem>
 
       <StoryItem description='Выбор диапазона.'>
-        <div style={{ width: '400px' }}>
-          <NewDatepicker range/>
+        <div style={{ width: '296px' }}>
+          <NewDatepicker defaultValue='04.03.2021 - 02.03.2021' range/>
         </div>
       </StoryItem>
     </Story>

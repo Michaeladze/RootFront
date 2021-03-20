@@ -5,10 +5,10 @@ import './DatepickerCalendar.scss';
 import Chevron from '../../_icons/chevron-left';
 import { formatDate } from '../../../index';
 import {
-  getDaysForMonth, isCurrentDay, isCurrentMonth, months, weekDays
+  getDaysForMonth, isCurrentDay, isCurrentMonth, months, stringToDate, weekDays
 } from './datepicker.utils';
 import {
-  IDatepickerActivePeriod, IDatepickerDay, IDatepickerPeriodType
+  IDatepickerActivePeriod, IDatepickerDay, IDatepickerPeriodType, IDatepickerStack
 } from './datepicker.types';
 
 interface IDatepickerCalendarProps {
@@ -47,26 +47,34 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   /** Текущий выбранный день для range = false */
-  const setCurrent = useCallback(() => {
-    let d = new Date();
-    const formatToday = formatDate(d.getTime()).date.split('.');
-
-    if (value) {
-      let [dd, mm, yyyy] = value.split('.');
-      dd = dd.includes('_') ? formatToday[0] : dd;
-      mm = mm.includes('_') ? formatToday[1] : mm;
-      yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;
-      d = new Date(`${mm}.${dd}.${yyyy}`);
+  const setCurrent = useCallback((): Date => {
+    if (value && !range) {
+      return stringToDate(value);
     }
 
-    return d;
-  }, [value]);
+    return new Date();
+  }, [value, range]);
+
+  /** Текущий выбранный диапазон для range = true */
+  const setRange = (): IDatepickerStack => {
+    if (value && range) {
+      const values = value.split(' - ');
+      const from = values[0].includes('_') ? undefined : values[0];
+      const to = values[1].includes('_') ? undefined : values[1];
+      return [from ? stringToDate(from) : undefined, to ? stringToDate(to) : undefined];
+    }
+
+    return [undefined, undefined];
+  };
 
   const [currentDate, setCurrentDate] = useState<Date>(setCurrent());
+  const [rangeDates, setRangeDates] = useState<IDatepickerStack>([undefined, undefined]);
 
   /** Устанавливаем текущий день */
   useEffect(() => {
     if (range) {
+      setRangeDates(setRange());
+    } else {
       setCurrentDate(setCurrent());
     }
   }, [value, range]);
@@ -118,13 +126,35 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   /** Изменяя дату, изменяем значение в инпуте */
   const onDateChange = (date: Date) => {
-    setInputValue(formatDate(date.getTime()).date);
-    setPeriodType('day');
+    if (range) {
+      let dates: IDatepickerStack = [...rangeDates];
 
-    if (!range) {
+      if (dates[0] !== undefined && dates[1] !== undefined) {
+        dates = [undefined, undefined];
+      }
+
+      if (dates[0] === undefined) {
+        dates[0] = date;
+        setInputValue(formatDate(date.getTime()).date + ' - __.__.____');
+      } else {
+        if (date.getTime() > dates[0]?.getTime()) {
+          dates[1] = date;
+          const tmp = value.split(' - ');
+          tmp[1] = formatDate(date.getTime()).date;
+          const newValue = tmp.join(' - ');
+          setInputValue(newValue);
+        }
+      }
+
+      setRangeDates(dates);
+
+    } else {
+      setInputValue(formatDate(date.getTime()).date);
       setCurrentDate(date);
       toggleCalendar(false);
     }
+
+    setPeriodType('day');
   };
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -133,14 +163,36 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const [activePeriod, setActivePeriod] = useState<IDatepickerActivePeriod>(getDaysForMonth(currentDate));
 
   useEffect(() => {
-    setActivePeriod(getDaysForMonth(currentDate));
-  }, [currentDate]);
+    if (!range) {
+      setActivePeriod(getDaysForMonth(currentDate));
+    }
+  }, [currentDate, range]);
+
+  useEffect(() => {
+    if (range) {
+      if (rangeDates[1] !== undefined) {
+        setActivePeriod(getDaysForMonth(rangeDates[1]));
+      } else if (rangeDates[0] !== undefined) {
+        setActivePeriod(getDaysForMonth(rangeDates[0]));
+      } else {
+        setActivePeriod(getDaysForMonth(new Date()));
+      }
+    }
+  }, [rangeDates, range]);
+
+  // -------------------------------------------------------------------------------------------------------------------
 
   useEffect(() => {
     if (minDate && new Date().getTime() < minDate.getTime()) {
       setActivePeriod(getDaysForMonth(minDate));
     }
   }, [minDate]);
+
+  useEffect(() => {
+    if (maxDate && new Date().getTime() > maxDate.getTime()) {
+      setActivePeriod(getDaysForMonth(maxDate));
+    }
+  }, [maxDate]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -154,7 +206,12 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     date
   }: IDatepickerDay) => {
     const periodClass = `rf-datepicker__calendar-day--${period}`;
-    const currentDayClass = isCurrentDay(date, currentDate) ? 'rf-datepicker__calendar-date--active' : '';
+    const rangeDayCondition = (rangeDates[0] && isCurrentDay(date, rangeDates[0])) || (rangeDates[1] && isCurrentDay(date, rangeDates[1]));
+    const activeCondition = range ? rangeDayCondition : isCurrentDay(date, currentDate);
+    const currentDayClass = activeCondition ? 'rf-datepicker__calendar-date--active' : '';
+    const inRangeClass = range && rangeDates[0] && rangeDates[1] &&
+    (date.getTime() >= rangeDates[0].getTime() && date.getTime() < rangeDates[1].getTime()) ?
+      'rf-datepicker__calendar-date--range' : '';
 
     const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const disabledMin = minDate && minDate.getTime() > d.getTime();
@@ -163,8 +220,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
     return (
       <div
-        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day ${periodClass} ${currentDayClass} ${disabledClass}`}
-        key={date.getTime()}
+        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day ${periodClass} ${currentDayClass} ${disabledClass} ${inRangeClass}`}
         onClick={() => onDayClick(date)}
       >
         {date.getDate()}
@@ -183,7 +239,13 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   const monthsJSX = months.map((m: string, i: number) => {
     const d = new Date(activePeriod.year, i);
-    const currentMonthClass = isCurrentMonth(d, currentDate) ? 'rf-datepicker__calendar-date--active' : '';
+    const rangeMonthCondition = (rangeDates[0] && isCurrentMonth(d, rangeDates[0])) || (rangeDates[1] && isCurrentMonth(d, rangeDates[1]));
+    const activeCondition = range ? rangeMonthCondition : isCurrentMonth(d, currentDate);
+    const currentMonthClass = activeCondition ? 'rf-datepicker__calendar-date--active' : '';
+
+    const inRangeClass = range && rangeDates[0] && rangeDates[1] &&
+    (d.getTime() >= rangeDates[0].getTime() && d.getTime() < rangeDates[1].getTime()) ?
+      'rf-datepicker__calendar-date--range' : '';
 
     const monthMs = 1000 * 3600 * 24 * 31;
     const disabledMin = minDate && ((minDate.getTime() - monthMs) > d.getTime());
@@ -191,8 +253,8 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
 
     return (
-      <div className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month ${currentMonthClass} ${disabledClass}`}
-        key={m}
+      <div
+        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month ${currentMonthClass} ${disabledClass} ${inRangeClass}`}
         onClick={(e: React.MouseEvent) => onMonthClick(e, i)}>
         {m}
       </div>
@@ -220,14 +282,22 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   };
 
   const yearsJSX = years.map((y: number) => {
-    const currentMonthClass = activePeriod.year === y ? 'rf-datepicker__calendar-date--active' : '';
+    const rangeMonthCondition = (rangeDates[0] && y === rangeDates[0].getFullYear()) ||
+      (rangeDates[1] && y === rangeDates[1]?.getFullYear());
+    const activeCondition = range ? rangeMonthCondition : activePeriod.year === y;
+    const currentMonthClass = activeCondition ? 'rf-datepicker__calendar-date--active' : '';
+
+    const inRangeClass = range && rangeDates[0] && rangeDates[1] &&
+    (y >= rangeDates[0]?.getFullYear() && y < rangeDates[1]?.getFullYear()) ?
+      'rf-datepicker__calendar-date--range' : '';
 
     const disabledMin = minDate && minDate.getFullYear() > y;
     const disabledMax = maxDate && maxDate.getFullYear() < y;
     const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
 
     return (
-      <div className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year ${currentMonthClass} ${disabledClass}`}
+      <div
+        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year ${currentMonthClass} ${inRangeClass} ${disabledClass}`}
         key={y}
         onClick={(e: React.MouseEvent) => onYearClick(e, y)}>
         {y}

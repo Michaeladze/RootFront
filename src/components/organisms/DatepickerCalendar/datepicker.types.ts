@@ -13,6 +13,8 @@ export interface IDatepickerDay {
   date: Date;
 }
 
+export type IDatepickerStack = [Date | undefined, Date | undefined];
+
 export interface IDateVariants {
   date: Date;
   timestamp: number;
