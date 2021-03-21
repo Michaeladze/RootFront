@@ -76,23 +76,41 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
         const [dd1, mm1, yyyy1] = from.split('.');
 
         const [dd2, mm2, yyyy2] = to.split('.');
-        const fromD = new Date(`${mm1}.${dd1}.${yyyy1}`).getTime();
-        const toD = new Date(`${mm2}.${dd2}.${yyyy2}`).getTime();
+        let fromD = new Date(`${mm1}.${dd1}.${yyyy1}`).getTime();
+        let toD = new Date(`${mm2}.${dd2}.${yyyy2}`).getTime();
 
 
         /** Если дата ПО меньше даты С, ставим дату ПО на 1 день больше даты С*/
         if (toD < fromD) {
-          result = `${formatDate(fromD).date} - ${formatDate(fromD + 24 * 3600 * 1000).date}`;
+          toD = fromD + 24 * 3600 * 1000;
         }
+
+        if (minDate && fromD < minDate.getTime()) {
+          fromD = minDate.getTime();
+        }
+
+        if (maxDate && fromD > maxDate.getTime()) {
+          fromD = minDate ? minDate.getTime() : maxDate.getTime();
+        }
+
+        if (maxDate && toD > maxDate.getTime()) {
+          toD = maxDate.getTime();
+        }
+
+
+        result = `${formatDate(fromD).date} - ${formatDate(toD).date}`;
       }
     } else {
       const [dd, mm, yyyy] = date.split('.');
 
-      if (minDate && new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
-        result = formatDate(minDate.getTime()).date;
+      if (minDate) {
+
+        if (minDate && date === '' || new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
+          result = formatDate(minDate.getTime()).date;
+        }
       }
 
-      if (maxDate && new Date(+yyyy, +mm, +dd).getTime() > maxDate.getTime()) {
+      if (maxDate && new Date(+yyyy, +mm - 1, +dd).getTime() > maxDate.getTime()) {
         result = formatDate(maxDate.getTime()).date;
       }
     }
@@ -134,43 +152,75 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  const getReturnValue = (value: string): IDateVariants => {
+  const getReturnValue = (value: string, range: boolean): IDateVariants => {
+    if (range) {
+      const [from, to] = value.split(' - ');
+      const [dd1, mm1, yyyy1] = from.split('.');
+      const [dd2, mm2, yyyy2] = to.split('.');
+      const fromD = new Date(`${mm1}.${dd1}.${yyyy1}`).getTime();
+      const toD = new Date(`${mm2}.${dd2}.${yyyy2}`).getTime();
+      return {
+        value,
+        date: {
+          from: new Date(fromD),
+          to: new Date(toD),
+          value: new Date(fromD)
+        },
+        timestamp: {
+          from: fromD,
+          to: toD,
+          value: fromD
+        }
+      };
+    }
+
     const [dd, mm, yyyy] = value.split('.');
     const date = new Date(`${mm}.${dd}.${yyyy}`);
     return {
-      date,
+      date: {
+        from: date,
+        to: date,
+        value: date
+      },
       value,
-      timestamp: date.getTime()
+      timestamp: {
+        from: date.getTime(),
+        to: date.getTime(),
+        value: date.getTime()
+      }
     };
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
 
-    if (!e.target.value.includes('_')) {
+    if (!e.target.value.includes('_') && e.target.value !== '') {
       const result = validate(e.target.value);
 
       if (e.target.value !== result) {
         setInputValue(result);
       }
 
-      getValue && getValue(getReturnValue(result));
+      getValue && getValue(getReturnValue(result, range));
     }
   };
 
   const setValue = (value: string) => {
     setInputValue(value);
-    getValue && getValue(getReturnValue(value));
 
-    setTimeout(() => {
-      if (inputRef.current) {
-        const input = inputRef.current.querySelector('input');
+    if (!value.includes('_') && value !== '') {
+      getValue && getValue(getReturnValue(value, range));
 
-        if (input) {
-          input.dispatchEvent(new Event('change'));
+      setTimeout(() => {
+        if (inputRef.current) {
+          const input = inputRef.current.querySelector('input');
+
+          if (input) {
+            input.dispatchEvent(new Event('change'));
+          }
         }
-      }
-    }, 100);
+      }, 100);
+    }
   };
 
   // -------------------------------------------------------------------------------------------------------------------

@@ -24,6 +24,13 @@ export const newDatepicker = () => {
     console.log(values);
   };
 
+  const rangeConfig = { fields: { rangeDate: '' } };
+  const rangeForm = useReactiveForm(rangeConfig);
+  const onRangeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(rangeForm.values);
+  };
+
   return (
     <Story name='Datepicker' width={600} height={1200}
       description='Календарь с выбором даты. В defaultValue можно передать строку, число Date.now() или объект new Date().'>
@@ -34,9 +41,9 @@ export const newDatepicker = () => {
         </div>
       </StoryItem>
 
-      <StoryItem description='Выбор даты с ограничениями. Ограничения задаются пропсами min и max типа Date.'>
+      <StoryItem description='Выбор даты с ограничениями. Ограничения задаются пропсами min и max типа Date. Если есть ограничение min и не задано defaultValue, то значением становится min.'>
         <div style={{ width: '200px' }}>
-          <NewDatepicker min={new Date(2022, 1, 1)} max={new Date(2023, 5, 10)} />
+          <NewDatepicker min={new Date(2021, 2, 5)} max={new Date(2021, 2, 15)} />
         </div>
       </StoryItem>
 
@@ -52,9 +59,14 @@ export const newDatepicker = () => {
       </StoryItem>
 
       <StoryItem description='Выбор диапазона.'>
-        <div style={{ width: '296px' }}>
-          <NewDatepicker defaultValue='04.03.2021 - 02.03.2021' range/>
-        </div>
+        <form ref={rangeForm.ref} onSubmit={onRangeSubmit} style={{ display: 'flex' }}>
+          <div style={{ width: '296px' }}>
+            <NewDatepicker name='rangeDate' range getValue={getValue} />
+          </div>
+          <div style={{ marginLeft: '24px' }}>
+            <Button type='submit'>Отправить</Button>
+          </div>
+        </form>
       </StoryItem>
     </Story>
   );

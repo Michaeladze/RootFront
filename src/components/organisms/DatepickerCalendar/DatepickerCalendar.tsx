@@ -165,8 +165,29 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   useEffect(() => {
     if (!range) {
       setActivePeriod(getDaysForMonth(currentDate));
+
+      if (minDate && currentDate.getTime() < minDate.getTime()) {
+        setActivePeriod(getDaysForMonth(minDate));
+      }
+
+      if (maxDate && currentDate.getTime() > maxDate.getTime()) {
+        setActivePeriod(getDaysForMonth(maxDate));
+      }
+    } else {
+      if (minDate && rangeDates[0] && rangeDates[0].getTime() < minDate.getTime()) {
+        setActivePeriod(getDaysForMonth(minDate));
+      }
+
+      if (maxDate && rangeDates[1] && rangeDates[1].getTime() > maxDate.getTime()) {
+        setActivePeriod(getDaysForMonth(maxDate));
+      }
     }
-  }, [currentDate, range]);
+  }, [
+    currentDate,
+    range,
+    minDate,
+    maxDate
+  ]);
 
   useEffect(() => {
     if (range) {
@@ -179,20 +200,6 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
       }
     }
   }, [rangeDates, range]);
-
-  // -------------------------------------------------------------------------------------------------------------------
-
-  useEffect(() => {
-    if (minDate && new Date().getTime() < minDate.getTime()) {
-      setActivePeriod(getDaysForMonth(minDate));
-    }
-  }, [minDate]);
-
-  useEffect(() => {
-    if (maxDate && new Date().getTime() > maxDate.getTime()) {
-      setActivePeriod(getDaysForMonth(maxDate));
-    }
-  }, [maxDate]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
