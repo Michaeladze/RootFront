@@ -5,6 +5,7 @@ import './DatepickerCalendar.scss';
 import Chevron from '../../_icons/chevron-left';
 import { formatDate } from '../../../index';
 import {
+  compareMonths,
   getDaysForMonth, isCurrentDay, isCurrentMonth, months, stringToDate, weekDays
 } from './datepicker.utils';
 import {
@@ -143,11 +144,9 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
           tmp[1] = formatDate(date.getTime()).date;
           const newValue = tmp.join(' - ');
           setInputValue(newValue);
+          toggleCalendar(false);
         }
       }
-
-      setRangeDates(dates);
-
     } else {
       setInputValue(formatDate(date.getTime()).date);
       setCurrentDate(date);
@@ -216,9 +215,12 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const rangeDayCondition = (rangeDates[0] && isCurrentDay(date, rangeDates[0])) || (rangeDates[1] && isCurrentDay(date, rangeDates[1]));
     const activeCondition = range ? rangeDayCondition : isCurrentDay(date, currentDate);
     const currentDayClass = activeCondition ? 'rf-datepicker__calendar-date--active' : '';
+
+    const fromDateClass = rangeDates[0] && rangeDates[0]?.getTime() === date.getTime() ? 'rf-datepicker__calendar-date--from' : '';
+    const toDateClass = rangeDates[1] && rangeDates[1]?.getTime() === date.getTime() ? 'rf-datepicker__calendar-date--to' : '';
     const inRangeClass = range && rangeDates[0] && rangeDates[1] &&
-    (date.getTime() >= rangeDates[0].getTime() && date.getTime() < rangeDates[1].getTime()) ?
-      'rf-datepicker__calendar-date--range' : '';
+    (date.getTime() >= rangeDates[0].getTime() && date.getTime() <= rangeDates[1].getTime()) ?
+      'rf-datepicker__calendar-tile--range rf-datepicker__calendar-date--range' : '';
 
     const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const disabledMin = minDate && minDate.getTime() > d.getTime();
@@ -228,7 +230,8 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     return (
       <div
         key={date.getTime()}
-        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day ${periodClass} ${currentDayClass} ${disabledClass} ${inRangeClass}`}
+        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day
+        ${periodClass} ${currentDayClass} ${disabledClass} ${fromDateClass} ${toDateClass} ${inRangeClass}`}
         onClick={() => onDayClick(date)}
       >
         {date.getDate()}
@@ -251,9 +254,13 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const activeCondition = range ? rangeMonthCondition : isCurrentMonth(d, currentDate);
     const currentMonthClass = activeCondition ? 'rf-datepicker__calendar-date--active' : '';
 
-    const inRangeClass = range && rangeDates[0] && rangeDates[1] &&
-    (d.getTime() >= rangeDates[0].getTime() && d.getTime() < rangeDates[1].getTime()) ?
-      'rf-datepicker__calendar-date--range' : '';
+    const fromMonthClass = rangeDates[0] && isCurrentMonth(d, rangeDates[0]) ? 'rf-datepicker__calendar-month--from' : '';
+    const toMonthClass = rangeDates[1] && isCurrentMonth(d, rangeDates[1]) ? 'rf-datepicker__calendar-month--to' : '';
+    const inRangeCondition = range && rangeDates[0] && rangeDates[1] &&
+      (compareMonths(d, rangeDates[0]) >= 0 && compareMonths(d, rangeDates[1]) <= 0);
+    const inRangeClass = inRangeCondition ?
+      'rf-datepicker__calendar-tile--range rf-datepicker__calendar-month--range' : '';
+
 
     const monthMs = 1000 * 3600 * 24 * 31;
     const disabledMin = minDate && ((minDate.getTime() - monthMs) > d.getTime());
@@ -261,11 +268,13 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
 
     return (
-      <div
-        key={m}
-        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month ${currentMonthClass} ${disabledClass} ${inRangeClass}`}
-        onClick={(e: React.MouseEvent) => onMonthClick(e, i)}>
-        {m}
+      <div key={m} className={`rf-datepicker__calendar-month-wrapper ${inRangeClass} ${fromMonthClass} ${toMonthClass}`}>
+        <div
+          className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month
+        ${currentMonthClass} ${disabledClass}`}
+          onClick={(e: React.MouseEvent) => onMonthClick(e, i)}>
+          {m}
+        </div>
       </div>
     );
   });
@@ -296,20 +305,24 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const activeCondition = range ? rangeMonthCondition : activePeriod.year === y;
     const currentMonthClass = activeCondition ? 'rf-datepicker__calendar-date--active' : '';
 
+    const fromYearClass = rangeDates[0] && rangeDates[0]?.getFullYear() === y ? 'rf-datepicker__calendar-year--from' : '';
+    const toYearClass = rangeDates[1] && rangeDates[1]?.getFullYear() === y ? 'rf-datepicker__calendar-year--to' : '';
     const inRangeClass = range && rangeDates[0] && rangeDates[1] &&
-    (y >= rangeDates[0]?.getFullYear() && y < rangeDates[1]?.getFullYear()) ?
-      'rf-datepicker__calendar-date--range' : '';
+    (y >= rangeDates[0]?.getFullYear() && y <= rangeDates[1]?.getFullYear()) ?
+      'rf-datepicker__calendar-tile--range rf-datepicker__calendar-year--range' : '';
 
     const disabledMin = minDate && minDate.getFullYear() > y;
     const disabledMax = maxDate && maxDate.getFullYear() < y;
     const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
 
     return (
-      <div
-        className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year ${currentMonthClass} ${inRangeClass} ${disabledClass}`}
-        key={y}
-        onClick={(e: React.MouseEvent) => onYearClick(e, y)}>
-        {y}
+      <div key={y} className={`rf-datepicker__calendar-year-wrapper ${inRangeClass} ${fromYearClass} ${toYearClass}`}>
+        <div
+          className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year
+        ${currentMonthClass} ${disabledClass}`}
+          onClick={(e: React.MouseEvent) => onYearClick(e, y)}>
+          {y}
+        </div>
       </div>
     );
   });
