@@ -4,27 +4,29 @@ import React, {
 } from 'react';
 import { formatDate, Input } from '../../../index';
 import { Size } from '../../../types';
-import { replaceAt, sizeClass } from '../../../utils/helpers';
+import { replaceAt } from '../../../utils/helpers';
 import Calendar from '../../_icons/calendar-outline';
 import DatepickerCalendar from '../DatepickerCalendar';
 import useClickOutside from '../../../hooks/useClickOutside';
 import InputMask from 'react-input-mask';
-import { IDateVariants } from '../DatepickerCalendar/datepicker.types';
+import { IDateVariants } from '../../../types/projects.types';
 
 export interface IDatepickerProps {
+  /** Название */
   name?: string;
   placeholder?: string;
+  /** Значение по умолчанию */
   defaultValue?: Date | string | number;
   disabled?: boolean;
   readOnly?: boolean;
   /** Размер */
   size?: Size;
   /** Минимальная дата */
-  min?: Date | string | number;
+  min?: Date;
   /** Максимальная дата */
-  max?: Date | string | number;
+  max?: Date;
   /** Возвращает дату */
-  getValue?: (value: IDateVariants) => void;
+  onChange?: (value: IDateVariants) => void;
   /** Диапазон */
   range?: boolean;
 }
@@ -38,7 +40,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   max,
   disabled = false,
   readOnly = false,
-  getValue,
+  onChange,
   range = false
 }: IDatepickerProps) => {
   const minD: Date | undefined = min ? min instanceof Date ? min : new Date(min) : undefined;
@@ -190,7 +192,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     };
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onDatepickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
 
     if (!e.target.value.includes('_') && e.target.value !== '') {
@@ -200,7 +202,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
         setInputValue(result);
       }
 
-      getValue && getValue(getReturnValue(result, range));
+      onChange && onChange(getReturnValue(result, range));
     }
   };
 
@@ -208,7 +210,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     setInputValue(value);
 
     if (!value.includes('_') && value !== '') {
-      getValue && getValue(getReturnValue(value, range));
+      onChange && onChange(getReturnValue(value, range));
 
       setTimeout(() => {
         if (inputRef.current) {
@@ -277,8 +279,8 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           value={inputValue}
           disabled={disabled}
           readOnly={readOnly}
-          onChange={onChange}>
-          <Input className={`${sizeClass[size]}`}/>
+          onChange={onDatepickerChange}>
+          <Input size={size}/>
         </InputMask>
         <Calendar className='rf-datepicker__calendar-button'/>
       </div>

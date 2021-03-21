@@ -4,7 +4,7 @@ import StoryItem from '../../storybook/StoryItem';
 import NewDatepicker from './NewDatepicker';
 import { useReactiveForm } from 'use-reactive-form';
 import { Button } from '../../../index';
-import { IDateVariants } from '../DatepickerCalendar/datepicker.types';
+import { IDateVariants } from '../../../types/projects.types';
 
 export default {
   title: 'Form Controls/NewDatepicker',
@@ -13,7 +13,7 @@ export default {
 
 export const newDatepicker = () => {
 
-  const getValue = (value: IDateVariants) => {
+  const onChange = (value: IDateVariants) => {
     console.log('NewDatepicker: ', value);
   };
 
@@ -35,9 +35,9 @@ export const newDatepicker = () => {
     <Story name='Datepicker' width={600} height={1200}
       description='Календарь с выбором даты. В defaultValue можно передать строку, число Date.now() или объект new Date().'>
 
-      <StoryItem description='Выбор даты с вводом. Чтобы запретить ввод, используйте пропс readOnly.'>
+      <StoryItem description='Выбор даты с вводом. Для запрещения ввода используется пропс readOnly.'>
         <div style={{ width: '200px' }}>
-          <NewDatepicker getValue={getValue}/>
+          <NewDatepicker onChange={onChange}/>
         </div>
       </StoryItem>
 
@@ -61,7 +61,7 @@ export const newDatepicker = () => {
       <StoryItem description='Выбор диапазона. Задается пропсом range'>
         <form ref={rangeForm.ref} onSubmit={onRangeSubmit} style={{ display: 'flex' }}>
           <div style={{ width: '240px' }}>
-            <NewDatepicker name='rangeDate' range getValue={getValue} />
+            <NewDatepicker name='rangeDate' range onChange={onChange} />
           </div>
           <div style={{ marginLeft: '24px' }}>
             <Button type='submit'>Отправить</Button>
