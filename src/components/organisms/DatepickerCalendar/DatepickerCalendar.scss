@@ -193,21 +193,10 @@
   position: relative;
   width: 85.2px;
   margin-right: 8px;
+  margin-bottom: 8px;
 }
 
-.rf-datepicker__calendar-month-wrapper:nth-child(3n) {
-  margin-right: 0;
-
-  &:after {
-    display: none;
-  }
-}
-
-.rf-datepicker__calendar-month-wrapper:nth-child(n+4) {
-  padding-top: 8px;
-}
-
-.rf-datepicker__calendar-month--range {
+.rf-datepicker__calendar-month-wrapper--range {
   background-color: var(--accent-200);
   @include inRange;
   border-radius: 0;
@@ -219,6 +208,14 @@
   }
 }
 
+.rf-datepicker__calendar-month-wrapper:nth-child(3n) {
+  margin-right: 0;
+
+  &:after {
+    display: none;
+  }
+}
+
 .rf-datepicker__calendar-month {
   width: 100%;
   text-transform: capitalize;
@@ -226,17 +223,19 @@
   border-radius: 0;
 }
 
-.rf-datepicker__calendar-month--from .rf-datepicker__calendar-tile {
+.rf-datepicker__calendar-month-wrapper--from,
+.rf-datepicker__calendar-month-wrapper--from .rf-datepicker__calendar-tile {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
 }
 
-.rf-datepicker__calendar-month--to .rf-datepicker__calendar-tile {
+.rf-datepicker__calendar-month-wrapper--to,
+.rf-datepicker__calendar-month-wrapper--to .rf-datepicker__calendar-tile {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
 }
 
-.rf-datepicker__calendar-month--to {
+.rf-datepicker__calendar-month-wrapper--to {
   &:after {
     display: none;
   }
@@ -248,6 +247,7 @@
   position: relative;
   width: 56px;
   margin-right: 16px;
+  margin-bottom: 8px;
 }
 
 .rf-datepicker__calendar-year-wrapper:nth-child(4n) {
@@ -256,10 +256,6 @@
   &:after {
     display: none;
   }
-}
-
-.rf-datepicker__calendar-year-wrapper:nth-child(n+5) {
-  padding-top: 8px;
 }
 
 .rf-datepicker__calendar-year--range {
@@ -285,11 +281,13 @@
   margin-right: 0;
 }
 
+.rf-datepicker__calendar-year--from,
 .rf-datepicker__calendar-year--from .rf-datepicker__calendar-tile {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
 }
 
+.rf-datepicker__calendar-year--to,
 .rf-datepicker__calendar-year--to .rf-datepicker__calendar-tile {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -301,7 +299,8 @@
   }
 }
 
-.rf-datepicker__calendar-tile--range:hover,
-.rf-datepicker__calendar-tile--range .rf-datepicker__calendar-tile:hover {
+.rf-datepicker__calendar-date.rf-datepicker__calendar-tile--range:hover,
+.rf-datepicker__calendar-month-wrapper--range .rf-datepicker__calendar-tile:hover,
+.rf-datepicker__calendar-month-year--range .rf-datepicker__calendar-tile:hover {
   background-color: var(--accent-200);
 }

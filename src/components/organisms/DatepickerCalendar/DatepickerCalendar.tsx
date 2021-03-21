@@ -1,7 +1,6 @@
 import React, {
   Dispatch, ReactNode, RefObject, SetStateAction, useCallback, useEffect, useRef, useState
 } from 'react';
-import './DatepickerCalendar.scss';
 import Chevron from '../../_icons/chevron-left';
 import { formatDate } from '../../../index';
 import {
@@ -254,13 +253,14 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const activeCondition = range ? rangeMonthCondition : isCurrentMonth(d, currentDate);
     const currentMonthClass = activeCondition ? 'rf-datepicker__calendar-date--active' : '';
 
-    const fromMonthClass = rangeDates[0] && isCurrentMonth(d, rangeDates[0]) ? 'rf-datepicker__calendar-month--from' : '';
-    const toMonthClass = rangeDates[1] && isCurrentMonth(d, rangeDates[1]) ? 'rf-datepicker__calendar-month--to' : '';
+    const fromMonthCondition = rangeDates[0] && isCurrentMonth(d, rangeDates[0]);
+    const fromMonthClass = fromMonthCondition ? 'rf-datepicker__calendar-month-wrapper--from' : '';
+
+    const toMonthClass = rangeDates[1] && isCurrentMonth(d, rangeDates[1]) ? 'rf-datepicker__calendar-month-wrapper--to' : '';
     const inRangeCondition = range && rangeDates[0] && rangeDates[1] &&
       (compareMonths(d, rangeDates[0]) >= 0 && compareMonths(d, rangeDates[1]) <= 0);
     const inRangeClass = inRangeCondition ?
-      'rf-datepicker__calendar-tile--range rf-datepicker__calendar-month--range' : '';
-
+      'rf-datepicker__calendar-tile--range rf-datepicker__calendar-month-wrapper--range' : '';
 
     const monthMs = 1000 * 3600 * 24 * 31;
     const disabledMin = minDate && ((minDate.getTime() - monthMs) > d.getTime());

@@ -2,7 +2,6 @@ import React, {
   useCallback,
   useEffect, useRef, useState
 } from 'react';
-import './NewDatepicker.scss';
 import { formatDate, Input } from '../../../index';
 import { Size } from '../../../types';
 import { replaceAt, sizeClass } from '../../../utils/helpers';

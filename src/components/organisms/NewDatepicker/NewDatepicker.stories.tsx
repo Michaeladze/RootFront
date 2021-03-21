@@ -58,9 +58,9 @@ export const newDatepicker = () => {
         </div>
       </StoryItem>
 
-      <StoryItem description='Выбор диапазона.'>
+      <StoryItem description='Выбор диапазона. Задается пропсом range'>
         <form ref={rangeForm.ref} onSubmit={onRangeSubmit} style={{ display: 'flex' }}>
-          <div style={{ width: '296px' }}>
+          <div style={{ width: '240px' }}>
             <NewDatepicker name='rangeDate' range getValue={getValue} />
           </div>
           <div style={{ marginLeft: '24px' }}>

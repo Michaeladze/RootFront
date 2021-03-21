@@ -38,6 +38,7 @@ import Menu from './components/molecules/Menu';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
 import Select from './components/organisms/Select';
+import NewDatepicker from './components/organisms/NewDatepicker';
 import TextEditor from './components/organisms/TextEditor';
 import { openPopup, PopupMaker } from './components/organisms/PopupMaker';
 
@@ -123,7 +124,8 @@ export {
   PageWithList,
   Badge,
   ActionMenu,
-  UserStructure
+  UserStructure,
+  NewDatepicker
 };
 
 export {
