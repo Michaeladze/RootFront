@@ -26,7 +26,7 @@ export interface IDatepickerProps {
   /** Максимальная дата */
   max?: Date;
   /** Возвращает дату */
-  onChange?: (value: IDateVariants) => void;
+  onChange?: (value: IDateVariants, name?: string) => void;
   /** Диапазон */
   range?: boolean;
 }
@@ -202,7 +202,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
         setInputValue(result);
       }
 
-      onChange && onChange(getReturnValue(result, range));
+      onChange && onChange(getReturnValue(result, range), name);
     }
   };
 
@@ -210,7 +210,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     setInputValue(value);
 
     if (!value.includes('_') && value !== '') {
-      onChange && onChange(getReturnValue(value, range));
+      onChange && onChange(getReturnValue(value, range), name);
 
       setTimeout(() => {
         if (inputRef.current) {
