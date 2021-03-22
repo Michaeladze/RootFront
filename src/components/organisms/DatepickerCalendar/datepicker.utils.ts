@@ -1,5 +1,5 @@
 import { IDatepickerActivePeriod } from './datepicker.types';
-import { formatDate } from '../../../utils/helpers';
+import { formatDate, replaceAt } from '../../../utils/helpers';
 
 export const weekDays = [
   'пн',
@@ -125,4 +125,43 @@ export const stringToDate = (s: string): Date => {
   mm = mm.includes('_') ? formatToday[1] : mm;
   yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;
   return new Date(`${mm}.${dd}.${yyyy}`);
+};
+
+/** Преобразование любого типа к дате */
+export const parseToFormat = (defaultValue?: Date | string | number): {
+  date: Date,
+  string: string
+} => {
+  let inputValue = '';
+
+  /** Заменить на точки символы, находящиеся на 2 и 5 позициях  */
+  if (typeof defaultValue === 'string' && defaultValue.length > 0) {
+    let newInputValue = defaultValue;
+
+    if (newInputValue[2] !== '.') {
+      newInputValue = replaceAt(newInputValue, 2, '.');
+    }
+
+    if (newInputValue[5] !== '.') {
+      newInputValue = replaceAt(newInputValue, 5, '.');
+    }
+
+    inputValue = newInputValue;
+  }
+
+  if (typeof defaultValue === 'number') {
+    inputValue = formatDate(defaultValue).date;
+  }
+
+  if (defaultValue instanceof Date) {
+    inputValue = formatDate(defaultValue.getTime()).date;
+  }
+
+  const [dd, mm, yyyy] = inputValue.split('.');
+  const date = new Date(+yyyy, +mm - 1, +dd);
+
+  return {
+    date,
+    string: inputValue
+  };
 };

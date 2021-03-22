@@ -4,12 +4,12 @@ import React, {
 } from 'react';
 import { formatDate, Input } from '../../../index';
 import { Size } from '../../../types';
-import { replaceAt } from '../../../utils/helpers';
 import Calendar from '../../_icons/calendar-outline';
 import DatepickerCalendar from '../DatepickerCalendar';
 import useClickOutside from '../../../hooks/useClickOutside';
 import InputMask from 'react-input-mask';
 import { IDateVariants } from '../../../types/projects.types';
+import { parseToFormat } from '../DatepickerCalendar/datepicker.utils';
 
 export interface IDatepickerProps {
   /** Название */
@@ -22,9 +22,9 @@ export interface IDatepickerProps {
   /** Размер */
   size?: Size;
   /** Минимальная дата */
-  min?: Date;
+  min?: Date | string | number;
   /** Максимальная дата */
-  max?: Date;
+  max?: Date | string | number;
   /** Возвращает дату */
   onChange?: (value: IDateVariants, name?: string) => void;
   /** Диапазон */
@@ -43,10 +43,21 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   onChange,
   range = false
 }: IDatepickerProps) => {
-  const minD: Date | undefined = min ? min instanceof Date ? min : new Date(min) : undefined;
-  const maxD: Date | undefined = max ? max instanceof Date ? max : new Date(max) : undefined;
-  const minDate: Date | undefined = minD ? new Date(minD.getFullYear(), minD.getMonth(), minD.getDate()) : undefined;
-  const maxDate: Date | undefined = maxD ? new Date(maxD.getFullYear(), maxD.getMonth(), maxD.getDate()) : undefined;
+
+  const [minDate, setMinDate] = useState<Date | undefined>(undefined);
+  const [maxDate, setMaxDate] = useState<Date | undefined>(undefined);
+
+  useEffect(() => {
+    setMinDate(min ? parseToFormat(min).date : undefined);
+  }, [min]);
+
+  useEffect(() => {
+    if (max) {
+      setMaxDate(max ? parseToFormat(max).date : undefined);
+    }
+  }, [max]);
+
+  // -------------------------------------------------------------------------------------------------------------------
 
   const datepickerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -121,35 +132,9 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   /** Проверяем и подставляем defaultValue */
   useEffect(() => {
-    let inputValue = '';
-
-    /** Заменить на точки символы, находящиеся на 2 и 5 позициях  */
-    if (typeof defaultValue === 'string') {
-      let newInputValue = defaultValue;
-
-      if (newInputValue[2] !== '.') {
-        newInputValue = replaceAt(newInputValue, 2, '.');
-      }
-
-      if (newInputValue[5] !== '.') {
-        newInputValue = replaceAt(newInputValue, 5, '.');
-      }
-
-      inputValue = newInputValue;
-    }
-
-    if (typeof defaultValue === 'number') {
-      inputValue = formatDate(defaultValue).date;
-    }
-
-    if (defaultValue instanceof Date) {
-      inputValue = formatDate(defaultValue.getTime()).date;
-    }
-
-    inputValue = validate(inputValue);
-
+    const inputValue = validate(parseToFormat(defaultValue).string);
     setInputValue(inputValue);
-  }, [defaultValue, min, max]);
+  }, [defaultValue, minDate, maxDate]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -194,34 +179,29 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   const onDatepickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-
-    if (!e.target.value.includes('_') && e.target.value !== '') {
-      const result = validate(e.target.value);
-
-      if (e.target.value !== result) {
-        setInputValue(result);
-      }
-
-      onChange && onChange(getReturnValue(result, range), name);
-    }
   };
 
   const setValue = (value: string) => {
     setInputValue(value);
+  };
 
-    if (!value.includes('_') && value !== '') {
-      onChange && onChange(getReturnValue(value, range), name);
-
-      setTimeout(() => {
-        if (inputRef.current) {
-          const input = inputRef.current.querySelector('input');
-
-          if (input) {
-            input.dispatchEvent(new Event('change'));
-          }
-        }
-      }, 100);
+  useEffect(() => {
+    if (!inputValue.includes('_') && inputValue !== '') {
+      onChange && onChange(getReturnValue(inputValue, range), name);
+      fireOnChange();
     }
+  }, [inputValue]);
+
+  const fireOnChange = () => {
+    setTimeout(() => {
+      if (inputRef.current) {
+        const input = inputRef.current.querySelector('input');
+
+        if (input) {
+          input.dispatchEvent(new Event('change'));
+        }
+      }
+    }, 100);
   };
 
   // -------------------------------------------------------------------------------------------------------------------
