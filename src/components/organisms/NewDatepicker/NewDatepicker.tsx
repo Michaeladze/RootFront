@@ -182,7 +182,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   const onDatepickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let result = e.target.value;
 
-    if (result.length === 10 && !result.includes('_')) {
+    if (range || (result.length === 10 && !result.includes('_'))) {
       result = validate(result);
     }
 
