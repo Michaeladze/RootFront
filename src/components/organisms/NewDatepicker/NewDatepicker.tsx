@@ -149,7 +149,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     inputValue = validate(inputValue);
 
     setInputValue(inputValue);
-  }, [defaultValue]);
+  }, [defaultValue, minDate, maxDate]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -226,6 +226,15 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const onKeyPress = (e: React.KeyboardEvent) => {
+    if (e.keyCode === 13 || e.charCode === 13 || e.key === 'Enter') {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   const disabledClass = disabled ? 'rf-datepicker__input-wrapper--disabled' : '';
   const readOnlyClass = readOnly ? 'rf-datepicker__input-wrapper--readonly' : '';
 
@@ -279,6 +288,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           value={inputValue}
           disabled={disabled}
           readOnly={readOnly}
+          onKeyPress={onKeyPress}
           onChange={onDatepickerChange}>
           <Input size={size}/>
         </InputMask>
