@@ -52,6 +52,7 @@ import UserItem from './components/projects/molecules/User';
 import UsersStack from './components/projects/molecules/UsersStack';
 import PopupFooter from './components/projects/molecules/PopupFooter';
 import UserStructure from './components/projects/atoms/UserStructure';
+import Confirm from './components/projects/popups/Confirm';
 
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
 import Page from './components/projects/templates/Page';
@@ -125,7 +126,8 @@ export {
   Badge,
   ActionMenu,
   UserStructure,
-  NewDatepicker
+  NewDatepicker,
+  Confirm
 };
 
 export {
