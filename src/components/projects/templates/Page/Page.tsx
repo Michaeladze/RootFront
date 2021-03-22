@@ -13,6 +13,7 @@ export interface IPageProps {
   title?: ReactNode;
   className?: string;
   backUrl?: string;
+  onBackUrlClick?: () => void;
   children?: ReactNode | ReactNode[];
   user?: IUser;
   /** Список действий в дропдауне пользователя */
@@ -28,6 +29,7 @@ const Page: React.FC<IPageProps> = ({
   title,
   className = '',
   backUrl = '',
+  onBackUrlClick,
   user,
   actionsList = [],
   menuPosition = 'right',
@@ -56,12 +58,19 @@ const Page: React.FC<IPageProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const onBackClick = (e: React.MouseEvent) => {
+    if (onBackUrlClick) {
+      e.preventDefault();
+      onBackUrlClick();
+    }
+  };
+
   return (
     <div className={`rf-page ${className}`} ref={pageRef}>
       <header className='rf-page__header' ref={headerRef}>
         <div className='rf-page__header-inner'>
           <div className='rf-page__header-wrapper'>
-            {backUrl && <Link to={backUrl} className='rf-page__header-back'>
+            {backUrl && <Link to={backUrl} onClick={onBackClick} className='rf-page__header-back'>
               <Chevron/>
             </Link>}
             <h2 className='rf-page__title'>{title}</h2>
