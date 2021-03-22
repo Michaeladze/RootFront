@@ -4,7 +4,8 @@
 
 .rf-page__aside-filters {
   position: relative;
-  max-width: 280px;
+  min-width: 280px;
+  width: 280px;
   margin-right: 32px;
 }
 
@@ -17,7 +18,6 @@
 
 .rf-page__main {
   width: 100%;
-  max-width: 904px;
 }
 
 .rf-page__main-action-menu {
