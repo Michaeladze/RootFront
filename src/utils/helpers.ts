@@ -195,3 +195,10 @@ export const oDataTransform = <T>():MonoTypeOperatorFunction<T> => map((data: an
   delete data['@odata.metadataEtag'];
   return data.d ? oDataServ(data.d) as T : data as T;
 });
+
+/** Функция для добавления пробелов в число */
+export const numberWithSpaces = (x: number): string => {
+  const parts = x.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return parts.join('.');
+};
