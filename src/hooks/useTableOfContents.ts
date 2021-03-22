@@ -54,7 +54,7 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0, deps = 
       });
 
       /** Активируем последний заголовок если вся страница проскролена */
-      if (window.innerHeight + window.pageYOffset >= document.documentElement.offsetHeight) {
+      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight) {
         activeIndex = titlesNodes.length - 1;
 
         setActiveTitle({
