@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Story from '../../storybook/Story';
 import StoryItem from '../../storybook/StoryItem';
 import NewDatepicker from './NewDatepicker';
 import { useReactiveForm } from 'use-reactive-form';
-import { Button } from '../../../index';
+import { Button, Checkbox } from '../../../index';
 import { IDateVariants } from '../../../types/projects.types';
 
 export default {
@@ -31,13 +31,28 @@ export const newDatepicker = () => {
     console.log(rangeForm.values);
   };
 
+  const [disabled, setDisabled] = useState(false);
+
   return (
     <Story name='Datepicker' width={600} height={1200}
       description='Календарь с выбором даты. В defaultValue можно передать строку, число Date.now() или объект new Date().'>
 
       <StoryItem description='Выбор даты с вводом. Для запрещения ввода используется пропс readOnly.'>
-        <div style={{ width: '200px' }}>
-          <NewDatepicker onChange={onChange}/>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          <div style={{ width: '200px' }}>
+            <NewDatepicker
+              onChange={onChange}
+              disabled={disabled}
+              defaultValue={disabled ? undefined : '28.03.2021'}
+              min={disabled ? undefined : new Date()}/>
+          </div>
+          <div style={{ marginLeft: '16px' }}>
+            <Checkbox label='Бессрочно'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDisabled(e.target.checked)}/>
+          </div>
         </div>
       </StoryItem>
 
