@@ -21,6 +21,10 @@ export const pageWithSections = () => {
       component: <div style={{ height: '300px' }}> Позиция </div>
     },
     {
+      id: 'position',
+      component: <div style={{ height: '100px' }}> Без названия </div>
+    },
+    {
       id: 'type',
       title: 'Тип подбора',
       component: <div style={{ height: '300px' }}> Тип подбора </div>

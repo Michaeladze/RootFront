@@ -88,7 +88,7 @@ export interface IActionMenuListConfig {
 /** Секции для шаблона */
 export interface IPageSection {
   id: string;
-  title: ReactNode;
+  title?: ReactNode;
   component: ReactNode;
 }
 
