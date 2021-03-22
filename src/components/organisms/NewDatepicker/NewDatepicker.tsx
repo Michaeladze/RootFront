@@ -123,11 +123,8 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     } else {
       const d = stringToDate(date);
 
-      if (minDate) {
-
-        if (minDate && date === '' || d.getTime() < minDate.getTime()) {
-          result = formatDate(minDate.getTime()).date;
-        }
+      if (date !== '' && minDate && d.getTime() < minDate.getTime()) {
+        result = formatDate(minDate.getTime()).date;
       }
 
       if (maxDate && d.getTime() > maxDate.getTime()) {
@@ -183,7 +180,13 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   };
 
   const onDatepickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(validate(e.target.value));
+    let result = e.target.value;
+
+    if (result.length === 10 && !result.includes('_')) {
+      result = validate(result);
+    }
+
+    setInputValue(result);
   };
 
   const setValue = (value: string) => {
