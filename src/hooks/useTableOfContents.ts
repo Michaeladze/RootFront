@@ -14,6 +14,8 @@ export interface IUseTableOfContentsProps {
     selector: string;
     /* Доп. отступ сверху для активации элемента (помимо отступа контейнера) */
     additionalOffset?: number;
+    /* Доп. зависимости для запуска парсинга тайтлов */
+    deps?: any[];
 }
 
 export interface IActiveTitle {
@@ -21,7 +23,7 @@ export interface IActiveTitle {
   activeIndex: number;
 }
 
-const useTableOfContents = ({ container, selector, additionalOffset = 0 }: IUseTableOfContentsProps): IActiveTitle => {
+const useTableOfContents = ({ container, selector, additionalOffset = 0, deps = [] }: IUseTableOfContentsProps): IActiveTitle => {
   const [activeTitle, setActiveTitle] = useState<IActiveTitle>({
     activeIndex: 0,
     activeTitleId: undefined
@@ -80,7 +82,7 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0 }: IUseT
     setTimeout(() => {
       setTitlesNodes(parseTitles());
     });
-  }, [selector]);
+  }, [selector, ...deps]);
 
   useEffect(() => {
     if (!activeTitle.activeTitleId && titlesNodes.length) {
