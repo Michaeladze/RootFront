@@ -111,6 +111,23 @@ export const formatDate = (date: string | number | undefined): IFormattedDate =>
   };
 };
 
+/** Преобразовать dd.mm.yyy в Date */
+export const stringToDate = (s: string): Date => {
+  const d = new Date();
+
+  if (!s) {
+    return d;
+  }
+
+  const formatToday = formatDate(d.getTime()).date.split('.');
+
+  let [dd, mm, yyyy] = s.split('.');
+  dd = dd.includes('_') ? formatToday[0] : dd;
+  mm = mm.includes('_') ? formatToday[1] : mm;
+  yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;
+  return new Date(`${mm}.${dd}.${yyyy}`);
+};
+
 /**
  * Функция обрезки текста
  * @param text - строка, которую нужно сократить

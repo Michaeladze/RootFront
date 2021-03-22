@@ -5,11 +5,12 @@ import Chevron from '../../_icons/chevron-left';
 import { formatDate } from '../../../index';
 import {
   compareMonths,
-  getDaysForMonth, isCurrentDay, isCurrentMonth, months, stringToDate, weekDays
+  getDaysForMonth, isCurrentDay, isCurrentMonth, months, weekDays
 } from './datepicker.utils';
 import {
   IDatepickerActivePeriod, IDatepickerDay, IDatepickerPeriodType, IDatepickerStack
 } from './datepicker.types';
+import { stringToDate } from '../../../utils/helpers';
 
 interface IDatepickerCalendarProps {
   /** Формат всегда dd.mm.yyyy */

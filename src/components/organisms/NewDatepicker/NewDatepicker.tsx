@@ -10,6 +10,7 @@ import useClickOutside from '../../../hooks/useClickOutside';
 import InputMask from 'react-input-mask';
 import { IDateVariants } from '../../../types/projects.types';
 import { parseToFormat } from '../DatepickerCalendar/datepicker.utils';
+import { stringToDate } from '../../../utils/helpers';
 
 export interface IDatepickerProps {
   /** Название */
@@ -85,11 +86,8 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
       const [from, to] = date.split(' - ');
 
       if (from && to && !from.includes('_') && !to.includes('_')) {
-        const [dd1, mm1, yyyy1] = from.split('.');
-
-        const [dd2, mm2, yyyy2] = to.split('.');
-        let fromD = new Date(`${mm1}.${dd1}.${yyyy1}`).getTime();
-        let toD = new Date(`${mm2}.${dd2}.${yyyy2}`).getTime();
+        let fromD = stringToDate(from).getTime();
+        let toD = stringToDate(to).getTime();
 
 
         /** Если дата ПО меньше даты С, ставим дату ПО на 1 день больше даты С*/
@@ -113,16 +111,16 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
         result = `${formatDate(fromD).date} - ${formatDate(toD).date}`;
       }
     } else {
-      const [dd, mm, yyyy] = date.split('.');
+      const d = stringToDate(date);
 
       if (minDate) {
 
-        if (minDate && date === '' || new Date(+yyyy, +mm - 1, +dd).getTime() < minDate.getTime()) {
+        if (minDate && date === '' || d.getTime() < minDate.getTime()) {
           result = formatDate(minDate.getTime()).date;
         }
       }
 
-      if (maxDate && new Date(+yyyy, +mm - 1, +dd).getTime() > maxDate.getTime()) {
+      if (maxDate && d.getTime() > maxDate.getTime()) {
         result = formatDate(maxDate.getTime()).date;
       }
     }
@@ -141,10 +139,8 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   const getReturnValue = (value: string, range: boolean): IDateVariants => {
     if (range) {
       const [from, to] = value.split(' - ');
-      const [dd1, mm1, yyyy1] = from.split('.');
-      const [dd2, mm2, yyyy2] = to.split('.');
-      const fromD = new Date(`${mm1}.${dd1}.${yyyy1}`).getTime();
-      const toD = new Date(`${mm2}.${dd2}.${yyyy2}`).getTime();
+      const fromD = stringToDate(from).getTime();
+      const toD = stringToDate(to).getTime();
       return {
         value,
         date: {
@@ -160,8 +156,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
       };
     }
 
-    const [dd, mm, yyyy] = value.split('.');
-    const date = new Date(`${mm}.${dd}.${yyyy}`);
+    const date = stringToDate(value);
     return {
       date: {
         from: date,

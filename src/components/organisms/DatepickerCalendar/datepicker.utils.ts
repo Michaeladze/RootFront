@@ -116,17 +116,6 @@ export const compareMonths = (d1: Date, d2?: Date): number => {
   return 0;
 };
 
-export const stringToDate = (s: string): Date => {
-  const d = new Date();
-  const formatToday = formatDate(d.getTime()).date.split('.');
-
-  let [dd, mm, yyyy] = s.split('.');
-  dd = dd.includes('_') ? formatToday[0] : dd;
-  mm = mm.includes('_') ? formatToday[1] : mm;
-  yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;
-  return new Date(`${mm}.${dd}.${yyyy}`);
-};
-
 /** Преобразование любого типа к дате */
 export const parseToFormat = (defaultValue?: Date | string | number): {
   date: Date,
