@@ -169,6 +169,24 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const showAside = !!sections && sections.some((s: IPageSection) => !!s.title);
+
+  const asideBlock = showAside && (
+    <aside className='rf-page__content-aside' ref={asideRef}>
+      <div className='rf-page__aside-inner'>
+        <div className='rf-page__aside-bar' ref={lineRef}>
+          <div className='rf-page__aside-slider' ref={sliderRef}/>
+        </div>
+
+        <nav className='rf-page__aside-nav'>
+          {asideJSX}
+        </nav>
+      </div>
+    </aside>
+  );
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   return (
     <>
       {actionMenu && (
@@ -189,17 +207,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
                 {sectionsJSX}
               </div>
 
-              <aside className='rf-page__content-aside' ref={asideRef}>
-                <div className='rf-page__aside-inner'>
-                  <div className='rf-page__aside-bar' ref={lineRef}>
-                    <div className='rf-page__aside-slider' ref={sliderRef}/>
-                  </div>
-
-                  <nav className='rf-page__aside-nav'>
-                    {asideJSX}
-                  </nav>
-                </div>
-              </aside>
+              {asideBlock}
             </>
           )
         }
@@ -207,4 +215,5 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
     </>
   );
 };
+
 export default PageWithSections;
