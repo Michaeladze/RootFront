@@ -1,7 +1,7 @@
 import useClickOutside from './hooks/useClickOutside';
 import { useLocation } from './hooks/useLocation';
 import {
-  formatDate, getMonthName, getShortString, oDataTransform
+  formatDate, getMonthName, getShortString, oDataTransform, stringToDate
 } from './utils/helpers';
 
 // ------------------------ Компоненты Atoms ---------------------------------------------------------------------------
@@ -131,7 +131,7 @@ export {
 };
 
 export {
-  formatDate, getShortString, getMonthName, oDataTransform
+  formatDate, getShortString, getMonthName, oDataTransform, stringToDate
 };
 
 
