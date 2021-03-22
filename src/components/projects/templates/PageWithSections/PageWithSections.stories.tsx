@@ -21,7 +21,7 @@ export const pageWithSections = () => {
       component: <div style={{ height: '300px' }}> Позиция </div>
     },
     {
-      id: 'position',
+      id: 'noname',
       component: <div style={{ height: '100px' }}> Без названия </div>
     },
     {

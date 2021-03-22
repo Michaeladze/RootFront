@@ -2,7 +2,7 @@ import React, {
   ReactNode, useEffect, useRef
 } from 'react';
 import { Preloader } from '../../../../index';
-
+import StickyContainer from '../StickyContainer';
 
 interface IProps {
   /** Наполнение */
@@ -25,6 +25,8 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
 
   /** Прокрутка до отображения разделителя */
   const SHOW_DIVIDER_SCROLL_TOP = 10;
+  /** Отступ снизу при прокрутке блока фильтров */
+  const FILTERS_OFFSET_SCROLL_BOTTOM = 33;
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -79,9 +81,16 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
           <>
             {filters && (
               <aside className='rf-page__aside-filters'>
-                <div className='rf-page__aside-filters-inner'>
-                  {filters}
-                </div>
+                <StickyContainer
+                  containerSelector='.rf-page__with-list'
+                  top={actionMenu && actionMenuRef.current ? actionMenuRef.current.getBoundingClientRect().top : 180}
+                  bottom={FILTERS_OFFSET_SCROLL_BOTTOM}
+                >
+
+                  <div className='rf-page__aside-filters-inner'>
+                    {filters}
+                  </div>
+                </StickyContainer>
               </aside>
             )}
             <main className='rf-page__main' ref={mainRef}>

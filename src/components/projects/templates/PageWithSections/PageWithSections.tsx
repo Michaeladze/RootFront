@@ -126,7 +126,8 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   const { activeTitleId, activeIndex } = useTableOfContents({
     container: sectionsRef,
     selector: '.rf-page__section-title',
-    additionalOffset: ADDITIONAL_SCROLL_OFFSET + (actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0)
+    additionalOffset: ADDITIONAL_SCROLL_OFFSET + (actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0),
+    deps: [preloader]
   });
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -151,6 +152,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
       );
     });
 
+  /** Передвигаем слайдер к активной секции */
   useEffect(() => {
     setTimeout(() => {
       if (sliderRef.current) {

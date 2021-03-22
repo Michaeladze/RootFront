@@ -1,7 +1,11 @@
 .rf-sticky-container {
-  position: absolute;
+  position: relative;
   z-index: 100;
-  width: 300px;
-  height: 1000px;
-  background: linear-gradient(to bottom, lightblue, lightgreen);
+  height: 100%;
+  will-change: min-height;
+}
+
+.rf-sticky-element {
+  transform: translate3d(0%, 0, 0);
+  will-change: position, transform;
 }
