@@ -149,7 +149,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     inputValue = validate(inputValue);
 
     setInputValue(inputValue);
-  }, [defaultValue, minDate, maxDate]);
+  }, [defaultValue, min, max]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
