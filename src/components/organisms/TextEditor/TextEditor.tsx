@@ -61,7 +61,13 @@ const TextEditor: FC<IProps> = ({ name, preview, getValue, className = '', defau
           ]
         }
       ],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        'bold',
+        'italic',
+        'underline',
+        'strike',
+        'blockquote'
+      ],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       [{ 'script': 'sub' }, { 'script': 'super' }],
       [{ 'color': c }, { 'background': c }]

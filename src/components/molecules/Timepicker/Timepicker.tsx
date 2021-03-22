@@ -58,7 +58,13 @@ const Timepicker: FC<ITimepickerProps> = ({
   return (
     <div className={`rf-timepicker__wrapper ${className || ''} ${disabled ? 'rf-timepicker__disable' : ''}`}>
       <InputMask
-        mask={[/[0-2]/, /[0-9]/, ':', /[0-5]/, /[0,5,8]/]}
+        mask={[
+          /[0-2]/,
+          /[0-9]/,
+          ':',
+          /[0-5]/,
+          /[0,5,8]/
+        ]}
         value={time}
         alwaysShowMask={true}
         readOnly={props.readOnly}

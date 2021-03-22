@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-left-outline';
-import { Tabs } from '../../../../index';
+import { Preloader, Tabs } from '../../../../index';
 import { IUser } from '../../../../types/projects.types';
 import { IListElement, ITab } from '../../../../types';
 import User from '../../molecules/User';
@@ -21,6 +21,7 @@ export interface IPageProps {
   menuPosition?: 'left' | 'right';
   /** Navigation */
   navigation?: ITab[];
+  preloader?: boolean;
 }
 
 const Page: React.FC<IPageProps> = ({
@@ -31,7 +32,8 @@ const Page: React.FC<IPageProps> = ({
   actionsList = [],
   menuPosition = 'right',
   children,
-  navigation
+  navigation,
+  preloader = false
 }: IPageProps) => {
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -76,7 +78,7 @@ const Page: React.FC<IPageProps> = ({
         </div>
       </header>
       <div className='rf-page__content' ref={contentRef}>
-        {children}
+        {preloader ? <Preloader/> : children}
       </div>
     </div>
   );

@@ -12,3 +12,5 @@ export interface IDatepickerDay {
   period: IDatepickerPeriod;
   date: Date;
 }
+
+export type IDatepickerStack = [Date | undefined, Date | undefined];

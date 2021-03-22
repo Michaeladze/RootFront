@@ -4,6 +4,7 @@
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
+  z-index: 10;
   width: 296px;
   height: 296px;
   padding: 16px 8px;
@@ -110,14 +111,39 @@
   cursor: pointer;
 }
 
+// Days
+
 .rf-datepicker__calendar-date {
   margin-right: 8px;
   @include s1;
+  position: relative;
 }
 
 .rf-datepicker__calendar-date--active {
   background-color: var(--accent-200);
   border: 1px solid var(--accent-500);
+}
+
+@mixin inRange() {
+  border-radius: 0;
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: calc(100% + 2px);
+    top: -1px;
+    right: -1px;
+    transform: translateX(100%);
+    background-color: var(--accent-200);
+  }
+}
+
+.rf-datepicker__calendar-date--range {
+  position: relative;
+  background-color: var(--accent-200);
+  @include inRange;
 }
 
 .rf-datepicker__calendar-date:not(.rf-datepicker__calendar-date--active):hover {
@@ -126,6 +152,10 @@
 
 .rf-datepicker__calendar-day:nth-child(7n) {
   margin-right: 0;
+
+  &:after {
+    display: none;
+  }
 }
 
 .rf-datepicker__calendar-day--prev {
@@ -138,19 +168,139 @@
   color: var(--base-500);
 }
 
-.rf-datepicker__calendar-month {
-  width: auto;
-  text-transform: capitalize;
-  margin-bottom: 8px;
-}
-
-.rf-datepicker__calendar-year {
-  min-width: 50px;
-  margin-bottom: 8px;
-  margin-right: 16px;
-}
-
 .rf-datepicker__calendar-date--disabled {
   pointer-events: none;
   color: var(--base-300);
+}
+
+.rf-datepicker__calendar-date--from {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.rf-datepicker__calendar-date--to {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  &:after {
+    display: none;
+  }
+}
+
+// Months
+
+.rf-datepicker__calendar-month-wrapper {
+  position: relative;
+  width: 85.2px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.rf-datepicker__calendar-month-wrapper--range {
+  background-color: var(--accent-200);
+  @include inRange;
+  border-radius: 0;
+
+  &:after {
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+}
+
+.rf-datepicker__calendar-month-wrapper:nth-child(3n) {
+  margin-right: 0;
+
+  &:after {
+    display: none;
+  }
+}
+
+.rf-datepicker__calendar-month {
+  width: 100%;
+  text-transform: capitalize;
+  margin-right: 0;
+  border-radius: 0;
+}
+
+.rf-datepicker__calendar-month-wrapper--from,
+.rf-datepicker__calendar-month-wrapper--from .rf-datepicker__calendar-tile {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.rf-datepicker__calendar-month-wrapper--to,
+.rf-datepicker__calendar-month-wrapper--to .rf-datepicker__calendar-tile {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.rf-datepicker__calendar-month-wrapper--to {
+  &:after {
+    display: none;
+  }
+}
+
+// Years
+
+.rf-datepicker__calendar-year-wrapper {
+  position: relative;
+  width: 56px;
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+.rf-datepicker__calendar-year-wrapper:nth-child(4n) {
+  margin-right: 0;
+
+  &:after {
+    display: none;
+  }
+}
+
+.rf-datepicker__calendar-year--range {
+  background-color: var(--accent-200);
+  @include inRange;
+  border-radius: 0;
+
+  &:after {
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 100%;
+  }
+}
+
+.rf-datepicker__calendar-year {
+  width: 100%;
+  margin-right: 0;
+  border-radius: 0;
+}
+
+.rf-datepicker__calendar-year:nth-child(4n) {
+  margin-right: 0;
+}
+
+.rf-datepicker__calendar-year--from,
+.rf-datepicker__calendar-year--from .rf-datepicker__calendar-tile {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.rf-datepicker__calendar-year--to,
+.rf-datepicker__calendar-year--to .rf-datepicker__calendar-tile {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.rf-datepicker__calendar-year--to {
+  &:after {
+    display: none;
+  }
+}
+
+.rf-datepicker__calendar-date.rf-datepicker__calendar-tile--range:hover,
+.rf-datepicker__calendar-month-wrapper--range .rf-datepicker__calendar-tile:hover,
+.rf-datepicker__calendar-month-year--range .rf-datepicker__calendar-tile:hover {
+  background-color: var(--accent-200);
 }

@@ -3,6 +3,7 @@ import { useReactiveForm } from 'use-reactive-form';
 import {
   Button, Checkbox, Datepicker, FormGroup, Input, Radio, Select, Textarea
 } from '../index';
+import NewDatepicker from '../components/organisms/NewDatepicker';
 import { IOption } from '../types';
 
 export default { title: 'Hooks/useReactiveForm' };
@@ -11,6 +12,7 @@ export const useReactiveFormHook = () => {
   const config = {
     fields: {
       parent: [{ child: 'Parent Child Structure' }],
+      customDate: new Date(),
       dateFrom: new Date(),
       dateTo: null,
       text: 'Default text',
@@ -64,6 +66,12 @@ export const useReactiveFormHook = () => {
       <div style={style}>
         <FormGroup label='Date from'>
           <Datepicker name='dateFrom' value={values.dateFrom} onChange={onDateChange} />
+        </FormGroup>
+      </div>
+
+      <div style={style}>
+        <FormGroup label='New datepicker'>
+          <NewDatepicker name='customDate' defaultValue={values.customDate} />
         </FormGroup>
       </div>
 

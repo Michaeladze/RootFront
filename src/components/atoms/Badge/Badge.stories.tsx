@@ -15,7 +15,13 @@ export default {
 };
 
 export const badge = () => {
-  const list: any = [9, 99, 999, 100, undefined];
+  const list: any = [
+    9,
+    99,
+    999,
+    100,
+    undefined
+  ];
 
   const badgesJSX = variants.map((variant: Variant) => (
     <StoryRow key={variant}>
@@ -29,7 +35,12 @@ export const badge = () => {
     </StoryRow>
   ));
 
-  const userPhotos = ['bottomLeft', 'topLeft', 'topRight', 'bottomRight'].map((position: any) => (
+  const userPhotos = [
+    'bottomLeft',
+    'topLeft',
+    'topRight',
+    'bottomRight'
+  ].map((position: any) => (
     <StoryCol key={position}>
       <Badge variant='danger' position={position}>
         <UserPhoto fullName='Bottle Neck' />

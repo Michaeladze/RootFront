@@ -2,6 +2,7 @@
 
 .rf-page__content--sections {
   display: flex;
+  min-height: 100%;
 }
 
 .rf-page__action-menu {
@@ -59,7 +60,7 @@
   right: 40px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .rf-page__content-aside {
     display: none;
   }

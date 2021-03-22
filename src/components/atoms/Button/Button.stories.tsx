@@ -14,7 +14,12 @@ export default {
 
 const scales: Size[] = ['big', 'medium', 'small'];
 
-const buttonTypes: any = ['primary', 'secondary', 'link', 'outlinePrimary'];
+const buttonTypes: any = [
+  'primary',
+  'secondary',
+  'link',
+  'outlinePrimary'
+];
 
 export const buttons = () => {
   const buttonsJSX = buttonTypes.map((bt: any) => (

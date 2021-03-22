@@ -75,7 +75,12 @@ const Input: FC<IInputProps> = ({
         console.log(e);
       }
     };
-  }, [onClear, debounce, props.onKeyUp, search]);
+  }, [
+    onClear,
+    debounce,
+    props.onKeyUp,
+    search
+  ]);
 
   // ------------------------------------------------------------------------------------------------------------------
   /** Очистка поля ввода и сброс результатов поиска */

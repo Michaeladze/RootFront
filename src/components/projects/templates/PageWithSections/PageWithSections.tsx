@@ -1,7 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
-import { Tile } from '../../../../index';
+import { Preloader, Tile } from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
 import useTableOfContents from '../../../../hooks/useTableOfContents';
 
@@ -10,11 +10,13 @@ interface IPageWithSectionsProps {
   sections?: IPageSection[];
   /** Fixed action menu */
   actionMenu?: ReactNode;
+  preloader?: boolean;
 }
 
 const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   sections,
-  actionMenu
+  actionMenu,
+  preloader = false
 }: IPageWithSectionsProps) => {
 
   /** Ссылка на навигацию */
@@ -110,7 +112,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   const sectionsJSX = sections?.map((section: IPageSection) => {
     return (
       <section key={section.id} className='rf-page__section'>
-        <h2 className='rf-page__section-title' id={section.id}>{section.title}</h2>
+        { section.title && <h2 className='rf-page__section-title' id={section.id}>{section.title}</h2> }
         <Tile>
           {section.component}
         </Tile>
@@ -150,15 +152,38 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
     });
 
   useEffect(() => {
-    if (sliderRef.current) {
-      const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
-      const navLink = document.querySelectorAll('.rf-page__aside-link')[activeIndex];
-      const menuOffset = actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0;
+    setTimeout(() => {
+      if (sliderRef.current) {
+        const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
+        const navLinks = document.querySelectorAll('.rf-page__aside-link');
+        const navLink = navLinks[activeIndex];
 
-      sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - pageHeader.offsetHeight - menuOffset}px`;
-    }
+        if (pageHeader && navLink) {
+          const menuOffset = actionMenuRef.current ? actionMenuRef.current.offsetHeight : 0;
+          sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - pageHeader.offsetHeight - menuOffset}px`;
+        }
+      }
+    });
   }, [activeTitleId]);
 
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  const showAside = !!sections && sections.some((s: IPageSection) => !!s.title);
+
+  const asideBlock = showAside && (
+    <aside className='rf-page__content-aside' ref={asideRef}>
+      <div className='rf-page__aside-inner'>
+        <div className='rf-page__aside-bar' ref={lineRef}>
+          <div className='rf-page__aside-slider' ref={sliderRef}/>
+        </div>
+
+        <nav className='rf-page__aside-nav'>
+          {asideJSX}
+        </nav>
+      </div>
+    </aside>
+  );
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -175,23 +200,20 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
       <div className='rf-page__content--sections'>
 
-        <div className='rf-page__content-sections' ref={sectionsRef}>
-          {sectionsJSX}
-        </div>
+        {
+          preloader ? <Preloader/> : (
+            <>
+              <div className='rf-page__content-sections' ref={sectionsRef}>
+                {sectionsJSX}
+              </div>
 
-        <aside className='rf-page__content-aside' ref={asideRef}>
-          <div className='rf-page__aside-inner'>
-            <div className='rf-page__aside-bar' ref={lineRef}>
-              <div className='rf-page__aside-slider' ref={sliderRef}/>
-            </div>
-
-            <nav className='rf-page__aside-nav'>
-              {asideJSX}
-            </nav>
-          </div>
-        </aside>
+              {asideBlock}
+            </>
+          )
+        }
       </div>
     </>
   );
 };
+
 export default PageWithSections;

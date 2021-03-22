@@ -29,6 +29,16 @@ export interface IUser {
   salary?: number;
   /** Валюта */
   currency?: string;
+
+  /** Орг структура */
+  departmentsPath?: IUserStructure[];
+}
+
+export interface IUserStructure {
+  id: string;
+  name: string;
+  unitType: string;
+  unitTypeDesc: string;
 }
 
 export interface IFeedback {
@@ -78,6 +88,21 @@ export interface IActionMenuListConfig {
 /** Секции для шаблона */
 export interface IPageSection {
   id: string;
-  title: ReactNode;
+  title?: ReactNode;
   component: ReactNode;
+}
+
+/** Возвращаемое значение календаря */
+export interface IDateVariants {
+  date: {
+    from: Date;
+    to: Date;
+    value: Date;
+  };
+  timestamp: {
+    from: number;
+    to: number;
+    value: number;
+  }
+  value: string;
 }

@@ -1,4 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, {
+  ReactNode, useEffect, useState
+} from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { Page, Tile } from '../../../../index';
@@ -25,7 +27,7 @@ export const pageWithList = () => {
     }
   ];
 
-  const listJSX: ReactNode[] = Array(8).fill('').map((_, i: number) => <Tile> Tile {i}</Tile>);
+  const listJSX: ReactNode[] = Array(12).fill('').map((_, i: number) => <Tile> Tile {i}</Tile>);
 
   const user: any = { fullName: 'Ричард Брэндмауер' };
 
@@ -52,14 +54,28 @@ export const pageWithList = () => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const filtersJSX = <>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur consectetur enim facere id iste iusto optio perspiciatis, quos recusandae repudiandae sequi, unde. Assumenda cupiditate earum eos iure nam voluptate!
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam atque cum deleniti et fugit ipsum maiores maxime modi nesciunt nobis obcaecati, optio pariatur porro ratione reprehenderit sequi sit tenetur.</>;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, saepe similique. Animi aut blanditiis corporis dicta dolore eos, eveniet explicabo fugiat iste minima modi neque nostrum nulla possimus quas voluptates.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus animi aperiam architecto, autem dicta id maiores maxime minima, modi natus nihil nulla quaerat quia saepe sapiente sit ut vero.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet assumenda at blanditiis exercitationem in reiciendis. Accusantium eaque magni molestias quam ratione similique sunt voluptates. Ducimus facilis fuga minima numquam!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet consequuntur corporis, dolor dolores doloribus eligendi facilis fugiat itaque non perferendis repellat voluptatum. Adipisci ex fuga, laborum maxime nobis non omnis.
+  </>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const actionMenu = <ActionMenu listConfig={config} type='list'/>;
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
+  }, []);
 
   return (
     <BrowserRouter>
       <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation}>
-        <PageWithList filters={filtersJSX} actionMenu={<ActionMenu listConfig={config} type='list'/>}>
+        <PageWithList filters={filtersJSX} preloader={!loaded}>
           {listJSX}
         </PageWithList>
       </Page>

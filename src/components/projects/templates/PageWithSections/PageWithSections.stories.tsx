@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { ContentExpander, Page } from '../../../../index';
@@ -19,6 +19,10 @@ export const pageWithSections = () => {
       id: 'position',
       title: 'Позиция',
       component: <div style={{ height: '300px' }}> Позиция </div>
+    },
+    {
+      id: 'position',
+      component: <div style={{ height: '100px' }}> Без названия </div>
     },
     {
       id: 'type',
@@ -60,10 +64,18 @@ export const pageWithSections = () => {
 
   const user: any = { fullName: 'Ричард Брэндмауер' };
 
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 2000);
+  }, []);
+
   return (
     <BrowserRouter>
-      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation} >
-        <PageWithSections sections={sections} actionMenu={<ActionMenu/>}/>
+      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation}>
+        <PageWithSections sections={sections} actionMenu={<ActionMenu/>} preloader={!loaded}/>
       </Page>
     </BrowserRouter>
   );

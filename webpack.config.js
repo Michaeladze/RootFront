@@ -1,76 +1,69 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
-const prefixer = require('postcss-prefix-selector');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const webpack = require('webpack');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const dotenv = require('dotenv');
+// получаем путь проекта
+const dividor = __dirname.split('/').length - 1 ? '/' : '\\';
 
-const argv = process.argv.indexOf('--env') + 1;
-const env = process.argv[argv] || 'development';
+const __project = __dirname
+  .split(dividor)
+  .slice(0, -3)
+  .join(dividor);
 
-// Create the fallback path (the production .env)
-const basePath = `${path.join(__dirname)}/.env.${env}`;
-// Set the path parameter in the dotenv config
-const fileEnv = dotenv.config({ path: basePath }).parsed;
 
-// Reduce it to a nice object, the same as before (but with the variables from the file)
+// =========================================================================
+// открываем все свойства .env
+const env = process.argv[process.argv.indexOf('--env') + 1] || 'development';
+const fileEnv = dotenv.config({ path: `${__project}/.env.${env}` }).parsed;
+// меняем версию
 const envKeys = Object.keys(fileEnv)
   .reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {});
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+envKeys['process.env.REACT_APP_V'] = `"${require('../../../package.json').version}"`;
+// =========================================================================
 
-const __dirname_arr = __dirname.split('/');
-const __dirname_up = [...__dirname_arr.slice(0, -1)].join('/');
-const __project = __dirname_arr.slice(-1)[0];
 
-console.clear();
+// =========================================================================
+// console.clear();
 console.log('\x1b[32m', '#########################################');
 console.log('\x1b[36m', 'ENVIRONMENT:  ', env);
-console.log(' DIR:         ', __dirname_up);
 console.log(' PROJECT:     ', __project);
-console.log(' ENV_PATH:    ', basePath);
+console.log(' ENV_PATH:    ', `${__project}/.env.${env}`);
+console.log(' VER:         ', `${envKeys['process.env.REACT_APP_V']}`);
 console.log('\x1b[32m', '#########################################');
-
-const prefix = envKeys['process.env.REACT_APP_NAME'] ? '#' + envKeys['process.env.REACT_APP_NAME'] : '';
-
-if (!prefix) {
-  throw new Error('Не задано название приложения REACT_APP_NAME');
-}
-
+console.log(envKeys);
+// =========================================================================
 module.exports = {
-  entry: ['src/singleSpaEntry.tsx'],
+  entry: ['./src/singleSpaEntry.tsx'],
   output: {
     library: 'single-spa-worktime',
     libraryTarget: 'umd',
     filename: 'index.js',
-    path: path.resolve(__dirname_up, `_feedback/modules/${__project}`)
+    path: path.resolve(__project, 'module')
   },
   resolve: {
     extensions: [
       '.ts',
       '.tsx',
-      '.js'
+      '.js',
+      '.jsx',
+      '.json'
     ],
     modules: [__dirname, 'node_modules']
   },
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        exclude: [path.resolve(__dirname, 'node_modules')],
-        loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.tsx$/,
-        exclude: [path.resolve(__dirname, 'node_modules')],
-        loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.js?$/,
-        exclude: [path.resolve(__dirname, 'node_modules')],
-        use: [
-          'babel-loader', 'eslint-loader'
-        ]
+        test: /\.(js|jsx|ts|tsx)$/,
+        use: 'babel-loader',
+        exclude: [path.resolve(__dirname, 'node_modules'), /spec\.(js|jsx|ts|tsx)$/]
       },
       {
         test: /\.html$/i,
@@ -81,17 +74,8 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              plugins: () => [
-                prefixer({
-                  prefix: prefix
-                })
-              ]
-            }
-          },
           'resolve-url-loader',
+          'scoped-css-loader',
           'sass-loader'
         ]
       },
@@ -140,13 +124,11 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: [`../modules/${__project}`] }),
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
     new webpack.PrefetchPlugin('react'),
     new webpack.DefinePlugin(envKeys),
-    new webpack.EnvironmentPlugin(['NODE_ENV'])
+    new webpack.DefinePlugin({ 'process.env': { 'NODE_ENV': JSON.stringify('production') } }),
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
   ],
-  devtool: 'source-map',
-
   externals: [],
   devServer: {
     historyApiFallback: true,

@@ -2,16 +2,10 @@
   position: relative;
   z-index: 100;
   height: 100%;
-  background: linear-gradient(to bottom, lightblue, lightgreen);
+  will-change: min-height;
 }
 
 .rf-sticky-element {
-  position: -webkit-sticky;
-  position: sticky;
-}
-
-.rf-sticky-element:before,
-.rf-sticky-element:after {
-  content: '';
-  display: table;
+  transform: translate3d(0%, 0, 0);
+  will-change: position, transform;
 }

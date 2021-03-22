@@ -18,7 +18,13 @@ const FeedbackPopup: React.FC<IFeedbackPopupProps> = ({ user, sendFeedback, onCl
   const [message, setMessage] = useState<string>('');
   const [attachment, setAttachment] = useState<IFileData[]>([]);
 
-  const stars = [1, 2, 3, 4, 5].map((n: number) => (
+  const stars = [
+    1,
+    2,
+    3,
+    4,
+    5
+  ].map((n: number) => (
     <div
       className={`feedback__star ${n <= rating ? 'feedback__star--active' : ''}`}
       key={n}

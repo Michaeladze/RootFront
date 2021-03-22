@@ -1,8 +1,8 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
+import { Preloader } from '../../../../index';
 import StickyContainer from '../StickyContainer';
-
 
 interface IProps {
   /** Наполнение */
@@ -11,17 +11,22 @@ interface IProps {
   filters?: ReactNode;
   /** Fixed action menu */
   actionMenu?: ReactNode;
+  preloader?: boolean;
 }
 
-const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProps) => {
+const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preloader = false }: IProps) => {
 
   /** Ссылка на меню */
   const actionMenuRef = useRef<HTMLDivElement>(null);
   /** Ссылка на разделитель скролла */
   const dividerRef = useRef<HTMLDivElement>(null);
+  /** Ссылка на контент */
+  const mainRef = useRef<HTMLDivElement>(null);
 
   /** Прокрутка до отображения разделителя */
   const SHOW_DIVIDER_SCROLL_TOP = 10;
+  /** Отступ снизу при прокрутке блока фильтров */
+  const FILTERS_OFFSET_SCROLL_BOTTOM = 33;
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -44,8 +49,14 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
     setTimeout(() => {
       const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
 
-      if (actionMenuRef.current && pageHeader) {
-        actionMenuRef.current.style.top = `${pageHeader.offsetHeight}px`;
+      if (actionMenuRef.current) {
+        if (pageHeader) {
+          actionMenuRef.current.style.top = `${pageHeader.offsetHeight}px`;
+        }
+
+        if (mainRef.current) {
+          mainRef.current.style.paddingTop = `${actionMenuRef.current.offsetHeight}px`;
+        }
       }
 
     });
@@ -65,27 +76,37 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu }: IProp
 
   return (
     <div className='rf-page__with-list'>
-      {filters && (
-        <aside className='rf-page__aside-filters'>
-          <StickyContainer top={actionMenu && actionMenuRef.current ? actionMenuRef.current.getBoundingClientRect().top + 10 : 190}>
+      {
+        preloader ? <Preloader/> : (
+          <>
+            {filters && (
+              <aside className='rf-page__aside-filters'>
+                <StickyContainer
+                  containerSelector='.rf-page__with-list'
+                  top={actionMenu && actionMenuRef.current ? actionMenuRef.current.getBoundingClientRect().top : 180}
+                  bottom={FILTERS_OFFSET_SCROLL_BOTTOM}
+                >
 
-            <div className='rf-page__aside-filters-inner'>
-              {filters}
-            </div>
-          </StickyContainer>
-        </aside>
-      )}
-      <main className='rf-page__main'>
-        <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
-          <div className='rf-page__main-action-menu-inner'>
-            <div className='rf-page__action-menu-divider--list' ref={dividerRef}/>
-            {actionMenu}
-          </div>
-        </div>
-        <div className='rf-page__main-content'>
-          {children}
-        </div>
-      </main>
+                  <div className='rf-page__aside-filters-inner'>
+                    {filters}
+                  </div>
+                </StickyContainer>
+              </aside>
+            )}
+            <main className='rf-page__main' ref={mainRef}>
+              {actionMenu && <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
+                <div className='rf-page__main-action-menu-inner'>
+                  <div className='rf-page__action-menu-divider--list' ref={dividerRef}/>
+                  {actionMenu}
+                </div>
+              </div>}
+              <div className='rf-page__main-content'>
+                {children}
+              </div>
+            </main>
+          </>
+        )
+      }
     </div>
   );
 };
