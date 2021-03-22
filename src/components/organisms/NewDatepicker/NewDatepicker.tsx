@@ -83,17 +83,13 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     let result = date;
 
     if (range) {
-      const [from, to] = date.split(' - ');
+      let [from, to] = date.split(' - ');
+      let fromD = 0;
+      let toD = 0;
 
-      if (from && to && !from.includes('_') && !to.includes('_')) {
-        let fromD = stringToDate(from).getTime();
-        let toD = stringToDate(to).getTime();
-
-
-        /** Если дата ПО меньше даты С, ставим дату ПО на 1 день больше даты С*/
-        if (toD < fromD) {
-          toD = fromD + 24 * 3600 * 1000;
-        }
+      /** Валидация даты С */
+      if (from && !from.includes('_')) {
+        fromD = stringToDate(from).getTime();
 
         if (minDate && fromD < minDate.getTime()) {
           fromD = minDate.getTime();
@@ -103,12 +99,26 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           fromD = minDate ? minDate.getTime() : maxDate.getTime();
         }
 
+        from = formatDate(fromD).date;
+      }
+
+      if (to && !to.includes('_')) {
+        toD = stringToDate(to).getTime();
+
+        /** Если дата ПО меньше даты С, ставим дату ПО на 1 день больше даты С*/
+        if (toD < fromD) {
+          toD = fromD + 24 * 3600 * 1000;
+        }
+
         if (maxDate && toD > maxDate.getTime()) {
           toD = maxDate.getTime();
         }
 
+        to = formatDate(toD).date;
+      }
 
-        result = `${formatDate(fromD).date} - ${formatDate(toD).date}`;
+      if (from || to) {
+        result = [from, to].join(' - ');
       }
     } else {
       const d = stringToDate(date);
@@ -173,11 +183,11 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   };
 
   const onDatepickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    setInputValue(validate(e.target.value));
   };
 
   const setValue = (value: string) => {
-    setInputValue(value);
+    setInputValue(validate(value));
   };
 
   useEffect(() => {
