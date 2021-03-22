@@ -3,9 +3,7 @@ import Story from '../../storybook/Story';
 import StoryItem from '../../storybook/StoryItem';
 import NewDatepicker from './NewDatepicker';
 import { useReactiveForm } from 'use-reactive-form';
-import {
-  Button, Checkbox, Message
-} from '../../../index';
+import { Button, Checkbox } from '../../../index';
 import { IDateVariants } from '../../../types/projects.types';
 
 export default {
@@ -107,8 +105,7 @@ export const newDatepicker = () => {
         </form>
       </StoryItem>
 
-      <StoryItem description='Выбор диапазона. Задается пропсом range'>
-        <Message variant='danger'>В разработке</Message>
+      <StoryItem description='Выбор диапазона. Задается пропсом range. На вход принимает только строку.'>
         <form ref={rangeForm.ref} onSubmit={onRangeSubmit} style={{
           display: 'flex',
           marginTop: '24px'

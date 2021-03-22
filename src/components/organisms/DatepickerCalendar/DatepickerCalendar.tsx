@@ -138,14 +138,15 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
         dates[0] = date;
         setInputValue(formatDate(date.getTime()).date + ' - __.__.____');
       } else {
-        if (date.getTime() >= dates[0]?.getTime()) {
-          dates[1] = date;
-          const tmp = value.split(' - ');
-          tmp[1] = formatDate(date.getTime()).date;
-          const newValue = tmp.join(' - ');
-          setInputValue(newValue);
-          toggleCalendar(false);
+        dates[1] = date;
+
+        if (dates[1].getTime() < dates[0]?.getTime()) {
+          dates = [dates[1], dates[0]];
         }
+
+        const newValue = `${formatDate(dates[0]?.getTime()).date} - ${formatDate(dates[1]?.getTime()).date}`;
+        setInputValue(newValue);
+        toggleCalendar(false);
       }
     } else {
       setInputValue(formatDate(date.getTime()).date);
