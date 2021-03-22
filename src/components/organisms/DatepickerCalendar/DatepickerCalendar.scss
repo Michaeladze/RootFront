@@ -108,7 +108,6 @@
   flex-wrap: wrap;
   padding: 4px;
   border-top: 1px solid var(--base-200);
-  cursor: pointer;
 }
 
 // Days
@@ -303,4 +302,12 @@
 .rf-datepicker__calendar-month-wrapper--range .rf-datepicker__calendar-tile:hover,
 .rf-datepicker__calendar-month-year--range .rf-datepicker__calendar-tile:hover {
   background-color: var(--accent-200);
+}
+
+.rf-datepicker__calendar-tile:not(.rf-datepicker__calendar-date--disabled) {
+  cursor: pointer;
+}
+
+.rf-datepicker__calendar-tile.rf-datepicker__calendar-week-day {
+  cursor: default;
 }
