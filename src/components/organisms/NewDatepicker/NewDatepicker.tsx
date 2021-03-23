@@ -215,7 +215,17 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
         const input = inputRef.current.querySelector('input');
 
         if (input) {
-          input.dispatchEvent(new Event('change'));
+
+          let event;
+
+          if (typeof (Event) === 'function') {
+            event = new Event('change');
+          } else {
+            event = document.createEvent('Event');
+            event.initEvent('change', true, true);
+          }
+
+          input.dispatchEvent(event);
         }
       }
     }, 100);
