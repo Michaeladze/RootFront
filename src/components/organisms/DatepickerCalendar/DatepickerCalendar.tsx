@@ -411,19 +411,19 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     <div className='rf-datepicker__calendar' ref={contentRef} style={coordinates}>
       <header className='rf-datepicker__calendar-header'>
         <div className='rf-calendar__control'>
-          <button className='rf-calendar__button rf-calendar__button-prev' disabled={prevArrowDisabled} onClick={() => onPeriodChange(-1)}>
+          <button type='button' className='rf-calendar__button rf-calendar__button-prev' disabled={prevArrowDisabled} onClick={() => onPeriodChange(-1)}>
             <Chevron className='rf-datepicker__calendar-prev'/>
           </button>
-          <button className='rf-calendar__button rf-calendar__label-button' onClick={onPeriodTypeChange}>
+          <button type='button' className='rf-calendar__button rf-calendar__label-button' onClick={onPeriodTypeChange}>
             <span className='rf-datepicker__calendar-label'>
               {periodTypeLabel[periodType]}
             </span>
           </button>
-          <button className='rf-calendar__button rf-calendar__button-next' disabled={nextArrowDisabled} onClick={() => onPeriodChange(1)}>
+          <button type='button' className='rf-calendar__button rf-calendar__button-next' disabled={nextArrowDisabled} onClick={() => onPeriodChange(1)}>
             <Chevron className='rf-datepicker__calendar-right'/>
           </button>
         </div>
-        <button className='rf-datepicker__calendar-today' disabled={todayDisabled} onClick={() => onDateChange(new Date())}>Сегодня</button>
+        <button type='button' className='rf-datepicker__calendar-today' disabled={todayDisabled} onClick={() => onDateChange(new Date())}>Сегодня</button>
       </header>
 
       {periodType === 'day' && (
