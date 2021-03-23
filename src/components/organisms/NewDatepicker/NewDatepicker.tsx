@@ -137,7 +137,16 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   /** Проверяем и подставляем defaultValue */
   useEffect(() => {
-    const inputValue = validate(parseToFormat(defaultValue).string);
+    if (!defaultValue) {
+      return;
+    }
+
+    let inputValue = parseToFormat(defaultValue).string;
+
+    if (!inputValue.includes('_')) {
+      inputValue = validate(parseToFormat(defaultValue).string);
+    }
+
     setInputValue(inputValue);
   }, [defaultValue, minDate, maxDate]);
 

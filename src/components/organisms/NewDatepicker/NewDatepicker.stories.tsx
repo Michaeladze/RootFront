@@ -5,6 +5,7 @@ import NewDatepicker from './NewDatepicker';
 import { useReactiveForm } from 'use-reactive-form';
 import { Button, Checkbox } from '../../../index';
 import { IDateVariants } from '../../../types/projects.types';
+import { object, string } from 'yup';
 
 export default {
   title: 'Form Controls/NewDatepicker',
@@ -26,22 +27,44 @@ export const newDatepicker = () => {
 
   // --------------------------------------------------------------------------------
 
+  const [disabled, setDisabled] = useState(false);
+
   const config = {
     fields: {
       fromDate: '',
       toDate: ''
-    }
+    },
+    schema: object().shape({
+      fromDate: string().test({
+        test: (value: any) => {
+          return !value.includes('_') && value.length > 0;
+        },
+        message: 'Выберите дату начала'
+      }),
+      toDate: disabled ?
+        string()
+          .notRequired() :
+        string().test({
+          test: (value: any) => {
+            return !value.includes('_') && value.length > 0;
+          },
+          message: 'Выберите дату окончания'
+        })
+    })
   };
-  const { ref, values, update } = useReactiveForm(config);
+  const { ref, values, validate, errors, update } = useReactiveForm(config);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({
-      ...values,
-      toDate: disabled ? -1 : values.toDate
-    });
-  };
 
-  const [disabled, setDisabled] = useState(false);
+    if (validate()) {
+      console.log({
+        ...values,
+        toDate: disabled ? -1 : values.toDate
+      });
+    } else {
+      console.log(errors);
+    }
+  };
 
   const onDateChange = (date: IDateVariants, name?: string) => {
     if (date && name) {
@@ -103,6 +126,8 @@ export const newDatepicker = () => {
             <Button type='submit'>Отправить</Button>
           </div>
         </form>
+        {errors.fromDate?.error && <p style={{ marginTop: '8px' }}>{errors.fromDate.error}</p>}
+        {errors.toDate?.error && <p style={{ marginTop: '8px' }}>{errors.toDate.error}</p>}
       </StoryItem>
 
       <StoryItem description='Выбор диапазона. Задается пропсом range. На вход принимает только строку.'>
