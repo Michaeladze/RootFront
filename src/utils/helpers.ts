@@ -125,7 +125,7 @@ export const stringToDate = (s: string): Date => {
   dd = dd.includes('_') ? formatToday[0] : dd;
   mm = mm.includes('_') ? formatToday[1] : mm;
   yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;
-  return new Date(+yyyy, +mm, +dd);
+  return new Date(+yyyy, +mm - 1, +dd);
 };
 
 /**
