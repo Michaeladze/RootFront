@@ -28,6 +28,8 @@ export interface IFileInputProps extends Omit<IButtonProps, 'onError'> {
   onError?: (err: Error) => void;
   /** Максимальный размер - kB */
   maxSize?: number;
+  /** Количество файлов */
+  count?: number;
   /** Сжать изображения */
   compressImages?: boolean;
 }
@@ -43,6 +45,7 @@ const FileInput: React.FC<IFileInputProps> = ({
   setFile,
   onError,
   maxSize,
+  count,
   ...props
 }: IFileInputProps) => {
   /** Файл */
@@ -57,7 +60,7 @@ const FileInput: React.FC<IFileInputProps> = ({
     if (ref.current && ref.current.files) {
       const promises: Promise<IFileData>[] = [];
 
-      Array.from(ref.current.files as FileList).forEach((fl: File) => {
+      Array.from(ref.current.files as FileList).slice(0, count).forEach((fl: File) => {
         const validationResult = validateFile(fl, {
           maxSize,
           accept
