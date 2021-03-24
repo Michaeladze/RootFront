@@ -75,6 +75,7 @@ import InfoCircle from './components/_icons/info-circle';
 import PersonAddOutline from './components/_icons/person-add-outline';
 import BoxGrid from './components/_icons/box-grid';
 import Close from './components/_icons/close';
+import Forward from './components/_icons/forward';
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -148,5 +149,6 @@ export {
   InfoCircle,
   PersonAddOutline,
   BoxGrid,
-  Close
+  Close,
+  Forward
 };

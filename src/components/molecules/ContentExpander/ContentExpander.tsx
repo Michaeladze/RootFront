@@ -8,6 +8,7 @@ export interface IContentExpanderProps {
   defaultValue?: boolean;
   onExpand?: () => void;
   expanded?: boolean;
+  stickArrow?: boolean;
   className?: string;
 }
 
@@ -18,7 +19,8 @@ const ContentExpander: React.FC<IContentExpanderProps> = ({
   expanded,
   defaultValue = false,
   className = '',
-  disabled = false
+  disabled = false,
+  stickArrow = false
 }: IContentExpanderProps) => {
   /** Раскрыть / Скрыть */
   const [innerExpanded, setInnerExpanded] = useState<boolean>(defaultValue);
@@ -32,9 +34,10 @@ const ContentExpander: React.FC<IContentExpanderProps> = ({
   };
 
   const disabledClass = disabled ? 'expander--disabled' : '';
+  const stickArrowClass = stickArrow ? 'expander--arrow-stick' : '';
 
   return (
-    <div className={`expander ${className} ${disabledClass}`}>
+    <div className={`expander ${className} ${stickArrowClass} ${disabledClass}`}>
       <h3 className='expander__title' onClick={onClick}>
         <span className='expander__title-text'>{title}</span>
         <Angle className={`expander__icon ${expanded || innerExpanded ? 'expander__icon--rotate' : ''}`} />
