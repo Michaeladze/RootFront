@@ -197,8 +197,9 @@ export const oDataTransform = <T>():MonoTypeOperatorFunction<T> => map((data: an
 });
 
 /** Функция для добавления пробелов в число */
-export const numberWithSpaces = (x: number): string => {
+export const numberWithSpaces = (x: number, n = 3): string => {
   const parts = x.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const regex = new RegExp(`\\B(?=(\\d{${n}})+(?!\\d))`, 'g');
+  parts[0] = parts[0].replace(regex, ' ');
   return parts.join('.');
 };
