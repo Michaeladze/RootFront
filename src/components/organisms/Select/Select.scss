@@ -72,43 +72,49 @@
   padding-right: 32px;
 }
 
-.rf-select__input-icon {
-  position: absolute;
-  width: 24px;
-  top: 50%;
-  transform: translateY(-50%) rotate(0);
-  transition: 0.35s;
-}
+.rf-select {
+  .rf-select__input-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%) rotate(0);
+    transition: 0.35s;
+  }
 
-.rf-select__input-icon svg {
-  color: var(--base-500);
-}
+  .rf-select__input-icon svg {
+    color: var(--base-500);
+  }
 
-.rf-select__input-angle {
-  right: 8px;
-  cursor: pointer;
-}
+  .rf-select__input-angle {
+    right: 8px;
+    cursor: pointer;
+  }
 
-.rf-select__input-clear {
-  right: 40px;
-  width: 24px;
-  cursor: pointer;
-  display: none;
-  pointer-events: none;
-  color: var(--base-300);
-}
+  .rf-select__input-clear {
+    right: 40px;
+    width: 24px;
+    cursor: pointer;
+    display: none;
+    pointer-events: none;
+    color: var(--base-300);
+  }
 
-.rf-select__input-clear--show {
-  display: block;
-  pointer-events: auto;
-}
+  .rf-select__input-clear--show {
+    display: block;
+    pointer-events: auto;
+  }
 
-.rf-select__input-clear:hover {
-  color: var(--base-500);
-}
+  .rf-select__input-clear:hover {
+    color: var(--base-500);
+  }
 
-.rf-select__input-angle--rotate {
-  transform: translateY(-50%) rotate(180deg);
+  .rf-select__input-angle--rotate {
+    transform: translateY(-50%) rotate(180deg);
+  }
 }
 
 .rf-select__chips {
