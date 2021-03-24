@@ -13,7 +13,7 @@
     "allowJs": true,
     "esModuleInterop": true,
     "strict": true,
-    "module": "commonjs",
+    "module": "ESNext",
     "moduleResolution": "node",
     "jsx": "react"
   },
