@@ -102,6 +102,7 @@ const FeedbackPopup: React.FC<IFeedbackPopupProps> = ({ user, sendFeedback, onCl
           maxSize={500}
           accept='image/*'
         />
+
         {/* <div className='feedback__file-notifications'>*/}
         {/*  <p className='feedback__file-notification'>Максимальное количество файлов: 3 шт. по 500 Kb.</p>*/}
         {/* </div>*/}
