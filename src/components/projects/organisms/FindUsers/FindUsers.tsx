@@ -142,7 +142,8 @@ const FindUsers: FC<IProps> = ({
         <Checkbox
           label={label}
           align='center'
-          checked={selectedPeopleMap[item.id]}
+          value={item.id}
+          defaultChecked={selectedPeopleMap[item.id]}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, item)}
         />
       </div>

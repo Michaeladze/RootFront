@@ -16,6 +16,7 @@ export const findUsers = () => {
   const subtitle = 'Поиск только по сотрудникам банка, которым вы можете делегировать свои полномочия (роль “Делегирование”).';
 
   const [filtered, setFiltered] = useState<IUser[]>(users);
+  const [selected, setSelected] = useState<IUser[]>([]);
 
   const onClear = () => {
     setFiltered(users);
@@ -29,7 +30,7 @@ export const findUsers = () => {
   const [show, toggle] = useState(false);
 
   const getUsers = (users: IUser[]) => {
-    console.log(users);
+    setSelected(users);
   };
 
   return (
@@ -43,6 +44,7 @@ export const findUsers = () => {
               onSearch={onSearch}
               getUsers={getUsers}
               searchData={filtered}
+              users={selected}
               loaded={true}
               onClose={() => toggle(false)}
               subtitle={subtitle}/>
