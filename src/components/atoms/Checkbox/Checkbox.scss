@@ -5,6 +5,18 @@
   cursor: pointer;
 }
 
+.rf-checkbox--flex-start {
+  align-items: flex-start;
+}
+
+.rf-checkbox--center {
+  align-items: center;
+}
+
+.rf-checkbox--flex-end {
+  align-items: flex-end;
+}
+
 .rf-checkbox__input {
   position: absolute;
   top: -9999px;

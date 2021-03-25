@@ -1,7 +1,7 @@
 @import "../../../../styles/mixins";
 
 .find-users__wrapper {
-  width: 464px;
+  width: 832px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -27,6 +27,7 @@
 .find-users__input-wrapper {
   position: relative;
   margin: 24px 0;
+  max-width: 432px;
 }
 
 .find-users__input-wrapper > div {
@@ -55,15 +56,14 @@
 }
 
 .find-users__list-wrapper {
-  min-height: 0;
-  overflow-y: auto;
   flex: 1 auto;
 
-  margin-right: -24px;
-  padding-right: 24px;
-  margin-top: 8px;
+  min-height: 320px;
+  margin: 0 -48px;
+  padding: 8px 48px 24px;
 
   position: relative;
+  border-bottom: 1px solid var(--base-200);
 }
 
 .list-users__wrapper {
@@ -80,28 +80,24 @@
   padding: 0 16px;
 }
 
+.list-users__user {
+  display: flex;
+  padding-left: 14px;
+}
+
 .list-users__user-name {
   @include s1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .list-users__user-position {
   @include p2;
+  color: var(--base-500);
 }
 
-.list-users__button-add,
-.list-users__button-add:focus,
-.list-users__button-add:hover {
-  margin-left: auto;
-  background-color: var(--accent-100);
-  color: var(--accent-500);
-}
-
-.list-users__button-check,
-.list-users__button-check:focus,
-.list-users__button-check:hover {
-  margin-left: auto;
-  background-color: var(--accent-500);
-  color: var(--base-000);
+.list-users__user-id {
+  margin-left: 4px;
 }
 
 .selected__list-wrapper {
@@ -112,6 +108,8 @@
 
 .selected__text {
   @include c2;
+  text-align: center;
+  word-break: break-word;
 }
 
 .selected__button.rf-button {
@@ -181,9 +179,14 @@
 
 .swiper-button-prev.swiper-button-disabled,
 .swiper-button-next.swiper-button-disabled {
-  opacity: 0.1;
+  opacity: 0;
 }
 
 .find-users__message {
   @include p2;
+}
+
+.list-users__user-info {
+  color: var(--accent-500);
+  margin-left: 8px;
 }

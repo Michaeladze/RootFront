@@ -1,5 +1,9 @@
 @import "src/styles/mixins";
 
+.user-structure {
+  min-width: 300px;
+}
+
 .user-structure__item:not(:last-of-type) {
   margin-bottom: 16px;
 }

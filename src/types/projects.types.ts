@@ -17,6 +17,8 @@ export interface IUser {
   photo: string;
   /** Должность */
   position: string;
+  /** ID должности  */
+  positionId?: string;
   /** Подразделение */
   department: string;
   /** Департамент ID */
@@ -29,7 +31,6 @@ export interface IUser {
   salary?: number;
   /** Валюта */
   currency?: string;
-
   /** Орг структура */
   departmentsPath?: IUserStructure[];
 }

@@ -16,10 +16,12 @@ export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: boolean;
   /** Вариант */
   variant?: Variant;
+  /** Вертикальное выравнивание */
+  align?: 'flex-start' | 'center' | 'flex-end';
 }
 
 const Checkbox: FC<ICheckboxProps> = ({
-  label, value, node, icon = true, variant = 'accent', ...props
+  label, value, node, icon = true, variant = 'accent', align = 'flex-start', ...props
 }: ICheckboxProps) => {
   /** Отображение иконки */
   const withIcon = icon ? (
@@ -33,9 +35,14 @@ const Checkbox: FC<ICheckboxProps> = ({
   );
 
   const disabledClass = props.disabled ? 'disabled' : '';
+  const alignClass: Record<string, string> = {
+    'flex-start': 'rf-checkbox--flex-start',
+    'center': 'rf-checkbox--center',
+    'flex-end': 'rf-checkbox--flex-end',
+  };
 
   return (
-    <label className={`rf-checkbox ${props.className || ''} ${disabledClass} `}>
+    <label className={`rf-checkbox ${props.className || ''} ${disabledClass} ${alignClass[align]} `}>
       <input {...props} type='checkbox' className='rf-checkbox__input' value={value} />
 
       {withIcon}
