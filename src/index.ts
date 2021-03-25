@@ -76,10 +76,14 @@ import PersonAddOutline from './components/_icons/person-add-outline';
 import BoxGrid from './components/_icons/box-grid';
 import Close from './components/_icons/close';
 import Forward from './components/_icons/forward';
+import { useUndo } from './hooks/useUndo';
+import { setTitle } from './utils/setTitle';
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-export { useClickOutside, useLocation };
+export {
+  useClickOutside, useLocation, useUndo
+};
 export {
   Switch,
   Tile,
@@ -132,7 +136,7 @@ export {
 };
 
 export {
-  formatDate, getShortString, getMonthName, oDataTransform, stringToDate
+  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, setTitle
 };
 
 

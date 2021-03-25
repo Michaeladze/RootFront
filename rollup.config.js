@@ -9,15 +9,17 @@ import react from 'react';
 import reactDom from 'react-dom';
 import { babel } from '@rollup/plugin-babel';
 import reactIs from 'react-is';
-
+import packageJson from './package.json';
 export default {
   input: 'src/index.ts',
 
   output: [
     {
-      dir: 'dist',
-      format: 'es'
-    }
+      // This is an easy way to keep your `main` in sync between rollup & the package
+      file: packageJson.main,
+      format: 'cjs',
+      sourcemap: true,
+    },
   ],
   plugins: [
     external(),
