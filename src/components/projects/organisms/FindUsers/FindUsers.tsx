@@ -81,9 +81,7 @@ const FindUsers: FC<IProps> = ({
 
   /** Сбрасываем поиск на старте */
   useEffect(() => {
-    return () => {
-      onSearch && onSearch('');
-    };
+    onSearch && onSearch('');
   }, []);
 
   const onSubmit = () => {
