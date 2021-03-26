@@ -29,17 +29,20 @@ export interface IProps {
   onClear?: () => void;
   /** Вернуть выбранных пользователей в компонент */
   getUsers?: (data: IUser[]) => void;
-  /** Дополнительная информация о депортаменте поиска */
+  /** Дополнительная информация о департаменте поиска */
   department?: string;
   /** Флаг загрузки */
   loaded: boolean;
   /** Подзаголовок */
   subtitle?: ReactNode;
+  /** Деактивировать выбранных пользователей */
+  disableSelected?: boolean;
 }
 
 const FindUsers: FC<IProps> = ({
   onClose,
   users = [],
+  disableSelected,
   searchData = [],
   onSearch,
   getUsers,
@@ -57,6 +60,8 @@ const FindUsers: FC<IProps> = ({
     a[u.id] = true;
     return a;
   }, {});
+
+  const disablePeopleMap = useRef<Record<string, boolean>>(selectedPeopleMap);
 
   /** Строка поиска */
   const [searchString, setSearchString] = useState<string>('');
@@ -143,6 +148,7 @@ const FindUsers: FC<IProps> = ({
           label={label}
           align='center'
           value={item.id}
+          disabled={disableSelected && disablePeopleMap.current[item.id]}
           defaultChecked={selectedPeopleMap[item.id]}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, item)}
         />
@@ -158,9 +164,11 @@ const FindUsers: FC<IProps> = ({
       <UserPhoto url={item.photo} radius={'48px'} fullName={`${item.firstName} ${item.lastName}`} />
       <h5 className='selected__text'>{`${item.lastName}`}</h5>
       <h5 className='selected__text'>{`${item.firstName}`}</h5>
-      <Button className='selected__button' onClick={() => removeHandle(item)} buttonType='round'>
-        <Close />
-      </Button>
+      { disableSelected && disablePeopleMap.current[item.id] && (
+        <Button className='selected__button' onClick={() => removeHandle(item)} buttonType='round'>
+          <Close/>
+        </Button>
+      )}
     </SwiperSlide>
   ));
 
