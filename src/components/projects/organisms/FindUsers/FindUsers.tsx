@@ -164,7 +164,7 @@ const FindUsers: FC<IProps> = ({
       <UserPhoto url={item.photo} radius={'48px'} fullName={`${item.firstName} ${item.lastName}`} />
       <h5 className='selected__text'>{`${item.lastName}`}</h5>
       <h5 className='selected__text'>{`${item.firstName}`}</h5>
-      { disableSelected && disablePeopleMap.current[item.id] && (
+      { !(disableSelected && disablePeopleMap.current[item.id]) && (
         <Button className='selected__button' onClick={() => removeHandle(item)} buttonType='round'>
           <Close/>
         </Button>
