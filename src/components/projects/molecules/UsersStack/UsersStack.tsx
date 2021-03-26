@@ -3,7 +3,7 @@ import { IUser } from '../../../../types/projects.types';
 import { UserPhoto } from '../../../../index';
 
 export interface IUsersStackProps {
-  usersMocks: IUser[];
+  users: IUser[];
   /** Радиус */
   radius?: string;
 }
