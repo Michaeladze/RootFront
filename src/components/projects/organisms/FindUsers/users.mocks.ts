@@ -1,6 +1,6 @@
 import { IUser } from '../../../../types/projects.types';
 
-export const users: IUser[] = [
+export const usersMocks: IUser[] = [
   {
     id: '#000001',
     firstName: 'Illidan',

@@ -3,7 +3,7 @@ import FindUsers from './FindUsers';
 import Story from '../../../storybook/Story';
 import StoryItem from '../../../storybook/StoryItem';
 import { Button, Modal } from '../../../../index';
-import { users } from './users';
+import { usersMocks } from './users.mocks';
 import { IUser } from '../../../../types/projects.types';
 
 export default {
@@ -15,15 +15,15 @@ export const findUsers = () => {
 
   const subtitle = 'Поиск только по сотрудникам банка, которым вы можете делегировать свои полномочия (роль “Делегирование”).';
 
-  const [filtered, setFiltered] = useState<IUser[]>(users);
+  const [filtered, setFiltered] = useState<IUser[]>(usersMocks);
   const [selected, setSelected] = useState<IUser[]>([]);
 
   const onClear = () => {
-    setFiltered(users);
+    setFiltered(usersMocks);
   };
 
   const onSearch = (s: string) => {
-    const tmp = users.filter((u: IUser) => u.fullName.toLowerCase().includes(s.toLowerCase()));
+    const tmp = usersMocks.filter((u: IUser) => u.fullName.toLowerCase().includes(s.toLowerCase()));
     setFiltered(tmp);
   };
 
