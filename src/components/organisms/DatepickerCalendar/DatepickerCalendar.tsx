@@ -382,21 +382,32 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  /** Активность месяцев */
-  const prevMonthDisabled = periodType === 'day' && !!minDate && minDate.getMonth() > activePeriod.month - 1;
-  const nextMonthDisabled = periodType === 'day' && !!maxDate && maxDate.getMonth() < activePeriod.month + 1;
-
   /** Активность годов */
-  const prevYearDisabled = periodType === 'month' && !!minDate && minDate.getFullYear() > activePeriod.year - 1;
-  const nextYearDisabled = periodType === 'month' && !!maxDate && maxDate.getFullYear() < activePeriod.year + 1;
+  const prevYearDisabled = !!minDate && minDate.getFullYear() > activePeriod.year - 1;
+  const nextYearDisabled = !!maxDate && maxDate.getFullYear() < activePeriod.year + 1;
 
-  /** Активность декад */
-  const prevDecadeDisabled = periodType === 'year' && !!minDate && minDate.getFullYear() > decadeStart;
-  const nextDecadeDisabled = periodType === 'year' && !!maxDate && maxDate.getFullYear() < decadeStart + 10;
+  const arrowsDisabled = {
+    prevArrowDisabled: {
+      /** Активность перд. месяцев */
+      day: prevYearDisabled && !!minDate && minDate.getMonth() > activePeriod.month - 1,
+      /** Активность перд. годов */
+      month: prevYearDisabled,
+      /** Активность перд. декад */
+      year: !!minDate && minDate.getFullYear() > decadeStart
+    },
+    nextArrowDisabled: {
+      /** Активность след. месяцев */
+      day: nextYearDisabled && !!maxDate && maxDate.getMonth() < activePeriod.month + 1,
+      /** Активность след. годов */
+      month: nextYearDisabled,
+      /** Активность след. декад */
+      year: !!maxDate && maxDate.getFullYear() < decadeStart + 10
+    }
+  };
 
   /** Флаг активности стрелок */
-  const prevArrowDisabled: boolean = prevMonthDisabled || prevYearDisabled || prevDecadeDisabled;
-  const nextArrowDisabled: boolean = nextMonthDisabled || nextYearDisabled || nextDecadeDisabled;
+  const prevArrowDisabled: boolean = arrowsDisabled.prevArrowDisabled[periodType];
+  const nextArrowDisabled: boolean = arrowsDisabled.nextArrowDisabled[periodType];
 
   /** Активность кнопки Сегодня */
   const d = new Date();
