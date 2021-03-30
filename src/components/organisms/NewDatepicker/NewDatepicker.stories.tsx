@@ -104,7 +104,7 @@ export const newDatepicker = () => {
               name='fromDate'
               defaultValue={values.fromDate}
               min={new Date()}
-              max={new Date().getTime() + 1000 * 3600 * 24 * 30}
+              max={new Date().getTime() + 1000 * 3600 * 24 * 370}
               onChange={onDateChange} />
           </div>
           <div style={{
