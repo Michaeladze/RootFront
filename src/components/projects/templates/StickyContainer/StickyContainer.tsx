@@ -7,13 +7,15 @@ import { install } from 'resize-observer';
 
 interface IProps {
   containerSelector: string;
+  /** Контейнер со сроллом, по-умолчанию = window */
+  scrollContainer?: string;
   children?: ReactNode | ReactNode[];
   top?: number;
   bottom?: number;
 }
 
 const StickyContainer: React.FC<IProps> = ({
-  containerSelector,
+  containerSelector, scrollContainer,
   children,
   top = 0,
   bottom = 0
@@ -32,6 +34,7 @@ const StickyContainer: React.FC<IProps> = ({
       /** https://blixhavn.github.io/sticky-sidebar-v2/ */
       sidebar = new StickySidebar('.rf-sticky-container', {
         containerSelector,
+        scrollContainer,
         innerWrapperSelector: '.rf-sticky-element',
         topSpacing: top,
         bottomSpacing: bottom
@@ -42,7 +45,7 @@ const StickyContainer: React.FC<IProps> = ({
     return () => {
       sidebar.destroy();
     };
-  }, []);
+  }, [top, bottom]);
 
   return (
     <div className='rf-sticky-container' ref={container}>
