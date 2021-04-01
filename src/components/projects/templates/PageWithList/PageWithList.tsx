@@ -16,6 +16,8 @@ interface IProps {
 
 const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preloader = false }: IProps) => {
 
+  /** Ссылка контейнер страницы */
+  const listPageRef = useRef<HTMLDivElement>(null);
   /** Ссылка на меню */
   const actionMenuRef = useRef<HTMLDivElement>(null);
   /** Ссылка на разделитель скролла */
@@ -75,7 +77,7 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
   };
 
   return (
-    <div className='rf-page__with-list'>
+    <div className='rf-page__with-list' ref={listPageRef}>
       {
         preloader ? <Preloader/> : (
           <>
@@ -83,7 +85,7 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
               <aside className='rf-page__aside-filters'>
                 <StickyContainer
                   containerSelector='.rf-page__with-list'
-                  top={actionMenu && actionMenuRef.current ? actionMenuRef.current.getBoundingClientRect().top : 180}
+                  top={listPageRef.current ? listPageRef.current.getBoundingClientRect().top : 0}
                   bottom={FILTERS_OFFSET_SCROLL_BOTTOM}
                 >
 
