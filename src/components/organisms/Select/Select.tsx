@@ -176,14 +176,18 @@ const Select: FC<ISelectProps> = ({
           <li className={`rf-select__list-item ${hiddenClass}`} key={v.value}>
             {multiSelect ? (
               <Checkbox
-                {...v}
+                label={v.label}
+                value={v.value}
+                disabled={v.disabled}
                 name={props.name || 'defaultSelectName'}
                 onChange={onOptChange}
                 checked={defaultChecked}
               />
             ) : (
               <Radio
-                {...v}
+                label={v.label}
+                value={v.value}
+                disabled={v.disabled}
                 name={props.name || 'defaultSelectName'}
                 onChange={onOptChange}
                 onClick={onOptClick}
