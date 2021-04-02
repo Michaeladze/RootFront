@@ -19,6 +19,10 @@ export interface IModalProps {
   headerContent?: React.ReactNode;
   /** Контент для футера в модальном окне */
   footerContent?: React.ReactNode;
+  /** Высота контента */
+  height?: string;
+  /** Запретить общий скролл */
+  disableScroll?: boolean;
 }
 
 const Modal: FC<IModalProps> = ({
@@ -28,7 +32,9 @@ const Modal: FC<IModalProps> = ({
   darkenBackground = true,
   showClose = true,
   headerContent,
-  footerContent
+  footerContent,
+  height,
+  disableScroll = false
 }: IModalProps) => {
   /** Создаем контейнер для модалки */
   const [div] = useState<HTMLDivElement>(document.createElement('div'));
@@ -53,10 +59,14 @@ const Modal: FC<IModalProps> = ({
     };
   });
 
+  const style = height ? { height } : {};
+
   /** Обертка для модалки */
   const modal = (
     <div className={`rf-modal ${darkenBackground ? 'rf-modal--darken' : ''}`} onClick={onClose}>
-      <div className={`rf-modal__wrapper ${className}`} onClick={(e) => e.stopPropagation()}>
+      <div style={style}
+        className={`rf-modal__wrapper rf-modal__wrapper1 ${className}`}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}>
         {showClose && (
           <button className='rf-modal__close-button' onClick={onClose}>
             <Close />
@@ -65,7 +75,7 @@ const Modal: FC<IModalProps> = ({
 
         {headerContent && <div className='rf-modal__header'>{headerContent}</div>}
 
-        <div className='rf-modal__content'>{children}</div>
+        <div style={{ overflowY: disableScroll ? 'hidden' : 'auto' } } className='rf-modal__content'>{children}</div>
 
         {footerContent && <div className='rf-modal__footer'>{footerContent}</div>}
       </div>

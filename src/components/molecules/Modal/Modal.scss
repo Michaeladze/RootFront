@@ -31,14 +31,12 @@
   max-width: 90vw;
   max-height: 95vh;
   background: var(--base-000);
-  overflow-y: auto;
-
+  overflow-y: hidden;
 }
 
 .rf-modal__content {
   padding: 40px 48px;
   flex-grow: 1;
-  overflow-y: auto;
 }
 
 .rf-modal__header {
