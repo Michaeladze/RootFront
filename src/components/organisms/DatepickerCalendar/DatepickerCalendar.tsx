@@ -83,7 +83,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const [coordinates, setCoordinates] = useState({
-    top: '-9999px',
+    top: '-99999px',
     left: '0',
     right: 'auto'
   });
