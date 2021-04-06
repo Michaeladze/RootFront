@@ -1,5 +1,5 @@
 import React, {
-  ReactNode, useEffect, useRef
+  ReactNode, useEffect, useRef, useState
 } from 'react';
 import { Preloader } from '../../../../index';
 import StickyContainer from '../StickyContainer';
@@ -17,7 +17,7 @@ interface IProps {
 const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preloader = false }: IProps) => {
 
   /** Ссылка контейнер страницы */
-  const listPageRef = useRef<HTMLDivElement>(null);
+  const [listPageRef, setNode] = useState<HTMLDivElement | null>(null);
   /** Ссылка на меню */
   const actionMenuRef = useRef<HTMLDivElement>(null);
   /** Ссылка на разделитель скролла */
@@ -29,6 +29,8 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
   const SHOW_DIVIDER_SCROLL_TOP = 10;
   /** Отступ снизу при прокрутке блока фильтров */
   const FILTERS_OFFSET_SCROLL_BOTTOM = 33;
+  /** Горизонтальный паддинг ActionMenu */
+  const ACTION_MENU_PADDING = 16;
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -58,26 +60,28 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
 
         if (mainRef.current) {
           mainRef.current.style.paddingTop = `${actionMenuRef.current.offsetHeight}px`;
+          actionMenuRef.current.style.left = mainRef.current.getBoundingClientRect().left - ACTION_MENU_PADDING + 'px';
+          actionMenuRef.current.style.width = mainRef.current.getBoundingClientRect().width + 'px';
         }
       }
 
     });
   }, [actionMenu]);
 
-  const stylesForActionMenu = filters ? {
-    width: 'calc(100% - 360px)',
-    maxWidth: '1000px',
-    left: '336px',
-    padding: '0 0 24px 0',
-  } : {
-    width: 'calc(100% - 48px)',
-    maxWidth: '1320px',
-    left: '0',
-    padding: '0 24px 24px'
-  };
+  const [top, setTop] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (listPageRef) {
+        setTop(listPageRef.getBoundingClientRect().top);
+      }
+    });
+  }, [listPageRef]);
+
+  const stylesForActionMenu = filters ? { maxWidth: '1000px' } : { maxWidth: '1320px' };
 
   return (
-    <div className='rf-page__with-list' ref={listPageRef}>
+    <div className='rf-page__with-list' ref={(node) => setNode(node)}>
       {
         preloader ? <Preloader/> : (
           <>
@@ -85,7 +89,7 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
               <aside className='rf-page__aside-filters'>
                 <StickyContainer
                   containerSelector='.rf-page__with-list'
-                  top={listPageRef.current ? listPageRef.current.getBoundingClientRect().top : 0}
+                  top={top}
                   bottom={FILTERS_OFFSET_SCROLL_BOTTOM}
                 >
 
