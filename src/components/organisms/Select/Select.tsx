@@ -284,7 +284,7 @@ const Select: FC<ISelectProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  const clearIconClass = !props.readOnly && inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
+  const clearIconClass = inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
 
   return (
     <div className={`rf-select ${sizeClass[size]} ${props.className || ''}`} ref={componentNode}>
@@ -306,14 +306,16 @@ const Select: FC<ISelectProps> = ({
           className={`rf-select__input-icon rf-select__input-clear ${clearIconClass}`}>
           <Close />
         </Button>
-        <Button
-          buttonType='text'
-          disabled={props.disabled}
-          className={`rf-select__input-icon rf-select__input-angle
+        {inputValue.length === 0 && (
+          <Button
+            buttonType='text'
+            disabled={props.disabled}
+            className={`rf-select__input-icon rf-select__input-angle
                 ${showDropdown ? 'rf-select__input-angle--rotate' : ''}`}
-          onClick={openSelectDropdown}>
-          <Angle />
-        </Button>
+            onClick={openSelectDropdown}>
+            <Angle/>
+          </Button>
+        )}
       </div>
 
       <ul className={`rf-select__list ${showDropdown ? 'rf-select__list--show' : ''}`} ref={dropdownRef} onScroll={(e: any) => e.stopPropagation()}>
