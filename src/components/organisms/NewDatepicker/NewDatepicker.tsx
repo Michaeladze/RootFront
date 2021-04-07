@@ -3,7 +3,7 @@ import React, {
   useEffect, useRef, useState
 } from 'react';
 import { formatDate, Input } from '../../../index';
-import { Size } from '../../../types';
+import { DateFormat, Size } from '../../../types';
 import Calendar from '../../_icons/calendar-outline';
 import DatepickerCalendar from '../DatepickerCalendar';
 import useClickOutside from '../../../hooks/useClickOutside';
@@ -30,11 +30,18 @@ export interface IDatepickerProps {
   onChange?: (value: IDateVariants, name?: string) => void;
   /** Диапазон */
   range?: boolean;
+  /** Формат */
+  format?: DateFormat;
+  /** Показать день недели */
+  showDayOfWeek?: boolean;
+  /** Язык */
+  locale?: 'ru' | 'en';
 }
 
 const NewDatepicker: React.FC<IDatepickerProps> = ({
   name = 'datepicker',
-  placeholder = 'Выберите дату',
+  locale = 'ru',
+  placeholder = locale === 'ru' ? 'Выберите дату' : 'Choose a date',
   size = 'medium',
   defaultValue,
   min,
@@ -42,7 +49,9 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   disabled = false,
   readOnly = false,
   onChange,
-  range = false
+  range = false,
+  format = 'dd.mm.yyyy',
+  showDayOfWeek = false,
 }: IDatepickerProps) => {
 
   const [minDate, setMinDate] = useState<Date | undefined>(undefined);
@@ -279,7 +288,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
     /[1,2]/,
     /\d/,
     /\d/,
-    /\d/,
+    /\d/
   ];
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -309,6 +318,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           toggleRef={inputRef}
           setInputValue={setValue}
           range={range}
+          locale={locale}
           showCalendar={showCalendar}
           toggleCalendar={toggleCalendar}/>
       )}

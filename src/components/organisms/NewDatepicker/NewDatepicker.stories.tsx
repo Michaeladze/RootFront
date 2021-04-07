@@ -83,8 +83,7 @@ export const newDatepicker = () => {
 
       <StoryItem description='Выбор даты с вводом. Для запрещения ввода используется пропс readOnly.'>
         <div style={{ width: '200px' }}>
-          <NewDatepicker
-            onChange={onChange}/>
+          <NewDatepicker onChange={onChange}/>
         </div>
       </StoryItem>
 

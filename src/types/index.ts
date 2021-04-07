@@ -82,3 +82,6 @@ export type Variant = 'base' | 'accent' | 'info' | 'complement' | 'danger' | 'wa
 
 /** Размер */
 export type Size = 'small' | 'medium' | 'big';
+
+/** Формат даты для дейтпикера */
+export type DateFormat = 'dd.mm.yy' | 'dd.mm.yyyy';

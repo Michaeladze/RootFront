@@ -29,6 +29,8 @@ interface IDatepickerCalendarProps {
   toggleRef: RefObject<HTMLDivElement>
   /** Диапазон */
   range: boolean;
+  /** Язык */
+  locale: 'ru' | 'en';
 }
 
 const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
@@ -39,7 +41,8 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   minDate,
   maxDate,
   toggleRef,
-  range
+  range,
+  locale
 }: IDatepickerCalendarProps) => {
 
   /** Ссылка на контент */
@@ -249,7 +252,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     setPeriodType('day');
   };
 
-  const monthsJSX = months.map((m: string, i: number) => {
+  const monthsJSX = months[locale].map((m: string, i: number) => {
     const d = new Date(activePeriod.year, i);
     const rangeMonthCondition = (rangeDates[0] && isCurrentMonth(d, rangeDates[0])) || (rangeDates[1] && isCurrentMonth(d, rangeDates[1]));
     const activeCondition = range ? rangeMonthCondition : isCurrentMonth(d, currentDate);
@@ -365,7 +368,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const [periodType, setPeriodType] = useState<IDatepickerPeriodType>('day');
 
   const periodTypeLabel: Record<IDatepickerPeriodType, ReactNode> = {
-    day: <> {months[activePeriod.month]} {activePeriod.year} </>,
+    day: <> {months[locale][activePeriod.month]} {activePeriod.year} </>,
     month: <> {activePeriod.year} </>,
     year: <> {decadeStart} - {decadeStart + 9} </>
   };
@@ -434,12 +437,14 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
             <Chevron className='rf-datepicker__calendar-right'/>
           </button>
         </div>
-        <button type='button' className='rf-datepicker__calendar-today' disabled={todayDisabled} onClick={() => onDateChange(new Date())}>Сегодня</button>
+        <button type='button' className='rf-datepicker__calendar-today' disabled={todayDisabled} onClick={() => onDateChange(new Date())}>
+          {locale === 'ru' ? 'Сегодня' : 'Today'}
+        </button>
       </header>
 
       {periodType === 'day' && (
         <div className='rf-datepicker__calendar-week'>
-          {weekDays.map((d: string) => <div className='rf-datepicker__calendar-tile rf-datepicker__calendar-week-day' key={d}>{d}</div>)}
+          {weekDays[locale].map((d: string) => <div className='rf-datepicker__calendar-tile rf-datepicker__calendar-week-day' key={d}>{d}</div>)}
         </div>
       )}
 
