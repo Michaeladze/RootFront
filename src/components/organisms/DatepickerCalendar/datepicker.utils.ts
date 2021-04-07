@@ -181,3 +181,29 @@ export const parseToFormat = (defaultValue?: Date | string | number): {
     string: inputValue
   };
 };
+
+/** Получить день недели по индексу */
+export const getWeekDay = (n: number, locale: DateLocale): string => {
+  const weekDays: Record<DateLocale, string[]> = {
+    ru: [
+      'Вс',
+      'Пн',
+      'Вт',
+      'Ср',
+      'Чт',
+      'Пт',
+      'Сб'
+    ],
+    en: [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat'
+    ]
+  };
+
+  return weekDays[locale][n];
+};

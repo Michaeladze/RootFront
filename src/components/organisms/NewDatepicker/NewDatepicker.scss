@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .rf-datepicker {
   position: relative;
 }
@@ -30,4 +32,14 @@
   .rf-input {
     pointer-events: none;
   }
+}
+
+.rf-datepicker__input-day {
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translateY(-50%);
+  @include p1;
+  pointer-events: none;
+  text-transform: capitalize;
 }

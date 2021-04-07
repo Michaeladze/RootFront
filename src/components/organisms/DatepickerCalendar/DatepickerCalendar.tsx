@@ -63,8 +63,8 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const setRange = (): IDatepickerStack => {
     if (value && range) {
       const values = value.split(' - ');
-      const from = values[0].includes('_') ? undefined : values[0];
-      const to = values[1].includes('_') ? undefined : values[1];
+      const from = values[0]?.includes('_') ? undefined : values[0];
+      const to = values[1]?.includes('_') ? undefined : values[1];
       return [from ? stringToDate(from) : undefined, to ? stringToDate(to) : undefined];
     }
 

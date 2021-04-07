@@ -83,7 +83,7 @@ export const newDatepicker = () => {
 
       <StoryItem description='Выбор даты с вводом. Для запрещения ввода используется пропс readOnly.'>
         <div style={{ width: '200px' }}>
-          <NewDatepicker onChange={onChange}/>
+          <NewDatepicker showDayOfWeek onChange={onChange}/>
         </div>
       </StoryItem>
 
@@ -134,8 +134,14 @@ export const newDatepicker = () => {
           display: 'flex',
           marginTop: '24px'
         }}>
-          <div style={{ width: '240px' }}>
-            <NewDatepicker name='rangeDate' range min={Date.now()} max={Date.now() + 1000 * 3600 * 24 * 10} onChange={onChange} />
+          <div style={{ width: '320px' }}>
+            <NewDatepicker
+              showDayOfWeek
+              name='rangeDate'
+              range
+              min={Date.now()}
+              max={Date.now() + 1000 * 3600 * 24 * 10}
+              onChange={onChange} />
           </div>
           <div style={{ marginLeft: '24px' }}>
             <Button type='submit'>Отправить</Button>
