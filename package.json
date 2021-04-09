@@ -1,6 +1,6 @@
 {
   "name": "root-front",
-  "version": "1.11.36",
+  "version": "1.11.37",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
