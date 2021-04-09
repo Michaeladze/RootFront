@@ -284,7 +284,7 @@ const Select: FC<ISelectProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  const clearIconClass = inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
+  const clearIconClass = !props.readOnly && inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
 
   return (
     <div className={`rf-select ${sizeClass[size]} ${props.className || ''}`} ref={componentNode}>
@@ -306,7 +306,7 @@ const Select: FC<ISelectProps> = ({
           className={`rf-select__input-icon rf-select__input-clear ${clearIconClass}`}>
           <Close />
         </Button>
-        {inputValue.length === 0 && (
+        { (props.readOnly || inputValue.length === 0) && (
           <Button
             buttonType='text'
             disabled={props.disabled}
