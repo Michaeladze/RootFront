@@ -396,7 +396,8 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   return (
     <div className='rf-datepicker' ref={datepickerRef}>
       <div className={`rf-datepicker__input-wrapper ${disabledClass} ${readOnlyClass}`}
-        ref={inputRef} onClick={() => toggleCalendar(true)}>
+        ref={inputRef}
+        onFocus={() => toggleCalendar(true)}>
         <InputMask
           mask={mask}
           name={name}
