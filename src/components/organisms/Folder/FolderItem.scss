@@ -1,0 +1,31 @@
+@import "src/styles/mixins";
+
+.rf-folder__item {
+  position: relative;
+}
+
+.rf-folder__item-label {
+  @include p2;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rf-folder__item-label-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+  transition: transform 0.15s;
+  color: var(--base-500);
+}
+
+.rf-folder__item-label-icon--rotate {
+  transform: rotate(-90deg);
+}
+
+.rf-folder__item--no-children .rf-folder__item-label-icon {
+  opacity: 0;
+}
+
+.rf-folder__item-folder--hidden {
+  display: none;
+}

@@ -6,6 +6,7 @@ export interface IOption {
   value: string;
   disabled?: boolean;
   node?: ReactNode;
+  children?: IOption[];
 }
 
 /** Таб */
