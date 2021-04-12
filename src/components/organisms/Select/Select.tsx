@@ -27,7 +27,7 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Размер */
   size?: Size;
   /** Событие на удаление чипсы */
-  onChipsRemove: (id: string, name?: string) => void;
+  onChipsRemove?: (id: string, name?: string) => void;
 }
 
 const Select: FC<ISelectProps> = ({
