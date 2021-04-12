@@ -26,6 +26,8 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   getValue?: (option: IOption) => void;
   /** Размер */
   size?: Size;
+  /** Событие на удаление чипсы */
+  onChipsRemove: (id: string, name?: string) => void;
 }
 
 const Select: FC<ISelectProps> = ({
@@ -35,6 +37,7 @@ const Select: FC<ISelectProps> = ({
   onChange,
   getValue,
   size = 'medium',
+  onChipsRemove,
   ...props
 }: ISelectProps) => {
   /** Ссылка на текущий компонент */
@@ -233,7 +236,7 @@ const Select: FC<ISelectProps> = ({
   }));
 
   /** Функция удаления чипсы */
-  const onChipsRemove = (id: string) => {
+  const onChipRemove = (id: string) => {
     if (componentNode.current) {
       const checkbox = componentNode.current.querySelector<HTMLInputElement>(`input[value='${id}']`);
 
@@ -245,11 +248,12 @@ const Select: FC<ISelectProps> = ({
     }
 
     setCurrentValue(onOptionRemove(id));
+    onChipsRemove && onChipsRemove(id, props.name);
   };
 
   const chipsJSX = multiSelect && chips.length > 0 && (
     <div className='rf-select__chips'>
-      <Chips variant='accent' items={chips} size={size} onRemove={onChipsRemove} disabled={props.disabled} />
+      <Chips variant='accent' items={chips} size={size} onRemove={onChipRemove} disabled={props.disabled} />
     </div>
   );
 
