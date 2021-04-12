@@ -242,7 +242,15 @@ const Select: FC<ISelectProps> = ({
       const checkbox = componentNode.current.querySelector<HTMLInputElement>(`input[value='${id}']`);
 
       if (checkbox) {
-        const event = new Event('change');
+        let event;
+
+        if (typeof (Event) === 'function') {
+          event = new Event('change');
+        } else {
+          event = document.createEvent('Event');
+          event.initEvent('change', true, true);
+        }
+
         checkbox.dispatchEvent(event);
         checkbox.checked = false;
       }
