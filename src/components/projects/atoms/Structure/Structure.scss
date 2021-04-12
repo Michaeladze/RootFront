@@ -1,19 +1,19 @@
 @import "src/styles/mixins";
 
-.user-structure {
+.structure {
   min-width: 300px;
 }
 
-.user-structure__item:not(:last-of-type) {
+.structure__item:not(:last-of-type) {
   margin-bottom: 16px;
 }
 
-.user-structure__unit {
+.structure__unit {
   @include c1;
   color: var(--base-500);
 }
 
-.user-structure__name {
+.structure__name {
   @include p1;
   color: var(--base-1000);
 }

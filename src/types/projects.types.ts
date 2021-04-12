@@ -32,10 +32,10 @@ export interface IUser {
   /** Валюта */
   currency?: string;
   /** Орг структура */
-  departmentsPath?: IUserStructure[];
+  departmentsPath?: IStructure[];
 }
 
-export interface IUserStructure {
+export interface IStructure {
   id: string;
   name: string;
   unitType: string;

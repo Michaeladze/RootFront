@@ -51,7 +51,7 @@ import UserPhoto from './components/projects/atoms/UserPhoto';
 import UserItem from './components/projects/molecules/User';
 import UsersStack from './components/projects/molecules/UsersStack';
 import PopupFooter from './components/projects/molecules/PopupFooter';
-import UserStructure from './components/projects/atoms/UserStructure';
+import Structure from './components/projects/atoms/Structure';
 import Confirm from './components/projects/popups/Confirm';
 
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
@@ -126,7 +126,7 @@ export {
   PageWithList,
   Badge,
   ActionMenu,
-  UserStructure,
+  Structure,
   NewDatepicker,
   Confirm
 };

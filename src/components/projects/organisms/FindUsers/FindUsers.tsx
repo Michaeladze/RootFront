@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 
 import {
-  Button, Checkbox, Input, PopupFooter, Tooltip, UserPhoto, UserStructure
+  Button, Checkbox, Input, PopupFooter, Tooltip, UserPhoto, Structure
 } from '../../../../index';
 import Preloader from '../../../atoms/Preloader';
 import { IUser } from '../../../../types/projects.types';
@@ -133,7 +133,7 @@ const FindUsers: FC<IProps> = ({
             {item.departmentsPath && (
               <Tooltip>
                 <Info className='list-users__user-info'/>
-                <UserStructure user={item}/>
+                <Structure departmentsPath={item.departmentsPath}/>
               </Tooltip>
             )}
           </h3>
