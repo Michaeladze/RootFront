@@ -103,6 +103,10 @@
     color: var(--base-300);
   }
 
+  .rf-select__input-clear[disabled] {
+    cursor: default;
+  }
+
   .rf-select__input-clear--show {
     display: block;
     pointer-events: auto;

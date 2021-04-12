@@ -64,7 +64,8 @@ const Select: FC<ISelectProps> = ({
   /** Функция фильтрации списка */
   const onFilter = (options: IOption[], search: string) => {
     return options.reduce((acc: Map<string, boolean>, o: IOption) => {
-      if (!o.label.toLowerCase().includes(search.toLowerCase())) {
+      if (!o.label.toLowerCase()
+        .includes(search.toLowerCase())) {
         acc.set(o.value, true);
       }
 
@@ -253,7 +254,7 @@ const Select: FC<ISelectProps> = ({
 
   const chipsJSX = multiSelect && chips.length > 0 && (
     <div className='rf-select__chips'>
-      <Chips variant='accent' items={chips} size={size} onRemove={onChipRemove} disabled={props.disabled} />
+      <Chips variant='accent' items={chips} size={size} onRemove={onChipRemove} disabled={props.disabled}/>
     </div>
   );
 
@@ -303,14 +304,16 @@ const Select: FC<ISelectProps> = ({
           onClick={onInputClick}
           disabled={props.disabled}
         />
-        <Button
-          buttonType='text'
-          disabled={props.disabled}
-          onClick={clearInput}
-          className={`rf-select__input-icon rf-select__input-clear ${clearIconClass}`}>
-          <Close />
-        </Button>
-        { (props.readOnly || inputValue.length === 0) && (
+        {!props.disabled && (
+          <Button
+            buttonType='text'
+            disabled={props.disabled}
+            onClick={clearInput}
+            className={`rf-select__input-icon rf-select__input-clear ${clearIconClass}`}>
+            <Close/>
+          </Button>
+        )}
+        {!props.disabled && (props.readOnly || inputValue.length === 0) && (
           <Button
             buttonType='text'
             disabled={props.disabled}
@@ -322,7 +325,8 @@ const Select: FC<ISelectProps> = ({
         )}
       </div>
 
-      <ul className={`rf-select__list ${showDropdown ? 'rf-select__list--show' : ''}`} ref={dropdownRef} onScroll={(e: any) => e.stopPropagation()}>
+      <ul className={`rf-select__list ${showDropdown ? 'rf-select__list--show' : ''}`} ref={dropdownRef}
+        onScroll={(e: any) => e.stopPropagation()}>
         {optionsList}
       </ul>
 
