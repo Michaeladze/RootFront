@@ -6,7 +6,13 @@ export interface IOption {
   value: string;
   disabled?: boolean;
   node?: ReactNode;
-  children?: IOption[];
+}
+
+export interface ITreeOption extends IOption {
+  checked: boolean;
+  hasCheckedChild?: boolean;
+  parent?: ITreeOption;
+  children?: ITreeOption[];
 }
 
 /** Таб */

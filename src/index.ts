@@ -37,6 +37,7 @@ import Chips from './components/molecules/Chips';
 import Menu from './components/molecules/Menu';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
+import CheckboxTree from './components/organisms/CheckboxTree';
 import Select from './components/organisms/Select';
 import NewDatepicker from './components/organisms/NewDatepicker';
 import TextEditor from './components/organisms/TextEditor';
@@ -128,7 +129,8 @@ export {
   ActionMenu,
   Structure,
   NewDatepicker,
-  Confirm
+  Confirm,
+  CheckboxTree
 };
 
 export {
