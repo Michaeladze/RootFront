@@ -44,7 +44,7 @@ const Checkbox: FC<ICheckboxProps> = ({
   );
 
   /** Иконка полу-чека */
-  const halfCheckIcon = halfChecked && (
+  const halfCheckIcon = halfChecked && icon && (
     <span className={`rf-checkbox__half-check ${variantClass[variant]}`}>
       <MinusIcon/>
     </span>
@@ -56,6 +56,7 @@ const Checkbox: FC<ICheckboxProps> = ({
     'center': 'rf-checkbox--center',
     'flex-end': 'rf-checkbox--flex-end',
   };
+  const showIconClass = icon ? '' : 'rf-checkbox__label--no-icon';
 
   return (
     <label className={`rf-checkbox ${props.className || ''} ${disabledClass} ${alignClass[align]}`}>
@@ -64,7 +65,7 @@ const Checkbox: FC<ICheckboxProps> = ({
       {checkIcon}
       {halfCheckIcon}
 
-      {label && <div className={`rf-checkbox__label ${node ? 'rf-checkbox__label--node' : ''}`}>{node || label}</div>}
+      {label && <div className={`rf-checkbox__label ${node ? 'rf-checkbox__label--node' : ''} ${showIconClass}`}>{node || label}</div>}
     </label>
   );
 };

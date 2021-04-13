@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { ITreeOption } from '../../../types';
 import Folder from './Folder';
+import { clearRecursion } from '../../../utils/treeHelpers';
 
-interface ITreeProps {
+export interface ITreeProps {
   /** Список */
   list: ITreeOption[];
   /** Состояние открыт/закрыт */
   open?: boolean;
   /** Изменение состояние */
-  onChange?: (value: ITreeOption[]) => void;
+  onChange?: (value: ITreeOption, tree: ITreeOption[]) => void;
+  /** Множественный выбор */
+  multiple?: boolean;
+  /** Активная опция в случае единичного выбора */
+  activeOption?: ITreeOption;
 }
 
-const CheckboxTree: React.FC<ITreeProps> = ({
+const SelectTree: React.FC<ITreeProps> = ({
   list,
   open,
-  onChange
+  onChange,
+  multiple = true,
+  activeOption
 }: ITreeProps) => {
 
   const [state, setState] = useState<ITreeOption[]>([]);
+  const [activeItem, setActiveItem] = useState<ITreeOption | undefined>(activeOption);
+
+  useEffect(() => {
+    setActiveItem(activeOption);
+  }, [activeOption]);
 
   // ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -44,22 +56,6 @@ const CheckboxTree: React.FC<ITreeProps> = ({
     setState(list);
   }, [list]);
 
-
-  // ---------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Компонент CheckboxTree рекурсивно мутирует list, добавляя в каждый элемент свойство parent. Так как на уровне текущего компонента CheckboxTree
-   * необходимо делать глубокое копирование для создания нового state, все рекурсии нужно удалить.
-   * */
-  const clearRecursion = (list: ITreeOption[]) => {
-    list.forEach((o: ITreeOption) => {
-      delete o.parent;
-
-      if (o.children) {
-        clearRecursion(o.children);
-      }
-    });
-  };
 
   // ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -91,21 +87,29 @@ const CheckboxTree: React.FC<ITreeProps> = ({
 
   /** Основная функция изменения состояния компонента */
   const handleChange = (flag: boolean, item: ITreeOption) => {
-    item.checked = flag;
-    changeParentsFlags(item);
-    changeChildrenFlags(flag, item.children);
+    if (multiple) {
+      item.checked = flag;
+
+      changeParentsFlags(item);
+      changeChildrenFlags(flag, item.children);
+    }
 
     clearRecursion(state);
     const result: ITreeOption[] = JSON.parse(JSON.stringify(state));
-    onChange && onChange(result);
+
+    if (!multiple) {
+      setActiveItem(item);
+    }
+
+    onChange && onChange(item, result);
     setState(result);
   };
 
   // ---------------------------------------------------------------------------------------------------------------------------------------
 
   return (
-    <Folder list={state} onChange={handleChange} open={open}/>
+    <Folder list={state} onChange={handleChange} open={!!open} multiple={multiple} activeItem={activeItem}/>
   );
 };
 
-export default CheckboxTree;
+export default SelectTree;

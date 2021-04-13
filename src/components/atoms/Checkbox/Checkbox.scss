@@ -22,6 +22,7 @@
   top: -99999px;
   left: -9999px;
   opacity: 0;
+  display: none;
 }
 
 @mixin checkBox {
@@ -62,6 +63,10 @@
   margin-left: 10px;
   @include p1;
   transition: 0.15s ease-in color;
+}
+
+.rf-checkbox__label--no-icon {
+  margin-left: 0;
 }
 
 // Hover

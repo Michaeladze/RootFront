@@ -3,6 +3,7 @@ import { useLocation } from './hooks/useLocation';
 import {
   formatDate, getMonthName, getShortString, oDataTransform, stringToDate
 } from './utils/helpers';
+import { treeDeepSearch } from './utils/treeHelpers';
 
 // ------------------------ Компоненты Atoms ---------------------------------------------------------------------------
 import Button from './components/atoms/Button';
@@ -37,7 +38,7 @@ import Chips from './components/molecules/Chips';
 import Menu from './components/molecules/Menu';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
-import CheckboxTree from './components/organisms/CheckboxTree';
+import SelectTree from './components/organisms/SelectTree';
 import Select from './components/organisms/Select';
 import NewDatepicker from './components/organisms/NewDatepicker';
 import TextEditor from './components/organisms/TextEditor';
@@ -130,11 +131,11 @@ export {
   Structure,
   NewDatepicker,
   Confirm,
-  CheckboxTree
+  SelectTree
 };
 
 export {
-  formatDate, getShortString, getMonthName, oDataTransform, stringToDate
+  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, treeDeepSearch
 };
 
 

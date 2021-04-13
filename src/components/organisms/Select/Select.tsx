@@ -183,7 +183,7 @@ const Select: FC<ISelectProps> = ({
                 label={v.label}
                 value={v.value}
                 disabled={v.disabled}
-                name={props.name || 'defaultSelectName'}
+                name={props.name}
                 onChange={onOptChange}
                 checked={defaultChecked}
               />
@@ -192,7 +192,7 @@ const Select: FC<ISelectProps> = ({
                 label={v.label}
                 value={v.value}
                 disabled={v.disabled}
-                name={props.name || 'defaultSelectName'}
+                name={props.name}
                 onChange={onOptChange}
                 onClick={onOptClick}
                 checked={defaultChecked}
