@@ -21,6 +21,7 @@ const PopupFooter: FC<IProps> = ({ onClose, onSubmit, textAccept = 'Выбрат
       <Button
         className='popup-footer__button'
         type={onSubmit ? 'button' : 'submit'}
+        disabled={rest.disabled}
         buttonType='primary'
         onClick={onClick}>
         {textAccept}
