@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { IListElement } from '../../../types';
 import { MenuContext } from '../../molecules/Menu/Menu';
 
@@ -8,10 +9,10 @@ interface IProps {
 }
 
 const List: React.FC<IProps> = ({ list }: IProps) => {
-  const onElementClick = (e: React.MouseEvent, handler?: () => void) => {
+  const onElementClick = (e: React.MouseEvent, li: IListElement) => {
     e.stopPropagation();
-    e.preventDefault();
-    handler && handler();
+    !li.url && e.preventDefault();
+    li.handler && li.handler();
     onClose && onClose();
   };
 
@@ -26,11 +27,19 @@ const List: React.FC<IProps> = ({ list }: IProps) => {
       return (
         <li className='rf-li' key={li.value || i}>
           {li.separated && <div className='rf-list__separator' />}
-          <div
-            className={`rf-list__element ${disabledClass} ${separatedClass}`}
-            onClick={(e: React.MouseEvent) => onElementClick(e, li.handler)}>
-            {li.label}
-          </div>
+          {
+            li.url ? (
+              <NavLink to={li.url}
+                className={`rf-list__element ${disabledClass} ${separatedClass}`}
+                onClick={(e: React.MouseEvent) => onElementClick(e, li)}> {li.label} </NavLink>
+            ) : (
+              <div
+                className={`rf-list__element ${disabledClass} ${separatedClass}`}
+                onClick={(e: React.MouseEvent) => onElementClick(e, li)}>
+                {li.label}
+              </div>
+            )
+          }
         </li>
       );
     });

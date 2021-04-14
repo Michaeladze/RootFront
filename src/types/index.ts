@@ -35,6 +35,8 @@ export interface IListElement {
   label: ReactNode;
   /** Обработчик */
   handler?: () => void;
+  /** Ссылка */
+  url?: string;
   /** ID значение */
   value?: string;
   /** Disabled */

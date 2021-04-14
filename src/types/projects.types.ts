@@ -82,8 +82,9 @@ export interface IActionMenuListConfig {
   onSort: (sortParam: string) => void;
   onSearch: (searchStr: string) => void;
   onClear: () => void;
-  /** Подпись на кнопке при множественном выбор */
+  /** Подпись на кнопке */
   actionLabel?: string;
+  singleAction?: () => void;
 }
 
 /** Секции для шаблона */

@@ -42,7 +42,12 @@ export const pageWithList = () => {
         value: 'desc'
       }
     ],
-    actionList: [],
+    actionList: [
+      {
+        label: 'Создать новую заявку',
+        url: '/'
+      }
+    ],
     onSort: (sortParam: string) => {
       console.log(sortParam);
     },

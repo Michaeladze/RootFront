@@ -6,6 +6,7 @@ import Story from '../../storybook/Story';
 import StoryRow from '../../storybook/StoryRow';
 import StoryCol from '../../storybook/StoryCol';
 import StoryItem from '../../storybook/StoryItem';
+import { BrowserRouter } from 'react-router-dom';
 
 export default {
   title: 'Menu',
@@ -16,7 +17,8 @@ export const menu = () => {
   const list: IListElement[] = [
     {
       value: '1',
-      label: 'Значение 1'
+      label: 'Значение 1',
+      url: '/test'
     },
     {
       value: '2',
@@ -72,45 +74,47 @@ export const menu = () => {
   );
 
   return (
-    <Story name='Menu (Меню 🙄)' height={600}>
-      <StoryItem description='Выпадающий список с действиями'>
-        <StoryRow>
-          <StoryCol>
-            <Menu list={list} position='right'>
-              <Button buttonType='secondary' variant='accent'>
-                Правое меню слева
-              </Button>
-            </Menu>
-          </StoryCol>
+    <BrowserRouter>
+      <Story name='Menu (Меню 🙄)' height={600}>
+        <StoryItem description='Выпадающий список с действиями'>
+          <StoryRow>
+            <StoryCol>
+              <Menu list={list} position='right'>
+                <Button buttonType='secondary' variant='accent'>
+                  Правое меню слева
+                </Button>
+              </Menu>
+            </StoryCol>
 
-          <StoryCol>
-            <Menu list={list}>
-              <Button buttonType='secondary' variant='accent'>
-                Левое меню
-              </Button>
-            </Menu>
-          </StoryCol>
+            <StoryCol>
+              <Menu list={list}>
+                <Button buttonType='secondary' variant='accent'>
+                  Левое меню
+                </Button>
+              </Menu>
+            </StoryCol>
 
-          <StoryCol>
-            <Menu position='right' list={list}>
-              <Button buttonType='secondary' variant='accent'>
-                Правое меню
-              </Button>
-            </Menu>
-          </StoryCol>
-        </StoryRow>
-      </StoryItem>
-      <StoryItem description='Выпадающий список с произвольным контентом'>
-        <StoryRow>
-          <StoryCol>
-            <Menu position='right' content={content}>
-              <Button buttonType='secondary' variant='accent'>
-                Тут контент 😏
-              </Button>
-            </Menu>
-          </StoryCol>
-        </StoryRow>
-      </StoryItem>
-    </Story>
+            <StoryCol>
+              <Menu position='right' list={list}>
+                <Button buttonType='secondary' variant='accent'>
+                  Правое меню
+                </Button>
+              </Menu>
+            </StoryCol>
+          </StoryRow>
+        </StoryItem>
+        <StoryItem description='Выпадающий список с произвольным контентом'>
+          <StoryRow>
+            <StoryCol>
+              <Menu position='right' content={content}>
+                <Button buttonType='secondary' variant='accent'>
+                  Тут контент 😏
+                </Button>
+              </Menu>
+            </StoryCol>
+          </StoryRow>
+        </StoryItem>
+      </Story>
+    </BrowserRouter>
   );
 };

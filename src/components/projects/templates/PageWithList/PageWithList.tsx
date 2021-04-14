@@ -49,8 +49,9 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  /** Расчет координаты для Aside */
   useEffect(() => {
-    setTimeout(() => {
+    const calculatePosition = () => {
       const pageHeader = document.querySelector('.rf-page__header') as HTMLElement;
 
       if (actionMenuRef.current) {
@@ -64,8 +65,16 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
           actionMenuRef.current.style.width = mainRef.current.getBoundingClientRect().width + 'px';
         }
       }
+    };
 
+    setTimeout(() => {
+      calculatePosition();
     });
+    window.addEventListener('resize', calculatePosition);
+
+    return () => {
+      window.removeEventListener('resize', calculatePosition);
+    };
   }, [actionMenu]);
 
   const [top, setTop] = useState(0);

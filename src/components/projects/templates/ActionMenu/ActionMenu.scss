@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.rf-action-menu--list {
+  height: 40px;
+}
+
 .rf-action-menu--default {
   padding: 0 32px;
   background-color: var(--base-000);
@@ -23,6 +27,8 @@
 
 .rf-action-menu__sorting {
   width: 200px;
+  margin-right: 24px;
+  min-width: 176px;
 }
 
 .rf-action-menu__search {
