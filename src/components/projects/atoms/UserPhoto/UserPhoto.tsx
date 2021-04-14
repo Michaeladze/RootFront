@@ -24,7 +24,7 @@ const UserPhoto: FC<IUserPhotoProps> = ({ className = '', url = '', radius = '40
   const isSapUrl: boolean = url?.slice(0, 4) === '/sap';
 
   if (isSapUrl) {
-    const host = ~window.location.hostname.indexOf('127.0.') ? 'https://sapd-fes-ap01.vtb24.ru:44310/' : '/';
+    const host = ~window.location.hostname.indexOf('127.0.') ? 'https://sapd-fes-ap01.vtb24.ru:44310/' : '';
     url = host + url;
   }
 
