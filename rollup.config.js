@@ -6,6 +6,7 @@ import autoprefixer from 'autoprefixer';
 import postcss from 'rollup-plugin-postcss';
 import copyFile  from "./test/test";
 
+import resolve from 'rollup-plugin-node-resolve';
 export default [
   // CommonJS
   {
@@ -21,8 +22,9 @@ export default [
       ...Object.keys(pkg.dependencies || {})
     ],
     plugins: [
-
+      resolve(),
       babel({
+
         exclude: 'node_modules/**'
       }),
       typescript({

@@ -12,11 +12,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: ['./src/index.ts'],
   output: {
-    filename: "index.js",
-    path: path.resolve(__dirname, "dist"),
-    libraryTarget: "umd",
-    library: "my-design-system"
-
+    filename: 'index.js',
+    publicPath: '',
+    path: path.join(__dirname, 'build'),
+    libraryTarget: 'commonjs'
   },
   resolve: {
     extensions: [

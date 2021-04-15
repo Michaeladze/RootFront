@@ -5,14 +5,22 @@
   "scripts": {
     "storybook": "start-storybook -p 9010 -s public ",
     "build-storybook": "build-storybook -s public",
-    "b1": "webpack --config webpack.config.js",
+    "clear": "rm -rf build",
+    "b1": " yarn clear && tsc && webpack --config webpack.config.js",
     "b2": "tsc && tsc -m es6 --outDir lib-esm && webpack",
     "b": "rollup -c && tsc"
   },
   "dependencies": {
 
-
-
+  },
+  "peerDependencies": {
+    "x----x----x": "===================================REACT===========================================================",
+    "react":"^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "rxjs": "^6.6.7",
+    "sass": "^1.32.8",
+    "axios": "^0.21.1"
   },
   "devDependencies": {
 "rollup-plugin-babel": "^4.4.0",
@@ -23,12 +31,13 @@
 "rollup-plugin-postcss": "^4.0.0",
 "typescript-plugin-css-modules": "^3.2.0",
     "typescript-styled-plugin": "^0.15.0",
-
-"x----x----x": "=========================================TYPES=====================================================",
+    "@babel/plugin-syntax-jsx": "^7.12.13",
+"rollup-plugin-node-resolve": "^5.2.0"
+,"x----x----x": "=========================================TYPES=====================================================",
     "typescript": "^4.1.2",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "x----x----x": "===================================STORYBOOK=======================================================",
     "@storybook/addon-actions": "^6.2.8",
     "@storybook/addon-console": "^1.2.3",
@@ -40,13 +49,7 @@
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.2.8",
-    "x----x----x": "===================================REACT===========================================================",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "rxjs": "^6.6.7",
-    "sass": "^1.32.8",
-    "axios": "^0.21.1",
+
     "x----x----x": "===================================WEBPACK========================================================",
     "webpack-cli": "3.3.10",
     "clean-webpack-plugin": "^3.0.0",

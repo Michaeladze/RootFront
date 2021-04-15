@@ -126,7 +126,7 @@
   }
 
   &.rf--danger {
-    background-color: var(--danger-500);
+    background-color: var(--danger-100);
     color: var(--base-000);
 
     &:hover {
@@ -135,7 +135,7 @@
 
     &:active,
     &:focus {
-      background-color: var(--danger-500);
+      background-color: var(--danger-100);
     }
 
     &:disabled {
@@ -261,7 +261,7 @@
 
   &.rf--danger {
     background-color: var(--danger-100);
-    color: var(--danger-500);
+    color: var(--danger-100);
 
     &:hover {
       background-color: var(--danger-100);
@@ -393,7 +393,7 @@
   }
 
   &.rf--danger {
-    color: var(--danger-500);
+    color: var(--danger-100);
 
     &:hover {
       background-color: var(--danger-100);
@@ -532,8 +532,8 @@
   }
 
   &.rf--danger {
-    color: var(--danger-500);
-    border-color: var(--danger-500);
+    color: var(--danger-100);
+    border-color: var(--danger-100);
 
     &:hover {
       background-color: var(--danger-100);
@@ -637,7 +637,7 @@
   }
 
   &.rf--danger {
-    color: var(--danger-500);
+    color: var(--danger-100);
   }
 
   &.rf--warning {
@@ -692,7 +692,7 @@
 
   &.rf--danger {
     color: var(--base-000);
-    background-color: var(--danger-500);
+    background-color: var(--danger-100);
   }
 
   &.rf--warning {

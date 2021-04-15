@@ -13,7 +13,7 @@ export interface IButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'>
   size?: Size;
 }
 
-const Button: FC<IButtonProps> = ({
+const Button1: FC<IButtonProps> = ({
   type = 'button',
   size = 'medium',
   buttonType = 'primary',
@@ -42,4 +42,4 @@ const Button: FC<IButtonProps> = ({
   );
 };
 
-export default Button;
+export default Button1;
