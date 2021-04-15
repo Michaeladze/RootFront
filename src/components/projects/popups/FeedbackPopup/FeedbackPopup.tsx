@@ -72,8 +72,8 @@ const FeedbackPopup: React.FC<IFeedbackPopupProps> = ({ user, sendFeedback, onCl
     <form className='feedback-popup' onSubmit={onSubmit}>
       <h2 className='feedback-popup__title'>Обратная связь</h2>
       <h4 className='feedback-popup__subtitle'>Помогите нам стать лучше, оцените работу сервиса.</h4>
-      <h4 className='feedback-popup__subtitle'>Для заведения инцидента воспользуйтесь
-        <a href={serviceManagerUrl} className='feedback-popup__subtitle--link'>ссылкой на сервис менеджер</a>.</h4>
+      <h4 className='feedback-popup__subtitle'>Для заведения инцидента воспользуйтесь ЦСПП
+        (<a href={serviceManagerUrl} className='feedback-popup__subtitle--link'>https://cspp.vtb.ru</a>).</h4>
 
       <div className='feedback__separator' />
 
