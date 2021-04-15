@@ -78,6 +78,7 @@ export interface IFeedback {
 /** Интерфейс шаблона страницы - Список действий */
 export interface IActionMenuListConfig {
   sortList: IOption[];
+  defaultSortValue?: string;
   actionList: IListElement[];
   onSort: (sortParam: string) => void;
   onSearch: (searchStr: string) => void;

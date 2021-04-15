@@ -242,6 +242,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     return (
       <button
         key={date.getTime()}
+        type='button'
         className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day
         ${periodClass} ${currentDayClass} ${disabledClass} ${fromDateClass} ${toDateClass} ${inRangeClass}`}
         onClick={() => onDayClick(date)}
@@ -284,6 +285,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     return (
       <div key={m} className={`rf-datepicker__calendar-month-wrapper ${inRangeClass} ${fromMonthClass} ${toMonthClass}`}>
         <button
+          type='button'
           className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month
         ${currentMonthClass} ${disabledClass}`}
           onClick={(e: React.MouseEvent) => onMonthClick(e, i)}
@@ -333,6 +335,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     return (
       <div key={y} className={`rf-datepicker__calendar-year-wrapper ${inRangeClass} ${fromYearClass} ${toYearClass}`}>
         <button
+          type='button'
           className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year
         ${currentMonthClass} ${disabledClass}`}
           onClick={(e: React.MouseEvent) => onYearClick(e, y)}
