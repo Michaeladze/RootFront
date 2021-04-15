@@ -6,6 +6,12 @@ export interface IOption {
     disabled?: boolean;
     node?: ReactNode;
 }
+export interface ITreeOption extends IOption {
+    checked: boolean;
+    hasCheckedChild?: boolean;
+    parent?: ITreeOption;
+    children?: ITreeOption[];
+}
 /** Таб */
 export interface ITab {
     /** Название вкладки */
@@ -25,6 +31,8 @@ export interface IListElement {
     label: ReactNode;
     /** Обработчик */
     handler?: () => void;
+    /** Ссылка */
+    url?: string;
     /** ID значение */
     value?: string;
     /** Disabled */
@@ -72,3 +80,5 @@ export interface IBreadcrumb {
 export declare type Variant = 'base' | 'accent' | 'info' | 'complement' | 'danger' | 'warning' | 'success';
 /** Размер */
 export declare type Size = 'small' | 'medium' | 'big';
+/** Формат даты для дейтпикера */
+export declare type DateFormat = 'dd.mm.yy' | 'dd.mm.yyyy';

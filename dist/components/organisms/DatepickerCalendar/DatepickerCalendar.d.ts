@@ -16,6 +16,8 @@ interface IDatepickerCalendarProps {
     toggleRef: RefObject<HTMLDivElement>;
     /** Диапазон */
     range: boolean;
+    /** Язык */
+    locale: 'ru' | 'en';
 }
 declare const DatepickerCalendar: React.FC<IDatepickerCalendarProps>;
 export default DatepickerCalendar;

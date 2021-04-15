@@ -4,6 +4,7 @@ import React, {
 import CheckIcon from '../../_icons/check-icon';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
+import MinusIcon from '../../_icons/minus';
 
 export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Лейбл */
@@ -16,31 +17,55 @@ export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: boolean;
   /** Вариант */
   variant?: Variant;
+  /** Вертикальное выравнивание */
+  align?: 'flex-start' | 'center' | 'flex-end';
+  /** Если дочерние чекбоксы чекнуты, флаг равен true */
+  halfChecked?: boolean;
 }
 
 const Checkbox: FC<ICheckboxProps> = ({
-  label, value, node, icon = true, variant = 'accent', ...props
+  label,
+  value,
+  node,
+  icon = true,
+  variant = 'accent',
+  align = 'flex-start',
+  halfChecked = false,
+  ...props
 }: ICheckboxProps) => {
+
   /** Отображение иконки */
-  const withIcon = icon ? (
+  const checkIcon = !halfChecked && icon && (
     <span className={`rf-checkbox__check ${variantClass[variant]} ${node ? 'rf-checkbox__check--node' : ''}`}>
       <span className='rf-checkbox__mark'>
-        <CheckIcon />
+        <CheckIcon/>
       </span>
     </span>
-  ) : (
-    ''
+  );
+
+  /** Иконка полу-чека */
+  const halfCheckIcon = halfChecked && icon && (
+    <span className={`rf-checkbox__half-check ${variantClass[variant]}`}>
+      <MinusIcon/>
+    </span>
   );
 
   const disabledClass = props.disabled ? 'disabled' : '';
+  const alignClass: Record<string, string> = {
+    'flex-start': 'rf-checkbox--flex-start',
+    'center': 'rf-checkbox--center',
+    'flex-end': 'rf-checkbox--flex-end',
+  };
+  const showIconClass = icon ? '' : 'rf-checkbox__label--no-icon';
 
   return (
-    <label className={`rf-checkbox ${props.className || ''} ${disabledClass} `}>
-      <input {...props} type='checkbox' className='rf-checkbox__input' value={value} />
+    <label className={`rf-checkbox ${props.className || ''} ${disabledClass} ${alignClass[align]}`}>
+      <input {...props} type='checkbox' className='rf-checkbox__input' value={value}/>
 
-      {withIcon}
+      {checkIcon}
+      {halfCheckIcon}
 
-      {label && <div className={`rf-checkbox__label ${node ? 'rf-checkbox__label--node' : ''}`}>{node || label}</div>}
+      {label && <div className={`rf-checkbox__label ${node ? 'rf-checkbox__label--node' : ''} ${showIconClass}`}>{node || label}</div>}
     </label>
   );
 };

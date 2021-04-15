@@ -13,6 +13,8 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
     getValue?: (option: IOption) => void;
     /** Размер */
     size?: Size;
+    /** Событие на удаление чипсы */
+    onChipsRemove?: (id: string, name?: string) => void;
 }
 declare const Select: FC<ISelectProps>;
 export default Select;

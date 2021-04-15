@@ -68,12 +68,12 @@ const Menu: React.FC<IListProps> = ({
   const clearCoordinates = () => {
     return position === 'left' ?
       {
-        top: '-9999px',
+        top: '-99999px',
         left: '0',
         right: 'auto'
       } :
       {
-        top: '-9999px',
+        top: '-99999px',
         left: 'auto',
         right: '0'
       };

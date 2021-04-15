@@ -3,6 +3,7 @@ import { useLocation } from './hooks/useLocation';
 import {
   formatDate, getMonthName, getShortString, oDataTransform, stringToDate
 } from './utils/helpers';
+import { treeDeepSearch } from './utils/treeHelpers';
 
 // ------------------------ Компоненты Atoms ---------------------------------------------------------------------------
 import Button from './components/atoms/Button';
@@ -37,6 +38,7 @@ import Chips from './components/molecules/Chips';
 import Menu from './components/molecules/Menu';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
+import SelectTree from './components/organisms/SelectTree';
 import Select from './components/organisms/Select';
 import NewDatepicker from './components/organisms/NewDatepicker';
 import TextEditor from './components/organisms/TextEditor';
@@ -51,7 +53,7 @@ import UserPhoto from './components/projects/atoms/UserPhoto';
 import UserItem from './components/projects/molecules/User';
 import UsersStack from './components/projects/molecules/UsersStack';
 import PopupFooter from './components/projects/molecules/PopupFooter';
-import UserStructure from './components/projects/atoms/UserStructure';
+import Structure from './components/projects/atoms/Structure';
 import Confirm from './components/projects/popups/Confirm';
 
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
@@ -76,14 +78,10 @@ import PersonAddOutline from './components/_icons/person-add-outline';
 import BoxGrid from './components/_icons/box-grid';
 import Close from './components/_icons/close';
 import Forward from './components/_icons/forward';
-import { useUndo } from './hooks/useUndo';
-import { setTitle } from './utils/setTitle';
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-export {
-  useClickOutside, useLocation, useUndo
-};
+export { useClickOutside, useLocation };
 export {
   Switch,
   Tile,
@@ -130,13 +128,14 @@ export {
   PageWithList,
   Badge,
   ActionMenu,
-  UserStructure,
+  Structure,
   NewDatepicker,
-  Confirm
+  Confirm,
+  SelectTree
 };
 
 export {
-  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, setTitle
+  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, treeDeepSearch
 };
 
 

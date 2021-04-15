@@ -53,6 +53,7 @@
 @import "../components/organisms/TextEditor/TextEditor";
 @import "../components/organisms/DatepickerCalendar/DatepickerCalendar";
 @import "../components/organisms/NewDatepicker/NewDatepicker";
+@import "../components/organisms/SelectTree/FolderItem";
 //
 @import "../components/projects/organisms/FindUsers/FindUsers";
 @import "../components/projects/organisms/AppHeader/AppHeader";
@@ -62,6 +63,6 @@
 @import "../components/projects/templates/PageWithList/PageWithList";
 @import "../components/projects/templates/ActionMenu/ActionMenu";
 @import "../components/projects/templates/StickyContainer/StickyContainer";
-@import "../components/projects/atoms/UserStructure/UserStructure";
+@import "../components/projects/atoms/Structure/Structure";
 //
 @import "../components/projects/popups/FeedbackPopup/FeedbackPopup";

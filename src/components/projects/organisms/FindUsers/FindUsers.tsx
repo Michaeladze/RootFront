@@ -1,19 +1,18 @@
 import React, {
-  FC, ReactNode, useEffect, useState
+  FC, ReactNode, useEffect, useRef, useState
 } from 'react';
-import Plus from '../../../_icons/plus';
-import Check from '../../../_icons/check';
 import Close from '../../../_icons/close-sm';
 import Arrow from '../../../_icons/arrow';
+import Info from '../../../_icons/info-circle';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 
 import {
-  Button, Input, PopupFooter, UserPhoto
+  Button, Checkbox, Input, PopupFooter, Tooltip, UserPhoto, Structure
 } from '../../../../index';
-import { IUser } from './index';
 import Preloader from '../../../atoms/Preloader';
+import { IUser } from '../../../../types/projects.types';
 
 /** Подключение модулей*/
 SwiperCore.use([Navigation]);
@@ -25,53 +24,84 @@ export interface IProps {
   /** Список уже выбранных пользователей */
   users?: IUser[];
   /** Функция поиска пользователей */
-  onSearch?: (search: string, department: string) => void;
+  onSearch?: (search: string) => void;
   /** Очистка */
   onClear?: () => void;
   /** Вернуть выбранных пользователей в компонент */
   getUsers?: (data: IUser[]) => void;
-  /** Дополнительная информация о депортаменте поиска */
+  /** Дополнительная информация о департаменте поиска */
   department?: string;
   /** Флаг загрузки */
   loaded: boolean;
+  /** Подзаголовок */
+  subtitle?: ReactNode;
+  /** Деактивировать выбранных пользователей */
+  disableSelected?: boolean;
 }
 
 const FindUsers: FC<IProps> = ({
   onClose,
   users = [],
+  disableSelected,
   searchData = [],
   onSearch,
   getUsers,
   onClear,
   department = 'Поиск по всем сотрудникам банка',
-  loaded = false
+  loaded = false,
+  subtitle = 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.'
 }: IProps) => {
+
+  const inputRef = useRef<HTMLDivElement>(null);
+
   /** Список выбранных людей */
   const [selectedPeople, setSelectedPeople] = useState<IUser[]>(users);
-  const idSelectedPeople = selectedPeople.map((u: IUser) => u.id);
-  /** Текущие результаты поиска */
+  const selectedPeopleMap: Record<string, boolean> = selectedPeople.reduce((a: Record<string, boolean>, u: IUser) => {
+    a[u.id] = true;
+    return a;
+  }, {});
+
+  const disablePeopleMap = useRef<Record<string, boolean>>(selectedPeopleMap);
+
+  /** Строка поиска */
   const [searchString, setSearchString] = useState<string>('');
 
   // --------------------------------------------------------------------------------------------------------------------
 
+
+  // Почему-то спадает фокус при поиске. Возможно из-за перерисовки компонента
   useEffect(() => {
-    console.log(selectedPeople);
-    onSearch && onSearch('', selectedPeople.length ? selectedPeople[0].structDepartmentId : '');
+    setTimeout(() => {
+      if (inputRef.current) {
+        const element: HTMLInputElement | null = inputRef.current.querySelector('input');
+
+        if (element) {
+          element.focus();
+        }
+      }
+    });
+  }, [searchData]);
+
+  // --------------------------------------------------------------------------------------------------------------------
+
+  /** Сбрасываем поиск на старте */
+  useEffect(() => {
+    onSearch && onSearch('');
   }, []);
 
   const onSubmit = () => {
-    onClose && onClose();
     getUsers && getUsers(selectedPeople);
+    onClose && onClose();
   };
 
   const inputHandle = (data: React.KeyboardEvent<HTMLInputElement>) => {
     const value = (data.target as HTMLInputElement).value;
     setSearchString(value);
-    onSearch && onSearch(value, selectedPeople.length ? selectedPeople[0].structDepartmentId : '');
+    onSearch && onSearch(value);
   };
 
   const addHandle = (item: IUser) => {
-    setSelectedPeople(selectedPeople.concat([item]));
+    setSelectedPeople([...selectedPeople, item]);
   };
 
   const removeHandle = (item: IUser) => {
@@ -80,41 +110,51 @@ const FindUsers: FC<IProps> = ({
 
   // --------------------------------------------------------------------------------------------------------------------
 
-  /** Кнопки добавить / удалить */
-
-  const buttonAdd = (item: IUser) => (
-    <Button className='list-users__button-add' onClick={() => addHandle(item)} buttonType='round' variant='accent'>
-      <Plus />
-    </Button>
-  );
-
-  const buttonCheck = (item: IUser) => (
-    <Button className='list-users__button-check' onClick={() => removeHandle(item)} buttonType='round'>
-      <Check />
-    </Button>
-  );
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>, item: IUser) => {
+    if (e.target.checked) {
+      addHandle(item);
+    } else {
+      removeHandle(item);
+    }
+  };
 
   // --------------------------------------------------------------------------------------------------------------------
 
   /** Список найденных сотрудников */
-  const listUsers: ReactNode[] = searchData
-    .filter((item: IUser) => {
-      if (!selectedPeople.length) {
-        return true;
-      }
+  const listUsers: ReactNode[] = searchData.map((item: IUser) => {
 
-      return item.structDepartmentId === selectedPeople[0].structDepartmentId;
-    })
-    .map((item: IUser) => (
-      <div className='list-users__wrapper' key={item.id}>
+    const label = (
+      <div className='list-users__user'>
         <UserPhoto url={item.photo} radius={'48px'} fullName={`${item.firstName} ${item.lastName}`} />
         <div className='list-users__texts-wrapper'>
-          <h3 className='list-users__user-name'>{`${item.lastName} ${item.firstName} ${item.middleName}`}</h3>
+          <h3 className='list-users__user-name'>
+            {`${item.lastName} ${item.firstName} ${item.middleName}`}
+            {item.id && <span className='list-users__user-id'>({item.id})</span>}
+            {item.departmentsPath && (
+              <Tooltip>
+                <Info className='list-users__user-info'/>
+                <Structure departmentsPath={item.departmentsPath}/>
+              </Tooltip>
+            )}
+          </h3>
           <h5 className='list-users__user-position'>{item.department}</h5>
         </div>
-        {idSelectedPeople.includes(item.id) ? buttonCheck(item) : buttonAdd(item)}
       </div>
-    ));
+    );
+
+    return (
+      <div className='list-users__wrapper' key={item.id}>
+        <Checkbox
+          label={label}
+          align='center'
+          value={item.id}
+          disabled={disableSelected && disablePeopleMap.current[item.id]}
+          defaultChecked={selectedPeopleMap[item.id]}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, item)}
+        />
+      </div>
+    );
+  });
 
   // --------------------------------------------------------------------------------------------------------------------
 
@@ -124,20 +164,22 @@ const FindUsers: FC<IProps> = ({
       <UserPhoto url={item.photo} radius={'48px'} fullName={`${item.firstName} ${item.lastName}`} />
       <h5 className='selected__text'>{`${item.lastName}`}</h5>
       <h5 className='selected__text'>{`${item.firstName}`}</h5>
-      <Button className='selected__button' onClick={() => removeHandle(item)} buttonType='round'>
-        <Close />
-      </Button>
+      { !(disableSelected && disablePeopleMap.current[item.id]) && (
+        <Button className='selected__button' onClick={() => removeHandle(item)} buttonType='round'>
+          <Close/>
+        </Button>
+      )}
     </SwiperSlide>
   ));
 
   // --------------------------------------------------------------------------------------------------------------------
 
   return (
-    <form className='find-users__wrapper'>
+    <div className='find-users__wrapper'>
       <h4 className='find-users__title'>Поиск сотрудников</h4>
-      <p className='find-users__notice'>Поиск осуществляется по выбранной компании и в рамках одного подразделения.</p>
-      <div className='find-users__input-wrapper'>
-        <Input placeholder='Поиск' search={true} onKeyUp={inputHandle} onClear={onClear} />
+      <p className='find-users__notice'>{subtitle}</p>
+      <div className='find-users__input-wrapper' ref={inputRef}>
+        <Input placeholder='Поиск' search={true} onKeyUp={inputHandle} autoFocus onClear={onClear} />
       </div>
 
       {!!selectedPeople.length && (
@@ -161,9 +203,6 @@ const FindUsers: FC<IProps> = ({
           </Button>
         </div>
       )}
-      <h6 className='find-users__subtitle'>
-        {selectedPeople.length ? selectedPeople[0].structDepartmentName : department}
-      </h6>
       <div className='find-users__list-wrapper'>
         {loaded ? (
           searchString === '' || listUsers.length > 0 ? (
@@ -175,8 +214,8 @@ const FindUsers: FC<IProps> = ({
           <Preloader />
         )}
       </div>
-      <PopupFooter textAccept='Добавить' onSubmit={onSubmit} />
-    </form>
+      <PopupFooter textAccept='Добавить' onSubmit={onSubmit} onClose={onClose} />
+    </div>
   );
 };
 

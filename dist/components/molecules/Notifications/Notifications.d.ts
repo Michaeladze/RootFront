@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { Variant } from '../../../types';
 /** Удалить уведомление */
 export declare const removeNotification: (id?: number | undefined) => void;

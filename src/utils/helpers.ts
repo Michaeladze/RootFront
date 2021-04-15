@@ -121,7 +121,7 @@ export const stringToDate = (s: string): Date => {
 
   const formatToday = formatDate(d.getTime()).date.split('.');
 
-  let [dd, mm, yyyy] = s.split('.');
+  let [dd, mm, yyyy] = s.slice(0, 10).split('.');
   dd = dd.includes('_') ? formatToday[0] : dd;
   mm = mm.includes('_') ? formatToday[1] : mm;
   yyyy = yyyy.includes('_') ? formatToday[2] : yyyy;

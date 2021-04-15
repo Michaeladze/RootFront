@@ -11,6 +11,10 @@ export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
     icon?: boolean;
     /** Вариант */
     variant?: Variant;
+    /** Вертикальное выравнивание */
+    align?: 'flex-start' | 'center' | 'flex-end';
+    /** Если дочерние чекбоксы чекнуты, флаг равен true */
+    halfChecked?: boolean;
 }
 declare const Checkbox: FC<ICheckboxProps>;
 export default Checkbox;

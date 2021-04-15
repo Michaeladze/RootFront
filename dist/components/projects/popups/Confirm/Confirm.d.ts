@@ -1,12 +1,16 @@
 import React from 'react';
-interface IProps {
+export interface IConfirmProps {
     /** Текст сабмита */
     textAccept: string;
     /** Действие */
-    onAction: () => void;
+    onAction: (comment?: string) => void;
     /** Текст подтверждения */
     text?: string;
     onClose?: () => void;
+    /** Комментарий */
+    comment?: string;
+    /** Показать комментарий */
+    showComment?: boolean;
 }
-declare const Confirm: React.FC<IProps>;
+declare const Confirm: React.FC<IConfirmProps>;
 export default Confirm;

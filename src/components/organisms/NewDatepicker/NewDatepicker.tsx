@@ -3,13 +3,13 @@ import React, {
   useEffect, useRef, useState
 } from 'react';
 import { formatDate, Input } from '../../../index';
-import { Size } from '../../../types';
+import { DateFormat, Size } from '../../../types';
 import Calendar from '../../_icons/calendar-outline';
 import DatepickerCalendar from '../DatepickerCalendar';
 import useClickOutside from '../../../hooks/useClickOutside';
 import InputMask from 'react-input-mask';
 import { IDateVariants } from '../../../types/projects.types';
-import { parseToFormat } from '../DatepickerCalendar/datepicker.utils';
+import { getWeekDay, parseToFormat } from '../DatepickerCalendar/datepicker.utils';
 import { stringToDate } from '../../../utils/helpers';
 
 export interface IDatepickerProps {
@@ -30,11 +30,18 @@ export interface IDatepickerProps {
   onChange?: (value: IDateVariants, name?: string) => void;
   /** Диапазон */
   range?: boolean;
+  /** Формат */
+  format?: DateFormat;
+  /** Показать день недели */
+  showDayOfWeek?: boolean;
+  /** Язык */
+  locale?: 'ru' | 'en';
 }
 
 const NewDatepicker: React.FC<IDatepickerProps> = ({
   name = 'datepicker',
-  placeholder = 'Выберите дату',
+  locale = 'ru',
+  placeholder = locale === 'ru' ? 'Выберите дату' : 'Select date',
   size = 'medium',
   defaultValue,
   min,
@@ -42,8 +49,12 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   disabled = false,
   readOnly = false,
   onChange,
-  range = false
+  range = false,
+  format = 'dd.mm.yyyy',
+  showDayOfWeek = false,
 }: IDatepickerProps) => {
+
+  const [dayOfWeek, setDayOfWeek] = useState<string[]>([]);
 
   const [minDate, setMinDate] = useState<Date | undefined>(undefined);
   const [maxDate, setMaxDate] = useState<Date | undefined>(undefined);
@@ -86,6 +97,14 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
       let [from, to] = date.split(' - ');
       let fromD = 0;
       let toD = 0;
+
+      if (from) {
+        from = from.slice(0, 10);
+      }
+
+      if (to) {
+        to = to.slice(0, 10);
+      }
 
       /** Валидация даты С */
       if (from && !from.includes('_')) {
@@ -204,10 +223,15 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   useEffect(() => {
     if (!inputValue.includes('_') && inputValue !== '') {
-      onChange && onChange(getReturnValue(inputValue, range), name);
+      const result = getReturnValue(inputValue, range);
+      onChange && onChange(result, name);
       fireOnChange();
+    } else {
+      if (showDayOfWeek) {
+        setDayOfWeek([]);
+      }
     }
-  }, [inputValue]);
+  }, [inputValue, showDayOfWeek]);
 
   const fireOnChange = () => {
     setTimeout(() => {
@@ -233,6 +257,35 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  useEffect(() => {
+    if (showDayOfWeek) {
+      if (!range) {
+        if (!inputValue.includes('_') && inputValue !== '') {
+          const result = getReturnValue(inputValue, range);
+          const dayFrom = result.date.value.getDay();
+          setDayOfWeek([getWeekDay(dayFrom, locale)]);
+        }
+      } else {
+        const [fromValue, toValue] = inputValue.split(' - ');
+
+
+        if (fromValue && !fromValue.includes('_')) {
+          const from = getReturnValue(fromValue, false);
+          const dayFrom = from.date.from.getDay();
+          setDayOfWeek([getWeekDay(dayFrom, locale)]);
+        }
+
+        if (toValue && !toValue.includes('_')) {
+          const to = getReturnValue(toValue, false);
+          const dayTo = to.date.from.getDay();
+          setDayOfWeek([...dayOfWeek, getWeekDay(dayTo, locale)]);
+        }
+      }
+    }
+  }, [inputValue, showDayOfWeek, range]);
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   const onKeyPress = (e: React.KeyboardEvent) => {
     if (e.keyCode === 13 || e.charCode === 13 || e.key === 'Enter') {
       e.stopPropagation();
@@ -242,52 +295,109 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  const disabledClass = disabled ? 'rf-datepicker__input-wrapper--disabled' : '';
-  const readOnlyClass = readOnly ? 'rf-datepicker__input-wrapper--readonly' : '';
+  let mask, fromMask, toMask;
 
-  const mask = range ? [
-    /[0-3]/,
-    inputValue[0] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
-    '.',
-    /[0,1]/,
-    inputValue[3] === '0' ? /[1-9]/ : /[0-2]/,
-    '.',
-    /[1,2]/,
-    /\d/,
-    /\d/,
-    /\d/,
-    ' ',
-    '-',
-    ' ',
-    /[0-3]/,
-    inputValue[13] === '3' ? /[0,1]/ : inputValue[13] === '0' ? /[1-9]/ : /[0-9]/,
-    '.',
-    /[0,1]/,
-    inputValue[16] === '0' ? /[1-9]/ : /[0-2]/,
-    '.',
-    /[1,2]/,
-    /\d/,
-    /\d/,
-    /\d/
-  ] : [
-    /[0-3]/,
-    inputValue[0] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
-    '.',
-    /[0,1]/,
-    inputValue[3] === '0' ? /[1-9]/ : /[0-2]/,
-    '.',
-    /[1,2]/,
-    /\d/,
-    /\d/,
-    /\d/,
-  ];
+  if (range) {
+    const defaultFromMask = [
+      /[0-3]/,
+      inputValue[0] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
+      '.',
+      /[0,1]/,
+      inputValue[3] === '0' ? /[1-9]/ : /[0-2]/,
+      '.',
+      /[1,2]/,
+      /\d/,
+      /\d/,
+      /\d/
+    ];
+
+    const defaultToMask = [
+      /[0-3]/,
+      inputValue[13] === '3' ? /[0,1]/ : inputValue[13] === '0' ? /[1-9]/ : /[0-9]/,
+      '.',
+      /[0,1]/,
+      inputValue[16] === '0' ? /[1-9]/ : /[0-2]/,
+      '.',
+      /[1,2]/,
+      /\d/,
+      /\d/,
+      /\d/
+    ];
+
+    fromMask = defaultFromMask;
+    toMask = defaultToMask;
+
+    if (showDayOfWeek) {
+
+      if (dayOfWeek[0]) {
+        fromMask.push(' ');
+
+        for (let i = 0; i < dayOfWeek[0].length; i++) {
+          fromMask.push(dayOfWeek[0][i]);
+        }
+
+      } else {
+        fromMask = defaultFromMask;
+      }
+
+      if (dayOfWeek[1]) {
+        toMask.push(' ');
+
+        for (let i = 0; i < dayOfWeek[1].length; i++) {
+          toMask.push(dayOfWeek[1][i]);
+        }
+      } else {
+        toMask = defaultToMask;
+      }
+    }
+
+    mask = [
+      ...fromMask,
+      ' ',
+      '-',
+      ' ',
+      ...toMask,
+    ];
+
+  } else {
+    const defaultMask = [
+      /[0-3]/,
+      inputValue[0] === '3' ? /[0,1]/ : inputValue[0] === '0' ? /[1-9]/ : /[0-9]/,
+      '.',
+      /[0,1]/,
+      inputValue[3] === '0' ? /[1-9]/ : /[0-2]/,
+      '.',
+      /[1,2]/,
+      /\d/,
+      /\d/,
+      /\d/
+    ];
+
+    mask = defaultMask;
+
+    if (showDayOfWeek) {
+      if (dayOfWeek[0]) {
+        mask.push(' ');
+
+        for (let i = 0; i < dayOfWeek[0].length; i++) {
+          mask.push(dayOfWeek[0][i]);
+        }
+      } else {
+        mask = defaultMask;
+      }
+    }
+  }
 
   // -------------------------------------------------------------------------------------------------------------------
+
+  const disabledClass = disabled ? 'rf-datepicker__input-wrapper--disabled' : '';
+  const readOnlyClass = readOnly ? 'rf-datepicker__input-wrapper--readonly' : '';
 
   return (
     <div className='rf-datepicker' ref={datepickerRef}>
       <div className={`rf-datepicker__input-wrapper ${disabledClass} ${readOnlyClass}`}
-        ref={inputRef} onClick={() => toggleCalendar(true)}>
+        ref={inputRef}
+        onFocus={() => toggleCalendar(true)}>
         <InputMask
           mask={mask}
           name={name}
@@ -309,6 +419,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
           toggleRef={inputRef}
           setInputValue={setValue}
           range={range}
+          locale={locale}
           showCalendar={showCalendar}
           toggleCalendar={toggleCalendar}/>
       )}

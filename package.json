@@ -1,6 +1,6 @@
 {
   "name": "root-front",
-  "version": "1.11.21",
+  "version": "1.11.48",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,14 +10,13 @@
     "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp .babelrc dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
     "start": "npm run build -- -w",
     "commit": "git add . && ./node_modules/cz-customizable/standalone.js",
-    "storybook": "start-storybook -p 9010 -s public -c src/.storybook",
+    "storybook": "start-storybook -p 9010 -s public ",
     "build-storybook": "build-storybook -s public -c ",
     "rflink": "yarn link  && cd node_modules/react && yarn link && cd ../react-dom && yarn link && cd ../react-router-dom && yarn link",
     "rfunlink": "yarn unlink  && cd node_modules/react && yarn unlink && cd ../react-dom && yarn unlink && cd ../react-router-dom &&yarn unlink",
     "stylelint": "npx stylelint **/*.scss --fix",
     "g": "node node_modules/react-generator-cmd/dist",
-    "semantic-release": "semantic-release",
-    "b": "rimraf dist && rollup -c"
+    "semantic-release": "semantic-release"
   },
   "license": "MIT",
   "author": {
@@ -56,16 +55,18 @@
     "@commitlint/config-conventional": "^12.0.1",
     "@commitlint/prompt": "^12.0.1",
     "@ptsecurity/commitlint-config": "^1.0.0",
-    "@storybook/addon-actions": "^6.1.11",
-    "@storybook/addon-console": "^1.2.2",
-    "@storybook/addon-docs": "^6.1.11",
+    "x----x----x": "==================================================================================================",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-console": "^1.2.3",
+    "@storybook/addon-docs":"^6.2.8",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.1.11",
-    "@storybook/addon-viewport": "^6.1.11",
-    "@storybook/addons": "^6.1.11",
-    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/addon-viewport": "^6.2.8",
+    "@storybook/addons": "^6.2.8",
+    "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.1.11",
+    "@storybook/react": "^6.2.8",
+    "x----x----x": "=======================================TYPES======================================================",
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
@@ -76,6 +77,7 @@
     "@types/redux-actions": "^2.6.1",
     "@types/storybook__addon-info": "^5.2.3",
     "@types/yup": "^0.29.11",
+    "x----x----x": "==================================================================================================",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "axios": "^0.21.0",
@@ -97,10 +99,10 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "lint-staged": "10.2.9",
-    "node-sass": "^4.14.1",
-    "react": "^17.0.2",
+    "sass":"^1.32.8" ,
+    "react": "17.0.2",
     "react-docgen-typescript-loader": "^3.7.2",
-    "react-dom": "^17.0.2",
+    "react-dom": "17.0.2",
     "react-generator-cmd": "^1.4.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
@@ -110,7 +112,7 @@
     "redux-observable": "^1.2.0",
     "rimraf": "^3.0.2",
     "semantic-release": "^17.3.1",
-    "storybook-addon-designs": "^5.4.2",
+    "storybook-addon-designs": "^5.4.5",
     "stylelint": "^13.8.0",
     "stylelint-config-sass-guidelines": "^7.1.0",
     "stylelint-config-standard": "^20.0.0",
@@ -120,29 +122,7 @@
     "use-reactive-form": "^1.1.6",
     "webpack-cli": "^4.3.0",
     "yup": "^0.32.9",
-"rollup-plugin-typescript2": "^0.30.0",
-"rollup-plugin-commonjs": "^10.1.0",
-"rollup-plugin-peer-deps-external": "^2.2.4",
-"rollup-plugin-postcss": "^4.0.0",
-"rollup-plugin-node-resolve": "^5.2.0",
-"rollup-plugin-url": "^3.0.1",
-"@svgr/rollup": "^5.5.0",
-"postcss": "^8.2.8",
-    "@rollup/plugin-babel": "^5.3.0"
-  },
-  "babel": {
-    "presets": ["@babel/preset-react", "@babel/preset-typescript"],
-    "plugins": [
-      "@babel/plugin-proposal-nullish-coalescing-operator",
-      "@babel/plugin-proposal-optional-chaining",
-      [
-        "babel-plugin-react-scoped-css",
-        {
-          "include": ".(sa|sc|c)ss$",
-          "hashSeed": "${npm_package_name}"
-        }
-      ]
-    ]
+    "x----x----x": "*"
   },
   "eslintConfig": {
     "extends": "./.eslintrc.json"

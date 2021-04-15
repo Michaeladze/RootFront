@@ -8,6 +8,13 @@ export interface IOption {
   node?: ReactNode;
 }
 
+export interface ITreeOption extends IOption {
+  checked: boolean;
+  hasCheckedChild?: boolean;
+  parent?: ITreeOption;
+  children?: ITreeOption[];
+}
+
 /** Таб */
 export interface ITab {
   /** Название вкладки */
@@ -28,6 +35,8 @@ export interface IListElement {
   label: ReactNode;
   /** Обработчик */
   handler?: () => void;
+  /** Ссылка */
+  url?: string;
   /** ID значение */
   value?: string;
   /** Disabled */
@@ -82,3 +91,6 @@ export type Variant = 'base' | 'accent' | 'info' | 'complement' | 'danger' | 'wa
 
 /** Размер */
 export type Size = 'small' | 'medium' | 'big';
+
+/** Формат даты для дейтпикера */
+export type DateFormat = 'dd.mm.yy' | 'dd.mm.yyyy';

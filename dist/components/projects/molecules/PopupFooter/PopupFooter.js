@@ -1,0 +1,34 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+import React from 'react';
+import Button from '../../../atoms/Button';
+var PopupFooter = function (_a) {
+    var onClose = _a.onClose, onSubmit = _a.onSubmit, _b = _a.textAccept, textAccept = _b === void 0 ? 'Выбрать' : _b, rest = __rest(_a, ["onClose", "onSubmit", "textAccept"]);
+    var onClick = function () {
+        onSubmit && onSubmit();
+    };
+    return (React.createElement("footer", __assign({}, rest, { className: "popup-footer " + (rest.className || '') }),
+        React.createElement(Button, { className: 'popup-footer__button', type: onSubmit ? 'button' : 'submit', disabled: rest.disabled, buttonType: 'primary', onClick: onClick }, textAccept),
+        onClose && (React.createElement(Button, { className: 'popup-footer__button', type: 'button', buttonType: 'link', onClick: onClose }, "\u041E\u0442\u043C\u0435\u043D\u0430"))));
+};
+export default PopupFooter;

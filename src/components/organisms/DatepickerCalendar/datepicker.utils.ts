@@ -1,30 +1,57 @@
-import { IDatepickerActivePeriod } from './datepicker.types';
+import { DateLocale, IDatepickerActivePeriod } from './datepicker.types';
 import { formatDate, replaceAt } from '../../../utils/helpers';
 
-export const weekDays = [
-  'пн',
-  'вт',
-  'ср',
-  'чт',
-  'пт',
-  'сб',
-  'вс'
-];
+export const weekDays: Record<DateLocale, string[]> = {
+  ru: [
+    'пн',
+    'вт',
+    'ср',
+    'чт',
+    'пт',
+    'сб',
+    'вс'
+  ],
+  en: [
+    'mon',
+    'tue',
+    'wed',
+    'thu',
+    'fri',
+    'sat',
+    'sun'
+  ]
+};
 
-export const months = [
-  'январь',
-  'февраль',
-  'март',
-  'апрель',
-  'май',
-  'июнь',
-  'июль',
-  'август',
-  'сентябрь',
-  'октябрь',
-  'ноябрь',
-  'декабрь'
-];
+export const months: Record<DateLocale, string[]> = {
+  ru: [
+    'январь',
+    'февраль',
+    'март',
+    'апрель',
+    'май',
+    'июнь',
+    'июль',
+    'август',
+    'сентябрь',
+    'октябрь',
+    'ноябрь',
+    'декабрь'
+  ],
+  en: [
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december'
+  ]
+};
 
 export const getDaysForMonth = (d?: Date): IDatepickerActivePeriod => {
   const date = d || new Date();
@@ -153,4 +180,30 @@ export const parseToFormat = (defaultValue?: Date | string | number): {
     date,
     string: inputValue
   };
+};
+
+/** Получить день недели по индексу */
+export const getWeekDay = (n: number, locale: DateLocale): string => {
+  const weekDays: Record<DateLocale, string[]> = {
+    ru: [
+      'Вс',
+      'Пн',
+      'Вт',
+      'Ср',
+      'Чт',
+      'Пт',
+      'Сб'
+    ],
+    en: [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat'
+    ]
+  };
+
+  return weekDays[locale][n];
 };

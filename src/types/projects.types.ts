@@ -17,6 +17,8 @@ export interface IUser {
   photo: string;
   /** Должность */
   position: string;
+  /** ID должности  */
+  positionId?: string;
   /** Подразделение */
   department: string;
   /** Департамент ID */
@@ -29,12 +31,11 @@ export interface IUser {
   salary?: number;
   /** Валюта */
   currency?: string;
-
   /** Орг структура */
-  departmentsPath?: IUserStructure[];
+  departmentsPath?: IStructure[];
 }
 
-export interface IUserStructure {
+export interface IStructure {
   id: string;
   name: string;
   unitType: string;
@@ -81,8 +82,9 @@ export interface IActionMenuListConfig {
   onSort: (sortParam: string) => void;
   onSearch: (searchStr: string) => void;
   onClear: () => void;
-  /** Подпись на кнопке при множественном выбор */
+  /** Подпись на кнопке */
   actionLabel?: string;
+  singleAction?: () => void;
 }
 
 /** Секции для шаблона */

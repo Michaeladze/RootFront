@@ -29,6 +29,8 @@ interface IDatepickerCalendarProps {
   toggleRef: RefObject<HTMLDivElement>
   /** Диапазон */
   range: boolean;
+  /** Язык */
+  locale: 'ru' | 'en';
 }
 
 const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
@@ -39,7 +41,8 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   minDate,
   maxDate,
   toggleRef,
-  range
+  range,
+  locale
 }: IDatepickerCalendarProps) => {
 
   /** Ссылка на контент */
@@ -60,8 +63,8 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const setRange = (): IDatepickerStack => {
     if (value && range) {
       const values = value.split(' - ');
-      const from = values[0].includes('_') ? undefined : values[0];
-      const to = values[1].includes('_') ? undefined : values[1];
+      const from = values[0]?.includes('_') ? undefined : values[0];
+      const to = values[1]?.includes('_') ? undefined : values[1];
       return [from ? stringToDate(from) : undefined, to ? stringToDate(to) : undefined];
     }
 
@@ -83,7 +86,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const [coordinates, setCoordinates] = useState({
-    top: '-9999px',
+    top: '-99999px',
     left: '0',
     right: 'auto'
   });
@@ -203,6 +206,14 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const onBlur = (lastButton: boolean) => {
+    if (lastButton) {
+      toggleCalendar(false);
+    }
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   /** Days */
   const onDayClick = (date: Date) => {
     onDateChange(date);
@@ -211,7 +222,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const daysJSX = activePeriod.days.map(({
     period,
     date
-  }: IDatepickerDay) => {
+  }: IDatepickerDay, i: number, array: IDatepickerDay[]) => {
     const periodClass = `rf-datepicker__calendar-day--${period}`;
     const rangeDayCondition = (rangeDates[0] && isCurrentDay(date, rangeDates[0])) || (rangeDates[1] && isCurrentDay(date, rangeDates[1]));
     const activeCondition = range ? rangeDayCondition : isCurrentDay(date, currentDate);
@@ -229,14 +240,15 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     const disabledClass = disabledMin || disabledMax ? 'rf-datepicker__calendar-date--disabled' : '';
 
     return (
-      <div
+      <button
         key={date.getTime()}
         className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-day
         ${periodClass} ${currentDayClass} ${disabledClass} ${fromDateClass} ${toDateClass} ${inRangeClass}`}
         onClick={() => onDayClick(date)}
+        onBlur={() => onBlur(i === array.length - 1)}
       >
         {date.getDate()}
-      </div>
+      </button>
     );
   });
 
@@ -249,7 +261,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     setPeriodType('day');
   };
 
-  const monthsJSX = months.map((m: string, i: number) => {
+  const monthsJSX = months[locale].map((m: string, i: number, array: string[]) => {
     const d = new Date(activePeriod.year, i);
     const rangeMonthCondition = (rangeDates[0] && isCurrentMonth(d, rangeDates[0])) || (rangeDates[1] && isCurrentMonth(d, rangeDates[1]));
     const activeCondition = range ? rangeMonthCondition : isCurrentMonth(d, currentDate);
@@ -271,12 +283,13 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
     return (
       <div key={m} className={`rf-datepicker__calendar-month-wrapper ${inRangeClass} ${fromMonthClass} ${toMonthClass}`}>
-        <div
+        <button
           className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-month
         ${currentMonthClass} ${disabledClass}`}
-          onClick={(e: React.MouseEvent) => onMonthClick(e, i)}>
+          onClick={(e: React.MouseEvent) => onMonthClick(e, i)}
+          onBlur={() => onBlur(i === array.length - 1)}>
           {m}
-        </div>
+        </button>
       </div>
     );
   });
@@ -301,7 +314,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     setPeriodType('month');
   };
 
-  const yearsJSX = years.map((y: number) => {
+  const yearsJSX = years.map((y: number, i: number, array: number[]) => {
     const rangeMonthCondition = (rangeDates[0] && y === rangeDates[0].getFullYear()) ||
       (rangeDates[1] && y === rangeDates[1]?.getFullYear());
     const activeCondition = range ? rangeMonthCondition : activePeriod.year === y;
@@ -319,12 +332,13 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
     return (
       <div key={y} className={`rf-datepicker__calendar-year-wrapper ${inRangeClass} ${fromYearClass} ${toYearClass}`}>
-        <div
+        <button
           className={`rf-datepicker__calendar-tile rf-datepicker__calendar-date rf-datepicker__calendar-year
         ${currentMonthClass} ${disabledClass}`}
-          onClick={(e: React.MouseEvent) => onYearClick(e, y)}>
+          onClick={(e: React.MouseEvent) => onYearClick(e, y)}
+          onBlur={() => onBlur(i === array.length - 1)}>
           {y}
-        </div>
+        </button>
       </div>
     );
   });
@@ -365,7 +379,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const [periodType, setPeriodType] = useState<IDatepickerPeriodType>('day');
 
   const periodTypeLabel: Record<IDatepickerPeriodType, ReactNode> = {
-    day: <> {months[activePeriod.month]} {activePeriod.year} </>,
+    day: <> {months[locale][activePeriod.month]} {activePeriod.year} </>,
     month: <> {activePeriod.year} </>,
     year: <> {decadeStart} - {decadeStart + 9} </>
   };
@@ -382,21 +396,32 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  /** Активность месяцев */
-  const prevMonthDisabled = periodType === 'day' && !!minDate && minDate.getMonth() > activePeriod.month - 1;
-  const nextMonthDisabled = periodType === 'day' && !!maxDate && maxDate.getMonth() < activePeriod.month + 1;
-
   /** Активность годов */
-  const prevYearDisabled = periodType === 'month' && !!minDate && minDate.getFullYear() > activePeriod.year - 1;
-  const nextYearDisabled = periodType === 'month' && !!maxDate && maxDate.getFullYear() < activePeriod.year + 1;
+  const prevYearDisabled = !!minDate && minDate.getFullYear() > activePeriod.year - 1;
+  const nextYearDisabled = !!maxDate && maxDate.getFullYear() < activePeriod.year + 1;
 
-  /** Активность декад */
-  const prevDecadeDisabled = periodType === 'year' && !!minDate && minDate.getFullYear() > decadeStart;
-  const nextDecadeDisabled = periodType === 'year' && !!maxDate && maxDate.getFullYear() < decadeStart + 10;
+  const arrowsDisabled = {
+    prevArrowDisabled: {
+      /** Активность перд. месяцев */
+      day: prevYearDisabled && !!minDate && minDate.getMonth() > activePeriod.month - 1,
+      /** Активность перд. годов */
+      month: prevYearDisabled,
+      /** Активность перд. декад */
+      year: !!minDate && minDate.getFullYear() > decadeStart
+    },
+    nextArrowDisabled: {
+      /** Активность след. месяцев */
+      day: nextYearDisabled && !!maxDate && maxDate.getMonth() < activePeriod.month + 1,
+      /** Активность след. годов */
+      month: nextYearDisabled,
+      /** Активность след. декад */
+      year: !!maxDate && maxDate.getFullYear() < decadeStart + 10
+    }
+  };
 
   /** Флаг активности стрелок */
-  const prevArrowDisabled: boolean = prevMonthDisabled || prevYearDisabled || prevDecadeDisabled;
-  const nextArrowDisabled: boolean = nextMonthDisabled || nextYearDisabled || nextDecadeDisabled;
+  const prevArrowDisabled: boolean = arrowsDisabled.prevArrowDisabled[periodType];
+  const nextArrowDisabled: boolean = arrowsDisabled.nextArrowDisabled[periodType];
 
   /** Активность кнопки Сегодня */
   const d = new Date();
@@ -411,7 +436,7 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
     <div className='rf-datepicker__calendar' ref={contentRef} style={coordinates}>
       <header className='rf-datepicker__calendar-header'>
         <div className='rf-calendar__control'>
-          <button type='button' className='rf-calendar__button rf-calendar__button-prev' disabled={prevArrowDisabled} onClick={() => onPeriodChange(-1)}>
+          <button type='button' className='rf-calendar__button rf-calendar__button--arrow rf-calendar__button-prev' disabled={prevArrowDisabled} onClick={() => onPeriodChange(-1)}>
             <Chevron className='rf-datepicker__calendar-prev'/>
           </button>
           <button type='button' className='rf-calendar__button rf-calendar__label-button' onClick={onPeriodTypeChange}>
@@ -419,16 +444,18 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
               {periodTypeLabel[periodType]}
             </span>
           </button>
-          <button type='button' className='rf-calendar__button rf-calendar__button-next' disabled={nextArrowDisabled} onClick={() => onPeriodChange(1)}>
+          <button type='button' className='rf-calendar__button rf-calendar__button--arrow rf-calendar__button-next' disabled={nextArrowDisabled} onClick={() => onPeriodChange(1)}>
             <Chevron className='rf-datepicker__calendar-right'/>
           </button>
         </div>
-        <button type='button' className='rf-datepicker__calendar-today' disabled={todayDisabled} onClick={() => onDateChange(new Date())}>Сегодня</button>
+        <button type='button' className='rf-datepicker__calendar-today' disabled={todayDisabled} onClick={() => onDateChange(new Date())}>
+          {locale === 'ru' ? 'Сегодня' : 'Today'}
+        </button>
       </header>
 
       {periodType === 'day' && (
         <div className='rf-datepicker__calendar-week'>
-          {weekDays.map((d: string) => <div className='rf-datepicker__calendar-tile rf-datepicker__calendar-week-day' key={d}>{d}</div>)}
+          {weekDays[locale].map((d: string) => <div className='rf-datepicker__calendar-tile rf-datepicker__calendar-week-day' key={d}>{d}</div>)}
         </div>
       )}
 

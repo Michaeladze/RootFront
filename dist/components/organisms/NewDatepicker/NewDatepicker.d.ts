@@ -1,5 +1,5 @@
 import React from 'react';
-import { Size } from '../../../types';
+import { DateFormat, Size } from '../../../types';
 import { IDateVariants } from '../../../types/projects.types';
 export interface IDatepickerProps {
     /** Название */
@@ -19,6 +19,12 @@ export interface IDatepickerProps {
     onChange?: (value: IDateVariants, name?: string) => void;
     /** Диапазон */
     range?: boolean;
+    /** Формат */
+    format?: DateFormat;
+    /** Показать день недели */
+    showDayOfWeek?: boolean;
+    /** Язык */
+    locale?: 'ru' | 'en';
 }
 declare const NewDatepicker: React.FC<IDatepickerProps>;
 export default NewDatepicker;

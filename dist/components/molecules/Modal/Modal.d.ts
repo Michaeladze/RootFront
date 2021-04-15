@@ -14,6 +14,10 @@ export interface IModalProps {
     headerContent?: React.ReactNode;
     /** Контент для футера в модальном окне */
     footerContent?: React.ReactNode;
+    /** Высота контента */
+    height?: string;
+    /** Запретить общий скролл */
+    disableScroll?: boolean;
 }
 declare const Modal: FC<IModalProps>;
 export default Modal;

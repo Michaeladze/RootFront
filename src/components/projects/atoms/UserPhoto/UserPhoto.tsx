@@ -21,6 +21,13 @@ const UserPhoto: FC<IUserPhotoProps> = ({ className = '', url = '', radius = '40
   } : {};
   const [initials, setInitials] = useState<string>('');
 
+  const isSapUrl: boolean = url?.slice(0, 4) === '/sap';
+
+  if (isSapUrl) {
+    const host = ~window.location.hostname.indexOf('127.0.') ? 'https://sapd-fes-ap01.vtb24.ru:44310/' : '';
+    url = host + url;
+  }
+
   useEffect(() => {
     if (fullName) {
       const [f, s]: string[] = fullName.split(' ');
@@ -33,7 +40,7 @@ const UserPhoto: FC<IUserPhotoProps> = ({ className = '', url = '', radius = '40
 
   return (
     <div className={`rf__user-photo ${className}`} style={{
-      backgroundImage: `url(${url})`,
+      backgroundImage: `url("${url}")`,
       ...styles
     }}>
       {!url && initials}

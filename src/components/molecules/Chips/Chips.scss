@@ -58,14 +58,14 @@
 }
 
 .rf-chips__item.rf--success {
-  background-color: var(--success-500);
+  background-color: var(--success-600);
 
   .rf-chips__name {
     color: var(--base-000);
   }
 
   &:hover {
-    background-color: var(--success-400);
+    background-color: var(--success-500);
   }
 }
 
