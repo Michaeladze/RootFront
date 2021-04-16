@@ -17,6 +17,11 @@
   z-index: 999;
 }
 
+.rf-page__action-menu--hidden {
+  height: 0;
+  padding-bottom: 0;
+}
+
 .rf-page__action-menu-inner {
   position: relative;
   width: 100%;
@@ -33,6 +38,10 @@
   bottom: -24px;
   left: 40px;
   opacity: 0;
+}
+
+.rf-page__action-menu--hidden .rf-page__action-menu-divider {
+  bottom: 0;
 }
 
 .rf-page__section {

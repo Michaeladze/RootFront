@@ -79,11 +79,13 @@ export const pageWithList = () => {
 
   return (
     <BrowserRouter>
-      <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation}>
-        <PageWithList filters={filtersJSX} preloader={!loaded} actionMenu={<ActionMenu listConfig={config} type='list' />}>
-          {listJSX}
-        </PageWithList>
-      </Page>
+      <div style={{ marginLeft: '70px' }}>
+        <Page backUrl='/' title='Изменение графика рабочего времени' user={user} navigation={navigation}>
+          <PageWithList filters={filtersJSX} preloader={!loaded} actionMenu={<ActionMenu listConfig={config} type='list' />}>
+            {listJSX}
+          </PageWithList>
+        </Page>
+      </div>
     </BrowserRouter>
   );
 };

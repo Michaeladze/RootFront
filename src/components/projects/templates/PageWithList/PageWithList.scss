@@ -32,6 +32,16 @@
   z-index: 999;
 }
 
+.rf-page__main-action-menu--no-filters {
+  width: calc(100% - 48px);
+  left: 24px;
+}
+
+.rf-page__main-action-menu--hidden {
+  height: 0;
+  padding-bottom: 0;
+}
+
 .rf-page__main-action-menu-inner {
   position: relative;
 }
@@ -45,4 +55,9 @@
   position: absolute;
   bottom: -24px;
   opacity: 0;
+}
+
+.rf-page__main-action-menu--hidden .rf-page__action-menu-divider--list {
+  width: calc(100% - 32px);
+  bottom: 0;
 }

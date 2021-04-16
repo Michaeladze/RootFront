@@ -297,6 +297,21 @@ const Select: FC<ISelectProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  /** Валидация в форме */
+  useEffect(() => {
+    if (componentNode.current) {
+      const option = componentNode.current.querySelector('.rf-select__list input:not([type=text])');
+      const input = componentNode.current.querySelector('.rf-input__field');
+
+      if (option && input) {
+        const invalid: boolean = option.classList.contains('invalid');
+        invalid ? input.classList.add('invalid') : input.classList.remove('invalid');
+      }
+    }
+  });
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   const clearIconClass = !props.readOnly && inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
 
   return (

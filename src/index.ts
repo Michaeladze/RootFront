@@ -1,7 +1,7 @@
 import useClickOutside from './hooks/useClickOutside';
 import { useLocation } from './hooks/useLocation';
 import {
-  formatDate, getMonthName, getShortString, oDataTransform, stringToDate
+  formatDate, getMonthName, getShortString, oDataTransform, stringToDate, numberWithSpaces
 } from './utils/helpers';
 import { treeDeepSearch } from './utils/treeHelpers';
 
@@ -135,7 +135,7 @@ export {
 };
 
 export {
-  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, treeDeepSearch
+  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, treeDeepSearch, numberWithSpaces
 };
 
 

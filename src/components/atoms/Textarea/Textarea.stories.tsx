@@ -53,6 +53,9 @@ export const textArea = () => {
   return (
     <Story name='Textarea' width={600}>
       <StoryItem description='Текстовое поле'>{listJSX}</StoryItem>
+      <StoryItem description='Текстовое поле'>
+        <Textarea disabled defaultValue='lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem s'/>
+      </StoryItem>
     </Story>
   );
 };

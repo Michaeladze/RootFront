@@ -189,16 +189,16 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const actionMenuHideClass = actionMenu ? '' : 'rf-page__action-menu--hidden';
+
   return (
     <>
-      {actionMenu && (
-        <div className='rf-page__action-menu' ref={actionMenuRef}>
-          <div className='rf-page__action-menu-inner'>
-            <div className='rf-page__action-menu-divider' ref={dividerRef}/>
-            {actionMenu}
-          </div>
+      <div className={`rf-page__action-menu ${actionMenuHideClass}`} ref={actionMenuRef}>
+        <div className='rf-page__action-menu-inner'>
+          <div className='rf-page__action-menu-divider' ref={dividerRef}/>
+          {actionMenu && actionMenu}
         </div>
-      )}
+      </div>
 
       <div className='rf-page__content--sections'>
 

@@ -88,6 +88,8 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
   }, [listPageRef]);
 
   const stylesForActionMenu = filters ? { maxWidth: '1000px' } : { maxWidth: '1320px' };
+  const actionMenuHideClass = actionMenu ? '' : 'rf-page__main-action-menu--hidden';
+  const noFiltersAndMenuClass = !actionMenu && !filters ? 'rf-page__main-action-menu--no-filters' : '';
 
   return (
     <div className='rf-page__with-list' ref={(node) => setNode(node)}>
@@ -109,12 +111,13 @@ const PageWithList: React.FC<IProps> = ({ children, filters, actionMenu, preload
               </aside>
             )}
             <main className='rf-page__main' ref={mainRef}>
-              {actionMenu && <div className='rf-page__main-action-menu' style={stylesForActionMenu} ref={actionMenuRef}>
+              <div className={`rf-page__main-action-menu ${actionMenuHideClass} ${noFiltersAndMenuClass}`}
+                style={stylesForActionMenu} ref={actionMenuRef}>
                 <div className='rf-page__main-action-menu-inner'>
                   <div className='rf-page__action-menu-divider--list' ref={dividerRef}/>
-                  {actionMenu}
+                  {actionMenu && actionMenu}
                 </div>
-              </div>}
+              </div>
               <div className='rf-page__main-content'>
                 {children}
               </div>

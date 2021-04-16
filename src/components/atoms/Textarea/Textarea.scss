@@ -32,7 +32,7 @@
 }
 
 .rf-textarea-field:disabled {
-  @include disabled();
+  cursor: default;
   background-color: var(--base-100);
   border-color: var(--base-300);
   color: var(--base-300);
