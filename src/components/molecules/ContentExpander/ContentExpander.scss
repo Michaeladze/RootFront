@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
+.expander__title--hidden {
+  display: none;
+}
+
 .expander__title-text {
   margin-right: 8px;
 }
