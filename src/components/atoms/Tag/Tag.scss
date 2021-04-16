@@ -1,0 +1,76 @@
+@import "../../../styles/mixins";
+
+.rf-tag {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 16px;
+  background-color: var(--base-200);
+  cursor: default;
+
+  height: 34px;
+  @include p1;
+  color: var(--base-000);
+
+  &.rf--small {
+    height: 26px;
+    @include p2;
+    color: var(--base-000);
+  }
+}
+
+.rf-tag.rf--base {
+  background-color: var(--base-500);
+
+  &:hover {
+    background-color: var(--base-400);
+  }
+}
+
+.rf-tag.rf--accent {
+  background-color: var(--accent-500);
+
+  &:hover {
+    background-color: var(--accent-400);
+  }
+}
+
+.rf-tag.rf--success {
+  background-color: var(--success-600);
+
+  &:hover {
+    background-color: var(--success-500);
+  }
+}
+
+.rf-tag.rf--warning {
+  background-color: var(--warning-500);
+
+  &:hover {
+    background-color: var(--warning-400);
+  }
+}
+
+.rf-tag.rf--danger {
+  background-color: var(--danger-500);
+
+  &:hover {
+    background-color: var(--danger-400);
+  }
+}
+
+.rf-tag.rf--info {
+  background-color: var(--info-500);
+
+  &:hover {
+    background-color: var(--info-400);
+  }
+}
+
+.rf-tag.rf--complement {
+  background-color: var(--complement-500);
+
+  &:hover {
+    background-color: var(--complement-400);
+  }
+}

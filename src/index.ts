@@ -25,6 +25,7 @@ import Tile from './components/atoms/Tile';
 import ShareButton from './components/atoms/ShareButton';
 import BackdropLoader from './components/atoms/BackdropLoader';
 import Badge from './components/atoms/Badge/Badge';
+import Tag from './components/atoms/Tag/Tag';
 
 // ------------------------ Компоненты Molecules -----------------------------------------------------------------------
 import Notifications, { sendNotification } from './components/molecules/Notifications';
@@ -131,7 +132,8 @@ export {
   Structure,
   NewDatepicker,
   Confirm,
-  SelectTree
+  SelectTree,
+  Tag
 };
 
 export {
