@@ -74,18 +74,16 @@ const FindUsers: FC<IProps> = ({
     setLoaded(false);
 
     cancelRequest();
-    // const host = ~window.location.hostname.indexOf('127.0.') ? 'https://sapd-fes-ap01.vtb24.ru:44310/' : '';
-
-    Axios.get(`sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURI(query)}`, {
+    Axios.get(`sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURIComponent(query)}`, {
       cancelToken: new Axios.CancelToken((c: Canceler) => {
         cancel.current = c;
       })
     })
-      .then(({ data }: AxiosResponse<IUser[]>) => {
-        setSearchResults(data);
+      .then(({ data }: AxiosResponse<{d: { results: IUser[]}}>) => {
+        setSearchResults(data.d.results);
         setLoaded(true);
       })
-      .catch((error: any) => {
+      .catch((_error: any) => {
         setSearchResults([]);
       });
   };
