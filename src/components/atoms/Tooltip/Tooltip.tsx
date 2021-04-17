@@ -1,6 +1,7 @@
 import React, {
   FC, ReactNode, useCallback, useEffect, useMemo, useState
 } from 'react';
+import { createPortal } from 'react-dom';
 
 
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -11,9 +12,10 @@ interface ITooltipContentProps {
   position: TooltipPosition;
   /** Дополнительный класс */
   className?: string;
+  portal: boolean;
 }
 
-const TooltipContent: FC<ITooltipContentProps> = ({ children, position, className }: ITooltipContentProps) => {
+const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, className, portal }: ITooltipContentProps) => {
   const div = useMemo<HTMLDivElement>(() => document.createElement('div'), []);
 
   /** При маунте добавляем модалку. При дестрое - удаляем. */
@@ -26,31 +28,54 @@ const TooltipContent: FC<ITooltipContentProps> = ({ children, position, classNam
     };
   }, [div]);
 
-  // rect.y = (rect.y || rect.top) + window.scrollY;
-  // rect.x = (rect.x || rect.left) + window.scrollX;
+  rect.y = (rect.y || rect.top) + window.scrollY;
+  rect.x = (rect.x || rect.left) + window.scrollX;
 
-  const styles = {
-    top: {
-      top: '0',
-      left: '50%',
-      transform: 'translate(-50%, -100%)'
-    },
-    right: {
-      top: '50%',
-      left: '100%',
-      transform: 'translate(0, -50%)'
-    },
-    bottom: {
-      top: '100%',
-      left: '50%',
-      transform: 'translate(-50%, 0)'
-    },
-    left: {
-      top: '50%',
-      left: '0',
-      transform: 'translate(-100%, -50%)'
-    }
-  };
+  const styles = portal ?
+    {
+      top: {
+        top: `${rect.y}px`,
+        left: `${rect.x + rect.width / 2}px`,
+        transform: 'translate(-50%, -100%)'
+      },
+      right: {
+        top: `${rect.y + rect.height / 2}px`,
+        left: `${rect.x + rect.width}px`,
+        transform: 'translate(0, -50%)'
+      },
+      bottom: {
+        top: `${rect.y + rect.height}px`,
+        left: `${rect.x + rect.width / 2}px`,
+        transform: 'translate(-50%, 0)'
+      },
+      left: {
+        top: `${rect.y + rect.height / 2}px`,
+        left: `${rect.x}px`,
+        transform: 'translate(-100%, -50%)'
+      }
+    } :
+    {
+      top: {
+        top: '0',
+        left: '50%',
+        transform: 'translate(-50%, -100%)'
+      },
+      right: {
+        top: '50%',
+        left: '100%',
+        transform: 'translate(0, -50%)'
+      },
+      bottom: {
+        top: '100%',
+        left: '50%',
+        transform: 'translate(-50%, 0)'
+      },
+      left: {
+        top: '50%',
+        left: '0',
+        transform: 'translate(-100%, -50%)'
+      }
+    };
 
   const padding = {
     top: 'paddingBottom',
@@ -77,7 +102,7 @@ const TooltipContent: FC<ITooltipContentProps> = ({ children, position, classNam
     </div>
   );
 
-  return tooltip;
+  return portal ? createPortal(tooltip, div) : tooltip;
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -93,13 +118,16 @@ export interface ITooltipProps {
   isVisible?: boolean;
   /** Дополнительный класс */
   className?: string;
+  /** Портал в элемент - по умолчанию body */
+  portal?: boolean;
 }
 
 const Tooltip: FC<ITooltipProps> = ({
   children,
   position = 'right',
   isVisible = true,
-  className = ''
+  className = '',
+  portal = false
 }: ITooltipProps) => {
   const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null);
 
@@ -142,7 +170,7 @@ const Tooltip: FC<ITooltipProps> = ({
       onMouseUp={stopPropagation}>
       {children[0]}
       {tooltipRect && isVisible && (
-        <TooltipContent className={className} position={position} rect={tooltipRect}>
+        <TooltipContent className={className} position={position} rect={tooltipRect} portal={portal}>
           {children[1]}
         </TooltipContent>
       )}

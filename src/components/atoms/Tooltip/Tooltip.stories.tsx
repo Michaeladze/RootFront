@@ -47,6 +47,13 @@ export const tooltip = () => {
           </StoryCol>
         </StoryRow>
       </StoryItem>
+
+      <StoryItem description='В некоторых случаях подсказку нужно отображать на уровне body. Для этого существует свойство portal.'>
+        <Tooltip portal>
+          <Button>Hover me</Button>
+          <div>Эта подсказка лежит в body </div>
+        </Tooltip>
+      </StoryItem>
     </Story>
   );
 };

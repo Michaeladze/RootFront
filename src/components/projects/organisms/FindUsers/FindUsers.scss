@@ -58,7 +58,8 @@
 .find-users__list-wrapper {
   flex: 1 auto;
 
-  min-height: 320px;
+  height: 392px;
+  overflow: auto;
   margin: 0 -48px;
   padding: 8px 48px 24px;
 
@@ -191,4 +192,22 @@
 .list-users__user-info {
   color: var(--accent-500);
   margin-left: 8px;
+}
+
+.search-results__message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: default;
+}
+
+.search-results__message-icon {
+  color: var(--base-150);
+}
+
+.search-results__message-text {
+  @include s0;
+  color: var(--base-300);
 }
