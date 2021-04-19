@@ -89,7 +89,10 @@ module.exports = {
     // new webpack.PrefetchPlugin('react'),
 
   ],
-  externals: [],
+  externals: {
+    react: "react",
+    'react-dom': "react-dom"
+  },
   devServer: {
     historyApiFallback: true,
     writeToDisk: true
