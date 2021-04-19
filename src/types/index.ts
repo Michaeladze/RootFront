@@ -15,6 +15,14 @@ export interface ITreeOption extends IOption {
   children?: ITreeOption[];
 }
 
+export interface ICustomOption extends IOption {
+  __isNew__: boolean;
+}
+
+export function isCustomOption(option: IOption | ICustomOption): option is ICustomOption {
+  return (option as ICustomOption).__isNew__;
+}
+
 /** Таб */
 export interface ITab {
   /** Название вкладки */
