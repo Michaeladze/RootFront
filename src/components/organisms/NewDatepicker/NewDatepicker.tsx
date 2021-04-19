@@ -64,9 +64,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
   }, [min]);
 
   useEffect(() => {
-    if (max) {
-      setMaxDate(max ? parseToFormat(max).date : undefined);
-    }
+    setMaxDate(max ? parseToFormat(max).date : undefined);
   }, [max]);
 
   // -------------------------------------------------------------------------------------------------------------------
