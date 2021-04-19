@@ -8,6 +8,7 @@
   "ignorePatterns": [
     "nodejs",
     "**/*.spec.tsx",
+    "**/*.js",
     "./**/*.stories.tsx",
     "dist",
     "build"

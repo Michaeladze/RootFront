@@ -1,13 +1,14 @@
 {
-  "name": "root-front",
+  "name": "root-front1",
   "version": "1.11.58",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "rimraf dist && tsc && yarn build_css && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/ && yarn cp",
+    "b": "rimraf dist && tsc && webpack --config webpack-lib.config.js && yarn cp",
     "build_css": "node-sass src/styles/index.scss -o dist/ ",
-    "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp .babelrc dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
+    "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
     "start": "npm run build -- -w",
     "commit": "git add . && ./node_modules/cz-customizable/standalone.js",
     "storybook": "start-storybook -p 9010 -s public ",
@@ -40,6 +41,16 @@
   "files": [
     "dist"
   ],
+  "peerDependencies": {
+    "x----x----x": "===================================REACT===========================================================",
+    "react":"^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "rxjs": "^6.6.7",
+    "sass": "^1.32.8",
+    "axios": "^0.21.1",
+    "axios-observable": "^1.1.3"
+  },
   "dependencies": {
     "detect-browser": "^5.2.0",
     "quill": "^1.3.7",
@@ -55,16 +66,7 @@
     "@commitlint/config-conventional": "^12.0.1",
     "@commitlint/prompt": "^12.0.1",
     "@ptsecurity/commitlint-config": "^1.0.0",
-    "@storybook/addon-actions": "^6.2.2",
-    "@storybook/addon-console": "^1.2.3",
-    "@storybook/addon-docs": "^6.2.2",
-    "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.2.2",
-    "@storybook/addon-viewport": "^6.2.2",
-    "@storybook/addons": "^6.2.2",
-    "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.1.21",
+
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
@@ -77,11 +79,9 @@
     "@types/yup": "^0.29.11",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
-    "axios": "^0.21.1",
-    "axios-observable": "^1.1.3",
-    "babel-loader": "^8.1.0",
-    "babel-plugin-react-scoped-css": "^1.1.1",
-    "clean-webpack-plugin": "^3.0.0",
+
+
+
     "copy-webpack-plugin": "^7.0.0",
     "cz-customizable": "^6.3.0",
     "enzyme": "^3.11.0",
@@ -97,13 +97,13 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "lint-staged": "10.2.9",
-    "node-sass": "^4.14.1",
-    "react": "17.0.2",
+
+
     "react-docgen-typescript-loader": "^3.7.2",
-    "react-dom": "17.0.2",
+
     "react-generator-cmd": "^1.4.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1",
+
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.8",
@@ -116,10 +116,53 @@
     "stylelint-config-standard": "^20.0.0",
     "ts-jest": "^26.4.4",
     "ts-loader": "^8.0.1",
+
     "typescript": "^4.1.3",
     "use-reactive-form": "^1.1.6",
-    "webpack-cli": "^4.3.0",
-    "yup": "^0.32.9"
+
+    "yup": "^0.32.9",
+    "x----x----x": "===================================STORYBOOK=======================================================",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-console": "^1.2.3",
+    "@storybook/addon-docs":"^6.2.8",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/addon-viewport": "^6.2.8",
+    "@storybook/addons": "^6.2.8",
+    "@storybook/preset-create-react-app": "^3.1.7",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.2.8",
+    "x----x----x": "===================================WEBPACK========================================================",
+    "webpack-cli": "^4.6.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "babel-loader": "8.1.0",
+    "babel-plugin-react-scoped-css": "1.1.1",
+    "css-loader": "^5.0.1",
+    "resolve-url-loader": "^3.1.2",
+    "sass-loader": "^10.1.0",
+    "scoped-css-loader": "^1.0.0",
+    "file-loader": "^6.2.0",
+    "url-loader": "^4.1.1",
+    "style-loader": "^2.0.0",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^6.0.0",
+    "x----x----x": "*"
+  },
+
+  "x----x----x": "===================================BABEL============================================================",
+  "babel": {
+    "presets": ["@babel/preset-react", "@babel/preset-typescript"],
+    "plugins": [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      "@babel/plugin-proposal-optional-chaining",
+      [
+        "babel-plugin-react-scoped-css",
+        {
+          "include": ".(sa|sc|c)ss$",
+          "hashSeed": "${npm_package_name}"
+        }
+      ]
+    ]
   },
   "eslintConfig": {
     "extends": "./.eslintrc.json"
