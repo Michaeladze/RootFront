@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps } from 'react';
+import React, { FC, HTMLProps, useEffect, useState } from 'react';
 import { Size, Variant } from '../../../types';
 import { sizeClass, variantClass } from '../../../utils/helpers';
 import './Button.scss'
@@ -20,6 +20,12 @@ const Button1: FC<IButtonProps> = ({
   variant = buttonType === 'text' ? 'base' : 'accent',
   ...props
 }: IButtonProps) => {
+  const [t,q]=useState("!!!!")
+
+  useEffect(()=>{
+    console.log(t)
+
+  },[]);
   const classesMap: { [key: string]: string } = {
     primary: 'rf-button--primary',
     secondary: 'rf-button--secondary',
