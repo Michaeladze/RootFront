@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.useLocation = void 0;
 var react_router_dom_1 = require("react-router-dom");
 var useLocation = function () {
+    debugger;
     // @ts-ignore
     var location = react_router_dom_1.useLocation();
     var query = location.search
