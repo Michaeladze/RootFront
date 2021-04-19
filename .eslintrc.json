@@ -2,14 +2,15 @@
   "parser": "@typescript-eslint/parser",
   "extends": "plugin:@typescript-eslint/recommended",
   "plugins": [
-    "unused-imports",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "unused-imports"
   ],
   "ignorePatterns": [
     "nodejs",
     "**/*.spec.tsx",
     "./**/*.stories.tsx",
-    "dist"
+    "dist",
+    "build"
   ],
   "rules": {
     "no-extra-parens": "off",

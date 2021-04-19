@@ -23,7 +23,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["../**/*"],
-  "files": ["custom.d.ts"],
+  "include": ["../src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.spec.*", "**/*.stories.*"]
 }
