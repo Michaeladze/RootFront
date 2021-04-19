@@ -95,6 +95,18 @@ export const select = () => {
     }
   };
 
+  const [options, setOptions] = useState(list);
+
+  const saveOption = (value: string) => {
+    setOptions([
+      ...options,
+      {
+        value,
+        label: value
+      }
+    ]);
+  };
+
   return (
     <Story name='Select' width={ 600 }>
       <StoryItem description='Выбор радио кнопок или чекбоксов из выпадающего списка'>
@@ -102,10 +114,10 @@ export const select = () => {
           <Select options={ list } placeholder='Запрещен ввод' readOnly/>
         </StoryRow>
         <StoryRow>
-          <Select name='s1' options={ list } placeholder='Выберите значение' value={ s1 }/>
+          <Select name='s1' options={ options } placeholder='Выберите значение' value={ s1 } saveOption={saveOption} creatable/>
         </StoryRow>
         <StoryRow>
-          <Select name='s2' options={ list } placeholder='Выберите несколько значений' multiSelect value={ s }/>
+          <Select name='s2' options={ options } placeholder='Выберите несколько значений' multiSelect value={ s } saveOption={saveOption} creatable/>
         </StoryRow>
       </StoryItem>
 

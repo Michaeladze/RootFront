@@ -124,3 +124,12 @@
 .rf-select__chips {
   margin-top: 16px;
 }
+
+.rf-select__add-option {
+  padding: 6px 32px;
+  cursor: pointer;
+}
+
+.rf-select__add-option-value {
+  color: var(--accent-500)
+}

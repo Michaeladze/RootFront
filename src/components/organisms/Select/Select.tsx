@@ -30,6 +30,10 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   size?: Size;
   /** Событие на удаление чипсы */
   onChipsRemove?: (id: string, name?: string) => void;
+  /** Возможность добавлять опции */
+  creatable?: boolean;
+  /** Создание новой опции */
+  saveOption?: (value: string) => void;
 }
 
 const Select: FC<ISelectProps> = ({
@@ -41,6 +45,8 @@ const Select: FC<ISelectProps> = ({
   getValue,
   size = 'medium',
   onChipsRemove,
+  creatable = false,
+  saveOption,
   ...props
 }: ISelectProps) => {
   /** Ссылка на текущий компонент */
@@ -51,6 +57,9 @@ const Select: FC<ISelectProps> = ({
   /** Отображение дропдауна с значениями */
   const [showDropdown, toggleDropdown] = useState(false);
   const dropdownRef = useRef<HTMLUListElement>(null);
+
+  /** Отображение сообщения о создании новой опции */
+  const [newOptionMessage, showNewOptionMessage] = useState<boolean>(false);
 
   /** При открытии выпадающего списка поднимаем скролл наверх */
   useEffect(() => {
@@ -90,9 +99,15 @@ const Select: FC<ISelectProps> = ({
     }
 
     /** Скрываем выпадающий список, если ничего не найдено */
+    // TODO Creatable проверять на точное совпадение
     if (options.length === result.size) {
-      showDropdown && toggleDropdown(false);
+      if (creatable) {
+        showNewOptionMessage(true);
+      } else {
+        showDropdown && toggleDropdown(false);
+      }
     } else {
+      showNewOptionMessage(false);
       !showDropdown && toggleDropdown(true);
     }
 
@@ -316,6 +331,13 @@ const Select: FC<ISelectProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const onSaveOption = () => {
+    saveOption && saveOption(inputValue);
+    showNewOptionMessage(false);
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   const clearIconClass = !props.readOnly && inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
 
   return (
@@ -355,6 +377,7 @@ const Select: FC<ISelectProps> = ({
       <ul className={`rf-select__list ${showDropdown ? 'rf-select__list--show' : ''}`} ref={dropdownRef}
         onScroll={(e: any) => e.stopPropagation()}>
         {optionsList}
+        {newOptionMessage && (<p className='rf-select__add-option' onClick={onSaveOption}>Хотите создать <span className='rf-select__add-option-value'>{inputValue}</span></p>)}
       </ul>
 
       {chipsJSX}
