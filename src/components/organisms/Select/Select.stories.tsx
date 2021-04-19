@@ -114,7 +114,7 @@ export const select = () => {
           <Select options={ list } placeholder='Запрещен ввод' readOnly/>
         </StoryRow>
         <StoryRow>
-          <Select name='s1' options={ options } placeholder='Выберите значение' value={ s1 } saveOption={saveOption} creatable/>
+          <Select name='s1' options={ options } placeholder='Выберите значение' value={ s1 } saveOption={saveOption} creatable saveOptionMessage='Хотите создать'/>
         </StoryRow>
         <StoryRow>
           <Select name='s2' options={ options } placeholder='Выберите несколько значений' multiSelect value={ s } saveOption={saveOption} creatable/>

@@ -34,6 +34,8 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   creatable?: boolean;
   /** Создание новой опции */
   saveOption?: (value: string) => void;
+  /** Сообщение создания новой опции */
+  saveOptionMessage?: string;
 }
 
 const Select: FC<ISelectProps> = ({
@@ -47,6 +49,7 @@ const Select: FC<ISelectProps> = ({
   onChipsRemove,
   creatable = false,
   saveOption,
+  saveOptionMessage = '',
   ...props
 }: ISelectProps) => {
   /** Ссылка на текущий компонент */
@@ -100,6 +103,7 @@ const Select: FC<ISelectProps> = ({
 
     /** Скрываем выпадающий список, если ничего не найдено */
     // TODO Creatable проверять на точное совпадение
+    // TODO При клике сразу выбирать
     if (options.length === result.size) {
       if (creatable) {
         showNewOptionMessage(true);
@@ -377,7 +381,7 @@ const Select: FC<ISelectProps> = ({
       <ul className={`rf-select__list ${showDropdown ? 'rf-select__list--show' : ''}`} ref={dropdownRef}
         onScroll={(e: any) => e.stopPropagation()}>
         {optionsList}
-        {newOptionMessage && (<p className='rf-select__add-option' onClick={onSaveOption}>Хотите создать <span className='rf-select__add-option-value'>{inputValue}</span></p>)}
+        {newOptionMessage && (<p className='rf-select__add-option' onClick={onSaveOption}>{saveOptionMessage} <span className='rf-select__add-option-value'>{inputValue}</span></p>)}
       </ul>
 
       {chipsJSX}
