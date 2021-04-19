@@ -5,7 +5,7 @@
   "scripts": {
     "storybook": "start-storybook -p 9010 -s public ",
     "build-storybook": "build-storybook -s public",
-    "clear": "rm -rf build",
+    "clear": "rm -rf dist",
     "b1": " yarn clear && tsc && webpack --config webpack.config.js",
     "b2": "tsc && tsc -m es6 --outDir lib-esm && webpack",
     "b": "rollup -c && tsc"
