@@ -22,6 +22,8 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   value?: string | string[];
   /** Изменение значение селекта */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>, option?: IOption) => void;
+  /** Изменение значение инпута */
+  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** Вернуть IOption */
   getValue?: (option: IOption) => void;
   /** Размер */
@@ -35,6 +37,7 @@ const Select: FC<ISelectProps> = ({
   multiSelect = false,
   value,
   onChange,
+  onInputChange,
   getValue,
   size = 'medium',
   onChipsRemove,
@@ -223,8 +226,9 @@ const Select: FC<ISelectProps> = ({
   };
 
   /** ChangeEvent для возможности записывать currentValue в input */
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const _onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+    typeof onInputChange === 'function' && onInputChange(e);
   };
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -268,7 +272,7 @@ const Select: FC<ISelectProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  /** Очистка оля ввода */
+  /** Очистка поля ввода */
   const clearInput = (e: React.MouseEvent) => {
     e.stopPropagation();
     setInputValue('');
@@ -321,7 +325,7 @@ const Select: FC<ISelectProps> = ({
           placeholder={props.placeholder}
           value={inputValue}
           readOnly={props.readOnly}
-          onChange={onInputChange}
+          onChange={_onInputChange}
           onKeyUp={onSearch}
           size={size}
           onClick={onInputClick}
