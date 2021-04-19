@@ -1,5 +1,6 @@
 import { FC, HTMLProps } from 'react';
 import { Size, Variant } from '../../../types';
+import './Button.scss';
 export interface IButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
     /** Внешний вид */
     buttonType?: 'primary' | 'secondary' | 'link' | 'outlinePrimary' | 'outlineSecondary' | 'round' | 'text';
