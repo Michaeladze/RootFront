@@ -32,10 +32,12 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   onChipsRemove?: (id: string, name?: string) => void;
   /** Возможность добавлять опции */
   creatable?: boolean;
-  /** Создание новой опции */
-  saveOption?: (value: string) => void;
+  /** Обратотка создания новой опции  */
+  onCreateOption?: (option: IOption) => void;
   /** Сообщение создания новой опции */
   saveOptionMessage?: string;
+  /** Префикс для value кастомных опций */
+  customPrefix?: string;
 }
 
 const Select: FC<ISelectProps> = ({
@@ -48,8 +50,9 @@ const Select: FC<ISelectProps> = ({
   size = 'medium',
   onChipsRemove,
   creatable = false,
-  saveOption,
+  onCreateOption,
   saveOptionMessage = '',
+  customPrefix = 'custom__',
   ...props
 }: ISelectProps) => {
   /** Ссылка на текущий компонент */
@@ -88,6 +91,9 @@ const Select: FC<ISelectProps> = ({
     }, new Map<string, boolean>());
   };
 
+  const isValidNewOption = (inputValue: string) =>
+    !(!inputValue || options.some(option => option.label === inputValue || option.value === inputValue));
+
   /** Поиск внутри селекта */
   const onSearch = (e: React.KeyboardEvent) => {
     if (props.readOnly) {
@@ -101,17 +107,14 @@ const Select: FC<ISelectProps> = ({
       result = onFilter(options, search);
     }
 
+    if (creatable && isValidNewOption(search)) {
+      showNewOptionMessage(true);
+    }
+
     /** Скрываем выпадающий список, если ничего не найдено */
-    // TODO Creatable проверять на точное совпадение
-    // TODO При клике сразу выбирать
     if (options.length === result.size) {
-      if (creatable) {
-        showNewOptionMessage(true);
-      } else {
-        showDropdown && toggleDropdown(false);
-      }
+      !creatable && showDropdown && toggleDropdown(false);
     } else {
-      showNewOptionMessage(false);
       !showDropdown && toggleDropdown(true);
     }
 
@@ -336,8 +339,26 @@ const Select: FC<ISelectProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const onSaveOption = () => {
-    saveOption && saveOption(inputValue);
-    showNewOptionMessage(false);
+    if (isValidNewOption(inputValue)) {
+      const customOption = {
+        label: inputValue,
+        value: `${customPrefix}${inputValue}`,
+      };
+
+      if (multiSelect) {
+        setCurrentValue([...currentValue, customOption]);
+      } else {
+        setInputValue(customOption.label);
+        setCurrentValue([customOption]);
+        toggleDropdown(false);
+        setHiddenOptions(new Map());
+      }
+
+      onCreateOption && onCreateOption(customOption);
+      !onCreateOption && getValue && getValue(customOption);
+      showNewOptionMessage(false);
+    }
+
   };
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -381,7 +402,10 @@ const Select: FC<ISelectProps> = ({
       <ul className={`rf-select__list ${showDropdown ? 'rf-select__list--show' : ''}`} ref={dropdownRef}
         onScroll={(e: any) => e.stopPropagation()}>
         {optionsList}
-        {newOptionMessage && (<p className='rf-select__add-option' onClick={onSaveOption}>{saveOptionMessage} <span className='rf-select__add-option-value'>{inputValue}</span></p>)}
+        {newOptionMessage && (
+          <p className='rf-select__add-option' onClick={onSaveOption}>
+            {saveOptionMessage} <span className='rf-select__add-option-value'>{inputValue}</span>
+          </p>)}
       </ul>
 
       {chipsJSX}
