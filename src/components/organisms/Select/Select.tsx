@@ -30,6 +30,14 @@ export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   size?: Size;
   /** Событие на удаление чипсы */
   onChipsRemove?: (id: string, name?: string) => void;
+  /** Возможность добавлять опции */
+  creatable?: boolean;
+  /** Обратотка создания новой опции  */
+  onCreateOption?: (option: IOption) => void;
+  /** Сообщение создания новой опции */
+  saveOptionMessage?: string;
+  /** Префикс для value кастомных опций */
+  customPrefix?: string;
 }
 
 const Select: FC<ISelectProps> = ({
@@ -41,6 +49,10 @@ const Select: FC<ISelectProps> = ({
   getValue,
   size = 'medium',
   onChipsRemove,
+  creatable = false,
+  onCreateOption,
+  saveOptionMessage = '',
+  customPrefix = 'custom__',
   ...props
 }: ISelectProps) => {
   /** Ссылка на текущий компонент */
@@ -51,6 +63,9 @@ const Select: FC<ISelectProps> = ({
   /** Отображение дропдауна с значениями */
   const [showDropdown, toggleDropdown] = useState(false);
   const dropdownRef = useRef<HTMLUListElement>(null);
+
+  /** Отображение сообщения о создании новой опции */
+  const [newOptionMessage, showNewOptionMessage] = useState<boolean>(false);
 
   /** При открытии выпадающего списка поднимаем скролл наверх */
   useEffect(() => {
@@ -76,6 +91,9 @@ const Select: FC<ISelectProps> = ({
     }, new Map<string, boolean>());
   };
 
+  const isValidNewOption = (inputValue: string) =>
+    !(!inputValue || options.some(option => option.label === inputValue || option.value === inputValue));
+
   /** Поиск внутри селекта */
   const onSearch = (e: React.KeyboardEvent) => {
     if (props.readOnly) {
@@ -89,9 +107,13 @@ const Select: FC<ISelectProps> = ({
       result = onFilter(options, search);
     }
 
+    if (creatable && isValidNewOption(search)) {
+      showNewOptionMessage(true);
+    }
+
     /** Скрываем выпадающий список, если ничего не найдено */
     if (options.length === result.size) {
-      showDropdown && toggleDropdown(false);
+      !creatable && showDropdown && toggleDropdown(false);
     } else {
       !showDropdown && toggleDropdown(true);
     }
@@ -316,6 +338,31 @@ const Select: FC<ISelectProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const onSaveOption = () => {
+    if (isValidNewOption(inputValue)) {
+      const customOption = {
+        label: inputValue,
+        value: `${customPrefix}${inputValue}`,
+      };
+
+      if (multiSelect) {
+        setCurrentValue([...currentValue, customOption]);
+      } else {
+        setInputValue(customOption.label);
+        setCurrentValue([customOption]);
+        toggleDropdown(false);
+        setHiddenOptions(new Map());
+      }
+
+      onCreateOption && onCreateOption(customOption);
+      !onCreateOption && getValue && getValue(customOption);
+      showNewOptionMessage(false);
+    }
+
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   const clearIconClass = !props.readOnly && inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
 
   return (
@@ -355,6 +402,10 @@ const Select: FC<ISelectProps> = ({
       <ul className={`rf-select__list ${showDropdown ? 'rf-select__list--show' : ''}`} ref={dropdownRef}
         onScroll={(e: any) => e.stopPropagation()}>
         {optionsList}
+        {newOptionMessage && (
+          <p className='rf-select__add-option' onClick={onSaveOption}>
+            {saveOptionMessage} <span className='rf-select__add-option-value'>{inputValue}</span>
+          </p>)}
       </ul>
 
       {chipsJSX}
