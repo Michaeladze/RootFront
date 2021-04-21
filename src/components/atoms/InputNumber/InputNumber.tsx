@@ -4,7 +4,7 @@ import { IInputProps } from '../Input/Input';
 import { Input, numberWithSpaces } from '../../../index';
 
 export interface IInputNumberProps extends IInputProps {
-  defaultValue?: string | number;
+  defaultValue?: string;
   separator?: string;
   floatPoints?: number;
   groupBy?: number;
@@ -12,7 +12,7 @@ export interface IInputNumberProps extends IInputProps {
 
 const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator = ' ', floatPoints = 0, groupBy = 3, ...props }: IInputNumberProps) => {
 
-  const [value, setValue] = useState<string | number>(defaultValue);
+  const [value, setValue] = useState<string>(defaultValue);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 

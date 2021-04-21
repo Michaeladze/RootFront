@@ -1,0 +1,22 @@
+.input-phone {
+  display: flex;
+}
+
+.input-phone__select {
+  width: 80px;
+
+  .rf-input__field {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+}
+
+.input-phone__input {
+  width: 100%;
+
+  .rf-input__field {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
