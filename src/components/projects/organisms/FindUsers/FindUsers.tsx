@@ -15,6 +15,7 @@ import {
 import Preloader from '../../../atoms/Preloader';
 import { IUser } from '../../../../types/projects.types';
 import Axios, { AxiosResponse, Canceler } from 'axios';
+import { usersMocks } from './users.mocks';
 
 
 SwiperCore.use([Navigation]);
@@ -29,6 +30,8 @@ export interface IProps {
   subtitle?: ReactNode;
   /** Деактивировать выбранных пользователей */
   disableSelected?: boolean;
+  /** Множественный выбор */
+  multiSelect?: boolean;
 }
 
 const FindUsers: FC<IProps> = ({
@@ -36,6 +39,7 @@ const FindUsers: FC<IProps> = ({
   users = [],
   disableSelected,
   getUsers,
+  multiSelect = true,
   subtitle = 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.'
 }: IProps) => {
 
@@ -56,7 +60,7 @@ const FindUsers: FC<IProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const [loaded, setLoaded] = useState<boolean>(true);
-  const [searchResults, setSearchResults] = useState<IUser[]>([]);
+  const [searchResults, setSearchResults] = useState<IUser[]>(usersMocks);
 
   const cancel = useRef<Canceler | undefined>(undefined);
 
@@ -118,11 +122,19 @@ const FindUsers: FC<IProps> = ({
   };
 
   const addHandle = (item: IUser) => {
-    setSelectedPeople([...selectedPeople, item]);
+    if (multiSelect) {
+      setSelectedPeople([...selectedPeople, item]);
+    } else {
+      setSelectedPeople([item]);
+    }
   };
 
   const removeHandle = (item: IUser) => {
-    setSelectedPeople(selectedPeople.filter((data) => item.id !== data.id));
+    if (multiSelect) {
+      setSelectedPeople(selectedPeople.filter((data) => item.id !== data.id));
+    } else {
+      setSelectedPeople([]);
+    }
   };
 
   // --------------------------------------------------------------------------------------------------------------------
@@ -222,7 +234,7 @@ const FindUsers: FC<IProps> = ({
         <Input placeholder='Поиск' search={ true } onKeyUp={ inputHandle } autoFocus onClear={ onClear }/>
       </div>
 
-      { !!selectedPeople.length && (
+      { !!selectedPeople.length && multiSelect && (
         <div className='swiper__container'>
           <div className='swiper__wrapper'>
             <Swiper
