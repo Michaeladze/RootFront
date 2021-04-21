@@ -26,6 +26,9 @@ import ShareButton from './components/atoms/ShareButton';
 import BackdropLoader from './components/atoms/BackdropLoader';
 import Badge from './components/atoms/Badge/Badge';
 import Tag from './components/atoms/Tag/Tag';
+import InputCreditCard from './components/atoms/InputCreditCard/InputCreditCard';
+import InputNumber from './components/atoms/InputNumber/InputNumber';
+import InputPhone from './components/atoms/InputPhone/InputPhone';
 
 // ------------------------ Компоненты Molecules -----------------------------------------------------------------------
 import Notifications, { sendNotification } from './components/molecules/Notifications';
@@ -133,7 +136,10 @@ export {
   NewDatepicker,
   Confirm,
   SelectTree,
-  Tag
+  Tag,
+  InputPhone,
+  InputCreditCard,
+  InputNumber
 };
 
 export {

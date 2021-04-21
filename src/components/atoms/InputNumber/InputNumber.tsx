@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './InputNumber.scss';
 import { IInputProps } from '../Input/Input';
 import { Input, numberWithSpaces } from '../../../index';
 

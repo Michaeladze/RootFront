@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './InputPhone.scss';
 import { IInputProps } from '../Input/Input';
 import { Input, Select } from '../../../index';
 import { IOption } from '../../../types';
