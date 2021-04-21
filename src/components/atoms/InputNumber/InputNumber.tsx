@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './InputNumber.scss';
 import { IInputProps } from '../Input/Input';
 import { Input, numberWithSpaces } from '../../../index';
@@ -6,26 +6,23 @@ import { Input, numberWithSpaces } from '../../../index';
 export interface IInputNumberProps extends IInputProps {
   defaultValue?: string | number;
   separator?: string;
+  floatPoints?: number;
 }
 
-const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator = ' ', ...props }: IInputNumberProps) => {
+const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator = ' ', floatPoints = 2, ...props }: IInputNumberProps) => {
 
   const [value, setValue] = useState<string | number>(defaultValue);
-
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     let value = e.target.value;
 
-    // /** Исключить все буквы алфавита */
-    // if (value[value.length - 1] !== '.' && value[value.length - 1] !== ',') {
-    //   if (isNaN(+value[value.length - 1]) || value.toLowerCase() === 'e') {
-    //     return;
-    //   }
-    // }
+    /** Исключить все буквы алфавита */
+    if (isNaN(+value.replace(/\s/g, ''))) {
+      e.preventDefault();
+      return;
+    }
+
 
     value = value.replace(/,/g, '.');
 
@@ -46,7 +43,7 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
 
     const values = value.split('.');
 
-    const value1: string = values[0].replace(/\s+/g, '');
+    const value1: string = values[0].replace(/\s/g, '');
     const value2: string = values[1];
 
     let result = '';
@@ -54,18 +51,17 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
     if (value1) {
       const integer = +value1;
 
-
       /** Исключить экспоненциальные значения и infinity */
       if (integer > Number.MAX_SAFE_INTEGER) {
         return;
       }
 
-      if (value2) {
-
+      if (value2 && value2.toString().length > floatPoints) {
+        return;
       }
 
       const float = +value2;
-      result = isNaN(float) ? numberWithSpaces(integer, 3, separator) : [numberWithSpaces(integer, 3, separator), float].join('.');
+      result = isNaN(float) ? numberWithSpaces(integer, 3, separator) : [numberWithSpaces(integer, 3, separator), value2].join('.');
     }
 
     setValue(result);
