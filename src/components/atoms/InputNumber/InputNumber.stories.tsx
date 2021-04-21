@@ -18,7 +18,7 @@ export const inputNumber = () => {
       <StoryItem>
         <StoryRow>
           <FormGroup label='Номер счета'>
-            <InputNumber />
+            <InputNumber groupBy={2} floatPoints={3} />
           </FormGroup>
         </StoryRow>
       </StoryItem>

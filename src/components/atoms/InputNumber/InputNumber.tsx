@@ -7,9 +7,10 @@ export interface IInputNumberProps extends IInputProps {
   defaultValue?: string | number;
   separator?: string;
   floatPoints?: number;
+  groupBy?: number;
 }
 
-const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator = ' ', floatPoints = 2, ...props }: IInputNumberProps) => {
+const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator = ' ', floatPoints = 0, groupBy = 3, ...props }: IInputNumberProps) => {
 
   const [value, setValue] = useState<string | number>(defaultValue);
 
@@ -23,8 +24,10 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
       return;
     }
 
-
-    value = value.replace(/,/g, '.');
+    if (floatPoints === 0 && value.includes('.')) {
+      const idx = value.indexOf('.');
+      value = value.slice(0, idx);
+    }
 
     /** Исключить повторение точек */
     const dotMap: Record<string, number> = { '.': 0 };
@@ -44,7 +47,7 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
     const values = value.split('.');
 
     const value1: string = values[0].replace(/\s/g, '');
-    const value2: string = values[1];
+    let value2: string = values[1];
 
     let result = '';
 
@@ -57,11 +60,11 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
       }
 
       if (value2 && value2.toString().length > floatPoints) {
-        return;
+        value2 = value2.slice(0, floatPoints);
       }
 
       const float = +value2;
-      result = isNaN(float) ? numberWithSpaces(integer, 3, separator) : [numberWithSpaces(integer, 3, separator), value2].join('.');
+      result = isNaN(float) ? numberWithSpaces(integer, groupBy, separator) : [numberWithSpaces(integer, groupBy, separator), value2].join('.');
     }
 
     setValue(result);
