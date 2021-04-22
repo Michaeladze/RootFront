@@ -2,11 +2,7 @@ import React from 'react';
 import './FatalError.scss';
 import FatalErrorIcon from './FatalErrorIcon';
 
-export interface IFatalErrorProps {
-  link: string;
-}
-
-const FatalError: React.FC<IFatalErrorProps> = ({ link }: IFatalErrorProps) => {
+const FatalError = () => {
 
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -17,7 +13,7 @@ const FatalError: React.FC<IFatalErrorProps> = ({ link }: IFatalErrorProps) => {
       <FatalErrorIcon/>
       <p className='fatal-error__label'>Что-то пошло не так... Пожалуйста, обновите страницу.</p>
       <p className='fatal-error__message'>Для заведения инцидента воспользуйтесь ЦСПП (
-        <a href={link} target='_blank' className='fatal-error__link'>{link}</a>).
+        <a href='https://cspp.vtb.ru' target='_blank' className='fatal-error__link'>https://cspp.vtb.ru</a>).
       </p>
     </div>
   );

@@ -14,7 +14,7 @@ export const fatalError = () => {
   return (
     <Story name='FatalError' description='Ошибка' width={600}>
       <StoryItem>
-        <FatalError link='https://cspp.vtb.ru'/>
+        <FatalError/>
       </StoryItem>
     </Story>
   );
