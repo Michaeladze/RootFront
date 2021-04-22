@@ -9,14 +9,17 @@ export interface IInputNumberProps extends IInputProps {
   separator?: string;
   floatPoints?: number;
   groupBy?: number;
+  max?: number;
 }
 
-const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator = ' ', floatPoints = 0, groupBy = 3, ...props }: IInputNumberProps) => {
+const InputNumber: React.FC<IInputNumberProps> = ({ max, defaultValue = '', separator = ' ', floatPoints = 0, groupBy = 3, ...props }: IInputNumberProps) => {
 
   const input = useRef<HTMLInputElement | null>(null);
 
-  const [inputValue, setInputValue] = useState<string>(defaultValue);
+  const [inputValue, setInputValue] = useState<string>('');
   const [value, setValue] = useState<string>(defaultValue);
+
+  // -------------------------------------------------------------------------------------------------------------------
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -54,7 +57,6 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
     let value2: string = values[1];
 
     let result = '';
-    let trimmedResult = '';
 
     if (value1) {
       const integer = +value1;
@@ -69,13 +71,41 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
       }
 
       const float = +value2;
-      trimmedResult = isNaN(float) ? integer.toString() : [integer, value2].join('.');
       result = isNaN(float) ? numberWithSpaces(integer, groupBy, separator) : [numberWithSpaces(integer, groupBy, separator), value2].join('.');
     }
 
-    setInputValue(trimmedResult);
     setValue(result);
   };
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  const handleDefault = (v: string | number) => {
+    const val: string = v.toString();
+
+    if (val.includes('.')) {
+      const values = val.split('.');
+      const result = [numberWithSpaces(+values[0]), values[1]].join('.');
+      setValue(result);
+    } else {
+      val ? setValue(numberWithSpaces(+val)) : setValue(val);
+    }
+  };
+
+  useEffect(() => {
+    if (defaultValue) {
+      handleDefault(defaultValue);
+    }
+  }, [defaultValue]);
+
+  useEffect(() => {
+    if (max && +value.replace(/\s/g, '') > max) {
+      handleDefault(max);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    setInputValue(value.replace(/\s/g, ''));
+  }, [value]);
 
   useEffect(() => {
     if (!input.current) {
