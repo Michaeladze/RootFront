@@ -17,7 +17,7 @@ const FatalError: React.FC<IFatalErrorProps> = ({ link }: IFatalErrorProps) => {
       <FatalErrorIcon/>
       <p className='fatal-error__label'>Что-то пошло не так... Пожалуйста, обновите страницу.</p>
       <p className='fatal-error__message'>Для заведения инцидента воспользуйтесь ЦСПП (
-        <a href='#' target='_blank' className='fatal-error__link'>{link}</a>).
+        <a href={link} target='_blank' className='fatal-error__link'>{link}</a>).
       </p>
     </div>
   );
