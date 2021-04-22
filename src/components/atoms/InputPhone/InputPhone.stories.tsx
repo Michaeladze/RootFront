@@ -33,7 +33,7 @@ export const inputPhone = () => {
               <FormGroup label='Телефон'>
                 <div style={{ display: 'flex' }}>
                   <div style={{ width: '100%' }}>
-                    <InputPhone name='phone' />
+                    <InputPhone name='phone' defaultValue='+79852586112' />
                   </div>
                   <div style={{ marginLeft: '24px' }}>
                     <Button type='submit'>Отправить</Button>

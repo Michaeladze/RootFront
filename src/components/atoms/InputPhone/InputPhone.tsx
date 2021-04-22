@@ -3,9 +3,23 @@ import React, {
 } from 'react';
 import { IInputProps } from '../Input/Input';
 import { Input, Select } from '../../../index';
-import { IOption } from '../../../types';
 import InputMask from 'react-input-mask';
+import { IOption } from '../../../types';
 
+const countryCodes: IOption[] = [
+  {
+    label: '+7',
+    value: '+7'
+  },
+  {
+    label: '+8',
+    value: '+8'
+  },
+  {
+    label: '+9',
+    value: '+9'
+  }
+];
 
 export interface IInputPhoneProps extends IInputProps {
   defaultValue?: string;
@@ -18,22 +32,15 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }:
 
   const input = useRef<HTMLInputElement | null>(null);
 
-  // -------------------------------------------------------------------------------------------------------------------
+  useEffect(() => {
+    setValue(defaultValue.slice(2, defaultValue.length));
+  }, [defaultValue]);
 
-  const countryCodes: IOption[] = [
-    {
-      label: '+7',
-      value: '+7'
-    },
-    {
-      label: '+8',
-      value: '+8'
-    },
-    {
-      label: '+9',
-      value: '+9'
-    }
-  ];
+  useEffect(() => {
+    setInputValue(countryCodes[0].value + value.replace(/(\s|-|_|\(|\))/g, ''));
+  }, [value]);
+
+  // -------------------------------------------------------------------------------------------------------------------
 
   const [countryCode, setCountryCode] = useState<string>(countryCodes[0].value);
   const onSelectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,7 +130,8 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }:
     <div className={`rf-phone-input ${focusClass}`} onFocus={onFocus} onBlur={onBlur}>
       <div className='rf-phone-input__select'>
         <Select
-          value={countryCode}
+          disabled
+          value={countryCodes[0].value}
           onChange={onSelectChange}
           options={countryCodes}
           readOnly/>
