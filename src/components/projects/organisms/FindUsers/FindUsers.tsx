@@ -52,6 +52,12 @@ const FindUsers: FC<IProps> = ({
     return a;
   }, {});
 
+  const [newPeople, setNewPeople] = useState<IUser[]>([]);
+  const newPeopleMap: Record<string, boolean> = newPeople.reduce((a: Record<string, boolean>, u: IUser) => {
+    a[u.id] = true;
+    return a;
+  }, {});
+
   const disablePeopleMap = useRef<Record<string, boolean>>(selectedPeopleMap);
 
   /** Строка поиска */
@@ -124,6 +130,10 @@ const FindUsers: FC<IProps> = ({
   const addHandle = (item: IUser) => {
     if (multiSelect) {
       setSelectedPeople([...selectedPeople, item]);
+
+      if (!newPeopleMap[item.id]) {
+        setNewPeople([...newPeople, item]);
+      }
     } else {
       setSelectedPeople([item]);
     }
@@ -132,6 +142,10 @@ const FindUsers: FC<IProps> = ({
   const removeHandle = (item: IUser) => {
     if (multiSelect) {
       setSelectedPeople(selectedPeople.filter((data) => item.id !== data.id));
+
+      if (!newPeopleMap[item.id]) {
+        setNewPeople(newPeople.filter((data) => item.id !== data.id));
+      }
     } else {
       setSelectedPeople([]);
     }
@@ -212,6 +226,7 @@ const FindUsers: FC<IProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  /** Автофокус */
   useEffect(() => {
     setTimeout(() => {
       if (inputRef.current) {
@@ -223,6 +238,10 @@ const FindUsers: FC<IProps> = ({
       }
     });
   }, []);
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  const disabled = newPeople.length === 0;
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -264,7 +283,7 @@ const FindUsers: FC<IProps> = ({
           )
         ) : <Preloader/> }
       </div>
-      <PopupFooter textAccept='Добавить' onSubmit={ onSubmit } onClose={ onClose }/>
+      <PopupFooter textAccept='Добавить' onSubmit={ onSubmit } disabled={disabled} onClose={ onClose }/>
     </div>
   );
 };
