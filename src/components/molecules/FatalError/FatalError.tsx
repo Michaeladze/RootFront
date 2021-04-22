@@ -1,5 +1,4 @@
 import React from 'react';
-import './FatalError.scss';
 import FatalErrorIcon from './FatalErrorIcon';
 
 const FatalError = () => {

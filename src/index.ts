@@ -40,6 +40,7 @@ import Timepicker from './components/molecules/Timepicker';
 import ContentExpander from './components/molecules/ContentExpander';
 import Chips from './components/molecules/Chips';
 import Menu from './components/molecules/Menu';
+import FatalError from './components/molecules/FatalError';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
 import SelectTree from './components/organisms/SelectTree';
@@ -139,7 +140,8 @@ export {
   Tag,
   InputPhone,
   InputCreditCard,
-  InputNumber
+  InputNumber,
+  FatalError
 };
 
 export {
