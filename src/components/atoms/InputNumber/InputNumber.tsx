@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect, useRef, useState
+} from 'react';
 import { IInputProps } from '../Input/Input';
 import { Input, numberWithSpaces } from '../../../index';
 
@@ -11,6 +13,9 @@ export interface IInputNumberProps extends IInputProps {
 
 const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator = ' ', floatPoints = 0, groupBy = 3, ...props }: IInputNumberProps) => {
 
+  const input = useRef<HTMLInputElement | null>(null);
+
+  const [inputValue, setInputValue] = useState<string>(defaultValue);
   const [value, setValue] = useState<string>(defaultValue);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +54,7 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
     let value2: string = values[1];
 
     let result = '';
+    let trimmedResult = '';
 
     if (value1) {
       const integer = +value1;
@@ -63,11 +69,30 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
       }
 
       const float = +value2;
+      trimmedResult = isNaN(float) ? integer.toString() : [integer, value2].join('.');
       result = isNaN(float) ? numberWithSpaces(integer, groupBy, separator) : [numberWithSpaces(integer, groupBy, separator), value2].join('.');
     }
 
+    setInputValue(trimmedResult);
     setValue(result);
   };
+
+  useEffect(() => {
+    if (!input.current) {
+      return;
+    }
+
+    let event;
+
+    if (typeof (Event) === 'function') {
+      event = new Event('change');
+    } else {
+      event = document.createEvent('Event');
+      event.initEvent('change', true, true);
+    }
+
+    input.current.dispatchEvent(event);
+  }, [inputValue]);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -82,16 +107,17 @@ const InputNumber: React.FC<IInputNumberProps> = ({ defaultValue = '', separator
 
 
   return (
-    <Input
-      {...props}
-      value={value}
-      name={ props.name }
-      placeholder={ props.placeholder }
-      disabled={ props.disabled }
-      readOnly={ props.readOnly }
-      onChange={ onChange }
-      onKeyPress={ onKeyPress }
-    />
+    <>
+      <Input
+        value={value}
+        placeholder={ props.placeholder }
+        disabled={ props.disabled }
+        readOnly={ props.readOnly }
+        onChange={ onChange }
+        onKeyPress={ onKeyPress }
+      />
+      <input type='text' className='rf-number-input__hidden' name={ props.name } value={inputValue} ref={input} readOnly/>
+    </>
   );
 };
 

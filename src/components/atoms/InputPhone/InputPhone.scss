@@ -1,8 +1,15 @@
-.input-phone {
+.rf-phone-input {
   display: flex;
 }
 
-.input-phone__select {
+.rf-phone-input--focus {
+
+  .rf-input__field {
+    border-color: var(--accent-500);
+  }
+}
+
+.rf-phone-input__select {
   width: 80px;
 
   .rf-input__field {
@@ -12,11 +19,18 @@
   }
 }
 
-.input-phone__input {
+.rf-phone-input__field {
   width: 100%;
 
   .rf-input__field {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+}
+
+.rf-phone-input__hidden {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

@@ -14,11 +14,13 @@
   @include s0;
   margin-top: 32px;
   margin-bottom: 4px;
+  cursor: default;
 }
 
 .fatal-error__message {
   @include p1;
-  color: var(--base-500)
+  color: var(--base-500);
+  cursor: default;
 }
 
 .fatal-error__link {

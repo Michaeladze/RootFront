@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect, useRef, useState
+} from 'react';
 import { IInputProps } from '../Input/Input';
 import { Input, Select } from '../../../index';
 import { IOption } from '../../../types';
@@ -7,31 +9,14 @@ import InputMask from 'react-input-mask';
 
 export interface IInputPhoneProps extends IInputProps {
   defaultValue?: string;
-  getValue?: (item: string) => void;
 }
 
-const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', getValue, ...props }: IInputPhoneProps) => {
+const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }: IInputPhoneProps) => {
 
-
+  const [inputValue, setInputValue] = useState<string>(defaultValue);
   const [value, setValue] = useState<string>(defaultValue);
 
-  // -------------------------------------------------------------------------------------------------------------------
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    const value = e.target.value;
-
-    setValue(value);
-  };
-
-  // -------------------------------------------------------------------------------------------------------------------
-
-  const onKeyPress = (e: React.KeyboardEvent) => {
-    if (e.keyCode === 13 || e.charCode === 13 || e.key === 'Enter') {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  };
+  const input = useRef<HTMLInputElement | null>(null);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -52,6 +37,9 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', getValue, .
 
   const [countryCode, setCountryCode] = useState<string>(countryCodes[0].value);
   const onSelectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const body = value.replace(/(\s|-|\(|\))/g, '');
+    const phone = e.target.value + body;
+    setInputValue(phone);
     setCountryCode(e.target.value);
   };
 
@@ -79,38 +67,80 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', getValue, .
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  useEffect(() => {
-    const r = value.replace(/(\s|-|\(|\))/g, '');
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const body = e.target.value.replace(/(\s|-|_|\(|\))/g, '');
+    const phone = countryCode + body;
+    setInputValue(phone);
+    setValue(e.target.value);
+  };
 
-    if (value && !r.includes('_')) {
-      getValue && getValue(countryCode + r);
+  // -------------------------------------------------------------------------------------------------------------------
+
+  const onKeyPress = (e: React.KeyboardEvent) => {
+    if (e.keyCode === 13 || e.charCode === 13 || e.key === 'Enter') {
+      e.stopPropagation();
+      e.preventDefault();
     }
-  }, [value, countryCode]);
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    if (!input.current) {
+      return;
+    }
+
+    let event;
+
+    if (typeof (Event) === 'function') {
+      event = new Event('change');
+    } else {
+      event = document.createEvent('Event');
+      event.initEvent('change', true, true);
+    }
+
+    input.current.dispatchEvent(event);
+
+  }, [inputValue]);
+
+  // -------------------------------------------------------------------------------------------------------------------
+
+  const [isFocus, setFocus] = useState<boolean>(false);
+
+  const onFocus = () => {
+    setFocus(true);
+  };
+
+  const onBlur = () => {
+    setFocus(false);
+  };
+
+  const focusClass: string = isFocus ? 'rf-phone-input--focus' : '';
 
   // -------------------------------------------------------------------------------------------------------------------
 
   return (
-    <div className='input-phone'>
-      <div className='input-phone__select'>
+    <div className={`rf-phone-input ${focusClass}`} onFocus={onFocus} onBlur={onBlur}>
+      <div className='rf-phone-input__select'>
         <Select
           value={countryCode}
           onChange={onSelectChange}
           options={countryCodes}
           readOnly/>
       </div>
-      <div className='input-phone__input'>
+      <div className='rf-phone-input__field'>
         {/* @ts-ignore */}
         <InputMask mask={mask}
-          {...props}
-          name={ props.name }
           value={value}
           placeholder={ props.placeholder }
           disabled={ props.disabled }
           readOnly={ props.readOnly }
           onChange={ onChange }
-          onKeyPress={ onKeyPress }>
+          onKeyPress={ onKeyPress }
+        >
           <Input/>
         </InputMask>
+        <input type='hidden' className='rf-phone-input__hidden' name={ props.name } value={inputValue} ref={input} readOnly/>
       </div>
     </div>
   );
