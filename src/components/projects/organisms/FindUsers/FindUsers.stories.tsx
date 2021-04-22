@@ -30,6 +30,7 @@ export const findUsers = () => {
             <FindUsers
               getUsers={getUsers}
               users={selected}
+              disableSelected
               onClose={() => toggle(false)}
               subtitle={subtitle}/>
           </Modal>

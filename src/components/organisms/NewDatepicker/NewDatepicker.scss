@@ -18,6 +18,7 @@
   transition: 0.35s;
   color: var(--base-500);
   cursor: pointer;
+  pointer-events: none;
 }
 
 .rf-datepicker__input-wrapper--disabled {

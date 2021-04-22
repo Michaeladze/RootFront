@@ -15,6 +15,7 @@ import {
 import Preloader from '../../../atoms/Preloader';
 import { IUser } from '../../../../types/projects.types';
 import Axios, { AxiosResponse, Canceler } from 'axios';
+import { usersMocks } from './users.mocks';
 
 
 SwiperCore.use([Navigation]);
@@ -29,6 +30,8 @@ export interface IProps {
   subtitle?: ReactNode;
   /** Деактивировать выбранных пользователей */
   disableSelected?: boolean;
+  /** Множественный выбор */
+  multiSelect?: boolean;
 }
 
 const FindUsers: FC<IProps> = ({
@@ -36,6 +39,7 @@ const FindUsers: FC<IProps> = ({
   users = [],
   disableSelected,
   getUsers,
+  multiSelect = true,
   subtitle = 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.'
 }: IProps) => {
 
@@ -48,6 +52,12 @@ const FindUsers: FC<IProps> = ({
     return a;
   }, {});
 
+  const [newPeople, setNewPeople] = useState<IUser[]>([]);
+  const newPeopleMap: Record<string, boolean> = newPeople.reduce((a: Record<string, boolean>, u: IUser) => {
+    a[u.id] = true;
+    return a;
+  }, {});
+
   const disablePeopleMap = useRef<Record<string, boolean>>(selectedPeopleMap);
 
   /** Строка поиска */
@@ -56,7 +66,7 @@ const FindUsers: FC<IProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const [loaded, setLoaded] = useState<boolean>(true);
-  const [searchResults, setSearchResults] = useState<IUser[]>([]);
+  const [searchResults, setSearchResults] = useState<IUser[]>(usersMocks);
 
   const cancel = useRef<Canceler | undefined>(undefined);
 
@@ -118,11 +128,27 @@ const FindUsers: FC<IProps> = ({
   };
 
   const addHandle = (item: IUser) => {
-    setSelectedPeople([...selectedPeople, item]);
+    if (multiSelect) {
+      setSelectedPeople([...selectedPeople, item]);
+
+      if (!newPeopleMap[item.id]) {
+        setNewPeople([...newPeople, item]);
+      }
+    } else {
+      setSelectedPeople([item]);
+    }
   };
 
   const removeHandle = (item: IUser) => {
-    setSelectedPeople(selectedPeople.filter((data) => item.id !== data.id));
+    if (multiSelect) {
+      setSelectedPeople(selectedPeople.filter((data) => item.id !== data.id));
+
+      if (!newPeopleMap[item.id]) {
+        setNewPeople(newPeople.filter((data) => item.id !== data.id));
+      }
+    } else {
+      setSelectedPeople([]);
+    }
   };
 
   // --------------------------------------------------------------------------------------------------------------------
@@ -200,6 +226,7 @@ const FindUsers: FC<IProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  /** Автофокус */
   useEffect(() => {
     setTimeout(() => {
       if (inputRef.current) {
@@ -214,6 +241,10 @@ const FindUsers: FC<IProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const disabled = newPeople.length === 0;
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   return (
     <div className='find-users__wrapper'>
       <h4 className='find-users__title'>Поиск сотрудников</h4>
@@ -222,7 +253,7 @@ const FindUsers: FC<IProps> = ({
         <Input placeholder='Поиск' search={ true } onKeyUp={ inputHandle } autoFocus onClear={ onClear }/>
       </div>
 
-      { !!selectedPeople.length && (
+      { !!selectedPeople.length && multiSelect && (
         <div className='swiper__container'>
           <div className='swiper__wrapper'>
             <Swiper
@@ -252,7 +283,7 @@ const FindUsers: FC<IProps> = ({
           )
         ) : <Preloader/> }
       </div>
-      <PopupFooter textAccept='Добавить' onSubmit={ onSubmit } onClose={ onClose }/>
+      <PopupFooter textAccept='Добавить' onSubmit={ onSubmit } disabled={disabled} onClose={ onClose }/>
     </div>
   );
 };
