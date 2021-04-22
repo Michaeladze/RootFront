@@ -5,7 +5,7 @@ import { IInputProps } from '../Input/Input';
 import { Input, numberWithSpaces } from '../../../index';
 
 export interface IInputNumberProps extends IInputProps {
-  defaultValue?: string;
+  defaultValue?: string | number;
   separator?: string;
   floatPoints?: number;
   groupBy?: number;
@@ -17,7 +17,7 @@ const InputNumber: React.FC<IInputNumberProps> = ({ max, defaultValue = '', sepa
   const input = useRef<HTMLInputElement | null>(null);
 
   const [inputValue, setInputValue] = useState<string>('');
-  const [value, setValue] = useState<string>(defaultValue);
+  const [value, setValue] = useState<string | number>(defaultValue);
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -98,13 +98,13 @@ const InputNumber: React.FC<IInputNumberProps> = ({ max, defaultValue = '', sepa
   }, [defaultValue]);
 
   useEffect(() => {
-    if (max && +value.replace(/\s/g, '') > max) {
+    if (max && +value.toString().replace(/\s/g, '') > max) {
       handleDefault(max);
     }
   }, [value]);
 
   useEffect(() => {
-    setInputValue(value.replace(/\s/g, ''));
+    setInputValue(value.toString().replace(/\s/g, ''));
   }, [value]);
 
   useEffect(() => {

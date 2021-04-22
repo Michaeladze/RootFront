@@ -35,7 +35,7 @@ export const inputNumber = () => {
               <FormGroup label='Число'>
                 <div style={{ display: 'flex' }}>
                   <div style={{ width: '100%' }}>
-                    <InputNumber name='number' defaultValue={'2000.20'} max={10000.50} floatPoints={1} />
+                    <InputNumber name='number' defaultValue={2000.20} max={10000.50} floatPoints={1} />
                   </div>
                   <div style={{ marginLeft: '24px' }}>
                     <Button type='submit'>Отправить</Button>
