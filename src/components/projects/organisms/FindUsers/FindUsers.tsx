@@ -15,7 +15,6 @@ import {
 import Preloader from '../../../atoms/Preloader';
 import { IUser } from '../../../../types/projects.types';
 import Axios, { AxiosResponse, Canceler } from 'axios';
-import { usersMocks } from './users.mocks';
 
 
 SwiperCore.use([Navigation]);
@@ -66,7 +65,7 @@ const FindUsers: FC<IProps> = ({
   // -------------------------------------------------------------------------------------------------------------------
 
   const [loaded, setLoaded] = useState<boolean>(true);
-  const [searchResults, setSearchResults] = useState<IUser[]>(usersMocks);
+  const [searchResults, setSearchResults] = useState<IUser[]>([]);
 
   const cancel = useRef<Canceler | undefined>(undefined);
 
