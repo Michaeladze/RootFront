@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../Button';
+import './Fonts.scss';
 
 const Fonts = () => {
   return (

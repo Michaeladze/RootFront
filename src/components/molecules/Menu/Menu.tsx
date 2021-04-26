@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useCallback, useLayoutEffect, useRef, useState
 } from 'react';
+import './Menu.scss';
 import { IListElement, IMenuContext } from '../../../types';
 import { useClickOutside } from '../../../index';
 import List from '../../atoms/List';

@@ -2,6 +2,7 @@ import React, {
   useCallback,
   useEffect, useRef, useState
 } from 'react';
+import './NewDatepicker.scss';
 import { formatDate, Input } from '../../../index';
 import { DateFormat, Size } from '../../../types';
 import Calendar from '../../_icons/calendar-outline';

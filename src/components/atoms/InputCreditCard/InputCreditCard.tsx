@@ -1,6 +1,7 @@
 import React, {
   useEffect, useRef, useState
 } from 'react';
+import './InputCreditCard.scss';
 import { IInputProps } from '../Input/Input';
 import { Input } from '../../../index';
 import InputMask from 'react-input-mask';

@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
+import './PageWithSections.scss';
 import { Preloader, Tile } from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
 import useTableOfContents from '../../../../hooks/useTableOfContents';

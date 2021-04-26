@@ -1,6 +1,7 @@
 import React, {
   FC, useContext, useEffect, useMemo, useState
 } from 'react';
+import './TimeElement.scss';
 import { arrayTimeHours, arrayTimeMinutes } from './timeData';
 import Button from '../Button';
 import Arrow from '../../_icons/angle-down';

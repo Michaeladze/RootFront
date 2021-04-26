@@ -1,6 +1,7 @@
 import React, {
   FC, InputHTMLAttributes, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
+import './Select.scss';
 import {
   IChips, IOption, Size
 } from '../../../types';

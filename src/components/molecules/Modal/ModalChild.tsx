@@ -1,4 +1,5 @@
 import React from 'react';
+import './ModalChild.scss';
 import Button from '../../atoms/Button/Button';
 
 const ModalChild: React.FC = () => {

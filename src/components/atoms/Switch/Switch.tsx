@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
+import './Switch.scss';
 
 export interface ISwitchProps {
   onChange?: (f: boolean) => void;

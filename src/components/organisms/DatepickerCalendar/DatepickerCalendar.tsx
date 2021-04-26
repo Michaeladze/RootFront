@@ -1,6 +1,7 @@
 import React, {
   Dispatch, ReactNode, RefObject, SetStateAction, useCallback, useEffect, useRef, useState
 } from 'react';
+import './DatepickerCalendar.scss';
 import Chevron from '../../_icons/chevron-left';
 import { formatDate } from '../../../index';
 import {

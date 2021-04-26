@@ -17,7 +17,7 @@
     "moduleResolution": "node",
     "jsx": "react"
   },
-  "files": ["./src/.storybook/custom.d.ts", "./src/index.ts"],
+  "files": [ "./src/index.ts"],
   "include": ["src"],
   "exclude": ["dist", "node_modules", "**/*.spec.*", "**/*.stories.*", "**/*.mocks.*"]
 }

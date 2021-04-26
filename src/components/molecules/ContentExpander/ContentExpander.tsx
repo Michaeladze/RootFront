@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react';
+import './ContentExpander.scss';
 import Angle from '../../_icons/angle-down';
 
 export interface IContentExpanderProps {

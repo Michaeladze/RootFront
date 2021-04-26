@@ -1,5 +1,5 @@
 import React, { FC, HTMLProps } from 'react';
-
+import './PopupFooter.scss';
 import Button from '../../../atoms/Button';
 
 export interface IProps extends HTMLProps<HTMLElement> {

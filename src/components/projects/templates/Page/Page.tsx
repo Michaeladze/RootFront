@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
+import './Page.scss';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-left-outline';
 import { Preloader, Tabs } from '../../../../index';

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './Notification.scss';
 import { INotification } from '../../molecules/Notifications/Notifications';
 import Close from '../../_icons/close';
 import { variantClass } from '../../../utils/helpers';

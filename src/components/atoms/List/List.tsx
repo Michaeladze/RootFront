@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import './List.scss';
 import { IListElement } from '../../../types';
 import { MenuContext } from '../../molecules/Menu/Menu';
 

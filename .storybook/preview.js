@@ -1,5 +1,5 @@
 import { addParameters } from '@storybook/react';
-import "../styles/index.scss";
+import "../src/styles/index.scss";
 import { configure } from '@storybook/react';
 
 

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './User.scss';
 import { IListElement } from '../../../../types';
 import Button from '../../../atoms/Button';
 import UserPhoto from '../../atoms/UserPhoto';

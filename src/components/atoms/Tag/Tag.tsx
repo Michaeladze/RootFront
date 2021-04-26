@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Size, Variant } from '../../../types';
 import { sizeClass, variantClass } from '../../../utils/helpers';
+import './Tag.scss';
 
 
 export interface ITagProps {

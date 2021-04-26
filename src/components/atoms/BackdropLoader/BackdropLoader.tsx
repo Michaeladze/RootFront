@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './BackdropLoader.scss';
 import Preloader from '../Preloader';
 import { Variant } from '../../../types';
 import { createPortal } from 'react-dom';
