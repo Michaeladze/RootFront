@@ -5,6 +5,7 @@ export interface ILocation extends Location {
 }
 
 export const useLocation = (): ILocation => {
+  debugger;
   // @ts-ignore
   const location: ILocation = useLocation1();
 
