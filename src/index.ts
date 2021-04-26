@@ -1,3 +1,5 @@
+import './styles/index.scss';
+
 import useClickOutside from './hooks/useClickOutside';
 import { useLocation } from './hooks/useLocation';
 import {

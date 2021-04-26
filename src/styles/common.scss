@@ -1,7 +1,5 @@
-@import 'variables';
-
 body {
-  font-family: $fontFamily;
+  font-family: 'Roboto', Arial, sans-serif;
   background-color: transparent;
 
   &.fixed {
@@ -47,21 +45,13 @@ input {
 
 button {
   cursor: pointer;
-  background-color: #fff;
+  background-color: transparent;
   border: none;
 }
 
 a {
   text-decoration: none;
 }
-
-// сброс стилей для отображения на мобильных устройствах
-//input,
-//textarea {
-//  -webkit-appearance: none !important;
-//  -moz-appearance: none !important;
-//  appearance: none !important;
-//}
 
 input::-ms-clear {
   display: none !important;
@@ -97,15 +87,4 @@ pre {
 
 .list-style-reset {
   list-style: none;
-}
-
-.visually-hidden {
-  // Всеми этими свойствами скрываем элемент, но оставляем возможность перехода с клавиатуры
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 0 !important;
-  border: 0 !important;
-  height: 1px !important;
-  width: 1px !important;
-  overflow: hidden;
 }
