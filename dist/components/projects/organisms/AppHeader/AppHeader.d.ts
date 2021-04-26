@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import './AppHeader.scss';
 import { IListElement } from '../../../../types';
 import { IUser } from '../../../../types/projects.types';
 export interface IAppHeaderProps {

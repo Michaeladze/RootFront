@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './Page.scss';
 import { IUser } from '../../../../types/projects.types';
 import { IListElement, ITab } from '../../../../types';
 export interface IPageProps {

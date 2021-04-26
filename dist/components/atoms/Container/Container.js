@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./Container.scss");
 /** Компонент-обертка, ограничивает ширину контента */
 var Container = function (_a) {
     var children = _a.children;

@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MenuContext = void 0;
 var react_1 = __importStar(require("react"));
+require("./Menu.scss");
 var index_1 = require("../../../index");
 var List_1 = __importDefault(require("../../atoms/List"));
 /** Контекст для передачи функций работы с меню. */

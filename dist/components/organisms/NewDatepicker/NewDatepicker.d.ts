@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewDatepicker.scss';
 import { DateFormat, Size } from '../../../types';
 import { IDateVariants } from '../../../types/projects.types';
 export interface IDatepickerProps {

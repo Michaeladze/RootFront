@@ -1,6 +1,7 @@
 import React, {
   useEffect, useRef, useState
 } from 'react';
+import './InputPhone.scss';
 import { IInputProps } from '../Input/Input';
 import { Input, Select } from '../../../index';
 import InputMask from 'react-input-mask';

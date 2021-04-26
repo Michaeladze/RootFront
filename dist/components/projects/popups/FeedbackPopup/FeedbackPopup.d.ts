@@ -1,4 +1,5 @@
 import React from 'react';
+import './FeedbackPopup.scss';
 import { IFeedback, IUser } from '../../../../types/projects.types';
 export interface IFeedbackPopupProps {
     user: IUser;

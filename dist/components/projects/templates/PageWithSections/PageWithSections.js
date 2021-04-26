@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./PageWithSections.scss");
 var index_1 = require("../../../../index");
 var useTableOfContents_1 = __importDefault(require("../../../../hooks/useTableOfContents"));
 var PageWithSections = function (_a) {

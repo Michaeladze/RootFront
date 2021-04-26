@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './Chips.scss';
 import Button from '../../atoms/Button';
 import Close from '../../_icons/close-sm';
 import {

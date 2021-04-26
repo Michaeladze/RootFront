@@ -29,6 +29,7 @@ var react_1 = __importDefault(require("react"));
 var share_1 = __importDefault(require("../../_icons/share"));
 var Button_1 = __importDefault(require("../Button"));
 var index_1 = require("../../../index");
+require("./ShareButton.scss");
 var ShareButton = function (_a) {
     var props = __rest(_a, []);
     var onClick = function () {

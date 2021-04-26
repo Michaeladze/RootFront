@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./PageWithList.scss");
 var index_1 = require("../../../../index");
 var StickyContainer_1 = __importDefault(require("../StickyContainer"));
 var PageWithList = function (_a) {

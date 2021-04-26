@@ -1,6 +1,7 @@
 import React, {
   createRef, FC, MouseEvent, ReactNode, RefObject, useEffect, useLayoutEffect, useMemo, useRef, useState
 } from 'react';
+import './Tabs.scss';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ITab } from '../../../types';
 

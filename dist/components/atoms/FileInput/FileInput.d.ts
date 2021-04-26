@@ -1,4 +1,5 @@
 import React from 'react';
+import './FileInput.scss';
 import { IFileData } from '../../../types';
 import { IButtonProps } from '../Button/Button';
 /**

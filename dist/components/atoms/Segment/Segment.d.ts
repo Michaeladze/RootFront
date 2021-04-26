@@ -1,5 +1,6 @@
 import React, { HTMLProps } from 'react';
 import { IOption, Variant } from '../../../types';
+import './Segment.scss';
 export interface ISegmentProps extends Omit<HTMLProps<HTMLInputElement>, 'list'> {
     /** Список элементов */
     list: [IOption, IOption];

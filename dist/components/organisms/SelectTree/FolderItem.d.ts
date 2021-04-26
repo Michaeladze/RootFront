@@ -1,5 +1,6 @@
 import React from 'react';
 import { ITreeOption } from '../../../types';
+import './FolderItem.scss';
 interface IFolderItemProps {
     item: ITreeOption;
     depth: number;

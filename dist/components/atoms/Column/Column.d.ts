@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './Column.scss';
 export interface IColumn {
     /** Дочерние элементы */
     children: React.ReactNode | React.ReactNode[];

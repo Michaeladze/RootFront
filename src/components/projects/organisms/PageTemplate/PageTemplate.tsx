@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-
+import './PageTemplate.scss';
 import Angle from '../../../_icons/angle-down';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '../../../molecules/Breadcrumbs';

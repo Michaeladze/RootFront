@@ -45,6 +45,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Timepicker.scss");
 var react_input_mask_1 = __importDefault(require("react-input-mask"));
 var time_1 = __importDefault(require("../../_icons/time"));
 var Input_1 = __importDefault(require("../../atoms/Input"));

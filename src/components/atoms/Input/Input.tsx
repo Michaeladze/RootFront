@@ -1,6 +1,7 @@
 import React, {
   FC, HTMLProps, useEffect, useRef, useState
 } from 'react';
+import './Input.scss';
 import { fromEvent } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, map

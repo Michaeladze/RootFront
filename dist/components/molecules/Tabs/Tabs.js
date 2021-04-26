@@ -20,6 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Tabs.scss");
 var react_router_dom_1 = require("react-router-dom");
 var Tabs = function (_a) {
     var list = _a.list, _b = _a.type, type = _b === void 0 ? 'underline' : _b, children = _a.children;

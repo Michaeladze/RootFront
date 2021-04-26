@@ -1,4 +1,5 @@
 import React from 'react';
+import './Preloader.scss';
 import { Size, Variant } from '../../../types';
 import { sizeClass, variantClass } from '../../../utils/helpers';
 

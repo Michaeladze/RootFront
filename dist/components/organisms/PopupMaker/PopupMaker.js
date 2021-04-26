@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.openPopup = exports.popups$$ = void 0;
 var react_1 = __importStar(require("react"));
+require("./PopupMaker.scss");
 var rxjs_1 = require("rxjs");
 var Modal_1 = __importDefault(require("../../molecules/Modal"));
 /** Стак попапов */

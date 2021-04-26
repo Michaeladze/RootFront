@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './FormGroup.scss';
 
 export interface IFormGroup {
   /** Дочерние элементы */

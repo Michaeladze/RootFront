@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import './Datepicker.scss';
 import { DatePickerProps } from 'react-date-picker/dist/entry.nostyle';
 import { Size } from '../../../types';
 export interface IDatepickerProps extends Omit<DatePickerProps, 'onChange'> {

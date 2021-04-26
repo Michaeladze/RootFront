@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef, useState
 } from 'react';
+import './PageWithList.scss';
 import { Preloader } from '../../../../index';
 import StickyContainer from '../StickyContainer';
 

@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './ActionMenu.scss';
 import { IActionMenuListConfig } from '../../../../types/projects.types';
 interface IActionMenuProps {
     type?: 'default' | 'list' | 'action';

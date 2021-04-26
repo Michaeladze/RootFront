@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.quillGet = void 0;
 var react_1 = __importStar(require("react"));
+require("./TextEditor.scss");
 var react_quill_1 = __importDefault(require("react-quill"));
 require("react-quill/dist/quill.snow.css");
 var quill_1 = __importDefault(require("quill"));

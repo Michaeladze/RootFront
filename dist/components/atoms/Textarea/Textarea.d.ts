@@ -1,4 +1,5 @@
 import { FC, HTMLProps } from 'react';
+import './Textarea.scss';
 export interface ITextareaProps extends HTMLProps<HTMLTextAreaElement> {
     /** Автоматическое изменение высоты */
     autoResize?: boolean;

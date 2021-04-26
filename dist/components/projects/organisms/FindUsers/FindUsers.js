@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./FindUsers.scss");
 var close_sm_1 = __importDefault(require("../../../_icons/close-sm"));
 var arrow_1 = __importDefault(require("../../../_icons/arrow"));
 var info_circle_1 = __importDefault(require("../../../_icons/info-circle"));
@@ -39,20 +40,25 @@ var Preloader_1 = __importDefault(require("../../../atoms/Preloader"));
 var axios_1 = __importDefault(require("axios"));
 swiper_1.default.use([swiper_1.Navigation]);
 var FindUsers = function (_a) {
-    var onClose = _a.onClose, _b = _a.users, users = _b === void 0 ? [] : _b, disableSelected = _a.disableSelected, getUsers = _a.getUsers, _c = _a.subtitle, subtitle = _c === void 0 ? 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.' : _c;
+    var onClose = _a.onClose, _b = _a.users, users = _b === void 0 ? [] : _b, disableSelected = _a.disableSelected, getUsers = _a.getUsers, _c = _a.multiSelect, multiSelect = _c === void 0 ? true : _c, _d = _a.subtitle, subtitle = _d === void 0 ? 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.' : _d;
     var inputRef = react_1.useRef(null);
     /** Список выбранных людей */
-    var _d = react_1.useState(users), selectedPeople = _d[0], setSelectedPeople = _d[1];
+    var _e = react_1.useState(users), selectedPeople = _e[0], setSelectedPeople = _e[1];
     var selectedPeopleMap = selectedPeople.reduce(function (a, u) {
+        a[u.id] = true;
+        return a;
+    }, {});
+    var _f = react_1.useState([]), newPeople = _f[0], setNewPeople = _f[1];
+    var newPeopleMap = newPeople.reduce(function (a, u) {
         a[u.id] = true;
         return a;
     }, {});
     var disablePeopleMap = react_1.useRef(selectedPeopleMap);
     /** Строка поиска */
-    var _e = react_1.useState(''), searchString = _e[0], setSearchString = _e[1];
+    var _g = react_1.useState(''), searchString = _g[0], setSearchString = _g[1];
     // -------------------------------------------------------------------------------------------------------------------
-    var _f = react_1.useState(true), loaded = _f[0], setLoaded = _f[1];
-    var _g = react_1.useState([]), searchResults = _g[0], setSearchResults = _g[1];
+    var _h = react_1.useState(true), loaded = _h[0], setLoaded = _h[1];
+    var _j = react_1.useState([]), searchResults = _j[0], setSearchResults = _j[1];
     var cancel = react_1.useRef(undefined);
     var cancelRequest = function () {
         if (cancel.current !== undefined) {
@@ -101,10 +107,26 @@ var FindUsers = function (_a) {
         setSearchString(value);
     };
     var addHandle = function (item) {
-        setSelectedPeople(__spreadArray(__spreadArray([], selectedPeople), [item]));
+        if (multiSelect) {
+            setSelectedPeople(__spreadArray(__spreadArray([], selectedPeople), [item]));
+            if (!newPeopleMap[item.id]) {
+                setNewPeople(__spreadArray(__spreadArray([], newPeople), [item]));
+            }
+        }
+        else {
+            setSelectedPeople([item]);
+        }
     };
     var removeHandle = function (item) {
-        setSelectedPeople(selectedPeople.filter(function (data) { return item.id !== data.id; }));
+        if (multiSelect) {
+            setSelectedPeople(selectedPeople.filter(function (data) { return item.id !== data.id; }));
+            if (!newPeopleMap[item.id]) {
+                setNewPeople(newPeople.filter(function (data) { return item.id !== data.id; }));
+            }
+        }
+        else {
+            setSelectedPeople([]);
+        }
     };
     // --------------------------------------------------------------------------------------------------------------------
     var onChange = function (e, item) {
@@ -145,13 +167,27 @@ var FindUsers = function (_a) {
         react_1.default.createElement("h5", { className: 'selected__text' }, "" + item.firstName),
         !(disableSelected && disablePeopleMap.current[item.id]) && (react_1.default.createElement(index_1.Button, { className: 'selected__button', onClick: function () { return removeHandle(item); }, buttonType: 'round' },
             react_1.default.createElement(close_sm_1.default, null))))); });
-    // --------------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------------------------
+    /** Автофокус */
+    react_1.useEffect(function () {
+        setTimeout(function () {
+            if (inputRef.current) {
+                var input = inputRef.current.querySelector('.rf-input__field');
+                if (input) {
+                    input.focus();
+                }
+            }
+        });
+    }, []);
+    // -------------------------------------------------------------------------------------------------------------------
+    var disabled = newPeople.length === 0;
+    // -------------------------------------------------------------------------------------------------------------------
     return (react_1.default.createElement("div", { className: 'find-users__wrapper' },
         react_1.default.createElement("h4", { className: 'find-users__title' }, "\u041F\u043E\u0438\u0441\u043A \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432"),
         react_1.default.createElement("p", { className: 'find-users__notice' }, subtitle),
         react_1.default.createElement("div", { className: 'find-users__input-wrapper', ref: inputRef },
             react_1.default.createElement(index_1.Input, { placeholder: '\u041F\u043E\u0438\u0441\u043A', search: true, onKeyUp: inputHandle, autoFocus: true, onClear: onClear })),
-        !!selectedPeople.length && (react_1.default.createElement("div", { className: 'swiper__container' },
+        !!selectedPeople.length && multiSelect && (react_1.default.createElement("div", { className: 'swiper__container' },
             react_1.default.createElement("div", { className: 'swiper__wrapper' },
                 react_1.default.createElement(react_2.Swiper, { spaceBetween: 0, slidesPerView: 'auto', navigation: {
                         nextEl: '.swiper-button-next',
@@ -162,6 +198,6 @@ var FindUsers = function (_a) {
             react_1.default.createElement(index_1.Button, { buttonType: 'round', className: 'swiper-button-prev' },
                 react_1.default.createElement(arrow_1.default, null)))),
         react_1.default.createElement("div", { className: 'find-users__list-wrapper' }, loaded ? (listUsers.length > 0 ? (listUsers) : (searchString === '' ? placeholder('Начните поиск') : placeholder('Нет результатов для отображения. Измените запрос.'))) : react_1.default.createElement(Preloader_1.default, null)),
-        react_1.default.createElement(index_1.PopupFooter, { textAccept: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', onSubmit: onSubmit, onClose: onClose })));
+        react_1.default.createElement(index_1.PopupFooter, { textAccept: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C', onSubmit: onSubmit, disabled: disabled, onClose: onClose })));
 };
 exports.default = FindUsers;

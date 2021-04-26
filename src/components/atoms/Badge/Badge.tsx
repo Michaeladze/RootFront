@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useLayoutEffect, useRef, useState
 } from 'react';
+import './Badge.scss';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
 

@@ -31,4 +31,4 @@ export declare const variants: Variant[];
 export declare const sizeClass: Record<Size, string>;
 export declare const oDataTransform: <T>() => MonoTypeOperatorFunction<T>;
 /** Функция для добавления пробелов в число */
-export declare const numberWithSpaces: (x: number, n?: number) => string;
+export declare const numberWithSpaces: (x: number, n?: number, s?: string) => string;

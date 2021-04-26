@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './PageWithSections.scss';
 import { IPageSection } from '../../../../types/projects.types';
 interface IPageWithSectionsProps {
     sections?: IPageSection[];

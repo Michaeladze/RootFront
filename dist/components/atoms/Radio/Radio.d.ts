@@ -1,4 +1,5 @@
 import { FC, InputHTMLAttributes, ReactNode } from 'react';
+import './Radio.scss';
 import { Variant } from '../../../types';
 export interface IRadioProps extends InputHTMLAttributes<HTMLInputElement> {
     /** Лейбл */

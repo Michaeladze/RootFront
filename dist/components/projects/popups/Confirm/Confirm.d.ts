@@ -1,4 +1,5 @@
 import React from 'react';
+import './Confirm.scss';
 export interface IConfirmProps {
     /** Текст сабмита */
     textAccept: string;

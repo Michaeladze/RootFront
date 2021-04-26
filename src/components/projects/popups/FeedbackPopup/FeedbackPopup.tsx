@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './FeedbackPopup.scss';
 import Star from '../../../_icons/star-fill';
 import {
   Button, FileInput, FormGroup, Textarea

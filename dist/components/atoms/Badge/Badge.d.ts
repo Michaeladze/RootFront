@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './Badge.scss';
 import { Variant } from '../../../types';
 export interface IBadgeProps {
     children: ReactNode;

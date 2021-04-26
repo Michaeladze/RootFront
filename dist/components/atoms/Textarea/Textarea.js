@@ -42,6 +42,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Textarea.scss");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var Textarea = function (_a) {

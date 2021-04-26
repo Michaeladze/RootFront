@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendNotification = exports.removeNotification = void 0;
 var react_1 = __importStar(require("react"));
+require("./Notifications.scss");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var Notification_1 = __importDefault(require("../../atoms/Notification"));

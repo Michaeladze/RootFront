@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./NewDatepicker.scss");
 var index_1 = require("../../../index");
 var calendar_outline_1 = __importDefault(require("../../_icons/calendar-outline"));
 var DatepickerCalendar_1 = __importDefault(require("../DatepickerCalendar"));
@@ -44,9 +45,7 @@ var NewDatepicker = function (_a) {
         setMinDate(min ? datepicker_utils_1.parseToFormat(min).date : undefined);
     }, [min]);
     react_1.useEffect(function () {
-        if (max) {
-            setMaxDate(max ? datepicker_utils_1.parseToFormat(max).date : undefined);
-        }
+        setMaxDate(max ? datepicker_utils_1.parseToFormat(max).date : undefined);
     }, [max]);
     // -------------------------------------------------------------------------------------------------------------------
     var datepickerRef = react_1.useRef(null);

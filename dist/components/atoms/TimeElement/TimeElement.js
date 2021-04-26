@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./TimeElement.scss");
 var timeData_1 = require("./timeData");
 var Button_1 = __importDefault(require("../Button"));
 var angle_down_1 = __importDefault(require("../../_icons/angle-down"));

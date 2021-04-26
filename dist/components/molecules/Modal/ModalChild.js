@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./ModalChild.scss");
 var Button_1 = __importDefault(require("../../atoms/Button/Button"));
 var ModalChild = function () {
     return (react_1.default.createElement("div", { className: 'rf-modal-child' },

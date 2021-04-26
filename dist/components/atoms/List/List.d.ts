@@ -1,4 +1,5 @@
 import React from 'react';
+import './List.scss';
 import { IListElement } from '../../../types';
 interface IProps {
     /** Элементы меню */

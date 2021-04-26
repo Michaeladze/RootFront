@@ -26,6 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./Checkbox.scss");
 var check_icon_1 = __importDefault(require("../../_icons/check-icon"));
 var helpers_1 = require("../../../utils/helpers");
 var minus_1 = __importDefault(require("../../_icons/minus"));

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./PageTemplate.scss");
 var angle_down_1 = __importDefault(require("../../../_icons/angle-down"));
 var react_router_dom_1 = require("react-router-dom");
 var Breadcrumbs_1 = __importDefault(require("../../../molecules/Breadcrumbs"));

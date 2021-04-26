@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Page.scss");
 var react_router_dom_1 = require("react-router-dom");
 var chevron_left_outline_1 = __importDefault(require("../../../_icons/chevron-left-outline"));
 var index_1 = require("../../../../index");

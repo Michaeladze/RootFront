@@ -20,6 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Badge.scss");
 var helpers_1 = require("../../../utils/helpers");
 var Badge = function (_a) {
     var badgeContent = _a.badgeContent, children = _a.children, _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.variant, variant = _c === void 0 ? 'base' : _c, _d = _a.max, max = _d === void 0 ? 99 : _d, _e = _a.position, position = _e === void 0 ? 'topRight' : _e, _f = _a.display, display = _f === void 0 ? true : _f, _g = _a.placeNear, placeNear = _g === void 0 ? false : _g;

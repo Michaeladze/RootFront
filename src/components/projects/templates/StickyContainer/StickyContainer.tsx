@@ -1,6 +1,7 @@
 import React, {
   ReactNode, useEffect, useRef
 } from 'react';
+import './StickyContainer.scss';
 // @ts-ignore
 import StickySidebar from 'sticky-sidebar-v2';
 import { install } from 'resize-observer';

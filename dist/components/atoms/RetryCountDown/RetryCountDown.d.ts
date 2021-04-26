@@ -1,4 +1,5 @@
 import React from 'react';
+import './RetryCountDown.scss';
 interface IProps {
     time: number[];
     action?: () => void;

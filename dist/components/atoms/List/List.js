@@ -21,6 +21,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var react_router_dom_1 = require("react-router-dom");
+require("./List.scss");
 var Menu_1 = require("../../molecules/Menu/Menu");
 var List = function (_a) {
     var list = _a.list;

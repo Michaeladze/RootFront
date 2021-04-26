@@ -45,6 +45,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Input.scss");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var search_1 = __importDefault(require("../../_icons/search"));

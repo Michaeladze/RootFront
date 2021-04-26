@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./Preloader.scss");
 var helpers_1 = require("../../../utils/helpers");
 var Preloader = function (_a) {
     var _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.size, size = _c === void 0 ? 'medium' : _c, _d = _a.variant, variant = _d === void 0 ? 'accent' : _d;

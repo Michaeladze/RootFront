@@ -31,6 +31,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Tooltip.scss");
 var react_dom_1 = require("react-dom");
 var TooltipContent = function (_a) {
     var _b;

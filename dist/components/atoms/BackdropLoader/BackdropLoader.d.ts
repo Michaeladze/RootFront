@@ -1,4 +1,5 @@
 import React from 'react';
+import './BackdropLoader.scss';
 import { Variant } from '../../../types';
 export interface IBackdropLoaderProps {
     className?: string;

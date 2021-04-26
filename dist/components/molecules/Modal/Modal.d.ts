@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './Modal.scss';
 export interface IModalProps {
     /** CSS класс для стилизации */
     className?: string;

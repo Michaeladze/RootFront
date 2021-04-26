@@ -39,6 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./Select.scss");
 var useClickOutside_1 = __importDefault(require("../../../hooks/useClickOutside"));
 var index_1 = require("../../../index");
 var caret_down_1 = __importDefault(require("../../_icons/caret-down"));
@@ -46,13 +47,15 @@ var close_1 = __importDefault(require("../../_icons/close"));
 var Chips_1 = __importDefault(require("../../molecules/Chips/Chips"));
 var helpers_1 = require("../../../utils/helpers");
 var Select = function (_a) {
-    var options = _a.options, _b = _a.multiSelect, multiSelect = _b === void 0 ? false : _b, value = _a.value, onChange = _a.onChange, getValue = _a.getValue, _c = _a.size, size = _c === void 0 ? 'medium' : _c, onChipsRemove = _a.onChipsRemove, props = __rest(_a, ["options", "multiSelect", "value", "onChange", "getValue", "size", "onChipsRemove"]);
+    var options = _a.options, _b = _a.multiSelect, multiSelect = _b === void 0 ? false : _b, value = _a.value, onChange = _a.onChange, onInputChange = _a.onInputChange, getValue = _a.getValue, _c = _a.size, size = _c === void 0 ? 'medium' : _c, onChipsRemove = _a.onChipsRemove, _d = _a.creatable, creatable = _d === void 0 ? false : _d, onCreateOption = _a.onCreateOption, _e = _a.saveOptionMessage, saveOptionMessage = _e === void 0 ? '' : _e, _f = _a.customPrefix, customPrefix = _f === void 0 ? 'custom__' : _f, props = __rest(_a, ["options", "multiSelect", "value", "onChange", "onInputChange", "getValue", "size", "onChipsRemove", "creatable", "onCreateOption", "saveOptionMessage", "customPrefix"]);
     /** Ссылка на текущий компонент */
     var componentNode = react_1.useRef(null);
     // -------------------------------------------------------------------------------------------------------------------
     /** Отображение дропдауна с значениями */
-    var _d = react_1.useState(false), showDropdown = _d[0], toggleDropdown = _d[1];
+    var _g = react_1.useState(false), showDropdown = _g[0], toggleDropdown = _g[1];
     var dropdownRef = react_1.useRef(null);
+    /** Отображение сообщения о создании новой опции */
+    var _h = react_1.useState(false), newOptionMessage = _h[0], showNewOptionMessage = _h[1];
     /** При открытии выпадающего списка поднимаем скролл наверх */
     react_1.useEffect(function () {
         if (showDropdown && dropdownRef.current) {
@@ -61,7 +64,7 @@ var Select = function (_a) {
     }, [showDropdown]);
     // -------------------------------------------------------------------------------------------------------------------
     /** Отфильтрованные значения */
-    var _e = react_1.useState(new Map()), hiddenOptions = _e[0], setHiddenOptions = _e[1];
+    var _j = react_1.useState(new Map()), hiddenOptions = _j[0], setHiddenOptions = _j[1];
     /** Функция фильтрации списка */
     var onFilter = function (options, search) {
         return options.reduce(function (acc, o) {
@@ -71,6 +74,9 @@ var Select = function (_a) {
             }
             return acc;
         }, new Map());
+    };
+    var isValidNewOption = function (inputValue) {
+        return !(!inputValue || options.some(function (option) { return option.label === inputValue || option.value === inputValue; }));
     };
     /** Поиск внутри селекта */
     var onSearch = function (e) {
@@ -82,9 +88,12 @@ var Select = function (_a) {
         if (search) {
             result = onFilter(options, search);
         }
+        if (creatable && isValidNewOption(search)) {
+            showNewOptionMessage(true);
+        }
         /** Скрываем выпадающий список, если ничего не найдено */
         if (options.length === result.size) {
-            showDropdown && toggleDropdown(false);
+            !creatable && showDropdown && toggleDropdown(false);
         }
         else {
             !showDropdown && toggleDropdown(true);
@@ -103,7 +112,7 @@ var Select = function (_a) {
         }
         return '';
     };
-    var _f = react_1.useState(initInputValue()), inputValue = _f[0], setInputValue = _f[1];
+    var _k = react_1.useState(initInputValue()), inputValue = _k[0], setInputValue = _k[1];
     react_1.useEffect(function () {
         setInputValue(initInputValue());
     }, [value]);
@@ -117,7 +126,7 @@ var Select = function (_a) {
         }
         return options.filter(function (o) { return o.value === value; });
     };
-    var _g = react_1.useState(initCurrentValue()), currentValue = _g[0], setCurrentValue = _g[1];
+    var _l = react_1.useState(initCurrentValue()), currentValue = _l[0], setCurrentValue = _l[1];
     var onOptionRemove = function (value) {
         return currentValue.filter(function (e) { return e.value !== value; });
     };
@@ -172,8 +181,9 @@ var Select = function (_a) {
         }
     };
     /** ChangeEvent для возможности записывать currentValue в input */
-    var onInputChange = function (e) {
+    var _onInputChange = function (e) {
         setInputValue(e.target.value);
+        typeof onInputChange === 'function' && onInputChange(e);
     };
     // -------------------------------------------------------------------------------------------------------------------
     /** Чипсы под инпутом для множественного выбора */
@@ -205,7 +215,7 @@ var Select = function (_a) {
     var chipsJSX = multiSelect && chips.length > 0 && (react_1.default.createElement("div", { className: 'rf-select__chips' },
         react_1.default.createElement(Chips_1.default, { variant: 'accent', items: chips, size: size, onRemove: onChipRemove, disabled: props.disabled })));
     // -------------------------------------------------------------------------------------------------------------------
-    /** Очистка оля ввода */
+    /** Очистка поля ввода */
     var clearInput = function (e) {
         e.stopPropagation();
         setInputValue('');
@@ -240,15 +250,41 @@ var Select = function (_a) {
         }
     });
     // -------------------------------------------------------------------------------------------------------------------
+    var onSaveOption = function () {
+        if (isValidNewOption(inputValue)) {
+            var customOption = {
+                label: inputValue,
+                value: "" + customPrefix + inputValue,
+            };
+            if (multiSelect) {
+                setCurrentValue(__spreadArray(__spreadArray([], currentValue), [customOption]));
+            }
+            else {
+                setInputValue(customOption.label);
+                setCurrentValue([customOption]);
+                toggleDropdown(false);
+                setHiddenOptions(new Map());
+            }
+            onCreateOption && onCreateOption(customOption);
+            !onCreateOption && getValue && getValue(customOption);
+            showNewOptionMessage(false);
+        }
+    };
+    // -------------------------------------------------------------------------------------------------------------------
     var clearIconClass = !props.readOnly && inputValue.length > 0 ? 'rf-select__input-clear--show' : '';
     return (react_1.default.createElement("div", { className: "rf-select " + helpers_1.sizeClass[size] + " " + (props.className || ''), ref: componentNode },
         react_1.default.createElement("div", { className: 'rf-select__input-wrapper' },
-            react_1.default.createElement(index_1.Input, { placeholder: props.placeholder, value: inputValue, readOnly: props.readOnly, onChange: onInputChange, onKeyUp: onSearch, size: size, onClick: onInputClick, disabled: props.disabled }),
+            react_1.default.createElement(index_1.Input, { placeholder: props.placeholder, value: inputValue, readOnly: props.readOnly, onChange: _onInputChange, onKeyUp: onSearch, size: size, onClick: onInputClick, disabled: props.disabled }),
             !props.disabled && (react_1.default.createElement(index_1.Button, { buttonType: 'text', disabled: props.disabled, onClick: clearInput, className: "rf-select__input-icon rf-select__input-clear " + clearIconClass },
                 react_1.default.createElement(close_1.default, null))),
             !props.disabled && (props.readOnly || inputValue.length === 0) && (react_1.default.createElement(index_1.Button, { buttonType: 'text', disabled: props.disabled, className: "rf-select__input-icon rf-select__input-angle\n                " + (showDropdown ? 'rf-select__input-angle--rotate' : ''), onClick: openSelectDropdown },
                 react_1.default.createElement(caret_down_1.default, null)))),
-        react_1.default.createElement("ul", { className: "rf-select__list " + (showDropdown ? 'rf-select__list--show' : ''), ref: dropdownRef, onScroll: function (e) { return e.stopPropagation(); } }, optionsList),
+        react_1.default.createElement("ul", { className: "rf-select__list " + (showDropdown ? 'rf-select__list--show' : ''), ref: dropdownRef, onScroll: function (e) { return e.stopPropagation(); } },
+            optionsList,
+            newOptionMessage && (react_1.default.createElement("p", { className: 'rf-select__add-option', onClick: onSaveOption },
+                saveOptionMessage,
+                " ",
+                react_1.default.createElement("span", { className: 'rf-select__add-option-value' }, inputValue)))),
         chipsJSX));
 };
 exports.default = Select;

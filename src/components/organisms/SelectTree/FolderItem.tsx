@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ITreeOption } from '../../../types';
+import './FolderItem.scss';
 import Folder from './Folder';
 import Angle from '../../_icons/angle-down';
 import { Checkbox, Radio } from '../../../index';

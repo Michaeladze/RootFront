@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import './User.scss';
 import { IListElement } from '../../../../types';
 /** Упрощенный интерфейс пользователя */
 interface IUser {

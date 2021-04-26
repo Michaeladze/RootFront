@@ -26,6 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./PopupFooter.scss");
 var Button_1 = __importDefault(require("../../../atoms/Button"));
 var PopupFooter = function (_a) {
     var onClose = _a.onClose, onSubmit = _a.onSubmit, _b = _a.textAccept, textAccept = _b === void 0 ? 'Выбрать' : _b, rest = __rest(_a, ["onClose", "onSubmit", "textAccept"]);

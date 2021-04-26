@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Breadcrumbs.scss';
 import Angle from '../../_icons/angle-down';
 import { Link } from 'react-router-dom';
 import { IBreadcrumb } from '../../../types';

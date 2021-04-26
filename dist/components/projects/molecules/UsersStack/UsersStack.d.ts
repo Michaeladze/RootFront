@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import './UsersStack.scss';
 import { IUser } from '../../../../types/projects.types';
 export interface IUsersStackProps {
     users: IUser[];

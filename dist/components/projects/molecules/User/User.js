@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./User.scss");
 var Button_1 = __importDefault(require("../../../atoms/Button"));
 var UserPhoto_1 = __importDefault(require("../../atoms/UserPhoto"));
 var index_1 = require("../../../../index");

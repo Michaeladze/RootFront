@@ -1,4 +1,5 @@
 import React, { FC, InputHTMLAttributes, ReactNode } from 'react';
+import './Checkbox.scss';
 import { Variant } from '../../../types';
 export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
     /** Лейбл */

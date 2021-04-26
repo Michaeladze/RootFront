@@ -1,6 +1,7 @@
 import React, {
   useCallback, useEffect, useRef, useState
 } from 'react';
+import './RetryCountDown.scss';
 import Button from '../Button';
 
 interface IProps {

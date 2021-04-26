@@ -181,11 +181,12 @@ var oDataTransform = function () { return operators_1.map(function (data) {
 }); };
 exports.oDataTransform = oDataTransform;
 /** Функция для добавления пробелов в число */
-var numberWithSpaces = function (x, n) {
+var numberWithSpaces = function (x, n, s) {
     if (n === void 0) { n = 3; }
+    if (s === void 0) { s = ' '; }
     var parts = x.toString().split('.');
     var regex = new RegExp("\\B(?=(\\d{" + n + "})+(?!\\d))", 'g');
-    parts[0] = parts[0].replace(regex, ' ');
+    parts[0] = parts[0].replace(regex, s);
     return parts.join('.');
 };
 exports.numberWithSpaces = numberWithSpaces;

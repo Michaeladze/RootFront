@@ -1,4 +1,5 @@
 import React from 'react';
+import './Structure.scss';
 import { IStructure } from '../../../../types/projects.types';
 interface IProps {
     departmentsPath: IStructure[];

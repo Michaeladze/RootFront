@@ -1,6 +1,7 @@
 import React, {
   FC, ReactNode, useEffect, useRef, useState
 } from 'react';
+import './FindUsers.scss';
 import Close from '../../../_icons/close-sm';
 import Arrow from '../../../_icons/arrow';
 import Info from '../../../_icons/info-circle';

@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./FolderItem.scss");
 var Folder_1 = __importDefault(require("./Folder"));
 var angle_down_1 = __importDefault(require("../../_icons/angle-down"));
 var index_1 = require("../../../index");

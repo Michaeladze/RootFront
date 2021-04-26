@@ -1,6 +1,7 @@
 import React, {
   ReactElement, ReactNode, useEffect, useState
 } from 'react';
+import './PopupMaker.scss';
 import { BehaviorSubject } from 'rxjs';
 import Modal from '../../molecules/Modal';
 

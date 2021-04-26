@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './PageTemplate.scss';
 import { IBreadcrumb } from '../../../../types';
 export interface IProps {
     /** Название*/

@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./FeedbackPopup.scss");
 var star_fill_1 = __importDefault(require("../../../_icons/star-fill"));
 var index_1 = require("../../../../index");
 var detect_browser_1 = require("detect-browser");

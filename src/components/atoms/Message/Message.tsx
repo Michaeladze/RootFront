@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './Message.scss';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
 

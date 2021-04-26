@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./BackdropLoader.scss");
 var Preloader_1 = __importDefault(require("../Preloader"));
 var react_dom_1 = require("react-dom");
 var BackdropLoader = function (_a) {

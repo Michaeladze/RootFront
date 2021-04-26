@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Confirm.scss';
 import {
   FormGroup, PopupFooter, Textarea
 } from '../../../../index';

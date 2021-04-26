@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import './Datepicker.scss';
 // @ts-ignore
 import DatePicker, { DatePickerProps } from 'react-date-picker/dist/entry.nostyle';
 import Calendar from '../../_icons/calendar-outline';

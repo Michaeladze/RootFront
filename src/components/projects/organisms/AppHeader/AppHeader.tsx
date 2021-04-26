@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react';
+import './AppHeader.scss';
 import { Link } from 'react-router-dom';
 import Container from '../../../atoms/Container';
 import { IListElement } from '../../../../types';
