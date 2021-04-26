@@ -1,5 +1,6 @@
 const babelPluginJsxSyntax = require('@babel/plugin-syntax-jsx').default
-const md5 = require('md5')
+const md5 = require('md5');
+const packageJSON = require('./package.json');
 
 const getFilenameFromPath = filePath => {
   const parts = filePath.split('/')
@@ -17,7 +18,7 @@ const forPlugin = (path, stats) => {
 
 function hashPlugin({ types: t }) {
 
-  const hash = md5('seed').substr(0, 8);
+  const hash = md5(packageJSON.version).substr(0, 8);
 
   return {
     inherits: babelPluginJsxSyntax,

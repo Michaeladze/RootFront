@@ -5,8 +5,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "rimraf dist && tsc && yarn build_css && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/ && yarn cp",
-    "b": "rimraf dist && tsc && webpack --config webpack-lib.config.js && yarn cp",
+    "build--old": "rimraf dist && tsc && yarn build_css && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/ && yarn cp",
+    "build": "rimraf dist && tsc && webpack --config webpack-lib.config.js && yarn cp",
     "build_css": "node-sass src/styles/index.scss -o dist/ ",
     "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
     "start": "npm run build -- -w",
@@ -63,7 +63,7 @@
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react": "17.0.3",
+    "@types/react": "^17.0.4",
     "@types/react-dom": "17.0.3",
     "@types/react-input-mask": "^2.0.5",
     "@types/react-router-dom": "^5.1.6",
@@ -78,7 +78,6 @@
     "@commitlint/config-conventional": "^12.0.1",
     "@commitlint/prompt": "^12.0.1",
     "@ptsecurity/commitlint-config": "^1.0.0",
-
 
     "copy-webpack-plugin": "^7.0.0",
     "cz-customizable": "^6.3.0",
@@ -96,7 +95,6 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "lint-staged": "10.2.9",
-
 
     "react-docgen-typescript-loader": "^3.7.2",
 

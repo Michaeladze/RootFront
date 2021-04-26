@@ -1,11 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const webpack = require('webpack');
-
-
-
-
 
 // =========================================================================
 module.exports = {
@@ -81,15 +75,8 @@ module.exports = {
   },
   node: { fs: 'empty' },
   stats: 'errors-only',
-
-  plugins: [
-    // new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: [`../dist`] }),
-    //  new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: [`./dist`] }),
-    //  new webpack.PrefetchPlugin('react'),
-
-  ],
   externals: {
-    react: "react",
+    'react': "react",
     'react-dom': "react-dom",
     'react-router-dom':"react-router-dom"
   },
