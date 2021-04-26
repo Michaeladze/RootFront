@@ -1,6 +1,6 @@
 {
   "name": "root-front",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -8,7 +8,7 @@
     "build--old": "rimraf dist && tsc && yarn build_css && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/ && yarn cp",
     "build": "rimraf dist && tsc && webpack --config webpack-lib.config.js && yarn cp",
     "build_css": "node-sass src/styles/index.scss -o dist/ ",
-    "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/",
+    "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/ && cp src/styles/mixins.scss dist/",
     "start": "npm run build -- -w",
     "commit": "git add . && ./node_modules/cz-customizable/standalone.js",
     "storybook": "start-storybook -p 9010 -s public ",
