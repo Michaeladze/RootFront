@@ -26,6 +26,7 @@ var react_1 = __importStar(require("react"));
 // @ts-ignore
 var sticky_sidebar_v2_1 = __importDefault(require("sticky-sidebar-v2"));
 var resize_observer_1 = require("resize-observer");
+require("./StickyContainer.scss");
 var StickyContainer = function (_a) {
     var containerSelector = _a.containerSelector, scrollContainer = _a.scrollContainer, children = _a.children, _b = _a.top, top = _b === void 0 ? 0 : _b, _c = _a.bottom, bottom = _c === void 0 ? 0 : _c;
     var container = react_1.useRef(null);

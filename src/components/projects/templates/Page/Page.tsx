@@ -7,7 +7,7 @@ import { Preloader, Tabs } from '../../../../index';
 import { IUser } from '../../../../types/projects.types';
 import { IListElement, ITab } from '../../../../types';
 import User from '../../molecules/User';
-
+import './Page.scss';
 
 export interface IPageProps {
   title?: ReactNode;

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import Close from '../../_icons/close';
-
+import './Modal.scss';
 export interface IModalProps {
   /** CSS класс для стилизации */
   className?: string;

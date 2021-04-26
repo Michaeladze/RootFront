@@ -5,7 +5,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Variant } from '../../../types';
 import Notification from '../../atoms/Notification';
-
+import './Notifications.scss';
 // ---------------------------------------------------------------------------------------------------------------------
 
 /** Стэк уведомлений */

@@ -2,7 +2,7 @@ import React, { HTMLProps, useRef } from 'react';
 import { IOption, Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
 import { Radio } from '../../../index';
-
+import './Segment.scss';
 
 export interface ISegmentProps extends Omit<HTMLProps<HTMLInputElement>, 'list'> {
   /** Список элементов */

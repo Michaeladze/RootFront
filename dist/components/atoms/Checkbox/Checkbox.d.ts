@@ -1,5 +1,6 @@
 import React, { FC, InputHTMLAttributes, ReactNode } from 'react';
 import { Variant } from '../../../types';
+import './Checkbox.scss';
 export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
     /** Лейбл */
     label?: React.ReactNode;

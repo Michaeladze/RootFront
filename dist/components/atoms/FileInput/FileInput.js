@@ -54,6 +54,7 @@ var file_utils_1 = require("../../../utils/file-utils");
 var Chips_1 = __importDefault(require("../../molecules/Chips/Chips"));
 var Button_1 = __importDefault(require("../Button"));
 var index_1 = require("../../../index");
+require("./FileInput.scss");
 var FileInput = function (_a) {
     var _b = _a.name, name = _b === void 0 ? '' : _b, _c = _a.accept, accept = _c === void 0 ? '*' : _c, _d = _a.multiple, multiple = _d === void 0 ? false : _d, _e = _a.className, className = _e === void 0 ? '' : _e, _f = _a.defaultValue, defaultValue = _f === void 0 ? '' : _f, _g = _a.disabled, disabled = _g === void 0 ? false : _g, _h = _a.placeholder, placeholder = _h === void 0 ? '' : _h, setFile = _a.setFile, onError = _a.onError, maxSize = _a.maxSize, count = _a.count, props = __rest(_a, ["name", "accept", "multiple", "className", "defaultValue", "disabled", "placeholder", "setFile", "onError", "maxSize", "count"]);
     /** Файл */

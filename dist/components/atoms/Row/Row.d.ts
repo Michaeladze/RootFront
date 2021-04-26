@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './Row.scss';
 export interface IRowProps {
     /** Дочерние элементы */
     children: React.ReactNode | React.ReactNode[];

@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { Variant } from '../../../types';
+import './Notifications.scss';
 /** Удалить уведомление */
 export declare const removeNotification: (id?: number | undefined) => void;
 /** Добавить уведомление */

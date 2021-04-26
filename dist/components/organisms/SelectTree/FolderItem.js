@@ -26,6 +26,7 @@ var react_1 = __importStar(require("react"));
 var Folder_1 = __importDefault(require("./Folder"));
 var angle_down_1 = __importDefault(require("../../_icons/angle-down"));
 var index_1 = require("../../../index");
+require("./FolderItem.scss");
 var FolderItem = function (_a) {
     var item = _a.item, onChange = _a.onChange, depth = _a.depth, open = _a.open, multiple = _a.multiple, activeItem = _a.activeItem;
     var _b = react_1.useState(open), showFolder = _b[0], toggleFolder = _b[1];

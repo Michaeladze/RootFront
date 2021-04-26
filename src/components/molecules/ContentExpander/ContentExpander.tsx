@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import Angle from '../../_icons/angle-down';
-
+import './ContentExpander.scss';
 export interface IContentExpanderProps {
   title: ReactNode;
   showTitle?: boolean;

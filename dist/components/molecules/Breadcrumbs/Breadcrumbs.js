@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var angle_down_1 = __importDefault(require("../../_icons/angle-down"));
 var react_router_dom_1 = require("react-router-dom");
+require("./Breadcrumbs.scss");
 var Breadcrumbs = function (_a) {
     var list = _a.list;
     var listJSX = list.map(function (b, i) { return (react_1.default.createElement("div", { className: 'breadcrumb', key: i },

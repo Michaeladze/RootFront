@@ -11,7 +11,7 @@ import InputMask from 'react-input-mask';
 import { IDateVariants } from '../../../types/projects.types';
 import { getWeekDay, parseToFormat } from '../DatepickerCalendar/datepicker.utils';
 import { stringToDate } from '../../../utils/helpers';
-
+import './NewDatepicker.scss';
 export interface IDatepickerProps {
   /** Название */
   name?: string;

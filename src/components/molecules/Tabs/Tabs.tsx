@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ITab } from '../../../types';
-
+import './Tabs.scss';
 export interface ITabsProps {
   /** Список вкладок */
   list: ITab[];

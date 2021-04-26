@@ -1,7 +1,7 @@
 import React, { FC, HTMLProps } from 'react';
 
 import Button from '../../../atoms/Button';
-
+import './PopupFooter.scss';
 export interface IProps extends HTMLProps<HTMLElement> {
   /** Сабмит */
   onSubmit?: () => void;

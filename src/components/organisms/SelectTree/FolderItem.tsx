@@ -3,7 +3,7 @@ import { ITreeOption } from '../../../types';
 import Folder from './Folder';
 import Angle from '../../_icons/angle-down';
 import { Checkbox, Radio } from '../../../index';
-
+import './FolderItem.scss';
 interface IFolderItemProps {
   item: ITreeOption;
   depth: number;

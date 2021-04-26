@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { BehaviorSubject } from 'rxjs';
+import './PopupMaker.scss';
 /** Стак попапов */
 export declare let popups$$: BehaviorSubject<React.ReactNode[]>;
 /** Основная функция добавления попапа в стек */

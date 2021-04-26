@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './PageWithList.scss';
 interface IProps {
     /** Наполнение */
     children: ReactNode | ReactNode[];

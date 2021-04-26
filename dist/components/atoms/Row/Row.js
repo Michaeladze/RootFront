@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./Row.scss");
 var Row = function (_a) {
     var children = _a.children, _b = _a.gap, gap = _b === void 0 ? 0 : _b, _c = _a.mb, mb = _c === void 0 ? 0 : _c, _d = _a.align, align = _d === void 0 ? 'top' : _d, _e = _a.justify, justify = _e === void 0 ? 'left' : _e, _f = _a.className, className = _f === void 0 ? '' : _f;
     var alignClass = '';

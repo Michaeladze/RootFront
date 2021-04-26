@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   FormGroup, PopupFooter, Textarea
 } from '../../../../index';
-
+import './Confirm.scss';
 
 export interface IConfirmProps {
   /** Текст сабмита */

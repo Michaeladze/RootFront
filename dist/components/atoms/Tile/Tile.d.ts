@@ -4,5 +4,6 @@ export interface ITileProps {
     className?: string;
     type?: 'default' | 'stretch';
 }
+import './Tile.scss';
 declare const Tile: React.FC<ITileProps>;
 export default Tile;

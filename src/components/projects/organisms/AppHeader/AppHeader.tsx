@@ -6,7 +6,7 @@ import User from '../../molecules/User';
 import Logo from '../../../_icons/vtb-logo';
 import { IUser } from '../../../../types/projects.types';
 import { Preloader } from '../../../../index';
-
+import './AppHeader.scss';
 export interface IAppHeaderProps {
   /** Название приложения */
   appName: string;

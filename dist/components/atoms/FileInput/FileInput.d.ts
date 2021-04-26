@@ -1,6 +1,7 @@
 import React from 'react';
 import { IFileData } from '../../../types';
 import { IButtonProps } from '../Button/Button';
+import './FileInput.scss';
 /**
  * Файловый инпут для небольших файлов, конвертирует файл в base64.
  * Передает в коллбек setFile объект c файлом и его base64 версией { file: File, base64: string }

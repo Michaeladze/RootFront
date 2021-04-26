@@ -12,7 +12,7 @@ import Angle from '../../_icons/caret-down';
 import Close from '../../_icons/close';
 import Chips from '../../molecules/Chips/Chips';
 import { sizeClass } from '../../../utils/helpers';
-
+import './Select.scss';
 export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /** Список вариантов */
   options: IOption[];

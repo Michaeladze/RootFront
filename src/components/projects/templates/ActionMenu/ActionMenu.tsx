@@ -5,7 +5,7 @@ import {
 } from '../../../../index';
 import { IActionMenuListConfig } from '../../../../types/projects.types';
 import AngleDown from '../../../_icons/angle-down';
-
+import './ActionMenu.scss';
 interface IActionMenuProps {
   type?: 'default' | 'list' | 'action';
   listConfig?: IActionMenuListConfig;

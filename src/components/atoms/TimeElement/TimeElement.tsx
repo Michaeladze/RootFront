@@ -5,7 +5,7 @@ import { arrayTimeHours, arrayTimeMinutes } from './timeData';
 import Button from '../Button';
 import Arrow from '../../_icons/angle-down';
 import { MenuContext } from '../../molecules/Menu/Menu';
-
+import './TimeElement.scss';
 export interface ITimepickerProps {
   updateTime: (newTime: string) => void;
   min: string;

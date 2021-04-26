@@ -3,7 +3,7 @@ import { INotification } from '../../molecules/Notifications/Notifications';
 import Close from '../../_icons/close';
 import { variantClass } from '../../../utils/helpers';
 import RetryCountDown from '../RetryCountDown';
-
+import './Notification.scss';
 export interface IProps {
   item: INotification;
   remove?: (id: number) => void;

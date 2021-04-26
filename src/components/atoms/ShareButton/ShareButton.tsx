@@ -2,7 +2,7 @@ import React, { HTMLProps } from 'react';
 import Share from '../../_icons/share';
 import Button from '../Button';
 import { sendNotification } from '../../../index';
-
+import './ShareButton.scss';
 export type IShareButtonProps = HTMLProps<HTMLElement>
 
 const ShareButton: React.FC<IShareButtonProps> = ({ ...props }: IShareButtonProps) => {

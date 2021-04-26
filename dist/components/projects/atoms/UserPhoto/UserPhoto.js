@@ -31,6 +31,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
+require("./UserPhoto.scss");
 var UserPhoto = function (_a) {
     var _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.url, url = _c === void 0 ? '' : _c, _d = _a.radius, radius = _d === void 0 ? '40px' : _d, _e = _a.fullName, fullName = _e === void 0 ? '' : _e;
     var styles = radius ? {

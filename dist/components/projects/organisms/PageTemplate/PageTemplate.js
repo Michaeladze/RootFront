@@ -9,6 +9,7 @@ var react_router_dom_1 = require("react-router-dom");
 var Breadcrumbs_1 = __importDefault(require("../../../molecules/Breadcrumbs"));
 var Button_1 = __importDefault(require("../../../atoms/Button"));
 var Container_1 = __importDefault(require("../../../atoms/Container"));
+require("./PageTemplate.scss");
 var PageTemplate = function (_a) {
     var title = _a.title, breadcrumbs = _a.breadcrumbs, children = _a.children, _b = _a.backUrl, backUrl = _b === void 0 ? '/' : _b, _c = _a.className, className = _c === void 0 ? '' : _c, _d = _a.onlyTitle, onlyTitle = _d === void 0 ? false : _d;
     return (react_1.default.createElement("div", { className: "page-template " + className },

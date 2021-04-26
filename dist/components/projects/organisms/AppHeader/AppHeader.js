@@ -9,6 +9,7 @@ var Container_1 = __importDefault(require("../../../atoms/Container"));
 var User_1 = __importDefault(require("../../molecules/User"));
 var vtb_logo_1 = __importDefault(require("../../../_icons/vtb-logo"));
 var index_1 = require("../../../../index");
+require("./AppHeader.scss");
 var AppHeader = function (_a) {
     var _b = _a.homeUrl, homeUrl = _b === void 0 ? '/' : _b, appName = _a.appName, children = _a.children, _c = _a.user, user = _c === void 0 ? null : _c, _d = _a.actionsList, actionsList = _d === void 0 ? [] : _d, _e = _a.showShadow, showShadow = _e === void 0 ? true : _e, _f = _a.className, className = _f === void 0 ? '' : _f;
     return (react_1.default.createElement("header", { className: "app__header " + (showShadow ? 'app__header--shadow' : '') + " " + className },

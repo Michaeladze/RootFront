@@ -2,7 +2,7 @@ import React, {
   FC, ReactNode, useCallback, useEffect, useMemo, useState
 } from 'react';
 import { createPortal } from 'react-dom';
-
+import './Tooltip.scss';
 
 type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 

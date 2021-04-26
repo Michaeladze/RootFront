@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./FormGroup.scss");
 var FormGroup = function (_a) {
     var label = _a.label, children = _a.children, errorMessage = _a.errorMessage, _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.required, required = _c === void 0 ? false : _c;
     return (react_1.default.createElement("div", { className: "rf-form-group " + className + " " },

@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var react_dom_1 = require("react-dom");
 var close_1 = __importDefault(require("../../_icons/close"));
+require("./Modal.scss");
 var Modal = function (_a) {
     var _b = _a.className, className = _b === void 0 ? '' : _b, children = _a.children, onClose = _a.onClose, _c = _a.darkenBackground, darkenBackground = _c === void 0 ? true : _c, _d = _a.showClose, showClose = _d === void 0 ? true : _d, headerContent = _a.headerContent, footerContent = _a.footerContent, height = _a.height, _e = _a.disableScroll, disableScroll = _e === void 0 ? false : _e;
     /** Создаем контейнер для модалки */

@@ -27,6 +27,7 @@ var react_router_dom_1 = require("react-router-dom");
 var chevron_left_outline_1 = __importDefault(require("../../../_icons/chevron-left-outline"));
 var index_1 = require("../../../../index");
 var User_1 = __importDefault(require("../../molecules/User"));
+require("./Page.scss");
 var Page = function (_a) {
     // -------------------------------------------------------------------------------------------------------------------
     var title = _a.title, _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.backUrl, backUrl = _c === void 0 ? '' : _c, onBackUrlClick = _a.onBackUrlClick, user = _a.user, _d = _a.actionsList, actionsList = _d === void 0 ? [] : _d, _e = _a.menuPosition, menuPosition = _e === void 0 ? 'right' : _e, children = _a.children, navigation = _a.navigation, _f = _a.preloader, preloader = _f === void 0 ? false : _f;

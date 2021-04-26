@@ -44,6 +44,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
+require("./Textarea.scss");
 var Textarea = function (_a) {
     var _b, _c;
     var _d = _a.autoResize, autoResize = _d === void 0 ? false : _d, _e = _a.initialRowCount, initialRowCount = _e === void 0 ? 3 : _e, _f = _a.debounce, debounce = _f === void 0 ? 300 : _f, getValue = _a.getValue, props = __rest(_a, ["autoResize", "initialRowCount", "debounce", "getValue"]);

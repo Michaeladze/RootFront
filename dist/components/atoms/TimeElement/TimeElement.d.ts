@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import './TimeElement.scss';
 export interface ITimepickerProps {
     updateTime: (newTime: string) => void;
     min: string;

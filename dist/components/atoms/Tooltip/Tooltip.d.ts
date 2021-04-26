@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import './Tooltip.scss';
 declare type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 /** Основной компонент на экспорт. */
 export interface ITooltipProps {

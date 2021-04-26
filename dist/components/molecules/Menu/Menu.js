@@ -26,6 +26,7 @@ exports.MenuContext = void 0;
 var react_1 = __importStar(require("react"));
 var index_1 = require("../../../index");
 var List_1 = __importDefault(require("../../atoms/List"));
+require("./Menu.scss");
 /** Контекст для передачи функций работы с меню. */
 exports.MenuContext = react_1.default.createContext({ onClose: function () { } });
 var Menu = function (_a) {

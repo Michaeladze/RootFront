@@ -51,6 +51,7 @@ var Input_1 = __importDefault(require("../../atoms/Input"));
 var Button_1 = __importDefault(require("../../atoms/Button"));
 var TimeElement_1 = __importDefault(require("../../atoms/TimeElement"));
 var Menu_1 = __importDefault(require("../Menu"));
+require("./Timepicker.scss");
 var Timepicker = function (_a) {
     var className = _a.className, initialValue = _a.initialValue, disabled = _a.disabled, onChangeValue = _a.onChangeValue, _b = _a.min, min = _b === void 0 ? '00:00' : _b, _c = _a.max, max = _c === void 0 ? '24:00' : _c, props = __rest(_a, ["className", "initialValue", "disabled", "onChangeValue", "min", "max"]);
     var _d = react_1.useState(initialValue), time = _d[0], setTime = _d[1];

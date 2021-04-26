@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './ContentExpander.scss';
 export interface IContentExpanderProps {
     title: ReactNode;
     showTitle?: boolean;

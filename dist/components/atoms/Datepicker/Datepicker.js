@@ -50,6 +50,7 @@ var entry_nostyle_1 = __importDefault(require("react-date-picker/dist/entry.nost
 var calendar_outline_1 = __importDefault(require("../../_icons/calendar-outline"));
 var close_1 = __importDefault(require("../../_icons/close"));
 var helpers_1 = require("../../../utils/helpers");
+require("./Datepicker.scss");
 var Datepicker = function (_a) {
     var _b = _a.size, size = _b === void 0 ? 'medium' : _b, _c = _a.showLeadingZeros, showLeadingZeros = _c === void 0 ? true : _c, props = __rest(_a, ["size", "showLeadingZeros"]);
     var _d = react_1.useState(props.value || null), value = _d[0], setValue = _d[1];

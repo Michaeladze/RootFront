@@ -3,7 +3,7 @@ import { IListElement } from '../../../../types';
 import Button from '../../../atoms/Button';
 import UserPhoto from '../../atoms/UserPhoto';
 import { Menu } from '../../../../index';
-
+import './User.scss';
 /** Упрощенный интерфейс пользователя */
 interface IUser {
   fullName?: string;

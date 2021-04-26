@@ -7,7 +7,7 @@ import Breadcrumbs from '../../../molecules/Breadcrumbs';
 import Button from '../../../atoms/Button';
 import Container from '../../../atoms/Container';
 import { IBreadcrumb } from '../../../../types';
-
+import './PageTemplate.scss';
 export interface IProps {
   /** Название*/
   title: ReactNode;

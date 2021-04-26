@@ -5,7 +5,7 @@ import {
   IChips, Size, Variant
 } from '../../../types';
 import { sizeClass, variantClass } from '../../../utils/helpers';
-
+import './Chips.scss';
 export interface IChipsProps {
   items: IChips[];
   className?: string;

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import 'react-quill/dist/quill.snow.css';
+import './TextEditor.scss';
 export interface IProps {
     /** Атрибут name */
     name: string;

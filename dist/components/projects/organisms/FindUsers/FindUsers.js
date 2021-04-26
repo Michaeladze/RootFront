@@ -32,6 +32,7 @@ var close_sm_1 = __importDefault(require("../../../_icons/close-sm"));
 var arrow_1 = __importDefault(require("../../../_icons/arrow"));
 var info_circle_1 = __importDefault(require("../../../_icons/info-circle"));
 var large_search_icon_1 = __importDefault(require("./large-search-icon"));
+require("./FindUsers.scss");
 var react_2 = require("swiper/react");
 var swiper_1 = __importStar(require("swiper"));
 var index_1 = require("../../../../index");

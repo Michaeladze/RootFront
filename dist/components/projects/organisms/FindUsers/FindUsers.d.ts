@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import './FindUsers.scss';
 import { IUser } from '../../../../types/projects.types';
 export interface IProps {
     onClose?: () => void;

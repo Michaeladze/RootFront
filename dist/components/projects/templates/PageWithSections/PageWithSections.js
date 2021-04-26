@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var index_1 = require("../../../../index");
 var useTableOfContents_1 = __importDefault(require("../../../../hooks/useTableOfContents"));
+require("./PageWithSections.scss");
 var PageWithSections = function (_a) {
     var sections = _a.sections, actionMenu = _a.actionMenu, _b = _a.preloader, preloader = _b === void 0 ? false : _b;
     /** Ссылка на навигацию */

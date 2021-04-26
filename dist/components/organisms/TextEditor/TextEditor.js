@@ -28,6 +28,7 @@ var react_quill_1 = __importDefault(require("react-quill"));
 require("react-quill/dist/quill.snow.css");
 var quill_1 = __importDefault(require("quill"));
 var helpers_1 = require("../../../utils/helpers");
+require("./TextEditor.scss");
 var TextEditor = function (_a) {
     var name = _a.name, preview = _a.preview, getValue = _a.getValue, _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.defaultValue, defaultValue = _c === void 0 ? '' : _c, colors = _a.colors;
     var palettes = [

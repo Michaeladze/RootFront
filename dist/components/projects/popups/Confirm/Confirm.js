@@ -21,6 +21,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var index_1 = require("../../../../index");
+require("./Confirm.scss");
 var Confirm = function (_a) {
     var comment = _a.comment, _b = _a.showComment, showComment = _b === void 0 ? false : _b, textAccept = _a.textAccept, onAction = _a.onAction, onClose = _a.onClose, text = _a.text;
     var handleSubmit = function () {

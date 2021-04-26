@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import './UserPhoto.scss';
 export interface IUserPhotoProps {
     className?: string;
     /** Ссылка на фото */

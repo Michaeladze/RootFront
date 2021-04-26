@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { IListElement } from '../../../../types';
 import { IUser } from '../../../../types/projects.types';
+import './AppHeader.scss';
 export interface IAppHeaderProps {
     /** Название приложения */
     appName: string;

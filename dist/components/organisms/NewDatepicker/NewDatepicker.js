@@ -35,6 +35,7 @@ var useClickOutside_1 = __importDefault(require("../../../hooks/useClickOutside"
 var react_input_mask_1 = __importDefault(require("react-input-mask"));
 var datepicker_utils_1 = require("../DatepickerCalendar/datepicker.utils");
 var helpers_1 = require("../../../utils/helpers");
+require("./NewDatepicker.scss");
 var NewDatepicker = function (_a) {
     var _b = _a.name, name = _b === void 0 ? 'datepicker' : _b, _c = _a.locale, locale = _c === void 0 ? 'ru' : _c, _d = _a.placeholder, placeholder = _d === void 0 ? locale === 'ru' ? 'Выберите дату' : 'Select date' : _d, _e = _a.size, size = _e === void 0 ? 'medium' : _e, defaultValue = _a.defaultValue, min = _a.min, max = _a.max, _f = _a.disabled, disabled = _f === void 0 ? false : _f, _g = _a.readOnly, readOnly = _g === void 0 ? false : _g, onChange = _a.onChange, _h = _a.range, range = _h === void 0 ? false : _h, _j = _a.format, format = _j === void 0 ? 'dd.mm.yyyy' : _j, _k = _a.showDayOfWeek, showDayOfWeek = _k === void 0 ? false : _k;
     var _l = react_1.useState([]), dayOfWeek = _l[0], setDayOfWeek = _l[1];

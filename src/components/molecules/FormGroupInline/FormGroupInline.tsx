@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-
+import './FormGroupInline.scss';
 export interface IFormGroupInlineProps {
   /** Дочерние элементы */
   children: React.ReactNode | React.ReactNode[];

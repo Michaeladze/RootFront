@@ -26,6 +26,7 @@ var react_1 = __importStar(require("react"));
 var star_fill_1 = __importDefault(require("../../../_icons/star-fill"));
 var index_1 = require("../../../../index");
 var detect_browser_1 = require("detect-browser");
+require("./FeedbackPopup.scss");
 var FeedbackPopup = function (_a) {
     var user = _a.user, sendFeedback = _a.sendFeedback, onClose = _a.onClose, _b = _a.serviceManagerUrl, serviceManagerUrl = _b === void 0 ? '#' : _b;
     var _c = react_1.useState(0), rating = _c[0], setRating = _c[1];

@@ -4,7 +4,7 @@ import React, {
 // @ts-ignore
 import StickySidebar from 'sticky-sidebar-v2';
 import { install } from 'resize-observer';
-
+import './StickyContainer.scss';
 interface IProps {
   containerSelector: string;
   /** Контейнер со сроллом, по-умолчанию = window */

@@ -32,6 +32,7 @@ var chevron_left_1 = __importDefault(require("../../_icons/chevron-left"));
 var index_1 = require("../../../index");
 var datepicker_utils_1 = require("./datepicker.utils");
 var helpers_1 = require("../../../utils/helpers");
+require("./DatepickerCalendar.scss");
 var DatepickerCalendar = function (_a) {
     var value = _a.value, setInputValue = _a.setInputValue, showCalendar = _a.showCalendar, toggleCalendar = _a.toggleCalendar, minDate = _a.minDate, maxDate = _a.maxDate, toggleRef = _a.toggleRef, range = _a.range, locale = _a.locale;
     /** Ссылка на контент */

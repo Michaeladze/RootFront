@@ -11,7 +11,7 @@ import {
   IDatepickerActivePeriod, IDatepickerDay, IDatepickerPeriodType, IDatepickerStack
 } from './datepicker.types';
 import { stringToDate } from '../../../utils/helpers';
-
+import './DatepickerCalendar.scss';
 interface IDatepickerCalendarProps {
   /** Формат всегда dd.mm.yyyy */
   value: string;

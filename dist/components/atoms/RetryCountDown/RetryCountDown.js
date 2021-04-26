@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var Button_1 = __importDefault(require("../Button"));
+require("./RetryCountDown.scss");
 var RetryCountDown = function (_a) {
     var time = _a.time, action = _a.action;
     var interval = react_1.useRef(null);

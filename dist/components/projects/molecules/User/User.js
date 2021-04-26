@@ -7,6 +7,7 @@ var react_1 = __importDefault(require("react"));
 var Button_1 = __importDefault(require("../../../atoms/Button"));
 var UserPhoto_1 = __importDefault(require("../../atoms/UserPhoto"));
 var index_1 = require("../../../../index");
+require("./User.scss");
 var User = function (_a) {
     var _b = _a.actionsList, actionsList = _b === void 0 ? [] : _b, _c = _a.menuPosition, menuPosition = _c === void 0 ? 'right' : _c, user = _a.user, _d = _a.showName, showName = _d === void 0 ? true : _d, radius = _a.radius;
     var name = (user === null || user === void 0 ? void 0 : user.fullName) || (user === null || user === void 0 ? void 0 : user.firstName) + " " + (user === null || user === void 0 ? void 0 : user.lastName);

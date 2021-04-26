@@ -7,6 +7,7 @@ var react_1 = __importDefault(require("react"));
 var Button_1 = __importDefault(require("../../atoms/Button"));
 var close_sm_1 = __importDefault(require("../../_icons/close-sm"));
 var helpers_1 = require("../../../utils/helpers");
+require("./Chips.scss");
 var Chips = function (_a) {
     var items = _a.items, _b = _a.variant, variant = _b === void 0 ? 'base' : _b, _c = _a.size, size = _c === void 0 ? 'medium' : _c, onRemove = _a.onRemove, onClick = _a.onClick, className = _a.className, disabled = _a.disabled;
     var handleRemove = function (e, id) {

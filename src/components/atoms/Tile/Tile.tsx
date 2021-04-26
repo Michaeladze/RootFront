@@ -5,7 +5,7 @@ export interface ITileProps {
   className?: string;
   type?: 'default' | 'stretch';
 }
-
+import './Tile.scss';
 const Tile: React.FC<ITileProps> = ({ children, className = '', type = 'default' }: ITileProps) => {
   const stretchClass = type === 'stretch' ? 'rf-tile--stretch' : '';
   return <div className={`rf-tile ${stretchClass} ${className}`}>{children}</div>;

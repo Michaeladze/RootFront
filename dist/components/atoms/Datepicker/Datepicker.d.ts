@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { DatePickerProps } from 'react-date-picker/dist/entry.nostyle';
 import { Size } from '../../../types';
+import './Datepicker.scss';
 export interface IDatepickerProps extends Omit<DatePickerProps, 'onChange'> {
     onChange?: (date: Date | null, name?: string) => void;
     clear?: boolean;

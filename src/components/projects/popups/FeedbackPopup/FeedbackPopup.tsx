@@ -6,7 +6,7 @@ import {
 import { IFileData } from '../../../../types';
 import { IFeedback, IUser } from '../../../../types/projects.types';
 import { BrowserInfo, detect } from 'detect-browser';
-
+import './FeedbackPopup.scss';
 export interface IFeedbackPopupProps {
   user: IUser;
   sendFeedback: (data: IFeedback) => void;

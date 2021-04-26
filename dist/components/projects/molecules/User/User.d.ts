@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { IListElement } from '../../../../types';
+import './User.scss';
 /** Упрощенный интерфейс пользователя */
 interface IUser {
     fullName?: string;

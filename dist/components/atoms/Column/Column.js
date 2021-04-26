@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./Column.scss");
 var Column = function (_a) {
     var children = _a.children, sm = _a.sm, md = _a.md, lg = _a.lg, gap = _a.gap, align = _a.align, _b = _a.className, className = _b === void 0 ? '' : _b;
     /** Класс для выравнивания колонки в контейнере */

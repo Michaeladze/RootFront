@@ -45,6 +45,7 @@ var caret_down_1 = __importDefault(require("../../_icons/caret-down"));
 var close_1 = __importDefault(require("../../_icons/close"));
 var Chips_1 = __importDefault(require("../../molecules/Chips/Chips"));
 var helpers_1 = require("../../../utils/helpers");
+require("./Select.scss");
 var Select = function (_a) {
     var options = _a.options, _b = _a.multiSelect, multiSelect = _b === void 0 ? false : _b, value = _a.value, onChange = _a.onChange, getValue = _a.getValue, _c = _a.size, size = _c === void 0 ? 'medium' : _c, onChipsRemove = _a.onChipsRemove, props = __rest(_a, ["options", "multiSelect", "value", "onChange", "getValue", "size", "onChipsRemove"]);
     /** Ссылка на текущий компонент */

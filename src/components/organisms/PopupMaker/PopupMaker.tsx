@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { BehaviorSubject } from 'rxjs';
 import Modal from '../../molecules/Modal';
-
+import './PopupMaker.scss';
 /** Стак попапов */
 export let popups$$ = new BehaviorSubject<ReactNode[]>([]);
 

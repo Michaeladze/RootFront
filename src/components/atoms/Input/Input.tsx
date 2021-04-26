@@ -11,7 +11,7 @@ import HideIcon from '../../_icons/hide';
 import ShowIcon from '../../_icons/show';
 import { Size } from '../../../types';
 import { sizeClass } from '../../../utils/helpers';
-
+import './Input.scss';
 export interface IInputProps extends Omit<HTMLProps<HTMLInputElement>, 'size'> {
   /** Возможность очистки поля по клику */
   onClear?: () => void;

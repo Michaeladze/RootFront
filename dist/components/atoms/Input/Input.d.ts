@@ -1,5 +1,6 @@
 import { FC, HTMLProps } from 'react';
 import { Size } from '../../../types';
+import './Input.scss';
 export interface IInputProps extends Omit<HTMLProps<HTMLInputElement>, 'size'> {
     /** Возможность очистки поля по клику */
     onClear?: () => void;

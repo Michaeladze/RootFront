@@ -1,7 +1,7 @@
 import React from 'react';
 import { Size, Variant } from '../../../types';
 import { sizeClass, variantClass } from '../../../utils/helpers';
-
+import './Preloader.scss';
 export interface IPreloaderProps {
   className?: string;
   size?: Size;

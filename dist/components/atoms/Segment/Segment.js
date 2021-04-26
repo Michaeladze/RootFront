@@ -44,6 +44,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var helpers_1 = require("../../../utils/helpers");
 var index_1 = require("../../../index");
+require("./Segment.scss");
 var Segment = function (_a) {
     var list = _a.list, _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.variant, variant = _c === void 0 ? 'accent' : _c, props = __rest(_a, ["list", "className", "variant"]);
     var slider = react_1.useRef(null);

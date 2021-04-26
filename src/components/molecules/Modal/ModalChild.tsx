@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../../atoms/Button/Button';
-
+import './ModalChild.scss';
 const ModalChild: React.FC = () => {
   return (
     <div className='rf-modal-child'>

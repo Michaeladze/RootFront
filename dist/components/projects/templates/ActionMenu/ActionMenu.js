@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var index_1 = require("../../../../index");
 var angle_down_1 = __importDefault(require("../../../_icons/angle-down"));
+require("./ActionMenu.scss");
 var ActionMenu = function (_a) {
     // -------------------------------------------------------------------------------------------------------------------
     var _b = _a.type, type = _b === void 0 ? 'default' : _b, listConfig = _a.listConfig, children = _a.children;

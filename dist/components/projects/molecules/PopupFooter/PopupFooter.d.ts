@@ -1,4 +1,5 @@
 import { FC, HTMLProps } from 'react';
+import './PopupFooter.scss';
 export interface IProps extends HTMLProps<HTMLElement> {
     /** Сабмит */
     onSubmit?: () => void;

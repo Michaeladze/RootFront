@@ -1,4 +1,5 @@
 import { FC, HTMLProps } from 'react';
+import './Timepicker.scss';
 export interface ITimepickerProps extends HTMLProps<HTMLInputElement> {
     /** Css класс */
     className?: string;

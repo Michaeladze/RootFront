@@ -1,5 +1,6 @@
 import React, { FC, InputHTMLAttributes } from 'react';
 import { IOption, Size } from '../../../types';
+import './Select.scss';
 export interface ISelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
     /** Список вариантов */
     options: IOption[];

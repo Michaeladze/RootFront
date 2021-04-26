@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var index_1 = require("../../../../index");
 var StickyContainer_1 = __importDefault(require("../StickyContainer"));
+require("./PageWithList.scss");
 var PageWithList = function (_a) {
     var children = _a.children, filters = _a.filters, actionMenu = _a.actionMenu, _b = _a.preloader, preloader = _b === void 0 ? false : _b;
     /** Ссылка контейнер страницы */

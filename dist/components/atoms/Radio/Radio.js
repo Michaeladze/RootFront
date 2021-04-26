@@ -28,6 +28,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var check_icon_1 = __importDefault(require("../../_icons/check-icon"));
 var helpers_1 = require("../../../utils/helpers");
+require("./Radio.scss");
 var Radio = function (_a) {
     var label = _a.label, value = _a.value, node = _a.node, _b = _a.icon, icon = _b === void 0 ? true : _b, _c = _a.variant, variant = _c === void 0 ? 'accent' : _c, props = __rest(_a, ["label", "value", "node", "icon", "variant"]);
     /** Отображение иконки */

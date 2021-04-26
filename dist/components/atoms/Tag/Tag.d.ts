@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Size, Variant } from '../../../types';
+import './Tag.scss';
 export interface ITagProps {
     children: ReactNode | ReactNode[];
     onClick?: () => void;

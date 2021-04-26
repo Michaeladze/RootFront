@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { IListElement, IMenuContext } from '../../../types';
+import './Menu.scss';
 export interface IListProps {
     /** Кнопка открытия меню */
     children: ReactNode;

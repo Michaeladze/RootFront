@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var index_1 = require("../../../../index");
+require("./UsersStack.scss");
 var UsersStack = function (_a) {
     var users = _a.users, radius = _a.radius;
     var LIMIT = 3;

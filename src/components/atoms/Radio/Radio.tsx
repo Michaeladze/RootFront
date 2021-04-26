@@ -4,7 +4,7 @@ import React, {
 import CheckIcon from '../../_icons/check-icon';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
-
+import './Radio.scss';
 export interface IRadioProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Лейбл */
   label: ReactNode;

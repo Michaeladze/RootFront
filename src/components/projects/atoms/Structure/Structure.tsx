@@ -4,7 +4,7 @@ import { IStructure } from '../../../../types/projects.types';
 interface IProps {
     departmentsPath: IStructure[]
 }
-
+import './Structure.scss';
 const Structure: React.FC<IProps> = ({ departmentsPath = [] }: IProps) => {
 
   const departmentsPathJSX = departmentsPath.map((item: IStructure) => (

@@ -5,7 +5,7 @@ import Calendar from '../../_icons/calendar-outline';
 import Close from '../../_icons/close';
 import { Size } from '../../../types';
 import { sizeClass } from '../../../utils/helpers';
-
+import './Datepicker.scss';
 export interface IDatepickerProps extends Omit<DatePickerProps, 'onChange'> {
   onChange?: (date: Date | null, name?: string) => void;
   clear?: boolean;

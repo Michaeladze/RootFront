@@ -21,6 +21,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var helpers_1 = require("../../../utils/helpers");
+require("./Switch.scss");
 var Switch = function (_a) {
     var label = _a.label, _b = _a.className, className = _b === void 0 ? '' : _b, _c = _a.state, state = _c === void 0 ? false : _c, _d = _a.disable, disable = _d === void 0 ? false : _d, onChange = _a.onChange, _e = _a.variant, variant = _e === void 0 ? 'accent' : _e;
     var _f = react_1.useState(state), s = _f[0], toggle = _f[1];

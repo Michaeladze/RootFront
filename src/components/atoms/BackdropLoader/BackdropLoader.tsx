@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Preloader from '../Preloader';
 import { Variant } from '../../../types';
 import { createPortal } from 'react-dom';
-
+import './BackdropLoader.scss';
 export interface IBackdropLoaderProps {
   className?: string;
   variant?: Variant;

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { IListElement } from '../../../types';
 import { MenuContext } from '../../molecules/Menu/Menu';
-
+import './List.scss';
 interface IProps {
   /** Элементы меню */
   list: IListElement[];

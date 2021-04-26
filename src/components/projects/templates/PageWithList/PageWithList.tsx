@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { Preloader } from '../../../../index';
 import StickyContainer from '../StickyContainer';
-
+import './PageWithList.scss';
 interface IProps {
   /** Наполнение */
   children: ReactNode | ReactNode[];

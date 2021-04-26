@@ -22,6 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var react_router_dom_1 = require("react-router-dom");
 var Menu_1 = require("../../molecules/Menu/Menu");
+require("./List.scss");
 var List = function (_a) {
     var list = _a.list;
     var onElementClick = function (e, li) {

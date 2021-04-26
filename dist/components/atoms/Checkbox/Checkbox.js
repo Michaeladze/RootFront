@@ -29,6 +29,7 @@ var react_1 = __importDefault(require("react"));
 var check_icon_1 = __importDefault(require("../../_icons/check-icon"));
 var helpers_1 = require("../../../utils/helpers");
 var minus_1 = __importDefault(require("../../_icons/minus"));
+require("./Checkbox.scss");
 var Checkbox = function (_a) {
     var label = _a.label, value = _a.value, node = _a.node, _b = _a.icon, icon = _b === void 0 ? true : _b, _c = _a.variant, variant = _c === void 0 ? 'accent' : _c, _d = _a.align, align = _d === void 0 ? 'flex-start' : _d, _e = _a.halfChecked, halfChecked = _e === void 0 ? false : _e, props = __rest(_a, ["label", "value", "node", "icon", "variant", "align", "halfChecked"]);
     /** Отображение иконки */

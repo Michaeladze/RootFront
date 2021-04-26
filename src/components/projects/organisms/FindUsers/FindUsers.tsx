@@ -5,7 +5,7 @@ import Close from '../../../_icons/close-sm';
 import Arrow from '../../../_icons/arrow';
 import Info from '../../../_icons/info-circle';
 import Icon from './large-search-icon';
-
+import './FindUsers.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 

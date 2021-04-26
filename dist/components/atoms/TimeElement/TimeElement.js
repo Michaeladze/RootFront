@@ -27,6 +27,7 @@ var timeData_1 = require("./timeData");
 var Button_1 = __importDefault(require("../Button"));
 var angle_down_1 = __importDefault(require("../../_icons/angle-down"));
 var Menu_1 = require("../../molecules/Menu/Menu");
+require("./TimeElement.scss");
 var TimeElement = function (_a) {
     var updateTime = _a.updateTime, min = _a.min, max = _a.max, value = _a.value;
     var _b = react_1.useState(null), time = _b[0], setTime = _b[1];

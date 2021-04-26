@@ -4,7 +4,7 @@ import React, {
 import { IListElement, IMenuContext } from '../../../types';
 import { useClickOutside } from '../../../index';
 import List from '../../atoms/List';
-
+import './Menu.scss';
 export interface IListProps {
   /** Кнопка открытия меню */
   children: ReactNode;

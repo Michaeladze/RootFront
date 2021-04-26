@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { IUser } from '../../../../types/projects.types';
 import { IListElement, ITab } from '../../../../types';
+import './Page.scss';
 export interface IPageProps {
     title?: ReactNode;
     className?: string;

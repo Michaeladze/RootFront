@@ -2,7 +2,7 @@ import React, {
   useCallback, useEffect, useRef, useState
 } from 'react';
 import Button from '../Button';
-
+import './RetryCountDown.scss';
 interface IProps {
   time: number[];
   action?: () => void;

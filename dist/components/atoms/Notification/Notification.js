@@ -7,6 +7,7 @@ var react_1 = __importDefault(require("react"));
 var close_1 = __importDefault(require("../../_icons/close"));
 var helpers_1 = require("../../../utils/helpers");
 var RetryCountDown_1 = __importDefault(require("../RetryCountDown"));
+require("./Notification.scss");
 var Notification = function (_a) {
     var item = _a.item, remove = _a.remove;
     /** Удалить уведомление */

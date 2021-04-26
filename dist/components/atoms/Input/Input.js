@@ -52,6 +52,7 @@ var close_1 = __importDefault(require("../../_icons/close"));
 var hide_1 = __importDefault(require("../../_icons/hide"));
 var show_1 = __importDefault(require("../../_icons/show"));
 var helpers_1 = require("../../../utils/helpers");
+require("./Input.scss");
 var Input = function (_a) {
     var _b, _c;
     var onClear = _a.onClear, _d = _a.debounce, debounce = _d === void 0 ? 300 : _d, _e = _a.search, search = _e === void 0 ? false : _e, floatLabel = _a.floatLabel, getValue = _a.getValue, _f = _a.size, size = _f === void 0 ? 'medium' : _f, props = __rest(_a, ["onClear", "debounce", "search", "floatLabel", "getValue", "size"]);

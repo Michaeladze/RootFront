@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IUser } from '../../../../types/projects.types';
 import { UserPhoto } from '../../../../index';
-
+import './UsersStack.scss';
 export interface IUsersStackProps {
   users: IUser[];
   /** Радиус */

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+require("./FormGroupInline.scss");
 var FormGroupInline = function (_a) {
     var children = _a.children, className = _a.className, errorMessage = _a.errorMessage, label = _a.label, required = _a.required;
     return (react_1.default.createElement("div", { className: "rf-inline-group " + className },

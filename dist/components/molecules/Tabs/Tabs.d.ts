@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { ITab } from '../../../types';
+import './Tabs.scss';
 export interface ITabsProps {
     /** Список вкладок */
     list: ITab[];

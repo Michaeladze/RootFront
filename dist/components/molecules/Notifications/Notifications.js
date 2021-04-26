@@ -43,6 +43,7 @@ var react_1 = __importStar(require("react"));
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var Notification_1 = __importDefault(require("../../atoms/Notification"));
+require("./Notifications.scss");
 // ---------------------------------------------------------------------------------------------------------------------
 /** Стэк уведомлений */
 var notifications$$ = new rxjs_1.BehaviorSubject([]);

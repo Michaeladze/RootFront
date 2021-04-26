@@ -4,7 +4,7 @@ import React, {
 import { Preloader, Tile } from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
 import useTableOfContents from '../../../../hooks/useTableOfContents';
-
+import './PageWithSections.scss';
 
 interface IPageWithSectionsProps {
   sections?: IPageSection[];

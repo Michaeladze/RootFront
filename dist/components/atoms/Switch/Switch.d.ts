@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Variant } from '../../../types';
+import './Switch.scss';
 export interface ISwitchProps {
     onChange?: (f: boolean) => void;
     label?: ReactNode;

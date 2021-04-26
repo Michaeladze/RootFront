@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var angle_down_1 = __importDefault(require("../../_icons/angle-down"));
+require("./ContentExpander.scss");
 var ContentExpander = function (_a) {
     var title = _a.title, children = _a.children, onExpand = _a.onExpand, expanded = _a.expanded, _b = _a.defaultValue, defaultValue = _b === void 0 ? false : _b, _c = _a.className, className = _c === void 0 ? '' : _c, _d = _a.disabled, disabled = _d === void 0 ? false : _d, _e = _a.stickArrow, stickArrow = _e === void 0 ? false : _e, _f = _a.showTitle, showTitle = _f === void 0 ? true : _f;
     /** Раскрыть / Скрыть */

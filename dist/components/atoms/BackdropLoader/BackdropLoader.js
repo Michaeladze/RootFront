@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var Preloader_1 = __importDefault(require("../Preloader"));
 var react_dom_1 = require("react-dom");
+require("./BackdropLoader.scss");
 var BackdropLoader = function (_a) {
     var _b = _a.className, className = _b === void 0 ? '' : _b, variant = _a.variant;
     var div = react_1.useState(document.createElement('div'))[0];

@@ -1,4 +1,5 @@
 import React, { Dispatch, RefObject, SetStateAction } from 'react';
+import './DatepickerCalendar.scss';
 interface IDatepickerCalendarProps {
     /** Формат всегда dd.mm.yyyy */
     value: string;

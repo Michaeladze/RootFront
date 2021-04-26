@@ -26,6 +26,7 @@ exports.openPopup = exports.popups$$ = void 0;
 var react_1 = __importStar(require("react"));
 var rxjs_1 = require("rxjs");
 var Modal_1 = __importDefault(require("../../molecules/Modal"));
+require("./PopupMaker.scss");
 /** Стак попапов */
 exports.popups$$ = new rxjs_1.BehaviorSubject([]);
 /** Закрываем последний открытый попап */

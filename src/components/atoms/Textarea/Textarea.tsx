@@ -5,7 +5,7 @@ import { fromEvent } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, map
 } from 'rxjs/operators';
-
+import './Textarea.scss';
 export interface ITextareaProps extends HTMLProps<HTMLTextAreaElement> {
   /** Автоматическое изменение высоты */
   autoResize?: boolean;

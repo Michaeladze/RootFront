@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 import Quill from 'quill';
 import { variants } from '../../../utils/helpers';
 import { Variant } from '../../../types';
-
+import './TextEditor.scss';
 export interface IProps {
   /** Атрибут name */
   name: string;

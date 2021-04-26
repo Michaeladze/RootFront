@@ -5,7 +5,7 @@ import CheckIcon from '../../_icons/check-icon';
 import { Variant } from '../../../types';
 import { variantClass } from '../../../utils/helpers';
 import MinusIcon from '../../_icons/minus';
-
+import './Checkbox.scss';
 export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Лейбл */
   label?: React.ReactNode;

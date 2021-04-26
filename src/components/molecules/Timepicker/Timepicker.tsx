@@ -8,7 +8,7 @@ import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
 import TimeElement from '../../atoms/TimeElement';
 import Menu from '../Menu';
-
+import './Timepicker.scss';
 export interface ITimepickerProps extends HTMLProps<HTMLInputElement> {
   /** Css класс */
   className?: string;

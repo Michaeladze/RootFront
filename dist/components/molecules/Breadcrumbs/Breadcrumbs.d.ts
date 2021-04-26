@@ -1,5 +1,6 @@
 import React from 'react';
 import { IBreadcrumb } from '../../../types';
+import './Breadcrumbs.scss';
 export interface IProps {
     list: IBreadcrumb[];
 }

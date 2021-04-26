@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { IBreadcrumb } from '../../../../types';
+import './PageTemplate.scss';
 export interface IProps {
     /** Название*/
     title: ReactNode;

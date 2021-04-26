@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { IChips, Size, Variant } from '../../../types';
+import './Chips.scss';
 export interface IChipsProps {
     items: IChips[];
     className?: string;
