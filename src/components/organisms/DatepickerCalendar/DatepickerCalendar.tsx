@@ -260,7 +260,9 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const onMonthClick = (e: React.MouseEvent, monthIndex: number) => {
     e.stopPropagation();
     setActivePeriod(getDaysForMonth(new Date(activePeriod.year, monthIndex)));
-    setPeriodType('day');
+    setTimeout(() => {
+      setPeriodType('day');
+    });
   };
 
   const monthsJSX = months[locale].map((m: string, i: number, array: string[]) => {
@@ -314,7 +316,9 @@ const DatepickerCalendar: React.FC<IDatepickerCalendarProps> = ({
   const onYearClick = (e: React.MouseEvent, year: number) => {
     e.stopPropagation();
     setActivePeriod(getDaysForMonth(new Date(year, activePeriod.month)));
-    setPeriodType('month');
+    setTimeout(() => {
+      setPeriodType('month');
+    });
   };
 
   const yearsJSX = years.map((y: number, i: number, array: number[]) => {
