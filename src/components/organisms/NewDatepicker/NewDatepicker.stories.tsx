@@ -3,7 +3,9 @@ import Story from '../../storybook/Story';
 import StoryItem from '../../storybook/StoryItem';
 import NewDatepicker from './NewDatepicker';
 import { useReactiveForm } from 'use-reactive-form';
-import { Button, Checkbox } from '../../../index';
+import {
+  Button, Checkbox, formatDate
+} from '../../../index';
 import { IDateVariants } from '../../../types/projects.types';
 import { object, string } from 'yup';
 
@@ -77,6 +79,9 @@ export const newDatepicker = () => {
 
   // --------------------------------------------------------------------------------
 
+  const startDate = formatDate(Date.now() + 1000 * 3600 * 24);
+  const endDate = formatDate(Date.now() + 1000 * 3600 * 24 * 5);
+
   return (
     <Story name='Datepicker' width={600} height={1200}
       description='Календарь с выбором даты. В defaultValue можно передать строку, число Date.now() или объект new Date().'>
@@ -141,6 +146,7 @@ export const newDatepicker = () => {
               range
               min={Date.now()}
               max={Date.now() + 1000 * 3600 * 24 * 10}
+              defaultValue={`${startDate.date} - ${endDate.date}`}
               onChange={onChange} />
           </div>
           <div style={{ marginLeft: '24px' }}>

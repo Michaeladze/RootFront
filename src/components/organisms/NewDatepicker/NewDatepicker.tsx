@@ -267,7 +267,6 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
       } else {
         const [fromValue, toValue] = inputValue.split(' - ');
 
-
         if (fromValue && !fromValue.includes('_')) {
           const from = getReturnValue(fromValue, false);
           const dayFrom = from.date.from.getDay();
@@ -277,7 +276,7 @@ const NewDatepicker: React.FC<IDatepickerProps> = ({
         if (toValue && !toValue.includes('_')) {
           const to = getReturnValue(toValue, false);
           const dayTo = to.date.from.getDay();
-          setDayOfWeek([...dayOfWeek, getWeekDay(dayTo, locale)]);
+          setDayOfWeek((state) => [...state, getWeekDay(dayTo, locale)]);
         }
       }
     }
