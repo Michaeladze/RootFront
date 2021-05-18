@@ -162,6 +162,7 @@ const Logger: React.FC<IProps> = ({ format = 'json', onSave }: IProps) => {
       }
 
       setActive(false);
+      setTime(0);
       return;
     }
 
