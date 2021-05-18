@@ -11,9 +11,10 @@ import { ILogRecord } from '../../../types';
 
 interface IProps {
   format?: 'txt' | 'json';
+  onSave?: (data: ILogRecord[]) => void;
 }
 
-const Logger: React.FC<IProps> = ({ format = 'json' }: IProps) => {
+const Logger: React.FC<IProps> = ({ format = 'json', onSave }: IProps) => {
 
 
   const [show, setShow] = useState<boolean>(false);
@@ -58,6 +59,8 @@ const Logger: React.FC<IProps> = ({ format = 'json' }: IProps) => {
   // -------------------------------------------------------------------------------------------------------------------
 
   const downloadFile = (data: ILogRecord[]) => {
+    onSave && onSave(data);
+
     let url = '';
 
     if (format === 'json') {
