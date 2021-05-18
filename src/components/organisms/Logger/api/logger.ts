@@ -1,6 +1,5 @@
 import { ILogRecord } from '../../../../types';
-
-export const records: {list: ILogRecord[]} = { list: [] };
+import { records } from '../Logger';
 
 export function logRecord(item: ILogRecord) {
   if (!localStorage.getItem('recording')) {

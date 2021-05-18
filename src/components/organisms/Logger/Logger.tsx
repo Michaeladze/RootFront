@@ -6,13 +6,15 @@ import Play from './icons/play-icon';
 import Pause from './icons/pause-icon';
 import Save from './icons/save-icon';
 import Trash from './icons/trash-icon';
-import { logRecord, records } from './api/logger';
+import { logRecord } from './api/logger';
 import { ILogRecord } from '../../../types';
 
 interface IProps {
   format?: 'txt' | 'json';
   onSave?: (data: ILogRecord[]) => void;
 }
+
+export const records: { list: ILogRecord[] } = { list: [] };
 
 const Logger: React.FC<IProps> = ({ format = 'json', onSave }: IProps) => {
 
