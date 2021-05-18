@@ -50,6 +50,7 @@ import Select from './components/organisms/Select';
 import NewDatepicker from './components/organisms/NewDatepicker';
 import TextEditor from './components/organisms/TextEditor';
 import Logger from './components/organisms/Logger';
+import { logRecord, reduxLogMiddleware } from './components/organisms/Logger/api/logger';
 import { openPopup, PopupMaker } from './components/organisms/PopupMaker';
 
 // ------------------------ Компоненты Projects ------------------------------------------------------------------------
@@ -149,7 +150,7 @@ export {
 };
 
 export {
-  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, treeDeepSearch, numberWithSpaces
+  formatDate, getShortString, getMonthName, oDataTransform, stringToDate, treeDeepSearch, numberWithSpaces, logRecord, reduxLogMiddleware
 };
 
 
