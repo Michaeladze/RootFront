@@ -102,3 +102,13 @@ export type Size = 'small' | 'medium' | 'big';
 
 /** Формат даты для дейтпикера */
 export type DateFormat = 'dd.mm.yy' | 'dd.mm.yyyy';
+
+/** Логирование */
+export interface ILogRecord {
+  timestamp: number;
+  source: 'network' | 'redux' | 'console';
+  snapshot: any;
+  name?: string;
+  text?: string;
+  action?: any;
+}

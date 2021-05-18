@@ -1,0 +1,67 @@
+.logger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 210px;
+  height: 40px;
+  z-index: 2000;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 17, 68, 0.18), 0 0 2px rgba(0, 17, 68, 0.12), 0 0 1px rgba(0, 0, 0, 0.04);
+
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+
+  cursor: pointer;
+}
+
+.logger__icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  color: #2E3A59;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.logger__label {
+  font-size: 14px;
+}
+
+.logger__time {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #8F9BB3;
+}
+
+.logger__indicator {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  border-radius: 50%;
+  background-color: #E4E9F2;
+}
+
+.logger__indicator--active {
+  background-color: #DB2C66;
+  animation: pulse 0.6s ease-in-out alternate infinite;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.75;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.logger__remove {
+  margin-left: auto;
+  color: #DB2C66;
+}
