@@ -6,7 +6,6 @@ import Play from './icons/play-icon';
 import Pause from './icons/pause-icon';
 import Save from './icons/save-icon';
 import Trash from './icons/trash-icon';
-import { logRecord } from './api/logger';
 import { ILogRecord } from '../../../types';
 
 interface IProps {
@@ -14,7 +13,29 @@ interface IProps {
   onSave?: (data: ILogRecord[]) => void;
 }
 
-export const records: { list: ILogRecord[] } = { list: [] };
+const records: { list: ILogRecord[] } = { list: [] };
+
+export function logRecord(item: ILogRecord) {
+  if (!localStorage.getItem('recording')) {
+    return;
+  }
+
+  records.list.push(item);
+}
+
+// @ts-ignore
+export const reduxLogMiddleware = store => next => action => {
+  const result = next(action);
+
+  logRecord({
+    timestamp: Date.now(),
+    source: 'redux',
+    action,
+    snapshot: JSON.parse(JSON.stringify(store.getState()))
+  });
+
+  return result;
+};
 
 const Logger: React.FC<IProps> = ({ format = 'json', onSave }: IProps) => {
 
