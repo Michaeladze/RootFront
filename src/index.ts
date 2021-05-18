@@ -49,8 +49,7 @@ import SelectTree from './components/organisms/SelectTree';
 import Select from './components/organisms/Select';
 import NewDatepicker from './components/organisms/NewDatepicker';
 import TextEditor from './components/organisms/TextEditor';
-import Logger from './components/organisms/Logger';
-import { logRecord, reduxLogMiddleware } from './components/organisms/Logger/api/logger';
+import Logger, { logRecord, reduxLogMiddleware } from './components/organisms/Logger/Logger';
 import { openPopup, PopupMaker } from './components/organisms/PopupMaker';
 
 // ------------------------ Компоненты Projects ------------------------------------------------------------------------
