@@ -111,4 +111,5 @@ export interface ILogRecord {
   name?: string;
   text?: string;
   action?: any;
+  pathname?: string;
 }

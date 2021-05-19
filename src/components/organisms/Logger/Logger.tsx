@@ -20,7 +20,10 @@ export function logRecord(item: ILogRecord) {
     return;
   }
 
-  records.list.push(item);
+  records.list.push({
+    ...item,
+    pathname: window.location.pathname
+  });
 }
 
 // @ts-ignore
@@ -182,10 +185,11 @@ const Logger: React.FC<IProps> = ({ format = 'json', onSave }: IProps) => {
     if (active) {
       if (records.list.length > 0) {
         setShowDownload(true);
+      } else {
+        setTime(0);
       }
 
       setActive(false);
-      setTime(0);
       return;
     }
 

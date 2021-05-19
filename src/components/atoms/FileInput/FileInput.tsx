@@ -1,4 +1,5 @@
 import React, {
+  ReactNode,
   useCallback, useRef, useState
 } from 'react';
 import './FileInput.scss';
@@ -33,6 +34,8 @@ export interface IFileInputProps extends Omit<IButtonProps, 'onError'> {
   count?: number;
   /** Сжать изображения */
   compressImages?: boolean;
+  showChips?: boolean;
+  customPlaceholder?: ReactNode;
 }
 
 const FileInput: React.FC<IFileInputProps> = ({
@@ -47,6 +50,8 @@ const FileInput: React.FC<IFileInputProps> = ({
   onError,
   maxSize,
   count,
+  showChips = true,
+  customPlaceholder,
   ...props
 }: IFileInputProps) => {
   /** Файл */
@@ -154,11 +159,11 @@ const FileInput: React.FC<IFileInputProps> = ({
           multiple={multiple}
         />
         <Button {...props} type='button' className='file-input__button' onClick={onClick} disabled={disabled}>
-          {placeholder}
+          {customPlaceholder || placeholder}
         </Button>
       </label>
 
-      {file.length > 0 && (
+      {showChips && file.length > 0 && (
         <div className='file-input__chips'>
           <Chips items={multipleChips} onRemove={multiple ? onFileRemove : undefined} />
         </div>
