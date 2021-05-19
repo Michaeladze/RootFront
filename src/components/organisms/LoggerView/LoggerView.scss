@@ -1,0 +1,125 @@
+.logger-view {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 300px;
+  z-index: 2000;
+  background-color: #2b2b2b;
+  cursor: default;
+}
+
+.logger-view__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.logger-view__header {
+  width: 100%;
+  height: 40px;
+  padding: 2px 0;
+  background-color: #3b3f41;
+  box-shadow: 0 2px 8px rgba(0, 17, 68, 0.18), 0 0 2px rgba(0, 17, 68, 0.12), 0 0 1px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+}
+
+.logger-view__header-file {
+  width: 170px;
+}
+
+.logger-view__header-upload {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.logger-view__header-upload-icon {
+  color: #C5CEE0;
+  margin-right: 8px;
+  position: relative;
+}
+
+.logger-view__header-upload-icon--active:after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  border-radius: 50%;
+  background-color: #83f52c;
+  border: 2px solid #3b3f41;
+  right: -1px;
+  bottom: 3px;
+}
+
+.logger-view__header-upload-label {
+  color: #C5CEE0;
+}
+
+.logger-view__list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.logger-view__record {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.logger-view__record-headers {
+  border-bottom: 1px solid #232323;
+  height: 24px;
+  font-size: 14px;
+}
+
+.logger-view__record--active,
+.logger-view__record:not(.logger-view__record-headers):hover {
+  background-color: #1a1a1a;
+}
+
+.logger-view__record-time {
+  color: #C5CEE0;
+  width: 170px;
+  margin-right: 10px;
+}
+
+.logger-view__record-pathname {
+  color: #C5CEE0;
+  width: 170px;
+  margin-right: 10px;
+}
+
+.logger-view__record-source {
+  color: #C5CEE0;
+  width: 100px;
+  margin-right: 10px;
+}
+
+.logger-view__record-name {
+  color: #C5CEE0;
+}
+
+.logger-view__header-filters {
+  display: flex;
+  align-items: center;
+  margin-left: 32px;
+}
+
+.logger-view__header-filters-button {
+  color: #C5CEE0;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.logger-view__header-filters-button--active {
+  background-color: #2b2b2b;
+}
