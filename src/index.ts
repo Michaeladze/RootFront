@@ -50,6 +50,7 @@ import Select from './components/organisms/Select';
 import NewDatepicker from './components/organisms/NewDatepicker';
 import TextEditor from './components/organisms/TextEditor';
 import Logger, { logRecord, reduxLogMiddleware } from './components/organisms/Logger/Logger';
+import LoggerView from './components/organisms/LoggerView';
 import { openPopup, PopupMaker } from './components/organisms/PopupMaker';
 
 // ------------------------ Компоненты Projects ------------------------------------------------------------------------
@@ -145,7 +146,8 @@ export {
   InputCreditCard,
   InputNumber,
   FatalError,
-  Logger
+  Logger,
+  LoggerView
 };
 
 export {
