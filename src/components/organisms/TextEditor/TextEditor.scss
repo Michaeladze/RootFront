@@ -1,4 +1,5 @@
 @import "src/styles/mixins";
+@import "../../../styles/vendor/Quill";
 
 @mixin blockquote {
   margin: 16px;
