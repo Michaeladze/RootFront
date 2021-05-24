@@ -38,7 +38,10 @@ module.exports = {
           'style-loader',
           'css-loader',
           'resolve-url-loader',
-          'scoped-css-loader',
+          {
+            loader: 'scoped-css-loader',
+            exclude: /vendor*/
+          },
           'sass-loader'
         ]
       },
