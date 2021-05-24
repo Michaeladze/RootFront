@@ -37,15 +37,17 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'resolve-url-loader',
-          {
-            loader: 'scoped-css-loader',
-            options: {
-              exclude: /vendor*/
-            }
-          },
-          'sass-loader'
+          'resolve-url-loader'
         ]
+      },
+      {
+        test: /\.css|\.scss$/,
+        use: ['scoped-css-loader'],
+        exclude: [path.resolve(__dirname, 'node_modules'), /src\/styles\/vendor\/*/]
+      },
+      {
+        test: /\.css|\.scss$/,
+        loader: ['sass-loader']
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,

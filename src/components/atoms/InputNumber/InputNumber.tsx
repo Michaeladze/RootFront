@@ -13,7 +13,14 @@ export interface IInputNumberProps extends IInputProps {
   max?: number;
 }
 
-const InputNumber: React.FC<IInputNumberProps> = ({ max, defaultValue = '', separator = ' ', floatPoints = 0, groupBy = 3, ...props }: IInputNumberProps) => {
+const InputNumber: React.FC<IInputNumberProps> = ({
+  max,
+  defaultValue = '',
+  separator = ' ',
+  floatPoints = 0,
+  groupBy = 3,
+  ...props
+}: IInputNumberProps) => {
 
   const input = useRef<HTMLInputElement | null>(null);
 
@@ -140,14 +147,16 @@ const InputNumber: React.FC<IInputNumberProps> = ({ max, defaultValue = '', sepa
   return (
     <>
       <Input
-        value={value}
+        { ...props }
+        value={ value }
         placeholder={ props.placeholder }
         disabled={ props.disabled }
         readOnly={ props.readOnly }
         onChange={ onChange }
         onKeyPress={ onKeyPress }
       />
-      <input type='text' className='rf-number-input__hidden' name={ props.name } value={inputValue} ref={input} readOnly/>
+      <input type='text' className='rf-number-input__hidden' name={ props.name } value={ inputValue } ref={ input }
+        readOnly/>
     </>
   );
 };
