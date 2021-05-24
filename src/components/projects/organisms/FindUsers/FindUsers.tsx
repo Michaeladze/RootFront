@@ -89,9 +89,10 @@ const FindUsers: FC<IProps> = ({
     }
 
     setLoaded(false);
+    const url = `${host}sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURIComponent(query)}`;
 
     cancelRequest();
-    Axios.get(`${host}sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURIComponent(query)}`, {
+    Axios.get(url, {
       cancelToken: new Axios.CancelToken((c: Canceler) => {
         cancel.current = c;
       }),
