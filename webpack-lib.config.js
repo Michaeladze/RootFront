@@ -40,7 +40,9 @@ module.exports = {
           'resolve-url-loader',
           {
             loader: 'scoped-css-loader',
-            exclude: /vendor*/
+            options: {
+              exclude: /vendor*/
+            }
           },
           'sass-loader'
         ]
