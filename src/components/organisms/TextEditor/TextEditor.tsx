@@ -2,7 +2,7 @@ import React, {
   FC, useEffect, useRef, useState
 } from 'react';
 import './TextEditor.scss';
-import '../../../styles/vendor/Quill';
+import '../../../styles/vendor/Quill.scss';
 import ReactQuill from 'react-quill';
 import Quill from 'quill';
 import { variants } from '../../../utils/helpers';
