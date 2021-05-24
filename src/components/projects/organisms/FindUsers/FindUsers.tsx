@@ -90,7 +90,7 @@ const FindUsers: FC<IProps> = ({
 
     setLoaded(false);
     const url = `${host}sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURIComponent(query)}`;
-    debugger;
+    console.log(url);
 
     cancelRequest();
     Axios.get(url, {
