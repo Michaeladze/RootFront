@@ -26,13 +26,7 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)$/,
         use: 'babel-loader',
-        exclude: [{
-          test: path.resolve(__dirname, 'node_modules'),
-          exclude: [
-            path.resolve(__dirname, 'node_modules/swiper'),
-            path.resolve(__dirname, 'node_modules/react-quill'),
-          ]
-        }, /spec\.(js|jsx|ts|tsx)$/]
+        exclude: [path.resolve(__dirname, 'node_modules'), /spec\.(js|jsx|ts|tsx)$/]
       },
       {
         test: /\.html$/i,
