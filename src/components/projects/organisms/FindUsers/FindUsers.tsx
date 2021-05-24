@@ -33,6 +33,10 @@ export interface IProps {
   disableSelected?: boolean;
   /** Множественный выбор */
   multiSelect?: boolean;
+  /** Хост запроса */
+  host?: string;
+  /** Хедерсы запроса */
+  headers?: Record<string, string>;
 }
 
 const FindUsers: FC<IProps> = ({
@@ -41,7 +45,9 @@ const FindUsers: FC<IProps> = ({
   disableSelected,
   getUsers,
   multiSelect = true,
-  subtitle = 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.'
+  subtitle = 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.',
+  host = '',
+  headers = {}
 }: IProps) => {
 
   const inputRef = useRef<HTMLDivElement>(null);
@@ -85,10 +91,11 @@ const FindUsers: FC<IProps> = ({
     setLoaded(false);
 
     cancelRequest();
-    Axios.get(`sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURIComponent(query)}`, {
+    Axios.get(`${host}sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURIComponent(query)}`, {
       cancelToken: new Axios.CancelToken((c: Canceler) => {
         cancel.current = c;
-      })
+      }),
+      headers
     })
       .then(({ data }: AxiosResponse<{d: { results: IUser[]}}>) => {
         setSearchResults(data.d.results);

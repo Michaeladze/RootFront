@@ -58,7 +58,7 @@ const Modal: FC<IModalProps> = ({
       document.body.removeChild(div);
       window.removeEventListener('keyup', closeOnEscPress);
     };
-  });
+  }, [div]);
 
   const style = height ? { height } : {};
 
