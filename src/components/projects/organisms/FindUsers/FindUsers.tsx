@@ -16,7 +16,9 @@ import {
 } from '../../../../index';
 import Preloader from '../../../atoms/Preloader';
 import { IUser } from '../../../../types/projects.types';
-import Axios, { AxiosResponse, Canceler } from 'axios';
+import Axios, {
+  AxiosResponse, AxiosStatic, Canceler
+} from 'axios';
 
 
 SwiperCore.use([Navigation]);
@@ -37,6 +39,8 @@ export interface IProps {
   host?: string;
   /** Хедерсы запроса */
   headers?: Record<string, string>;
+  /** DI Axios */
+  AxiosInstance?: AxiosStatic;
 }
 
 const FindUsers: FC<IProps> = ({
@@ -47,7 +51,8 @@ const FindUsers: FC<IProps> = ({
   multiSelect = true,
   subtitle = 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.',
   host = '',
-  headers = {}
+  headers = {},
+  AxiosInstance
 }: IProps) => {
 
   const inputRef = useRef<HTMLDivElement>(null);
@@ -88,13 +93,17 @@ const FindUsers: FC<IProps> = ({
       return;
     }
 
+    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath`;
+
     setLoaded(false);
-    const url = `${host}sap/opu/odata/sap/ZHRXSS_0685_DELEG_SRV/UserSet?search=${encodeURIComponent(query)}`;
+    const url = `${host}${uri}`;
     console.log(url);
 
+    const axios = AxiosInstance || Axios;
+
     cancelRequest();
-    Axios.get(url, {
-      cancelToken: new Axios.CancelToken((c: Canceler) => {
+    axios.get(url, {
+      cancelToken: new axios.CancelToken((c: Canceler) => {
         cancel.current = c;
       }),
       headers
