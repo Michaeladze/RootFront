@@ -15,7 +15,7 @@ export const findUsers = () => {
 
   const subtitle = 'Поиск только по сотрудникам банка, которым вы можете делегировать свои полномочия (роль “Делегирование”).';
 
-  const [selected, setSelected] = useState<IUser[]>(usersMocks);
+  const [selected, setSelected] = useState<IUser[]>([usersMocks[0]]);
   const [show, toggle] = useState(false);
 
   const getUsers = (users: IUser[]) => {
@@ -31,6 +31,7 @@ export const findUsers = () => {
             <FindUsers
               getUsers={getUsers}
               users={selected}
+              multiSelect={false}
               disableSelected
               onClose={() => toggle(false)}
               subtitle={subtitle}/>

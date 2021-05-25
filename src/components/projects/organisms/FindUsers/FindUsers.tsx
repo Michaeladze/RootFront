@@ -97,7 +97,6 @@ const FindUsers: FC<IProps> = ({
 
     setLoaded(false);
     const url = `${host}${uri}`;
-    console.log(url);
 
     const axios = AxiosInstance || Axios;
 
@@ -160,11 +159,10 @@ const FindUsers: FC<IProps> = ({
 
   const removeHandle = (item: IUser) => {
     if (multiSelect) {
-      setSelectedPeople(selectedPeople.filter((data) => item.id !== data.id));
 
-      if (!newPeopleMap[item.id]) {
-        setNewPeople(newPeople.filter((data) => item.id !== data.id));
-      }
+      setSelectedPeople(selectedPeople.filter((data) => item.id !== data.id));
+      setNewPeople(newPeople.filter((data) => item.id !== data.id));
+
     } else {
       setSelectedPeople([]);
     }
@@ -260,7 +258,7 @@ const FindUsers: FC<IProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  const disabled = newPeople.length === 0;
+  const disabled = multiSelect ? newPeople.length === 0 : selectedPeople.length === 0;
 
   // -------------------------------------------------------------------------------------------------------------------
 
