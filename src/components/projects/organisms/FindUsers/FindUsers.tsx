@@ -108,8 +108,8 @@ const FindUsers: FC<IProps> = ({
       }),
       headers
     })
-      .then(({ data }: AxiosResponse<{d: { results: IUser[]}}>) => {
-        setSearchResults(data.d.results);
+      .then(({ data }: AxiosResponse<{ value: IUser[]}>) => {
+        setSearchResults(data.value);
         setLoaded(true);
       })
       .catch((_error: any) => {
