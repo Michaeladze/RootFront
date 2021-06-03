@@ -1,6 +1,6 @@
 import React, {
   ReactNode,
-  useCallback, useEffect, useRef, useState
+  useCallback, useRef, useState
 } from 'react';
 import './FileInput.scss';
 import { getBase64, validateFile } from '../../../utils/file-utils';
@@ -57,14 +57,7 @@ const FileInput: React.FC<IFileInputProps> = ({
   ...props
 }: IFileInputProps) => {
   /** Файл */
-  const [file, uploadFile] = useState<IFileData[]>([]);
-
-  useEffect(() => {
-    if (files) {
-      uploadFile(files);
-    }
-  }, [files]);
-
+  const [file, uploadFile] = useState<IFileData[]>(() => files);
 
   /** Ссылка на инпут */
   const ref = useRef<HTMLInputElement>(null);
