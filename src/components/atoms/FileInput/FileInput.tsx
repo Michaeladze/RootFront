@@ -1,6 +1,6 @@
 import React, {
   ReactNode,
-  useCallback, useRef, useState
+  useCallback, useEffect, useRef, useState
 } from 'react';
 import './FileInput.scss';
 import { getBase64, validateFile } from '../../../utils/file-utils';
@@ -24,6 +24,7 @@ export interface IFileInputProps extends Omit<IButtonProps, 'onError'> {
   defaultValue?: string;
   disabled?: boolean;
   placeholder?: string;
+  files?: IFileData[];
   /** Функция возвращает файл в компонент */
   setFile: (file: IFileData[]) => void;
   /** Коллбек при ошибке */
@@ -46,6 +47,7 @@ const FileInput: React.FC<IFileInputProps> = ({
   defaultValue = '',
   disabled = false,
   placeholder = '',
+  files = [],
   setFile,
   onError,
   maxSize,
@@ -56,6 +58,13 @@ const FileInput: React.FC<IFileInputProps> = ({
 }: IFileInputProps) => {
   /** Файл */
   const [file, uploadFile] = useState<IFileData[]>([]);
+
+  useEffect(() => {
+    if (files) {
+      uploadFile(files);
+    }
+  }, [files]);
+
 
   /** Ссылка на инпут */
   const ref = useRef<HTMLInputElement>(null);
