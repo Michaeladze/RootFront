@@ -87,7 +87,6 @@ const FindUsers: FC<IProps> = ({
 
   const LIMIT = 10;
   const skip = useRef<number>(0);
-  const top = useRef<number>(LIMIT);
 
   const cancelRequest = () => {
     if (cancel.current !== undefined) {
@@ -108,7 +107,7 @@ const FindUsers: FC<IProps> = ({
       setLoaded(false);
     }
 
-    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&$skip=${skip.current}&$top=${top.current}`;
+    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&$skip=${skip.current}&$top=${LIMIT}`;
     const url = `${host}${uri}`;
 
     const axios = AxiosInstance || Axios;
@@ -121,7 +120,6 @@ const FindUsers: FC<IProps> = ({
       headers
     })
       .then(({ data }: AxiosResponse<{ value: IUser[]}>) => {
-        top.current += LIMIT;
         skip.current += LIMIT;
 
         if (lazy) {
@@ -166,7 +164,6 @@ const FindUsers: FC<IProps> = ({
 
   useEffect(() => {
     skip.current = 0;
-    top.current = LIMIT;
 
     onSearch(searchString);
   }, [searchString]);
