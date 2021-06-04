@@ -108,7 +108,7 @@ const FindUsers: FC<IProps> = ({
       setLoaded(false);
     }
 
-    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&skip=${skip.current}&top=${top.current}`;
+    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&$skip=${skip.current}&$top=${top.current}`;
     const url = `${host}${uri}`;
 
     const axios = AxiosInstance || Axios;
