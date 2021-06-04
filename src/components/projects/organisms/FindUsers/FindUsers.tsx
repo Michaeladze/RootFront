@@ -12,7 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 
 import {
-  Button, Checkbox, Input, PopupFooter, Tooltip, UserPhoto, Structure
+  Button, Checkbox, Input, PopupFooter, Structure, Tooltip, UserPhoto
 } from '../../../../index';
 import Preloader from '../../../atoms/Preloader';
 import { IUser } from '../../../../types/projects.types';
@@ -56,6 +56,7 @@ const FindUsers: FC<IProps> = ({
 }: IProps) => {
 
   const inputRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   /** Список выбранных людей */
   const [selectedPeople, setSelectedPeople] = useState<IUser[]>(users);
@@ -77,10 +78,16 @@ const FindUsers: FC<IProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  const [lazyPreloader, setLazyPreloader] = useState<boolean>(false);
+
   const [loaded, setLoaded] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<IUser[]>([]);
 
   const cancel = useRef<Canceler | undefined>(undefined);
+
+  const LIMIT = 10;
+  const skip = useRef<number>(0);
+  const top = useRef<number>(LIMIT);
 
   const cancelRequest = () => {
     if (cancel.current !== undefined) {
@@ -88,14 +95,20 @@ const FindUsers: FC<IProps> = ({
     }
   };
 
-  const onSearch = (query: string) => {
+  const onSearch = (query: string, lazy = false) => {
     if (query.length < 3) {
       return;
     }
 
-    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath`;
+    if (lazy && lazyPreloader) {
+      return;
+    }
 
-    setLoaded(false);
+    if (!lazy) {
+      setLoaded(false);
+    }
+
+    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&skip=${skip.current}&top=${top.current}`;
     const url = `${host}${uri}`;
 
     const axios = AxiosInstance || Axios;
@@ -108,12 +121,35 @@ const FindUsers: FC<IProps> = ({
       headers
     })
       .then(({ data }: AxiosResponse<{ value: IUser[]}>) => {
-        setSearchResults(data.value);
-        setLoaded(true);
+        top.current += LIMIT;
+        skip.current += LIMIT;
+
+        if (lazy) {
+          setSearchResults((list: IUser[]) => [...list, ...data.value]);
+          setLazyPreloader(false);
+        } else {
+          setSearchResults(data.value);
+          setLoaded(true);
+        }
       })
       .catch((_error: any) => {
-        setSearchResults([]);
+        setLazyPreloader(false);
+        setLoaded(true);
       });
+  };
+
+  const onLazyScroll = () => {
+    if (!dropdownRef.current || searchString.length < 3) {
+      return;
+    }
+
+    const scrollInPercent = Math.round((100 * dropdownRef.current.scrollTop) /
+      (dropdownRef.current.scrollHeight - dropdownRef.current.offsetHeight));
+
+    if (scrollInPercent > 90) {
+      setLazyPreloader(true);
+      onSearch(searchString, true);
+    }
   };
 
   useEffect(() => {
@@ -129,6 +165,9 @@ const FindUsers: FC<IProps> = ({
   };
 
   useEffect(() => {
+    skip.current = 0;
+    top.current = LIMIT;
+
     onSearch(searchString);
   }, [searchString]);
 
@@ -183,6 +222,9 @@ const FindUsers: FC<IProps> = ({
   /** Список найденных сотрудников */
   const listUsers: ReactNode[] = searchResults.map((item: IUser) => {
 
+    const shortPosition = item.department.slice(0, 100);
+    const isShorter = item.department.length > shortPosition.length;
+
     const label = (
       <div className='list-users__user'>
         <UserPhoto url={ item.photo } radius={ '48px' } fullName={ `${item.firstName} ${item.lastName}` }/>
@@ -197,7 +239,7 @@ const FindUsers: FC<IProps> = ({
               </Tooltip>
             ) }
           </h3>
-          <h5 className='list-users__user-position'>{ item.department }</h5>
+          <h5 className='list-users__user-position' title={isShorter ? item.department : undefined}>{ isShorter ? `${shortPosition}...` : shortPosition }</h5>
         </div>
       </div>
     );
@@ -291,7 +333,7 @@ const FindUsers: FC<IProps> = ({
           </Button>
         </div>
       ) }
-      <div className='find-users__list-wrapper'>
+      <div className='find-users__list-wrapper' ref={dropdownRef} onScroll={onLazyScroll}>
         { loaded ? (
           listUsers.length > 0 ? (
             listUsers
@@ -299,6 +341,13 @@ const FindUsers: FC<IProps> = ({
             searchString === '' ? placeholder('Начните поиск') : placeholder('Нет результатов для отображения. Измените запрос.')
           )
         ) : <Preloader/> }
+        {
+          lazyPreloader && (
+            <div className='find-users__list-lazy-preloader'>
+              <Preloader size='small'/>
+            </div>
+          )
+        }
       </div>
       <PopupFooter textAccept='Добавить' onSubmit={ onSubmit } disabled={disabled} onClose={ onClose }/>
     </div>

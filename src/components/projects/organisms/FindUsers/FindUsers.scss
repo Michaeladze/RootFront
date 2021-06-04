@@ -211,3 +211,9 @@
   @include s0;
   color: var(--base-300);
 }
+
+.find-users__list-lazy-preloader {
+  position: relative;
+  padding-top: 16px;
+  height: 32px;
+}

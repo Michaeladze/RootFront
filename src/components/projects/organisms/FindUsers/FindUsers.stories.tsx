@@ -16,7 +16,7 @@ export const findUsers = () => {
   const subtitle = 'Поиск только по сотрудникам банка, которым вы можете делегировать свои полномочия (роль “Делегирование”).';
 
   const [selected, setSelected] = useState<IUser[]>([usersMocks[0]]);
-  const [show, toggle] = useState(false);
+  const [show, toggle] = useState(true);
 
   const getUsers = (users: IUser[]) => {
     setSelected(users);
@@ -27,7 +27,7 @@ export const findUsers = () => {
       <StoryItem description='Модальное окно'>
         <Button onClick={() => toggle(true)}>Найти сотрудника</Button>
         {show && (
-          <Modal onClose={() => toggle(false)}>
+          <Modal onClose={() => toggle(false)} disableScroll={true}>
             <FindUsers
               getUsers={getUsers}
               users={selected}
