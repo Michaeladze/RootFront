@@ -9,7 +9,7 @@ export interface IHeadingData {
 }
 
 export interface IUseTableOfContentsProps {
-    container: React.RefObject<HTMLElement>;
+    container?: React.RefObject<HTMLElement>;
     /* Селектор для отслеживаемых заголовков/элементов */
     selector: string;
     /* Доп. отступ сверху для активации элемента (помимо отступа контейнера) */
@@ -31,26 +31,22 @@ const useTableOfContents = ({ container, selector, additionalOffset = 0, deps = 
   const [titlesNodes, setTitlesNodes] = useState<IHeadingData[]>([]);
 
   const parseTitles = () => {
-    if (container.current) {
-      const htmlNodes: HTMLElement[] = Array.from(container.current.querySelectorAll(selector));
+    const htmlNodes: HTMLElement[] = Array.from(document.querySelectorAll(selector));
 
-      return htmlNodes.map((node) => ({
-        id: node.id,
-        htmlNode: node,
-      }));
-    }
-
-    return [];
+    return htmlNodes.map((node) => ({
+      id: node.id,
+      htmlNode: node,
+    }));
   };
 
   const findActiveNode = () => {
-    if (titlesNodes.length && container.current) {
+    if (titlesNodes.length) {
 
-      const wrapper = container.current;
+      const wrapper = container?.current;
       const offsets = titlesNodes.map((node) => node.htmlNode.getBoundingClientRect().top);
 
       let activeIndex = offsets.findIndex(offset => {
-        return offset > wrapper.offsetTop + additionalOffset;
+        return offset > (wrapper?.offsetTop || 0) + additionalOffset;
       });
 
       /** Активируем последний заголовок если вся страница проскролена */

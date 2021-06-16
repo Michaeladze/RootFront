@@ -1,0 +1,125 @@
+@import "src/styles/mixins";
+
+.rf-sections-page {
+  padding-bottom: 20px;
+}
+
+.rf-page__sections-header {
+  height: 76px;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.rf-page__sections-header-back {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include round(36px);
+  background-color: var(--base-200);
+  color: var(--base-500);
+}
+
+.rf-page__sections-title {
+  @include h4;
+}
+
+.rf-page__content--sections {
+  display: flex;
+  min-height: 100%;
+}
+
+.rf-sections__action-menu {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 78px;
+  max-width: 880px;
+  width: 100%;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 999;
+  background-color: var(--base-000);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  padding: 14px;
+  transition: 0.5s;
+}
+
+.rf-page__section {
+  margin-bottom: 20px;
+}
+
+.rf-page__section:last-of-type {
+  margin-bottom: 0;
+}
+
+.rf-page__content-sections {
+  max-width: 880px;
+  width: 100%;
+}
+
+.rf-page__section-title {
+  @include h6;
+  margin-bottom: 16px;
+}
+
+.rf-page__content-aside {
+  position: fixed;
+  z-index: 1;
+  width: 192px;
+  right: 40px;
+}
+
+@media (max-width: 1280px) {
+  .rf-page__content-aside {
+    display: none;
+  }
+}
+
+.rf-page__aside-inner {
+  display: flex;
+  width: 100%;
+}
+
+.rf-page__aside-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-shrink: 1;
+}
+
+$asideLinkHeight: 46px;
+
+.rf-page__aside-link {
+  position: relative;
+  width: 100%;
+  min-height: $asideLinkHeight;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include p1;
+  cursor: pointer;
+}
+
+.rf-page__aside-bar {
+  position: relative;
+  width: 2px;
+  flex-shrink: 0;
+  background-color: var(--base-200);
+  margin-right: 38px;
+  border-radius: 2px;
+}
+
+.rf-page__aside-slider {
+  width: 100%;
+  height: $asideLinkHeight;
+  background-color: var(--accent-500);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+  transition: all ease-in-out 0.3s;
+}
