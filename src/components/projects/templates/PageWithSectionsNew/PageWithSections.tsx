@@ -44,7 +44,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   const pageHeaderRef = useRef<HTMLDivElement>(null);
 
   /** Дополнительной отступ для активации секции в оглавлении */
-  const ADDITIONAL_SCROLL_OFFSET = 30;
+  const ADDITIONAL_SCROLL_OFFSET = 40;
 
   // -------------------------------------------------------------------------------------------------------------------
 
@@ -91,8 +91,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   /** Активная секция при скролле */
   const { activeIndex } = useTableOfContents({
-    container: sectionsRef,
-    selector: '.rf-page__section',
+    selector: '.rf-page__section-title',
     additionalOffset: ADDITIONAL_SCROLL_OFFSET,
     deps: [preloader]
   });
@@ -104,7 +103,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
         const block = document.getElementById(section.id);
 
         if (block && pageHeaderRef.current) {
-          const top = block.getBoundingClientRect().top + pageYOffset - pageHeaderRef.current.offsetHeight;
+          const top = block.getBoundingClientRect().top + pageYOffset - ADDITIONAL_SCROLL_OFFSET;
           window.scrollTo(0, top);
         }
       };
@@ -121,7 +120,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
     setTimeout(() => {
       if (sliderRef.current) {
         const navLinks = document.querySelectorAll('.rf-page__aside-link');
-        const navLink = navLinks[activeIndex];
+        const navLink = navLinks[activeIndex >= navLinks.length ? navLinks.length - 1 : activeIndex];
 
         if (pageHeaderRef.current && navLink) {
           sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - pageHeaderRef.current.offsetHeight}px`;
