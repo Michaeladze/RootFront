@@ -28,9 +28,9 @@ const RequestHistory: React.FC<IProps> = ({ requestPath, initiator }: IProps) =>
 
   /** Фильтруем историю */
   const onPathFilter = (): IRequestPath[] => {
-    const find = requestPath.findIndex((i: IRequestPath) => !i.statusId);
-    const step = ~find ? find : requestPath.length;
-    return expanded ? requestPath : [requestPath[step - 1]];
+    const index = requestPath.findIndex((i: IRequestPath) => !i.statusId);
+    const step = index >= 0 ? index : requestPath.length - 1;
+    return requestPath.length > 0 ? expanded ? requestPath : [requestPath[step]] : [];
   };
 
   const [path, setPath] = useState(onPathFilter());
