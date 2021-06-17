@@ -8,6 +8,8 @@ import Button from '../../../atoms/Button';
 import { ContentExpander } from '../../../../index';
 import Employee from '../../organisms/Employee';
 import { usersMocks } from '../../organisms/FindUsers/users.mocks';
+import RequestHistory from '../../organisms/RequestHistory';
+import { historyMocks } from './history.mocks';
 
 export default {
   title: 'Projects/[New] Page With Sections',
@@ -27,9 +29,9 @@ export const pageWithSections = () => {
       component: <div style={{ height: '100px' }}> Без названия </div>
     },
     {
-      id: 'type',
-      title: 'Тип подбора',
-      component: <div style={{ height: '300px' }}> Тип подбора </div>
+      id: 'history',
+      title: 'История подбора',
+      component: <RequestHistory requestPath={historyMocks} initiator={usersMocks[usersMocks.length - 1]}/>
     },
     {
       id: 'org',

@@ -107,3 +107,30 @@ export interface IDateVariants {
   }
   value: string;
 }
+
+export interface IRequestPath {
+  /** Сфера деятельности*/
+  actArea: string;
+  /** Ид. пути выполнения*/
+  pathId: string;
+  /** Шаг маршрута*/
+  stepId: string;
+  /** Тип шаг (ид)*/
+  activityId: string;
+  /** Тип шаг (текст)*/
+  activityText: string;
+  /** Агент (ид)*/
+  agent: string;
+  /** Агент (текст)*/
+  agentName: string;
+  /** Фактический исполнитель*/
+  user: IUser[];
+  /** Статус (ид)*/
+  statusId: string;
+  /** Статус (текст)*/
+  statusText: string;
+  /** Критичность (0 - None (no color) / 1 - Error (red) / 2 - Warning (yellow) / 3 - Success (green))*/
+  criticality: string;
+  date?: number;
+  comment?: string;
+}

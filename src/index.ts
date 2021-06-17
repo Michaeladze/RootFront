@@ -65,6 +65,7 @@ import PopupFooter from './components/projects/molecules/PopupFooter';
 import Structure from './components/projects/atoms/Structure';
 import Confirm from './components/projects/popups/Confirm';
 import Employee from './components/projects/organisms/Employee';
+import RequestHistory from './components/projects/organisms/RequestHistory';
 
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
 import Page from './components/projects/templates/Page';
@@ -149,7 +150,8 @@ export {
   FatalError,
   Logger,
   LoggerView,
-  Employee
+  Employee,
+  RequestHistory
 };
 
 export {
