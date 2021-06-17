@@ -29,7 +29,7 @@ const Employee: React.FC<IProps> = ({ user }: IProps) => {
           {
             user.departmentsPath && (
               <Tooltip position='left'>
-                <Info className='rf-employee__department-tooltip-icon'/>
+                <Info className='rf-employee__department-icon'/>
                 <Structure departmentsPath={ user.departmentsPath }/>
               </Tooltip>
             )
