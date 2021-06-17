@@ -6,6 +6,8 @@ import { ITab } from '../../../../types';
 import { BrowserRouter } from 'react-router-dom';
 import Button from '../../../atoms/Button';
 import { ContentExpander } from '../../../../index';
+import Employee from '../../organisms/Employee';
+import { usersMocks } from '../../organisms/FindUsers/users.mocks';
 
 export default {
   title: 'Projects/[New] Page With Sections',
@@ -18,7 +20,7 @@ export const pageWithSections = () => {
     {
       id: 'position',
       title: 'Позиция',
-      component: <div style={{ height: '300px' }}> Позиция </div>
+      component: <div style={{ height: '300px' }}> <Employee user={usersMocks[usersMocks.length - 1]}/> </div>
     },
     {
       id: 'noname',

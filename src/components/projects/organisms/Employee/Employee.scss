@@ -1,0 +1,32 @@
+@import "src/styles/mixins";
+
+.rf-employee {
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.rf-employee__details {
+  margin-left: 32px;
+}
+
+.rf-employee__name {
+  @include h5;
+  margin-bottom: 8px;
+}
+
+.rf-employee__info {
+  @include p1;
+  color: var(--base-500);
+}
+
+.rf-employee__info-department {
+  display: inline-flex;
+  align-items: center;
+}
+
+.rf-employee__department-tooltip-icon {
+  margin-left: 10px;
+  color: var(--accent-500);
+  cursor: pointer;
+}

@@ -64,6 +64,7 @@ import UsersStack from './components/projects/molecules/UsersStack';
 import PopupFooter from './components/projects/molecules/PopupFooter';
 import Structure from './components/projects/atoms/Structure';
 import Confirm from './components/projects/popups/Confirm';
+import Employee from './components/projects/organisms/Employee';
 
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
 import Page from './components/projects/templates/Page';
@@ -147,7 +148,8 @@ export {
   InputNumber,
   FatalError,
   Logger,
-  LoggerView
+  LoggerView,
+  Employee
 };
 
 export {
