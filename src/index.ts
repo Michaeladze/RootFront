@@ -67,7 +67,7 @@ import Confirm from './components/projects/popups/Confirm';
 
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
 import Page from './components/projects/templates/Page';
-import PageWithSections from './components/projects/templates/PageWithSections';
+import PageWithSections from './components/projects/templates/PageWithSectionsNew';
 import PageWithList from './components/projects/templates/PageWithList';
 import ActionMenu from './components/projects/templates/ActionMenu';
 
