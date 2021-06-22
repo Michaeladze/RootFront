@@ -147,29 +147,29 @@ const FileInput: React.FC<IFileInputProps> = ({
 
   return (
     <div className='file-input__wrapper'>
-      <label className={`rf-input ${className || ''}`}>
+      <label className={ `rf-input ${className || ''}` }>
         <input
-          ref={ref}
+          ref={ ref }
           type='file'
-          name={name}
+          name={ name }
           className='rf-input__file-hidden'
-          defaultValue={defaultValue}
-          accept={accept}
-          placeholder={placeholder || 'Выберите файл'}
-          disabled={disabled}
-          onChange={onChange}
-          multiple={multiple}
+          defaultValue={ defaultValue }
+          accept={ accept }
+          placeholder={ placeholder || 'Выберите файл' }
+          disabled={ disabled }
+          onChange={ onChange }
+          multiple={ multiple }
         />
-        <Button {...props} type='button' className='file-input__button' onClick={onClick} disabled={disabled}>
-          {customPlaceholder || placeholder}
+        <Button { ...props } type='button' className='file-input__button' onClick={ onClick } disabled={ disabled }>
+          { customPlaceholder || placeholder }
         </Button>
       </label>
 
-      {showChips && file.length > 0 && (
+      { showChips && file.length > 0 && (
         <div className='file-input__chips'>
-          <Chips items={multipleChips} onRemove={multiple ? onFileRemove : undefined} />
+          <Chips items={ multipleChips } onRemove={ onFileRemove }/>
         </div>
-      )}
+      ) }
     </div>
   );
 };

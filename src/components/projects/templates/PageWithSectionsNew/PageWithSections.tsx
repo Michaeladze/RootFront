@@ -17,6 +17,7 @@ export interface IPageWithSectionsProps {
   /** Fixed action menu */
   actionMenu?: ReactNode;
   preloader?: boolean;
+  showNavigation?: boolean;
 }
 
 const PageWithSections: React.FC<IPageWithSectionsProps> = ({
@@ -25,7 +26,8 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   onBackUrlClick,
   sections,
   actionMenu,
-  preloader = false
+  preloader = false,
+  showNavigation = true
 }: IPageWithSectionsProps) => {
 
   /** Ссылка на навигацию */
@@ -78,7 +80,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   /** Отображение секций */
   const sectionsJSX = sections?.map((section: IPageSection) => {
     return (
-      <section key={ section.id } className='rf-page__section'>
+      <section key={ section.id } className='rf-page__section-block'>
         <Tile>
           { section.title && <h2 className='rf-page__section-title' id={ section.id }>{ section.title }</h2> }
           { section.component }
@@ -134,7 +136,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   const showAside = !!sections && sections.some((s: IPageSection) => !!s.title);
 
-  const asideBlock = showAside && (
+  const asideBlock = showNavigation && showAside && (
     <aside className='rf-page__content-aside' ref={ asideRef }>
       <div className='rf-page__aside-inner'>
         <div className='rf-page__aside-bar' ref={ lineRef }>
@@ -165,7 +167,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
     }
 
     if (pageRef.current.offsetHeight > document.documentElement.clientHeight) {
-      pageRef.current.style.paddingBottom = '118px';
+      pageRef.current.style.paddingBottom = '98px';
     } else {
       actionMenuRef.current.style.bottom = 'auto';
       actionMenuRef.current.style.top = sectionsRef.current.offsetHeight + pageHeaderRef.current.offsetHeight + 20 + 'px';
