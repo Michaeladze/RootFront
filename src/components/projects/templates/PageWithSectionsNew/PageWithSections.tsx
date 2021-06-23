@@ -7,6 +7,7 @@ import { IPageSection } from '../../../../types/projects.types';
 import useTableOfContents from '../../../../hooks/useTableOfContents';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-alt';
+import { resizeSensor } from '../../../../utils/resizeSensor';
 
 
 export interface IPageWithSectionsProps {
@@ -161,17 +162,39 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  useEffect(() => {
+  const calculateMenuPosition = () => {
     if (!pageRef.current || !sectionsRef.current || !actionMenuRef.current || !pageHeaderRef.current || preloader) {
       return;
     }
 
     if (pageRef.current.offsetHeight > document.documentElement.clientHeight) {
       pageRef.current.style.paddingBottom = '98px';
+      actionMenuRef.current.style.bottom = '20px';
+      actionMenuRef.current.style.top = 'auto';
     } else {
       actionMenuRef.current.style.bottom = 'auto';
-      actionMenuRef.current.style.top = sectionsRef.current.offsetHeight + pageHeaderRef.current.offsetHeight + 20 + 'px';
+      actionMenuRef.current.style.top = sectionsRef.current.offsetHeight + pageHeaderRef.current.offsetHeight + 'px';
     }
+  };
+
+
+  useEffect(() => {
+    calculateMenuPosition();
+  }, [preloader]);
+
+  useEffect(() => {
+    if (!sectionsRef.current) {
+      return;
+    }
+
+    resizeSensor(sectionsRef.current, () => {
+
+      if (!sectionsRef.current) {
+        return;
+      }
+
+      calculateMenuPosition();
+    });
   }, [preloader]);
 
   // -------------------------------------------------------------------------------------------------------------------

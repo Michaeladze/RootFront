@@ -6,10 +6,6 @@ import { ITab } from '../../../../types';
 import { BrowserRouter } from 'react-router-dom';
 import Button from '../../../atoms/Button';
 import { ContentExpander } from '../../../../index';
-import Employee from '../../organisms/Employee';
-import { usersMocks } from '../../organisms/FindUsers/users.mocks';
-import RequestHistory from '../../organisms/RequestHistory';
-import { historyMocks } from './history.mocks';
 
 export default {
   title: 'Projects/[New] Page With Sections',
@@ -19,30 +15,30 @@ export default {
 export const pageWithSections = () => {
 
   const sections: IPageSection[] = [
-    {
-      id: 'position',
-      title: 'Позиция',
-      component: <div style={{ height: '300px' }}> <Employee user={usersMocks[usersMocks.length - 1]}/> </div>
-    },
-    {
-      id: 'noname',
-      component: <div style={{ height: '100px' }}> Без названия </div>
-    },
-    {
-      id: 'history',
-      title: 'История подбора',
-      component: <RequestHistory requestPath={historyMocks} initiator={usersMocks[usersMocks.length - 1]}/>
-    },
-    {
-      id: 'org',
-      title: 'Организационные данные',
-      component: <div style={{ height: '300px' }}> Организационные данные </div>
-    },
-    {
-      id: 'test1',
-      title: 'Раздел 1',
-      component: <div style={{ height: '300px' }}> Раздел 1 </div>
-    },
+    // {
+    //   id: 'position',
+    //   title: 'Позиция',
+    //   component: <div style={{ height: '300px' }}> <Employee user={usersMocks[usersMocks.length - 1]}/> </div>
+    // },
+    // {
+    //   id: 'noname',
+    //   component: <div style={{ height: '100px' }}> Без названия </div>
+    // },
+    // {
+    //   id: 'history',
+    //   title: 'История подбора',
+    //   component: <RequestHistory requestPath={historyMocks} initiator={usersMocks[usersMocks.length - 1]}/>
+    // },
+    // {
+    //   id: 'org',
+    //   title: 'Организационные данные',
+    //   component: <div style={{ height: '300px' }}> Организационные данные </div>
+    // },
+    // {
+    //   id: 'test1',
+    //   title: 'Раздел 1',
+    //   component: <div style={{ height: '300px' }}> Раздел 1 </div>
+    // },
     {
       id: 'test2',
       title: 'Раздел 2',
