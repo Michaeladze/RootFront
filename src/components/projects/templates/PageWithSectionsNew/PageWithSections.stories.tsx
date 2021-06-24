@@ -42,7 +42,17 @@ export const pageWithSections = () => {
     {
       id: 'test2',
       title: 'Раздел 2',
-      component: <ContentExpander title='Expand'>
+      component: <ContentExpander title='Expand 1'>
+        <div style={{ height: '300px' }}>222</div>
+        <div style={{ height: '300px' }}>222</div>
+        <div style={{ height: '300px' }}>222</div>
+        <div style={{ height: '300px' }}>222</div>
+      </ContentExpander>
+    },
+    {
+      id: 'test22',
+      title: 'Раздел 22',
+      component: <ContentExpander title='Expand 2'>
         <div style={{ height: '300px' }}>222</div>
         <div style={{ height: '300px' }}>222</div>
         <div style={{ height: '300px' }}>222</div>

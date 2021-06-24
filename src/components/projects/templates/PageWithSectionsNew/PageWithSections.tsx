@@ -7,7 +7,6 @@ import { IPageSection } from '../../../../types/projects.types';
 import useTableOfContents from '../../../../hooks/useTableOfContents';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-alt';
-import { resizeSensor } from '../../../../utils/resizeSensor';
 
 
 export interface IPageWithSectionsProps {
@@ -187,14 +186,18 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
       return;
     }
 
-    resizeSensor(sectionsRef.current, () => {
+    const onClick = () => setTimeout(calculateMenuPosition);
 
-      if (!sectionsRef.current) {
-        return;
-      }
-
-      calculateMenuPosition();
+    const possibleExpanders = document.querySelectorAll('[data-expander]') || [];
+    possibleExpanders.forEach((node: Element) => {
+      node.addEventListener('click', onClick);
     });
+
+    return () => {
+      possibleExpanders.forEach((node: Element) => {
+        node.removeEventListener('click', onClick);
+      });
+    };
   }, [preloader]);
 
   // -------------------------------------------------------------------------------------------------------------------

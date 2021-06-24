@@ -42,7 +42,7 @@ const ContentExpander: React.FC<IContentExpanderProps> = ({
 
   return (
     <div className={`expander ${className} ${stickArrowClass} ${disabledClass}`}>
-      <h3 className={`expander__title ${hideTitleClass}`} onClick={onClick}>
+      <h3 className={`expander__title ${hideTitleClass}`} onClick={onClick} data-expander={true}>
         <span className='expander__title-text'>{title}</span>
         <Angle className={`expander__icon ${expanded || innerExpanded ? 'expander__icon--rotate' : ''}`} />
       </h3>
