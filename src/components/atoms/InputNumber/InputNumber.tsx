@@ -11,6 +11,7 @@ export interface IInputNumberProps extends IInputProps {
   floatPoints?: number;
   groupBy?: number;
   max?: number;
+  onInputChange?: (value: string) => void;
 }
 
 const InputNumber: React.FC<IInputNumberProps> = ({
@@ -19,6 +20,7 @@ const InputNumber: React.FC<IInputNumberProps> = ({
   separator = ' ',
   floatPoints = 0,
   groupBy = 3,
+  onInputChange,
   ...props
 }: IInputNumberProps) => {
 
@@ -82,6 +84,7 @@ const InputNumber: React.FC<IInputNumberProps> = ({
       result = isNaN(float) ? numberWithSpaces(integer, groupBy, separator) : [numberWithSpaces(integer, groupBy, separator), value2].join('.');
     }
 
+    onInputChange && onInputChange(value);
     setValue(result);
   };
 
