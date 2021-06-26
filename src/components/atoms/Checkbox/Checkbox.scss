@@ -49,6 +49,10 @@
   color: var(--base-000);
 }
 
+.rf-checkbox__check--round {
+  border-radius: 50%;
+}
+
 .rf-checkbox__mark {
   display: flex;
   align-items: center;
@@ -63,10 +67,26 @@
   margin-left: 10px;
   @include p1;
   transition: 0.15s ease-in color;
+  order: 2;
 }
 
 .rf-checkbox__label--no-icon {
   margin-left: 0;
+}
+
+.rf-checkbox--right {
+  width: 100%;
+
+  .rf-checkbox__label {
+    width: auto;
+    order: 2;
+    margin-left: 0;
+  }
+
+  .rf-checkbox__check {
+    order: 3;
+    margin-left: auto;
+  }
 }
 
 // Hover
@@ -167,12 +187,6 @@
   color: var(--base-1000);
 }
 
-.rf-checkbox__input:disabled ~ .rf-checkbox__label:not(.rf-checkbox__label--node) {
-  cursor: default;
-  pointer-events: none;
-  color: var(--base-1000);
-}
-
 // Disabled
 
 .rf-checkbox.disabled {
@@ -188,23 +202,6 @@
 .rf-checkbox__input:disabled:checked + .rf-checkbox__check {
   background-color: var(--base-300);
   border-color: var(--base-300);
-}
-
-.rf-checkbox.disabled + .rf-checkbox__check:not(.rf-checkbox__check--node),
-.rf-checkbox__input:disabled + .rf-checkbox__check:not(.rf-checkbox__check--node),
-.rf-checkbox__input:disabled:checked + .rf-checkbox__check:not(.rf-checkbox__check--node) {
-  @include disabled();
-}
-
-.rf-checkbox.disabled ~ .rf-checkbox__label:not(.rf-checkbox__label--node),
-.rf-checkbox__input:disabled ~ .rf-checkbox__label:not(.rf-checkbox__label--node) {
-  @include disabled();
-  color: var(--base-1000);
-}
-
-.rf-checkbox.disabled:hover ~ .rf-checkbox__label:not(.rf-checkbox__label--node),
-.rf-checkbox__input:disabled:hover ~ .rf-checkbox__label:not(.rf-checkbox__label--node) {
-  color: var(--base-1000);
 }
 
 .rf-checkbox__children {

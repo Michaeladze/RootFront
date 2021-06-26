@@ -34,6 +34,12 @@
   overflow-y: hidden;
 }
 
+.rf-modal__wrapper--fullScreen {
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
 .rf-modal__content {
   padding: 40px 48px;
   flex-grow: 1;

@@ -13,12 +13,18 @@ export default {
 export const modal = () => {
   const [show, toggle] = useState(false);
 
+  const modalFooter = (
+    <>
+      <Button> Согласен </Button>
+    </>
+  );
+
   return (
     <Story name='Modal (Модальное окно)'>
       <StoryItem description='Модальное окно открывается поверх страницы.'>
         <Button onClick={() => toggle(true)}>Открыть</Button>
         {show && (
-          <Modal onClose={() => toggle(false)}>
+          <Modal onClose={() => toggle(false)} header='Заголовок модального окна' footer={modalFooter}>
             <ModalChild />
           </Modal>
         )}

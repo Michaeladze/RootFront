@@ -17,13 +17,15 @@ export interface IModalProps {
   /** Флаг, показываем кнопку закрытия */
   showClose?: boolean;
   /** Контент для шапки в модальном окне */
-  headerContent?: React.ReactNode;
+  header?: React.ReactNode;
   /** Контент для футера в модальном окне */
-  footerContent?: React.ReactNode;
+  footer?: React.ReactNode;
   /** Высота контента */
   height?: string;
   /** Запретить общий скролл */
   disableScroll?: boolean;
+  /** На весь экран */
+  fullScreen?: boolean;
 }
 
 const Modal: FC<IModalProps> = ({
@@ -32,10 +34,11 @@ const Modal: FC<IModalProps> = ({
   onClose,
   darkenBackground = true,
   showClose = true,
-  headerContent,
-  footerContent,
+  header,
+  footer,
   height,
-  disableScroll = false
+  disableScroll = false,
+  fullScreen = false
 }: IModalProps) => {
   /** Создаем контейнер для модалки */
   const [div] = useState<HTMLDivElement>(document.createElement('div'));
@@ -61,12 +64,13 @@ const Modal: FC<IModalProps> = ({
   }, [div]);
 
   const style = height ? { height } : {};
+  const fullScreenClass = fullScreen ? 'rf-modal__wrapper--fullScreen' : '';
 
   /** Обертка для модалки */
   const modal = (
     <div className={`rf-modal ${darkenBackground ? 'rf-modal--darken' : ''}`} onClick={onClose}>
       <div style={style}
-        className={`rf-modal__wrapper rf-modal__wrapper1 ${className}`}
+        className={`rf-modal__wrapper ${fullScreenClass} ${className}`}
         onClick={(e: React.MouseEvent) => e.stopPropagation()}>
         {showClose && (
           <button className='rf-modal__close-button' onClick={onClose}>
@@ -74,11 +78,11 @@ const Modal: FC<IModalProps> = ({
           </button>
         )}
 
-        {headerContent && <div className='rf-modal__header'>{headerContent}</div>}
+        {header && <div className='rf-modal__header'>{header}</div>}
 
         <div style={{ overflowY: disableScroll ? 'hidden' : 'auto' } } className='rf-modal__content'>{children}</div>
 
-        {footerContent && <div className='rf-modal__footer'>{footerContent}</div>}
+        {footer && <div className='rf-modal__footer'>{footer}</div>}
       </div>
     </div>
   );

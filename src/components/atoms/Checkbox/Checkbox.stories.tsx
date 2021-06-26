@@ -37,7 +37,7 @@ export const checkbox = () => {
 
   const variantsJSX = variants.map((variant: Variant) => (
     <StoryRow key={variant}>
-      <Checkbox name='checkbox' value={variant} label={variant} variant={variant} defaultChecked />
+      <Checkbox name='checkbox' value={variant} label={variant} variant={variant} defaultChecked position='right'/>
     </StoryRow>
   ));
 
@@ -57,7 +57,11 @@ export const checkbox = () => {
   return (
     <Story name='Checkbox'>
       <StoryItem description='Состояния чекбокса'>{checkboxesJSX}</StoryItem>
-      <StoryItem description='Варианты цветового оформления'>{variantsJSX}</StoryItem>
+      <StoryItem description='Варианты цветового оформления. Чекбокс можно расположить справа.'>
+        <div style={{ width: '200px' }}>
+          {variantsJSX}
+        </div>
+      </StoryItem>
     </Story>
   );
 };
