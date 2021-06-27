@@ -58,6 +58,9 @@ const FindUsers: FC<IProps> = ({
   const inputRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  type ActiveFilter = 'all' | 'team';
+  const [activeFilter, setActiveFilter] = useState<ActiveFilter>('all');
+
   /** Список выбранных людей */
   const [selectedPeople, setSelectedPeople] = useState<IUser[]>(users);
   const selectedPeopleMap: Record<string, boolean> = selectedPeople.reduce((a: Record<string, boolean>, u: IUser) => {
@@ -107,8 +110,9 @@ const FindUsers: FC<IProps> = ({
       setLoaded(false);
     }
 
+    const teamUri = 'sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/ITeamSearch?$expand=departmentsPath';
     const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&$skip=${skip.current}&$top=${LIMIT}`;
-    const url = `${host}${uri}`;
+    const url = `${host}${activeFilter === 'all' ? uri : teamUri}`;
 
     const axios = AxiosInstance || Axios;
 
@@ -119,7 +123,7 @@ const FindUsers: FC<IProps> = ({
       }),
       headers
     })
-      .then(({ data }: AxiosResponse<{ value: IUser[]}>) => {
+      .then(({ data }: AxiosResponse<{ value: IUser[] }>) => {
         skip.current += LIMIT;
 
         if (lazy) {
@@ -236,7 +240,8 @@ const FindUsers: FC<IProps> = ({
               </Tooltip>
             ) }
           </h3>
-          <h5 className='list-users__user-position' title={isShorter ? item.department : undefined}>{ isShorter ? `${shortPosition}...` : shortPosition }</h5>
+          <h5 className='list-users__user-position'
+            title={ isShorter ? item.department : undefined }>{ isShorter ? `${shortPosition}...` : shortPosition }</h5>
         </div>
       </div>
     );
@@ -301,12 +306,25 @@ const FindUsers: FC<IProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  useEffect(() => {
+    skip.current = 0;
+    cancelRequest();
+    onSearch(searchString);
+  }, [activeFilter]);
+
+
   return (
     <div className='find-users__wrapper'>
       <h4 className='find-users__title'>Поиск сотрудников</h4>
       <p className='find-users__notice'>{ subtitle }</p>
       <div className='find-users__input-wrapper' ref={ inputRef }>
         <Input placeholder='Поиск' search={ true } onKeyUp={ inputHandle } autoFocus onClear={ onClear }/>
+      </div>
+      <div className='find-users__filters'>
+        <Button className={ `find-users__filters-button ${activeFilter === 'all' ? 'active' : ''}` }
+          buttonType='text' onClick={ () => setActiveFilter('all') }>Все</Button>
+        <Button className={ `find-users__filters-button ${activeFilter === 'team' ? 'active' : ''}` }
+          buttonType='text' onClick={ () => setActiveFilter('team') }>Моя команда</Button>
       </div>
 
       { !!selectedPeople.length && multiSelect && (
@@ -330,7 +348,7 @@ const FindUsers: FC<IProps> = ({
           </Button>
         </div>
       ) }
-      <div className='find-users__list-wrapper' ref={dropdownRef} onScroll={onLazyScroll}>
+      <div className='find-users__list-wrapper' ref={ dropdownRef } onScroll={ onLazyScroll }>
         { loaded ? (
           listUsers.length > 0 ? (
             listUsers
@@ -346,7 +364,7 @@ const FindUsers: FC<IProps> = ({
           )
         }
       </div>
-      <PopupFooter textAccept='Добавить' onSubmit={ onSubmit } disabled={disabled} onClose={ onClose }/>
+      <PopupFooter textAccept='Добавить' onSubmit={ onSubmit } disabled={ disabled } onClose={ onClose }/>
     </div>
   );
 };

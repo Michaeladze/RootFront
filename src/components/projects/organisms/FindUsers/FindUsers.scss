@@ -217,3 +217,34 @@
   padding-top: 16px;
   height: 32px;
 }
+
+.find-users__filters {
+  margin-bottom: 24px;
+}
+
+.rf-button.find-users__filters-button {
+  @include h6;
+  margin-right: 24px;
+  position: relative;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: var(--accent-500);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  &.active::after {
+    opacity: 1;
+  }
+}
