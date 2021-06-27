@@ -98,7 +98,7 @@ const FindUsers: FC<IProps> = ({
   };
 
   const onSearch = (query: string, lazy = false) => {
-    if (query.length < 3) {
+    if (activeFilter === 'all' && query.length < 3) {
       return;
     }
 
@@ -110,7 +110,7 @@ const FindUsers: FC<IProps> = ({
       setLoaded(false);
     }
 
-    const teamUri = 'sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/ITeamSearch?$expand=departmentsPath';
+    const teamUri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/ITeamSearch?$search=${encodeURIComponent(query)}?$expand=departmentsPath`;
     const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&$skip=${skip.current}&$top=${LIMIT}`;
     const url = `${host}${activeFilter === 'all' ? uri : teamUri}`;
 
