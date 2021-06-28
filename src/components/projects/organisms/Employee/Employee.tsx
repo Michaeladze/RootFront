@@ -1,6 +1,6 @@
 import React from 'react';
 import './Employee.scss';
-import { IUser } from '../../../../types/projects.types';
+import { IUser, TooltipPosition } from '../../../../types/projects.types';
 import UserPhoto from '../../atoms/UserPhoto';
 import Info from '../../../_icons/info-circle';
 import Tooltip from '../../../atoms/Tooltip';
@@ -8,9 +8,10 @@ import Structure from '../../atoms/Structure';
 
 export interface IEmployeeProps {
   user: IUser;
+  position?: TooltipPosition;
 }
 
-const Employee: React.FC<IEmployeeProps> = ({ user }: IEmployeeProps) => {
+const Employee: React.FC<IEmployeeProps> = ({ user, position = 'left' }: IEmployeeProps) => {
 
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -28,7 +29,7 @@ const Employee: React.FC<IEmployeeProps> = ({ user }: IEmployeeProps) => {
           { department }
           {
             user.departmentsPath && (
-              <Tooltip position='left'>
+              <Tooltip position={position} portal>
                 <Info className='rf-employee__department-icon'/>
                 <Structure departmentsPath={ user.departmentsPath }/>
               </Tooltip>

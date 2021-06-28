@@ -134,3 +134,5 @@ export interface IRequestPath {
   date?: number;
   comment?: string;
 }
+
+export type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';

@@ -3,9 +3,7 @@ import React, {
 } from 'react';
 import './Tooltip.scss';
 import { createPortal } from 'react-dom';
-
-
-type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
+import { TooltipPosition } from '../../../types/projects.types';
 
 interface ITooltipContentProps {
   rect: DOMRect;
