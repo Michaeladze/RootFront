@@ -167,7 +167,6 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
     }
 
     if (pageRef.current.offsetHeight > document.documentElement.clientHeight) {
-      pageRef.current.style.paddingBottom = '98px';
       actionMenuRef.current.style.bottom = '20px';
       actionMenuRef.current.style.top = 'auto';
     } else {
