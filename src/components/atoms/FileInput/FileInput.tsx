@@ -105,7 +105,7 @@ const FileInput: React.FC<IFileInputProps> = ({
 
             setFile(newFiles);
             uploadFile(newFiles);
-            // ref.current.value = '';
+            ref.current.value = '';
           }
         })
         .catch((error: Error) => {

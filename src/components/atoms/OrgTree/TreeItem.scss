@@ -1,0 +1,73 @@
+@import "src/styles/mixins";
+
+.rf-tree__item {
+  position: relative;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.rf-tree__item > .rf-tree__item--v {
+  content: '';
+  position: absolute;
+  width: 2px;
+  top: 20px;
+  left: 10px;
+  bottom: -14px;
+  transform: translate(-50%, 0);
+  background-color: var(--base-500);
+}
+
+.rf-tree__item--1:last-of-type .rf-tree__item--v {
+  display: none;
+}
+
+.rf-tree__item-label {
+  @include p2;
+  display: inline-flex;
+  position: relative;
+}
+
+.rf-tree__item-label .rf-tree__item--h {
+  content: '';
+  position: absolute;
+  left: -13px;
+  top: 10px;
+  width: 14px;
+  height: 2px;
+  transform: translate(0, -50%);
+  background-color: var(--base-500);
+}
+
+.rf-tree__item--1 > .rf-tree__item-label .rf-tree__item--h {
+  display: none;
+}
+
+.rf-tree__item--close:not(.rf-tree__item--1) > .rf-tree__item--v,
+.rf-tree__item--no-children:not(.rf-tree__item--1) > .rf-tree__item--v {
+  display: none;
+}
+
+.rf-tree__item-folder:not(.rf-tree__item-folder--hidden) {
+  margin-top: 14px;
+}
+
+.rf-tree__item-label-icon {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  margin-right: 6px;
+  transition: transform 0.15s;
+  color: var(--base-500);
+}
+
+.rf-tree__item-label-icon--rotate {
+  transform: rotate(-90deg);
+}
+
+.rf-tree__item-folder--hidden {
+  display: none;
+}
+
+.rf-tree__item--active > .rf-tree__item-label {
+  color: var(--accent-500);
+}

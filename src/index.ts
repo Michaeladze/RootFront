@@ -31,6 +31,7 @@ import Tag from './components/atoms/Tag/Tag';
 import InputCreditCard from './components/atoms/InputCreditCard/InputCreditCard';
 import InputNumber from './components/atoms/InputNumber/InputNumber';
 import InputPhone from './components/atoms/InputPhone/InputPhone';
+import OrgTree from './components/atoms/OrgTree/OrgTree';
 
 // ------------------------ Компоненты Molecules -----------------------------------------------------------------------
 import Notifications, { sendNotification } from './components/molecules/Notifications';
@@ -153,7 +154,8 @@ export {
   Logger,
   LoggerView,
   Employee,
-  RequestHistory
+  RequestHistory,
+  OrgTree
 };
 
 export {
