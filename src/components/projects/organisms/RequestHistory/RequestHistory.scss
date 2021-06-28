@@ -13,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  @include round('48px');
 }
 
 .history__user-line {
@@ -141,6 +142,7 @@
 
 .history__info {
   margin-left: 8px;
+  color: var(--accent-500);
 }
 
 .tooltip-users__wrapper {
