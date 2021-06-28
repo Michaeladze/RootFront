@@ -70,6 +70,7 @@ import RequestHistory from './components/projects/organisms/RequestHistory';
 // ------------------------ Компоненты Templates ------------------------------------------------------------------------
 import Page from './components/projects/templates/Page';
 import PageWithSections from './components/projects/templates/PageWithSectionsNew';
+import PageWithSectionsOld from './components/projects/templates/PageWithSections';
 import PageWithList from './components/projects/templates/PageWithList';
 import ActionMenu from './components/projects/templates/ActionMenu';
 
@@ -136,6 +137,7 @@ export {
   TextEditor,
   Page,
   PageWithSections,
+  PageWithSectionsOld,
   PageWithList,
   Badge,
   ActionMenu,
