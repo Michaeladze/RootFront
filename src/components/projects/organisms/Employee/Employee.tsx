@@ -6,11 +6,11 @@ import Info from '../../../_icons/info-circle';
 import Tooltip from '../../../atoms/Tooltip';
 import Structure from '../../atoms/Structure';
 
-interface IProps {
+export interface IEmployeeProps {
   user: IUser;
 }
 
-const Employee: React.FC<IProps> = ({ user }: IProps) => {
+const Employee: React.FC<IEmployeeProps> = ({ user }: IEmployeeProps) => {
 
 
   // -------------------------------------------------------------------------------------------------------------------

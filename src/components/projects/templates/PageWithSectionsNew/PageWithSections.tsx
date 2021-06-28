@@ -40,8 +40,6 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   const sliderRef = useRef<HTMLDivElement>(null);
   /** Ссылка на линию */
   const lineRef = useRef<HTMLDivElement>(null);
-  /** Ссылка на страницу */
-  const pageRef = useRef<HTMLDivElement>(null);
   /** Ссылка на шапку страницы */
   const pageHeaderRef = useRef<HTMLDivElement>(null);
 
@@ -161,49 +159,8 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
   // -------------------------------------------------------------------------------------------------------------------
 
-  const calculateMenuPosition = () => {
-    if (!pageRef.current || !sectionsRef.current || !actionMenuRef.current || !pageHeaderRef.current || preloader) {
-      return;
-    }
-
-    if (pageRef.current.offsetHeight > document.documentElement.clientHeight) {
-      pageRef.current.style.paddingBottom = '98px';
-      actionMenuRef.current.style.bottom = '20px';
-      actionMenuRef.current.style.top = 'auto';
-    } else {
-      actionMenuRef.current.style.bottom = 'auto';
-      actionMenuRef.current.style.top = sectionsRef.current.offsetHeight + pageHeaderRef.current.offsetHeight + 'px';
-    }
-  };
-
-
-  useEffect(() => {
-    calculateMenuPosition();
-  }, [preloader]);
-
-  useEffect(() => {
-    if (!sectionsRef.current) {
-      return;
-    }
-
-    const onClick = () => setTimeout(calculateMenuPosition);
-
-    const possibleExpanders = document.querySelectorAll('[data-expander]') || [];
-    possibleExpanders.forEach((node: Element) => {
-      node.addEventListener('click', onClick);
-    });
-
-    return () => {
-      possibleExpanders.forEach((node: Element) => {
-        node.removeEventListener('click', onClick);
-      });
-    };
-  }, [preloader]);
-
-  // -------------------------------------------------------------------------------------------------------------------
-
   return (
-    <div className='rf-sections-page' ref={ pageRef }>
+    <div className='rf-sections-page'>
       <header className='rf-page__sections-header' ref={pageHeaderRef}>
         { backUrl && (
           <Link to={ backUrl } onClick={ onBackClick } className='rf-page__sections-header-back'>
