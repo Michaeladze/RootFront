@@ -15,7 +15,8 @@
     "strict": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "jsx": "react"
+    "jsx": "react",
+    "skipLibCheck": true
   },
   "files": [ "./src/index.ts"],
   "include": ["src"],
