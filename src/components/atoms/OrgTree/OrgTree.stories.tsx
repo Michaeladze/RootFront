@@ -7,7 +7,7 @@ import { list } from './list';
 import OrgTree from './OrgTree';
 
 export default {
-  title: 'Tree',
+  title: 'OrgTree',
   component: Tree
 };
 
