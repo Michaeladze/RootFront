@@ -9,9 +9,10 @@ import Structure from '../../atoms/Structure';
 export interface IEmployeeProps {
   user: IUser;
   position?: TooltipPosition;
+  portal?: boolean;
 }
 
-const Employee: React.FC<IEmployeeProps> = ({ user, position = 'left' }: IEmployeeProps) => {
+const Employee: React.FC<IEmployeeProps> = ({ user, position = 'right', portal = false }: IEmployeeProps) => {
 
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -29,7 +30,7 @@ const Employee: React.FC<IEmployeeProps> = ({ user, position = 'left' }: IEmploy
           { department }
           {
             user.departmentsPath && (
-              <Tooltip position={position} portal>
+              <Tooltip position={position} portal={portal}>
                 <Info className='rf-employee__department-icon'/>
                 <Structure departmentsPath={ user.departmentsPath }/>
               </Tooltip>
