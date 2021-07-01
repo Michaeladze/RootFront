@@ -63,7 +63,7 @@ const RequestHistory: React.FC<IProps> = ({ requestPath, initiator }: IProps) =>
     return (
       <div className='request__history-element' key={r.stepId}>
         <div className='history__user-photo'>
-          {r.user && r.user.length === 1 ? <UserPhoto radius='48px' url={r.user[0].photo} /> : <EmptyUser />}
+          {r.user && r.user.length === 1 ? <UserPhoto radius='48px' url={r.user[0].photo} /> : <EmptyUser className='empty-user' /> }
           {i !== path.length - 1 && (
             <div className='history__user-line'>
               <div className='history__user-line-inner' />

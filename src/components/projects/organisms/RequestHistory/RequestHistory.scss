@@ -167,6 +167,7 @@
 
 .tooltip__wrapper {
   padding: 16px;
+  max-width: 500px;
 }
 
 .tooltip-users__info {
@@ -177,4 +178,9 @@
   @include p1;
   padding-left: 8px;
   color: var(--base-500)
+}
+
+.empty-user {
+  @include round(48px);
+  color: var(--base-500);
 }

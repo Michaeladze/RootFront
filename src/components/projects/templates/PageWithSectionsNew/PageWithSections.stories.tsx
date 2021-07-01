@@ -5,7 +5,7 @@ import { IPageSection } from '../../../../types/projects.types';
 import { ITab } from '../../../../types';
 import { BrowserRouter } from 'react-router-dom';
 import Button from '../../../atoms/Button';
-import { ContentExpander } from '../../../../index';
+import { ContentExpander, RequestHistory } from '../../../../index';
 
 export default {
   title: 'Projects/[New] Page With Sections',
@@ -52,12 +52,33 @@ export const pageWithSections = () => {
     {
       id: 'test22',
       title: 'Раздел 22',
-      component: <ContentExpander title='Expand 2'>
-        <div style={{ height: '300px' }}>222</div>
-        <div style={{ height: '300px' }}>222</div>
-        <div style={{ height: '300px' }}>222</div>
-        <div style={{ height: '300px' }}>222</div>
-      </ContentExpander>
+      component: <RequestHistory requestPath={[
+        {
+        /** Сфера деятельности*/
+          actArea: '',
+          /** Ид. пути выполнения*/
+          pathId: 'a',
+          /** Шаг маршрута*/
+          stepId: 'a',
+          /** Тип шаг (ид)*/
+          activityId: 'a',
+          /** Тип шаг (текст)*/
+          activityText: 'a',
+          /** Агент (ид)*/
+          agent: 'a',
+          /** Агент (текст)*/
+          agentName: 'a',
+          /** Фактический исполнитель*/
+          user: [],
+          /** Статус (ид)*/
+          statusId: 'a',
+          /** Статус (текст)*/
+          statusText: 'a',
+          /** Критичность (0 - None (no color) / 1 - Error (red) / 2 - Warning (yellow) / 3 - Success (green))*/
+          criticality: '1',
+          date: Date.now()
+        }
+      ]}/>
     }
   ];
 
