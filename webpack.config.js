@@ -62,21 +62,35 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader'
+        },
         exclude: [path.resolve(__dirname, 'node_modules'), /spec\.(js|jsx|ts|tsx)$/]
       },
       {
         test: /\.html$/i,
-        loader: 'html-loader'
+        use: {
+          loader: 'html-loader'
+        }
       },
       {
         test: /\.css|\.scss$/,
         use: [
-          'style-loader',
-          'css-loader',
-          'resolve-url-loader',
-          'scoped-css-loader',
-          'sass-loader'
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'resolve-url-loader'
+          },
+          {
+            loader: 'scoped-css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
         ]
       },
       {
@@ -109,12 +123,16 @@ module.exports = {
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+        use: {
+          loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+        },
         options: { name: 'assets/fonts/[name].[ext]' }
       },
       {
         test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader',
+        use: {
+          loader: 'file-loader'
+        },
         options: { name: 'assets/fonts/[name].[ext]' }
       }
     ]
