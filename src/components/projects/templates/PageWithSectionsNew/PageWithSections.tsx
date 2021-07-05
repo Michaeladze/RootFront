@@ -58,7 +58,7 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
 
       if (asideRef.current) {
         if (widthDelta > 0) {
-          asideRef.current.style.right = `${widthDelta + 40}px`;
+          asideRef.current.style.right = `${widthDelta - 120 + 20}px`;
         }
       }
     };

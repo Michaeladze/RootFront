@@ -93,6 +93,16 @@ export const pageWithSections = () => {
     }
   ];
 
+  const shellAsideStyle: any = {
+    position: 'fixed',
+    top: '20px',
+    bottom: '20px',
+    left: '20px',
+    width: '80px',
+    borderRadius: '20px',
+    backgroundColor: 'white'
+  };
+
   const user: any = { fullName: 'Ричард Брэндмауер' };
 
   const [loaded, setLoaded] = useState(false);
@@ -115,7 +125,11 @@ export const pageWithSections = () => {
         padding: '0 20px',
         backgroundColor: 'var(--base-150)'
       }}>
-        <PageWithSections sections={sections} actionMenu={actionMenu} preloader={!loaded} title='Изменение графика рабочего времени' backUrl='/'/>
+
+        <div style={shellAsideStyle}/>
+        <div style={{ marginLeft: '120px' }}>
+          <PageWithSections sections={sections} actionMenu={actionMenu} preloader={!loaded} title='Изменение графика рабочего времени' backUrl='/'/>
+        </div>
       </div>
     </BrowserRouter>
   );
