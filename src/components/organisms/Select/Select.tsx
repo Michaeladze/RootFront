@@ -10,7 +10,6 @@ import {
   Button, Checkbox, Input, Radio
 } from '../../../index';
 import Angle from '../../_icons/caret-down';
-import Close from '../../_icons/close';
 import Chips from '../../molecules/Chips/Chips';
 import { sizeClass } from '../../../utils/helpers';
 
@@ -379,16 +378,16 @@ const Select: FC<ISelectProps> = ({
           onClick={onInputClick}
           disabled={props.disabled}
         />
+        {/* {!props.disabled && (*/}
+        {/*  <Button*/}
+        {/*    buttonType='text'*/}
+        {/*    disabled={props.disabled}*/}
+        {/*    onClick={clearInput}*/}
+        {/*    className={`rf-select__input-icon rf-select__input-clear ${clearIconClass}`}>*/}
+        {/*    <Close/>*/}
+        {/*  </Button>*/}
+        {/* )}*/}
         {!props.disabled && (
-          <Button
-            buttonType='text'
-            disabled={props.disabled}
-            onClick={clearInput}
-            className={`rf-select__input-icon rf-select__input-clear ${clearIconClass}`}>
-            <Close/>
-          </Button>
-        )}
-        {!props.disabled && (props.readOnly || inputValue.length === 0) && (
           <Button
             buttonType='text'
             disabled={props.disabled}
