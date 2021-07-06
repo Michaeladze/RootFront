@@ -5,6 +5,7 @@ import './Tag.scss';
 
 
 export interface ITagProps {
+  //
   children: ReactNode | ReactNode[];
   onClick?: () => void;
   variant?: Variant;
