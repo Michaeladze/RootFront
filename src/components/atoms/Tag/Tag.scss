@@ -20,10 +20,11 @@
 }
 
 .rf-tag.rf--base {
-  background-color: var(--base-500);
+  background-color: var(--base-200);
+  color: var(--base-1000);
 
   &:hover {
-    background-color: var(--base-400);
+    background-color: var(--base-200);
   }
 }
 
