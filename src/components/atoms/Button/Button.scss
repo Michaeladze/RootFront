@@ -16,6 +16,10 @@
   white-space: nowrap;
 }
 
+.rf-button.rf-button__full-width {
+  width: 100%;
+}
+
 .rf-button.rf--big {
   @include buttonLarge;
   padding: 0 32px;

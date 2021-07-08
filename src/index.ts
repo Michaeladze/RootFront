@@ -44,6 +44,7 @@ import ContentExpander from './components/molecules/ContentExpander';
 import Chips from './components/molecules/Chips';
 import Menu from './components/molecules/Menu';
 import FatalError from './components/molecules/FatalError';
+import CompletePopup from './components/molecules/CompletePopup';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
 import SelectTree from './components/organisms/SelectTree';
@@ -121,6 +122,7 @@ export {
   Container,
   ContentExpander,
   Chips,
+  CompletePopup,
   Notifications,
   sendNotification,
   FormGroup,

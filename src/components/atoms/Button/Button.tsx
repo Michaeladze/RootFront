@@ -11,11 +11,14 @@ export interface IButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'>
   variant?: Variant;
   /** Размер */
   size?: Size;
+  /** 100% ширина */
+  fullWidth?: boolean;
 }
 
 const Button: FC<IButtonProps> = ({
   type = 'button',
   size = 'medium',
+  fullWidth = false,
   buttonType = 'primary',
   variant = buttonType === 'text' ? 'base' : 'accent',
   ...props
@@ -30,11 +33,15 @@ const Button: FC<IButtonProps> = ({
     round: 'rf-button--round'
   };
 
+  const widthClass = fullWidth ? 'rf-button__full-width' : '';
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   return (
     <button
       {...props}
       type={type}
-      className={`rf-button ${classesMap[buttonType]} ${sizeClass[size]} ${variantClass[variant]} ${
+      className={`rf-button ${classesMap[buttonType]} ${sizeClass[size]} ${variantClass[variant]} ${widthClass} ${
         props.className || ''
       }`}>
       {props.children}
