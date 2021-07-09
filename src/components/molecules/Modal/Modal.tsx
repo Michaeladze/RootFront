@@ -26,6 +26,8 @@ export interface IModalProps {
   disableScroll?: boolean;
   /** На весь экран */
   fullScreen?: boolean;
+  /** Кастомный компонент вместо */
+  custom?: boolean;
 }
 
 const Modal: FC<IModalProps> = ({
@@ -38,7 +40,8 @@ const Modal: FC<IModalProps> = ({
   footer,
   height,
   disableScroll = false,
-  fullScreen = false
+  fullScreen = false,
+  custom = false,
 }: IModalProps) => {
   /** Создаем контейнер для модалки */
   const [div] = useState<HTMLDivElement>(document.createElement('div'));
@@ -69,21 +72,28 @@ const Modal: FC<IModalProps> = ({
   /** Обертка для модалки */
   const modal = (
     <div className={`rf-modal ${darkenBackground ? 'rf-modal--darken' : ''}`} onClick={onClose}>
-      <div style={style}
-        className={`rf-modal__wrapper ${fullScreenClass} ${className}`}
-        onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-        {showClose && (
-          <button className='rf-modal__close-button' onClick={onClose}>
-            <Close />
-          </button>
-        )}
+      { custom ? (
+        <div onClick={ (e: React.MouseEvent) => e.stopPropagation() }>
+          {children}
+        </div>
+      ) : (
+        <div style={ style }
+          className={ `rf-modal__wrapper ${fullScreenClass} ${className}` }
+          onClick={ (e: React.MouseEvent) => e.stopPropagation() }>
+          { showClose && (
+            <button className='rf-modal__close-button' onClick={ onClose }>
+              <Close/>
+            </button>
+          ) }
 
-        {header && <div className='rf-modal__header'>{header}</div>}
+          { header && <div className='rf-modal__header'>{ header }</div> }
 
-        <div style={{ overflowY: disableScroll ? 'hidden' : 'auto' } } className='rf-modal__content'>{children}</div>
+          <div style={ { overflowY: disableScroll ? 'hidden' : 'auto' } } className='rf-modal__content'>{ children }</div>
 
-        {footer && <div className='rf-modal__footer'>{footer}</div>}
-      </div>
+          { footer && <div className='rf-modal__footer'>{ footer }</div> }
+        </div>
+      )
+      }
     </div>
   );
 

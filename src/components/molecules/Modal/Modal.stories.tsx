@@ -1,7 +1,6 @@
 import Modal from './Modal';
 import React, { useState } from 'react';
-import ModalChild from './ModalChild';
-import { Button } from '../../../index';
+import { Button, CompletePopup } from '../../../index';
 import Story from '../../storybook/Story';
 import StoryItem from '../../storybook/StoryItem';
 
@@ -24,8 +23,8 @@ export const modal = () => {
       <StoryItem description='Модальное окно открывается поверх страницы.'>
         <Button onClick={() => toggle(true)}>Открыть</Button>
         {show && (
-          <Modal onClose={() => toggle(false)} header='Заголовок модального окна' footer={modalFooter}>
-            <ModalChild />
+          <Modal onClose={() => toggle(false)} custom>
+            <CompletePopup label='Label' onClose={() => toggle(false)} />
           </Modal>
         )}
       </StoryItem>

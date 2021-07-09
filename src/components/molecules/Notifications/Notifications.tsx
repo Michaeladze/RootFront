@@ -32,7 +32,7 @@ export const removeNotification = (id?: number) => {
 };
 
 /** Добавить уведомление */
-export const sendNotification = (message: INotification, delay = 4000) => {
+export const sendNotification = (message: INotification, delay = 8000) => {
   if (notifications$$.closed || notifications$$.isStopped) {
     return;
   }
