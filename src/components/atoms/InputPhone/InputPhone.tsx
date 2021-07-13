@@ -28,6 +28,9 @@ export interface IInputPhoneProps extends IInputProps {
 
 const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }: IInputPhoneProps) => {
 
+  /** Ссылка на текущий компонент */
+  const componentNode = useRef<HTMLDivElement>(null);
+
   const [inputValue, setInputValue] = useState<string>(defaultValue);
   const [value, setValue] = useState<string>(defaultValue);
 
@@ -127,8 +130,25 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }:
 
   // -------------------------------------------------------------------------------------------------------------------
 
+  /** Валидация в форме */
+  useEffect(() => {
+    if (componentNode.current) {
+      const input = componentNode.current.querySelector(`.rf-input__field[name="${props.name}"]`);
+
+      if (input) {
+        const invalid: boolean = input.classList.contains('invalid');
+
+        if (invalid) {
+          componentNode.current.classList.add('invalid');
+        }
+      }
+    }
+  });
+
+  // -------------------------------------------------------------------------------------------------------------------
+
   return (
-    <div className={`rf-phone-input ${focusClass}`} onFocus={onFocus} onBlur={onBlur}>
+    <div className={`rf-phone-input ${focusClass}`} onFocus={onFocus} onBlur={onBlur} ref={componentNode}>
       <div className='rf-phone-input__select'>
         <Select
           disabled
@@ -145,11 +165,10 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }:
           disabled={ props.disabled }
           readOnly={ props.readOnly }
           onChange={ onChange }
-          onKeyPress={ onKeyPress }
-        >
-          <Input/>
+          onKeyPress={ onKeyPress }>
+          <Input name={ props.name } />
         </InputMask>
-        <input type='hidden' className='rf-phone-input__hidden' name={ props.name } value={inputValue} ref={input} readOnly/>
+        <input type='hidden' className='rf-phone-input__hidden' value={inputValue} ref={input} readOnly/>
       </div>
     </div>
   );
