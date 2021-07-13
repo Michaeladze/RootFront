@@ -1,6 +1,6 @@
 {
   "name": "root-front",
-  "version": "1.13.31",
+  "version": "1.13.32",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -52,8 +52,8 @@
     "sticky-sidebar-v2": "^1.1.0",
     "swiper": "6.1.2",
     "react-pdf": "4.2.0",
-    "pdfjs-dist": "2.1.266"
-
+    "pdfjs-dist": "2.1.266",
+    "crypto-pro": "^2.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.14.5",
