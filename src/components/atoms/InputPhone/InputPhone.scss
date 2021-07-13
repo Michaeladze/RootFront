@@ -2,6 +2,16 @@
   display: flex;
 }
 
+.rf-phone-input.invalid {
+  .rf-input__field {
+    border-color: var(--danger-500);
+  }
+
+  .rf-phone-input__field .rf-input__field {
+    border-left-color: var(--base-300);
+  }
+}
+
 .rf-phone-input--focus {
 
   .rf-input__field {
