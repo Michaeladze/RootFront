@@ -46,6 +46,7 @@ import Menu from './components/molecules/Menu';
 import FatalError from './components/molecules/FatalError';
 import CompletePopup from './components/molecules/CompletePopup';
 import PDFViewer from './components/molecules/PDFViewer';
+import CertReader from './components/molecules/CertReader';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
 import SelectTree from './components/organisms/SelectTree';
@@ -99,6 +100,7 @@ import Forward from './components/_icons/forward';
 export { useClickOutside, useLocation };
 export {
   PDFViewer,
+  CertReader,
   Switch,
   Tile,
   ShareButton,
