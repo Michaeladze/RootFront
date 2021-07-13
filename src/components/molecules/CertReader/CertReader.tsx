@@ -10,7 +10,7 @@ export interface IProps {
   /** входящий файл на подпись*/
   file: IRequestAttachment;
   /** успех*/
-  onSuccess:(result:IRequestAttachment)=>void
+  onSuccess:(result:ICertResult)=>void
   /** ошибка в тч и с плагинами*/
   onError:(e:any)=> void;
   /** название кнопки*/
@@ -25,6 +25,10 @@ interface IBrowserCert{
   thumbprint: string;
 }
 
+export interface ICertResult {
+  data:IRequestAttachment
+  cert:IBrowserCert
+}
 const CertReader: React.FC<IProps> = ({ file,
   onSuccess,
   onError,
@@ -55,9 +59,12 @@ const CertReader: React.FC<IProps> = ({ file,
           debugger;
           try {
             onSuccess({
-              ...file,
-              singBase64: await createAttachedSignature(item.thumbprint, file.base64.split('base64,')[1]),
-              cert: item.thumbprint
+              data: {
+                ...file,
+                singBase64: await createAttachedSignature(item.thumbprint, file.base64.split('base64,')[1]),
+                cert: item.thumbprint
+              },
+              cert: item
             });
           } catch (e) {
             onError(e);
