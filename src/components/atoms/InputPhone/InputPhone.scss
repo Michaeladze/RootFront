@@ -39,7 +39,8 @@
 }
 
 .rf-phone-input__hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;

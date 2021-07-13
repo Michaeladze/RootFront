@@ -5,6 +5,7 @@ import StoryItem from '../../storybook/StoryItem';
 import { Button, FormGroup } from '../../../index';
 import StoryRow from '../../storybook/StoryRow';
 import { useReactiveForm } from 'use-reactive-form';
+import { object, string } from 'yup';
 
 export default {
   title: 'Form Controls/InputPhone',
@@ -14,11 +15,20 @@ export default {
 
 export const inputPhone = () => {
 
-  const config = { fields: { phone: '' } };
-  const { ref, values } = useReactiveForm(config);
+  const config = {
+    fields: { phone: '' },
+    schema: object().shape({ phone: string().length(12) })
+  };
+  const { ref, values, validate } = useReactiveForm(config);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(values);
+
+    if (validate()) {
+      console.log(values);
+    } else {
+      console.log('error');
+    }
+
   };
 
   return (
