@@ -133,7 +133,7 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }:
   /** Валидация в форме */
   useEffect(() => {
     if (componentNode.current) {
-      const input = componentNode.current.querySelector(`.rf-input__field[name="${props.name}"]`);
+      const input = componentNode.current.querySelector('.rf-phone-input__hidden');
 
       if (input) {
         const invalid: boolean = input.classList.contains('invalid');
@@ -166,9 +166,9 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }:
           readOnly={ props.readOnly }
           onChange={ onChange }
           onKeyPress={ onKeyPress }>
-          <Input name={ props.name } />
+          <Input />
         </InputMask>
-        <input type='hidden' className='rf-phone-input__hidden' value={inputValue} ref={input} readOnly/>
+        <input type='text' className='rf-phone-input__hidden' name={ props.name } value={inputValue} ref={input} readOnly/>
       </div>
     </div>
   );
