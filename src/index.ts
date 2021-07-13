@@ -45,6 +45,7 @@ import Chips from './components/molecules/Chips';
 import Menu from './components/molecules/Menu';
 import FatalError from './components/molecules/FatalError';
 import CompletePopup from './components/molecules/CompletePopup';
+import PDFViewer from './components/molecules/PDFViewer';
 
 // ------------------------ Компоненты Organisms -----------------------------------------------------------------------
 import SelectTree from './components/organisms/SelectTree';
@@ -97,6 +98,7 @@ import Forward from './components/_icons/forward';
 
 export { useClickOutside, useLocation };
 export {
+  PDFViewer,
   Switch,
   Tile,
   ShareButton,

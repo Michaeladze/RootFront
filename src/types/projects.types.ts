@@ -134,5 +134,24 @@ export interface IRequestPath {
   date?: number;
   comment?: string;
 }
-
+export interface IRequestAttachment{
+  /** id вложения */
+  id?:string;
+  /** Тип вложения */
+  attType?:string,
+  /** Тип вложения (описание) */
+  attTypeText?:string,
+  /** Имя файла*/
+  fileName:string,
+  /** Данные файла в Base64*/
+  base64:string,
+  /** Данные подписанного файла в Base64 (Для ЭЦП) */
+  singBase64?:string,
+  /** thumbprint сертификата (Для ЭЦП) */
+  cert?:string,
+  /** Операция над вложением (I - создать / U - обновить / D - удалить)*/
+  action?:string,
+  /** Подписанты */
+  signer?: IUser[];
+}
 export type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
