@@ -1,6 +1,6 @@
 {
   "name": "root-front",
-  "version": "1.13.30",
+  "version": "1.13.31",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,7 +10,7 @@
     "build_css": "node-sass src/styles/index.scss -o dist/ ",
     "cp": "cp webpack.config.js dist/ && cp .eslintrc.json dist/ && cp .stylelintrc.json dist/ && cp commitlint.config.js dist/ && cp changelog.config.js dist/ && cp .lintstagedrc.json dist/ && mkdir dist/styles/ && cp src/styles/mixins.scss dist/styles/ && cp src/styles/common.scss dist/styles/",
     "start": "npm run build -- -w",
-    "commit": "git add . && ./node_modules/cz-customizable/standalone.js",
+    "commit": "git add . && node ./node_modules/cz-customizable/standalone.js",
     "storybook": "start-storybook -p 9010 -s public ",
     "build-storybook": "build-storybook -s public",
     "rflink": "yarn link  && cd node_modules/react && yarn link && cd ../react-dom && yarn link && cd ../react-router-dom && yarn link",
@@ -50,7 +50,10 @@
     "resize-observer": "^1.0.0",
     "sass": "^1.32.8",
     "sticky-sidebar-v2": "^1.1.0",
-    "swiper": "6.1.2"
+    "swiper": "6.1.2",
+    "react-pdf": "4.2.0",
+    "pdfjs-dist": "2.1.266"
+
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.14.5",
@@ -77,6 +80,7 @@
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.4",
+    "@types/react-pdf": "4.0.5",
     "@types/react-dom": "17.0.3",
     "@types/react-input-mask": "^2.0.5",
     "@types/react-router-dom": "^5.1.6",
