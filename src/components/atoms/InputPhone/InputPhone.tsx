@@ -147,7 +147,7 @@ const InputPhone: React.FC<IInputPhoneProps> = ({ defaultValue = '', ...props }:
           onChange={ onChange }
           onKeyPress={ onKeyPress }
         >
-          <Input/>
+          <Input name={ props.name } />
         </InputMask>
         <input type='hidden' className='rf-phone-input__hidden' name={ props.name } value={inputValue} ref={input} readOnly/>
       </div>

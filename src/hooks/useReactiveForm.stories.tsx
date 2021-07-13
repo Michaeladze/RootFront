@@ -1,28 +1,34 @@
 import React from 'react';
 import { useReactiveForm } from 'use-reactive-form';
 import {
-  Button, Checkbox, Datepicker, FormGroup, Input, Radio, Select, Textarea
+  Button, Checkbox, Datepicker, FormGroup, Input, InputPhone, Radio, Select, Textarea
 } from '../index';
 import NewDatepicker from '../components/organisms/NewDatepicker';
 import { IOption } from '../types';
+import { object, string } from 'yup';
 
 export default { title: 'Hooks/useReactiveForm' };
 
 export const useReactiveFormHook = () => {
   const config = {
     fields: {
+      phone: '',
       parent: [{ child: 'Parent Child Structure' }],
       customDate: new Date(),
       dateFrom: new Date(),
       dateTo: null,
-      text: 'Default text',
+      text: '',
       textarea: 'Default textarea',
       radio: '3',
       checkbox: ['1', '2'],
       select: '1',
       selectMulti: ['2', '3'],
       numberAsKey: { 50: '50' }
-    }
+    },
+    schema: object().shape({
+      phone: string().length(12),
+      text: string().required()
+    }),
   };
 
   const { ref, values, update, validate } = useReactiveForm(config);
@@ -32,6 +38,8 @@ export const useReactiveFormHook = () => {
 
     if (validate()) {
       console.log(values);
+    } else {
+      alert('error');
     }
   };
 
@@ -63,6 +71,12 @@ export const useReactiveFormHook = () => {
 
   return (
     <form ref={ref} onSubmit={onSubmit}>
+      <div style={style}>
+        <FormGroup label='Phone'>
+          <InputPhone name='phone' />
+        </FormGroup>
+      </div>
+
       <div style={style}>
         <FormGroup label='Date from'>
           <Datepicker name='dateFrom' value={values.dateFrom} onChange={onDateChange} />
