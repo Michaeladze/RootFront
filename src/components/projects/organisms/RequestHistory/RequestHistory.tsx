@@ -33,11 +33,11 @@ const RequestHistory: React.FC<IProps> = ({ requestPath, initiator }: IProps) =>
     return requestPath.length > 0 ? expanded ? requestPath : [requestPath[step]] : [];
   };
 
-  const [path, setPath] = useState(onPathFilter());
+  const [path, setPath] = useState<IRequestPath[]>([]);
 
   useEffect(() => {
     setPath(onPathFilter());
-  }, [expanded]);
+  }, [expanded, requestPath]);
 
   // -------------------------------------------------------------------------------------------------------------------
   const users = (users: IUser[] | null) => {
