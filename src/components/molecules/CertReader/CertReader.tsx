@@ -4,7 +4,7 @@ import { IRequestAttachment } from '../../../types/projects.types';
 import Menu from '../Menu';
 import { Button } from '../../../index';
 import { IListElement } from '../../../types';
-import { createAttachedSignature, getUserCertificates } from 'crypto-pro';
+import { createSignature, getUserCertificates } from 'crypto-pro';
 
 export interface IProps {
   /** входящий файл на подпись*/
@@ -58,10 +58,13 @@ const CertReader: React.FC<IProps> = ({ file,
         handler: async() => {
           debugger;
           try {
+
             onSuccess({
               data: {
                 ...file,
-                singBase64: await createAttachedSignature(item.thumbprint, file.base64.split('base64,')[1]),
+                // @ts-ignore
+                // singBase64_new: await createAttachedSignature(item.thumbprint, file.base64.split('base64,')[1]),
+                singBase64: await createSignature(item.thumbprint, file.base64.split('base64,')[1]),
                 cert: item.thumbprint
               },
               cert: item
