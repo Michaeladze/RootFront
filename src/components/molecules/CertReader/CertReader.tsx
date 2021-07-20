@@ -56,7 +56,7 @@ const CertReader: React.FC<IProps> = ({ file,
         label: item.name + ` ( ${item.issuerName})`,
         value: item.thumbprint,
         handler: async() => {
-          debugger;
+
           try {
 
             onSuccess({
@@ -64,7 +64,7 @@ const CertReader: React.FC<IProps> = ({ file,
                 ...file,
                 // @ts-ignore
                 // singBase64_new: await createAttachedSignature(item.thumbprint, file.base64.split('base64,')[1]),
-                singBase64: (await createSignature(item.thumbprint, file.base64.split('base64,')[1])).replace(/[\r\n]+/g, '\n'),
+                singBase64: (await createSignature(item.thumbprint, file.base64.split('base64,')[1])).replace(/[\r\n]+/g, ''),
                 cert: item.thumbprint
               },
               cert: item
