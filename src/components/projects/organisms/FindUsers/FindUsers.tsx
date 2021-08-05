@@ -41,6 +41,8 @@ export interface IProps {
   headers?: Record<string, string>;
   /** DI Axios */
   AxiosInstance?: AxiosStatic;
+  /** Вкладка ВСЕ */
+  showAll?: boolean;
 }
 
 const FindUsers: FC<IProps> = ({
@@ -52,7 +54,8 @@ const FindUsers: FC<IProps> = ({
   subtitle = 'Поиск осуществляется по выбранной компании и в рамках одного подразделения.',
   host = '',
   headers = {},
-  AxiosInstance
+  AxiosInstance,
+  showAll = true
 }: IProps) => {
 
   const inputRef = useRef<HTMLDivElement>(null);
@@ -326,8 +329,8 @@ const FindUsers: FC<IProps> = ({
         <Input placeholder='Поиск' search={ true } onKeyUp={ inputHandle } autoFocus onClear={ onClear }/>
       </div>
       <div className='find-users__filters'>
-        <Button className={ `find-users__filters-button ${activeFilter === 'all' ? 'active' : ''}` }
-          buttonType='text' onClick={ () => setActiveFilter('all') }>Все</Button>
+        { showAll && <Button className={ `find-users__filters-button ${activeFilter === 'all' ? 'active' : ''}` }
+          buttonType='text' onClick={ () => setActiveFilter('all') }>Все</Button> }
         <Button className={ `find-users__filters-button ${activeFilter === 'team' ? 'active' : ''}` }
           buttonType='text' onClick={ () => setActiveFilter('team') }>Моя команда</Button>
       </div>
