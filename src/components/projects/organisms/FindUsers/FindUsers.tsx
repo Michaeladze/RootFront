@@ -62,7 +62,12 @@ const FindUsers: FC<IProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   type ActiveFilter = 'all' | 'team';
-  const [activeFilter, setActiveFilter] = useState<ActiveFilter>('all');
+  const [activeFilter, setActiveFilter] = useState<ActiveFilter>(showAll ? 'all' : 'team');
+
+  useEffect(() => {
+    setActiveFilter(showAll ? 'all' : 'team');
+  }, [showAll]);
+
 
   /** Список выбранных людей */
   const [selectedPeople, setSelectedPeople] = useState<IUser[]>(users);
