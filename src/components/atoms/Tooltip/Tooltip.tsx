@@ -30,6 +30,8 @@ const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, cl
   rect.y = (rect.y || rect.top) + window.scrollY;
   rect.x = (rect.x || rect.left) + window.scrollX;
 
+  debugger;
+
   const styles = portal ?
     {
       top: {
@@ -75,6 +77,8 @@ const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, cl
         transform: 'translate(-100%, -50%)'
       }
     };
+
+  console.log(styles);
 
   const padding = {
     top: 'paddingBottom',

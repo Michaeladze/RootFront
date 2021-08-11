@@ -19,6 +19,7 @@ import { IUser } from '../../../../types/projects.types';
 import Axios, {
   AxiosResponse, AxiosStatic, Canceler
 } from 'axios';
+import { usersMocks } from './users.mocks';
 
 
 SwiperCore.use([Navigation]);
@@ -43,6 +44,8 @@ export interface IProps {
   AxiosInstance?: AxiosStatic;
   /** Вкладка ВСЕ */
   showAll?: boolean;
+  /** Исключить из поиска */
+  searchOption?: number[];
 }
 
 const FindUsers: FC<IProps> = ({
@@ -55,7 +58,8 @@ const FindUsers: FC<IProps> = ({
   host = '',
   headers = {},
   AxiosInstance,
-  showAll = true
+  showAll = true,
+  searchOption = []
 }: IProps) => {
 
   const inputRef = useRef<HTMLDivElement>(null);
@@ -92,7 +96,7 @@ const FindUsers: FC<IProps> = ({
   const [lazyPreloader, setLazyPreloader] = useState<boolean>(false);
 
   const [loaded, setLoaded] = useState<boolean>(true);
-  const [searchResults, setSearchResults] = useState<IUser[]>([]);
+  const [searchResults, setSearchResults] = useState<IUser[]>(usersMocks);
 
   const cancel = useRef<Canceler | undefined>(undefined);
 
@@ -119,12 +123,31 @@ const FindUsers: FC<IProps> = ({
     }
 
     let teamUri = 'sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/ITeamSearch?$expand=departmentsPath';
+    let queryWithOutSpecSymbols = '';
 
-    if (query) {
-      teamUri += `&$search=${encodeURIComponent(query)}`;
+    for (let i = 0; i < query.length; i++) {
+      if (!isNaN(+query[i]) || query[i].toLowerCase() !== query[i].toUpperCase()) {
+        queryWithOutSpecSymbols += query[i];
+      } else {
+        queryWithOutSpecSymbols += ' ';
+      }
     }
 
-    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(query)}&$expand=departmentsPath&$skip=${skip.current}&$top=${LIMIT}`;
+    if (query) {
+      teamUri += `&$search=${encodeURIComponent(queryWithOutSpecSymbols)}`;
+    }
+
+    let searchOptionStr = '';
+
+    if (searchOption && searchOption.length > 0) {
+      searchOptionStr = '$filter=';
+    }
+
+    searchOption?.forEach((n: number, i: number) => {
+      searchOptionStr += i === 0 ? `searchOption eq '${n}'` : `and searchOption eq '${n}'`;
+    });
+
+    const uri = `sap/opu/odata4/sap/zhrbc/default/sap/zhrbc_0720_react_utils/0001/IUserSearch?$search=${encodeURIComponent(queryWithOutSpecSymbols)}&$expand=departmentsPath&$skip=${skip.current}&$top=${LIMIT}&${searchOptionStr}`;
     const url = `${host}${activeFilter === 'all' ? uri : teamUri}`;
 
     const axios = AxiosInstance || Axios;
