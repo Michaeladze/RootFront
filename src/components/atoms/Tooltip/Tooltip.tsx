@@ -27,8 +27,8 @@ const TooltipContent: FC<ITooltipContentProps> = ({ rect, children, position, cl
     };
   }, [div]);
 
-  rect.y = (rect.y || rect.top) + window.scrollY;
-  rect.x = (rect.x || rect.left) + window.scrollX;
+  rect.y = (rect.y || rect.top) + window.pageYOffset;
+  rect.x = (rect.x || rect.left) + window.pageXOffset;
 
   debugger;
 
