@@ -2,12 +2,15 @@ import React, {
   ReactNode, useEffect, useRef
 } from 'react';
 import './PageWithSections.scss';
-import { Preloader, Tile } from '../../../../index';
+import {
+  Preloader, Tabs, Tile
+} from '../../../../index';
 import { IPageSection } from '../../../../types/projects.types';
 import useTableOfContents from '../../../../hooks/useTableOfContents';
 import { Link } from 'react-router-dom';
 import Chevron from '../../../_icons/chevron-alt';
 import ResizeObserver from 'resize-observer-polyfill';
+import { ITab } from '../../../../types';
 
 export interface IPageWithSectionsProps {
   title: ReactNode;
@@ -18,6 +21,8 @@ export interface IPageWithSectionsProps {
   actionMenu?: ReactNode;
   preloader?: boolean;
   showNavigation?: boolean;
+  /** Navigation tabs */
+  navigation?: ITab[];
 }
 
 const PageWithSections: React.FC<IPageWithSectionsProps> = ({
@@ -27,7 +32,8 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
   sections,
   actionMenu,
   preloader = false,
-  showNavigation = true
+  showNavigation = true,
+  navigation
 }: IPageWithSectionsProps) => {
 
   /** Ссылка на навигацию */
@@ -124,8 +130,8 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
         const navLinks = document.querySelectorAll('.rf-page__aside-link');
         const navLink = navLinks[activeIndex >= navLinks.length ? navLinks.length - 1 : activeIndex];
 
-        if (pageHeaderRef.current && navLink) {
-          sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - pageHeaderRef.current.offsetHeight}px`;
+        if (asideRef.current && navLink) {
+          sliderRef.current.style.top = `${navLink.getBoundingClientRect().top - asideRef.current.getBoundingClientRect().top}px`;
         }
       }
     });
@@ -200,6 +206,13 @@ const PageWithSections: React.FC<IPageWithSectionsProps> = ({
         ) }
         <h2 className='rf-page__sections-title'>{ title }</h2>
       </header>
+
+
+      {navigation && (
+        <div className='rf-page__tabs'>
+          <Tabs list={navigation}/>
+        </div>
+      )}
 
       <div className='rf-page__content--sections'>
 
