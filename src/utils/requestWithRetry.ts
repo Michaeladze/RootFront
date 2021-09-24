@@ -5,7 +5,7 @@ import {
   iif, Observable, of, Subject
 } from 'rxjs';
 import { AxiosResponse } from 'axios';
-import { AxiosObservable } from 'axios-observable/dist/axios-observable.interface';
+
 import { sendNotification } from '../index';
 import { removeNotification } from '../components/molecules/Notifications/Notifications';
 
@@ -14,7 +14,7 @@ const stop$ = new Subject<boolean>();
 export const RETRY_ID = -10;
 
 export function requestWithRetry<T = any>(
-  request$: AxiosObservable<T>,
+  request$: any,
   retry: () => void,
   max = 10,
   retries: number[] = [5, 15, 30]
